@@ -10,7 +10,7 @@ pages:
 # pip install pymdown-extensions
 # pip install pygments
 site_name: CS2030 Programming Methodology II
-repo_url: http://www.github.com/weitsang/nus-cs2030
+repo_url: https://github.com/nus-cs2030/1718-s1
 copyright: Copyright by Wei Tsang Ooi, Department of Computer Science, National University of Singapore 2017
 remote_branch: gh-pages
 markdown_extensions:
