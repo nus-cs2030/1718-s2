@@ -1,8 +1,8 @@
 pages:
+  - Home: 'index.md'
   - About: 'about.md'
   - Prerequisites: 'prereqs.md'
   - Readings: 'readings.md'
-
   - Lectures:
       - 1. Abstraction & Encapsulation: 'lec1.md'
   - Labs:
