@@ -9,3 +9,5 @@ Here is a collection of readings related to CS2030 or otherwise.
 * [How Not to Go About a Programming Assignment, by Agustin Cernuda del Rio](http://people.irisa.fr/Martin.Quinson/Teaching/how-not-to-code.pdf): _Computer programming students invariably fall into more than one bad habit. It can be extremely difficult to eradicate them (and many lecturers and professional programmers keep succumbing to them time and again).._
 
 * [Best Teacher I Ever Had, by David Owen](http://www.comp.nus.edu.sg/~leonghw/Courses/cattywampus.html): _Mr. Whitson taught sixth-grade science. On the first day of class, he gave us a lecture about a creature called the cattywampus, .._
+
+* [Academic Honesty](http://www.comp.nus.edu.sg/cug/plagiarism): _All students share the responsibility for upholding the academic standards and reputation of the University. Academic honesty is a prerequisite condition in the pursuit and acquisition of knowledge.._
