@@ -1,0 +1,7 @@
+article p, article li {
+  font-family: "gentium book basic";
+  line-height: 1.7em;
+}
+article p.admonition-title {
+  font-family: "Roboto";
+}
