@@ -3,6 +3,7 @@ pages:
   - About: 'about.md'
   - Prerequisites: 'prereqs.md'
   - Readings: 'readings.md'
+  - Policies: 'policies.md'
   - Lectures:
       - 1. Abstraction & Encapsulation: 'lec1.md'
   - Labs:
