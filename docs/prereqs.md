@@ -27,7 +27,7 @@ We will use the `sunfire` computing server for this module.  As such, you are ex
 
 If you are not familiar with this concept, take a look at the [slides from the CS1010/CS1020 workshop](www.comp.nus.edu.sg/~cs1020/workshop/CS1020_Intro_Workshop.pptx).
 
-## Text editor for programmer
+## Source code editors
 
 You are expected to be familiar with one or more source code editors.  Note that source code editor is not the same as text editor (e.g., Notepad).  A source code editor automatically highlights syntax, indents the code, matches parenthesis, supports autocompletion and code folding, and integrates with the software development process (such as revision control).
 
