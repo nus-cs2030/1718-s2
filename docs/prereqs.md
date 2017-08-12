@@ -36,3 +36,11 @@ CS1010 started (or would have started) you off with `vim`.  Many good source cod
 [^1]: [I can't mention `vim` without mentioning `emacs`](https://en.wikipedia.org/wiki/Editor_war)
 
 For your career, you should pick one and master it.  If you want to learn `vim`, the command `vimtutor` is a good place to start.  There are also many tutorials, webcasts, games, etc, online to help you learn `vim`.  Just google.
+
+## Developer's Friendly OS
+
+Your life through the computing modules would be much much better if you are using a developer's friendly operating system on your personal computer.  
+
+* If you uses Linux or macOS, you are all set.  For macOS users, [`brew`](https://brew.sh) is highly recommended.
+
+* If you use Windows 10, you should definitely install Ubuntu emulator on Windows 10.  There are many excellent tutorials online (such as [this one by Owen Williams](https://char.gd/blog/2017/how-to-set-up-the-perfect-modern-dev-environment-on-windows)).
