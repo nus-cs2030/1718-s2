@@ -24,6 +24,29 @@
 
 * We encourage discussions among students for lab assignments, but each student should be responsible for writing his/her own code and should give credits to others when appropriate.  
 
-* Plagiarism of answers is a serious offense in the university, and both parties, the student who copied, and the student who allowed others to copy, will be penalized equally.
+* NUS and School of Computing have a high standard on academic honesty and take any violation seriously.  In the context of computing modules, source code plagiarism -- copying code from another source and attributing it as one's own code -- is a series violation.   Please read the page [Preventing Plagiarism](http://www.comp.nus.edu.sg/cug/plagiarism) from the school's website to familiarize yourself with the policy.
 
-* Read more about [Academic Honesty](http://www.comp.nus.edu.sg/cug/plagiarism) from SoC's website.
+* I adopt a "no mercy" policy when it comes to disciplinary action on plagiarism.  Both parties, the student who copied, and the student who allowed others to copy, will be penalized equally.
+
+## Lecture Video
+
+* Screencast will be recorded and posted online 2-3 days after the lecture. 
+This will be done on a 'best effort' basis and screencast will not be guaranteed to be available.  
+
+* Posting of screencast is meant to help students who attended the lecture to recap the content, or to help those who are not able to attend the lecture due to unexpected circumstances.  It does not mean that you should skip lecture.
+
+## Model Solutions and Slides
+
+* Slides will be posted _after_ the class.  Note that slides are used as a _visual aid_ to assist me during lecture.  It is not meant as summary of lectures nor a replacement of lecture notes.
+
+* In a module like CS2030, there is often not a single correct answer.  Hence, there is no model solution for this module.  Sample solutions may be posted (both good and bad ones) for discussion.  I strongly encourage students to discuss your solution with me, instead of just comparing your solution with the sample solution.
+
+## Grading
+
+* Students will received the grades they deserved irrespective of how the other students in the class performed (i.e., no bell curve)
+
+## Open Book Assessment
+
+* All assessment, including graded labs, midterm test, and final assessment, are open book assessment -- you can bring in your notes or other _analog_ reference materials.  Java documentation will be made available during labs.  Relevant Java APIs will be provided during midterm tests and final assessments.
+
+* There is _nothing to memorize_ for this class.
