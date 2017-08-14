@@ -43,4 +43,4 @@ Your life through the computing modules would be much much better if you are usi
 
 * If you uses Linux or macOS, you are all set.  For macOS users, [`brew`](https://brew.sh) is highly recommended.
 
-* If you use Windows 10, you should definitely install Ubuntu emulator on Windows 10.  There are many excellent tutorials online (such as [this one by Owen Williams](https://char.gd/blog/2017/how-to-set-up-the-perfect-modern-dev-environment-on-windows)).
+* If you use Windows 10, you should definitely install the Ubuntu Bash Shell.  There are many excellent tutorials online (such as [this one](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/)).
