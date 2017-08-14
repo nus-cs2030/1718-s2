@@ -25,7 +25,7 @@ Students who take CS2030 are assumed to have sufficient knowledge of the above. 
 
 We will use the `sunfire` computing server for this module.  As such, you are expected to be comfortable with using CLI (command line interface) and the basic UNIX commands, in a text window without fancy windows and mouse, and the concept of `ssh`-ing into a remote host and work remotely.
 
-If you are not familiar with this concept, take a look at the [slides from the CS1010/CS1020 workshop](www.comp.nus.edu.sg/~cs1020/workshop/CS1020_Intro_Workshop.pptx).
+If you are not familiar with this concept, take a look at the [slides from the CS1010/CS1020 workshop](http://www.comp.nus.edu.sg/~cs1020/workshop/CS1020_Intro_Workshop.pptx).
 
 ## Source code editors
 
