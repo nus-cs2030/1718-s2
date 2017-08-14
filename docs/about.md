@@ -39,9 +39,9 @@ After completing the module, students should:
     - Implement basic algorithms in functions that are effect free.
 	- Implement useful functions that take/return another function
 	- Write correct and effective code using lambda expressions and/or infinite streams
-- be able to compare and constrast imperative programming, OO programming, and function programming paradigms, and select the most natural paradigms for each situation
+- be able to compare and contrast imperative programming, OO programming, and function programming paradigms, and select the most natural paradigms for each situation
 - be aware of how the OOP and FP concepts are implemented in different ways in different programming languages
-- be confident enough to learn new programming langauges that uses OOP and FP paradigm
+- be confident enough to learn new programming languages that uses OOP and FP paradigm
 - attain proficiency in Java 8 (and above)
 - be equipped with solid programming foundations for further studies in computer science
 
