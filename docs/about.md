@@ -7,8 +7,8 @@ This module is a follow up to CS1010.  It explores two modern programming paradi
 
 * **Lecture:** 10am - 12noon, every Monday
 * **Venue:** LT19
-* **Instructor:** [Ooi Wei Tsang](http://www.comp.nus.edu.sg/~ooiwt)
-* **Teaching Assistant:** Kenneth Lu
+* **Instructor:** [Ooi Wei Tsang](http://www.comp.nus.edu.sg/~ooiwt) (ooiwt@comp.nus.edu.sg)
+* **Teaching Assistant:** Kenneth Lu (lu.yang.kenneth@u.nus.edu)
 * **Lab:** Every Thursday (Week 3 - Week 13)
 * **Midterm Test:** October 2, 2017, Monday, 10am
 * **Final Assessment:** November 29, 2017, Wednesday, 9am.
