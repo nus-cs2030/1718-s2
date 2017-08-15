@@ -44,6 +44,10 @@ For a more detailed instructions, see [the guide from the maintainer of the PPA,
 
 Follow the [instructions to install Bash on Ubuntu on Windows](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/), then install as per the instructions for Ubuntu above.
 
+### Other Methods
+
+Oracle publishes an [installation guide](https://docs.oracle.com/javase/9/install/toc.htm) for JDK 9, including installing it on native Windows (not through Ubuntu emulator).  I find it much more troublesome and complicated.  Unfortunately, if you are using an earlier version of Windows, you will have to follow these instructions.
+
 ## Compiling
 
 Coming soon.
