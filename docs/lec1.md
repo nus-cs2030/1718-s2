@@ -315,7 +315,7 @@ class Circle {
    * Return the circumference of the circle.
    */
   public double getCircumference() {
-    return Math.PI*r*r;
+    return Math.PI*2*r;
   }
 
   /**
