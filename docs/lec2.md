@@ -4,11 +4,11 @@
 
 After this lecture, students should:
 
-- be understand that Java is a type safe language, in contrast to C
+- understand that Java is a type-safe language, in contrast to C
 - be familiar with Java variable and primitive types
 - understand the concepts of object-oriented programming, including interface, polymorphism, late binding, inheritance, method overriding and method overloading, and their purposes of introducing them as a method of programming.
 - know the purpose and usage of Java keywords `implements`, `extends`, `super`, `instanceof`, and `@Override`
-- understand Java concepts of array, enhanced for loop, method signature, `Object` class, and object equality. 
+- understand Java concepts of arrays, enhanced `for` loop, method signature, `Object` class, and object equality. 
 
 ## Type Safety
 
@@ -28,7 +28,7 @@ int main()
 
 In Line 4, we treat the address to a string as integer.  This generates a compiler's warning.
 
-In C, you can _type cast_ a variable from one type into another, i.e., force the compiler to treat variable of one type as another type.  The compiler would listen and do that for you.  The following code would print out gibberish and would compile perfectly without error.
+In C, you can _type cast_ a variable from one type into another, i.e., force the compiler to treat a variable of one type as another type.  The compiler would listen and do that for you.  The following code would print out gibberish and would compile perfectly without error.
 
 ```C
 #include <stdio.h>
@@ -38,25 +38,25 @@ int main()
 }
 ```
 
-Such flexibility and loose rules for type compatibility could be useful, if you know what you are doing, but for most programmers, it could be a major source of unintentional bugs, especially if one does not pay attention to compiler's warning or one forces the warning to go away without full understanding what is going on.
+Such flexibility and loose rules for type compatibility could be useful, if you know what you are doing, but for most programmers, it could be a major source of unintentional bugs, especially if one does not pay attention to compiler's warning or one forces the warning to go away without fully understanding what is going on.
 
-Java is very strict when it comes to type checking, and is one of the _type safe_ languages. Java ensures that basic operations (such as `+`, `-`, etc) and method calls apply to values in a way that makes sense.  If you try to pull the same trick as above, you will receive an error:
+Java is very strict when it comes to type checking, and is one of the _type-safe_ languages. Java ensures that basic operations (such as `+`, `-`, etc) and method calls apply to values in a way that makes sense.  If you try to pull the same trick as above, you will receive an error:
 
 <script type="text/javascript" src="https://asciinema.org/a/133995.js" id="asciicast-133995" async></script>
 
 !!! note "Java Primitive Data Types"
-    Java supports eight _primitive_ data types: `byte`, `short`, `int`, `long`, `float`, `double`, `boolean` and `char`.  If you are familiar with C, these data types should not be foreign to you.  One important difference is that, `char` stores 16-bit Unicode character, not 8-bit character like in C.  Java uses `byte` for that.  The other notable difference is that Java defines `true` and `false` as possible value to a `boolean`, unlike C which uses `0` for false and non-`0` for true.  
+    Java supports eight _primitive_ data types: `byte`, `short`, `int`, `long`, `float`, `double`, `boolean` and `char`.  If you are familiar with C, these data types should not be foreign to you.  One important difference is that a `char` variable stores a 16-bit Unicode character, not an 8-bit character like in C.  Java uses `byte` for that.  The other notable difference is that Java defines `true` and `false` as possible value to a `boolean`, unlike C which uses `0` for false and non-`0` for true.  
 
 	You can read all about Java [variables](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/variables.html) and [primitive data types](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html) in Oracle's Java Tutorial.
 
 
 ## Enforcing Abstraction Barrier with Interface
 
-Recall the concept of encapsulation. When we develop a large piece of software, it is important to hide the details about data representation and implementation, and only exposes certain `public` methods for the users to use.  We imagine that there is an abstraction barrier between the code that implement the internals of a class (called the _implementer_) , and the code that uses the class (called the _user_) to achieve a higher level task.
+Recall the concept of encapsulation. When we develop a large piece of software, it is important to hide the details about data representation and implementation, and only exposes certain `public` methods for the users to use.  We imagine that there is an abstraction barrier between the code that implements the internals of a class (called the _implementer_) and the code that uses the class (called the _user_) to achieve a higher level task.
 
 We have seen that we use `private` to enforce data hiding -- to hide certain fields and methods from outside of the barrier.  Now, we are going to see how we enforce that the right set of methods are defined, implemented, and used on both sides of the barrier.
 
-The mechanism to do this is through defining an _interface_ (aka a _protocol_ as it is called in Objective-C or Swift).  An interface is kind of like a contract between the implementer of a class and the user of a class.  If a class promises to implement an interface, then we are guarantee that the methods defined in the interface is implemented in the class as it is promised.  Otherwise, the code would not compile.
+The mechanism to do this is through defining an _interface_ (aka a _protocol_ as it is called in Objective-C or Swift).  An interface is kinda like a contract between the implementer of a class and the user of a class.  If a class promises to implement an interface, then we are guaranteed that the methods defined in the interface are implemented in the class as it is promised.  Otherwise, the code would not compile.
 
 In Java, we can define an interface using `interface` keyword:
 
@@ -104,10 +104,10 @@ class Circle implements GeometricShape {
 }
 ```
 
-This is very similar to the code you saw in Lecture 1 and Exercise 1, except that in Line 2, we say that `class Circle implements GeometricShape`.  This line informs the compiler that the programmer intends to implement all the methods included in the interface `GeometricShape` exactly as declared (in terms of names, number of arguments, types of arguments, returned type, and access modifier).  The rest of the class is the same, except that we renamed `getCircumference` with `getPerimeter`, which is more general and apply to all shapes.  You will also see that we added _annotations_ to our code by adding the line `@Override` before methods in `Circle` that implements the methods declared in `GeometricShape`.  This annotation is optional, but it informs our intention to the compiler and helps make the intention of the programmer clearer to others who read the code.
+This is very similar to the code you saw in Lecture 1 and Exercise 1, except that in Line 2, we say that `class Circle implements GeometricShape`.  This line informs the compiler that the programmer intends to implement all the methods included in the interface `GeometricShape` exactly as declared (in terms of names, the number of arguments, the types of arguments, returned type, and access modifier).  The rest of the class is the same, except that we renamed `getCircumference` with `getPerimeter`, which is more general and apply to all shapes.  You will also see that we added _annotations_ to our code by adding the line `@Override` before methods in `Circle` that implements the methods declared in `GeometricShape`.  This annotation is optional, but it informs our intention to the compiler and helps make the intention of the programmer clearer to others who read the code.
 
 !!! note "Java Annotation"
-    Annotations are metadata we add that is not part of the code.  Annotation do not affect execution.  They are useful to compilers and other software tools, as well as humans who read the code.  While we can similarly make the code more human friendly with comments, annotation is structured and so can be easily parsed by software.  `@Override` is probably going to be the only annotation useful for us in this class.
+    Annotations are metadata we add that is not part of the code.  Annotation does not affect execution.  They are useful to compilers and other software tools, as well as humans who read the code.  While we can similarly make the code more human-friendly with comments, an annotation is structured and so can be easily parsed by software.  `@Override` is probably going to be the only annotation useful for us in this class.
 
 Note that we can have other methods (such as `moveTo`) in the class beyond what is promised in the interface the class implements.
 
@@ -119,7 +119,7 @@ interface Printable {
 }
 ```
 
-The implementer of `Circle` wants to informs the users that the method `void print()` is implemented, it can do the following:
+The implementer of `Circle` wants to inform the users that the method `void print()` is implemented, it can do the following:
 
 ```Java
 class Circle implements GeometricShape, Printable {
@@ -150,11 +150,11 @@ class Circle implements GeometricShape, Printable {
 
 and the code still compiles!
 
-Not all programming languages that support OO supports interface.  Javascript and Python, for instance, does not support similar concepts.
+Not all programming languages that support classes support interface.  Javascript and Python, for instance, does not support similar concepts.
 
 ## Interface as Types
 
-In Java, interface is a type.  What this means is that:
+In Java, an interface is a type.  What this means is that:
 
 - We can declare a variable with an interface type, such as:
 ```Java
@@ -197,7 +197,7 @@ jump to Line 5-7, which is a `for` loop.  Line 5 declares a loop variable `obj` 
 
 The magic happens in Line 6:
 
-- First, since we now that any objects in the array has the type `Printable`, this means that they must implement the `Printable` interface and support the method `print()`.  
+- First, since we now that any object in the array has the type `Printable`, this means that they must implement the `Printable` interface and support the method `print()`.  
 - Second, we do not know, and we do not _need_ to know which class an object is an instance of.
 - Third, we can actually have objects of completely unrelated classes in the same array. We can have objects of type `Circle`, and objects of type `Point`.  We can have objects of type `Factory`, or objects of type `Student`, or objects of type `Cushion`.  As long as the objects implement the `Printable` interface, we can put them into the same array.
 - Forth, at _run time_, Java looks at `obj`, and determines its class, and invoke the right implementation of `print()` corresponding to the `obj`.  That is, if `obj` is an instance of a class `Circle`, then it will call `print()` method of `Circle`; if `obj` is an instance of a class `Point`, then it will call `print()` method of `Point`, and so on.
@@ -221,7 +221,7 @@ together in an array, you need to do something like the following pseudocode:
 		   :
 ```
 
-Not only is the code verbose and ugly, if you want define a new compound data type that supports printing, you need to remember to come to this place and add in a new condition and call the corresponding print function.
+Not only is the code verbose and ugly, if you want to define a new compound data type that supports printing, you need to remember to come to this place and add in a new condition and call the corresponding print function.
 
 In OO languages, you can have methods named `print()` implemented differently in different classes.  When we compile the code above, the compiler will have no way to know which implementation will be called.  The bindings of `print()` to the actual set of instructions will only be done at run time, after `obj` is instantiated from a class.  This is known as _dynamic binding_, or _late binding_, or _dynamic dispatch_.
 
@@ -309,7 +309,7 @@ One principle that we can follow is the _abstraction principle_, which says "Eac
 
 [^4]: This principle is formulated by Benjamin C. Pierce in his book _Types and Programming Languages_.
 
-Following the principle, we want to implement these styles-related fields and methods in just one place.  But where?
+Following the principle, we want to implement these style-related fields and methods in just one place.  But where?
 
 ## Inheritance
 
@@ -357,7 +357,7 @@ This mechanism for a class to inherit the properties and behavior from a parent 
 
 [^5]: The other three is encapsulation, abstraction, and polymorphism.
 
-With inheritance, we do not have to repeat the declaration of fields `fillColor`, `borderColor`, `borderThickness` and the associated methods in them.  This software engineering principle is also know as the DRY principle -- "_don't repeat yourself_" principle.  We are going to see DRY again and again in future lectures.
+With inheritance, we do not have to repeat the declaration of fields `fillColor`, `borderColor`, `borderThickness` and the associated methods in them.  This software engineering principle is also known as the DRY principle -- "_don't repeat yourself_" principle.  We are going to see DRY again and again in future lectures.
 
 We also call the `PaintedShape` the superclass (or base class) of `PaintedCircle` and `PaintedSquare`, and call `PaintedCircle` and `PaintedSquare` the subclass (or derived class)[^6] of `PaintedShape`.
 
@@ -375,7 +375,7 @@ Now consider the constructor for `PaintedCircle`.   We need to initialize the ge
 	}
 ```
 
-You can see that the constructor for `PaintedCircle` now takes in five parameters.  You can imagine that as the class get more sophisticated with more fields, we need to pass in more parameters to the class to initialize the fields.  It is not uncommon to provide alternative constructors with fewer parameters, and assign some _default_ values to the fields.
+You can see that the constructor for `PaintedCircle` now takes in five parameters.  You can imagine that as the class get more sophisticated with more fields, we need to pass in more parameters to the class to initialize the fields.  It is not uncommon to provide alternative constructors with fewer parameters and assign some _default_ values to the fields.
 
 ```Java
   // create circle with default style (white with black border of thickness 1)
@@ -393,7 +393,7 @@ You can see that the constructor for `PaintedCircle` now takes in five parameter
 	}
 ```
 
-Two methods in a class can have the same name and still co-exist peacefully together.  This is called _overloading_.  When a method is called, we look at the _signature_ of the method, which consists of (i) the name of the method, (ii) the number, order, and type of the arguments, to determine which method is called.  To be precise, the first sentence of this paragraph should read: Two methods in a class can have the same name and still co-exist peacefully together, as long as they have different signature.  Note that the return type is not part of the method signature, so you cannot have two methods with the same name and same arguments but different return type.  
+Two methods in a class can have the same name and still co-exist peacefully together.  This is called _overloading_.  When a method is called, we look at the _signature_ of the method, which consists of (i) the name of the method, (ii) the number, order, and type of the arguments, to determine which method is called.  To be precise, the first sentence of this paragraph should read: Two methods in a class can have the same name and still co-exist peacefully together, as long as they have different signatures.  Note that the return type is not part of the method signature, so you cannot have two methods with the same name and same arguments but different return type.  
 
 Even though the example above shows overloading of the constructor, we can overload other methods as well.
 
@@ -419,7 +419,7 @@ When you check `circles[0].equals(circles[1])`, however, it returns `false`, bec
 
 ![Screenshot](figures/object-representation-jvm/object-representation-jvm.004.png)
 
-What if you needs a method that compare if two circles are semantically the same?  You can implement your own method, say `isTheSameCircle(Circle c)`.  But, the `equals()` method is universal (all classes inherits this method) and is used by other classes for equality tests.  So, in most cases, we can implement a method called `equals()` with the same signature with the semantic that we want[^8].
+What if you need a method that compares if two circles are semantically the same?  You can implement your own method, say `isTheSameCircle(Circle c)`.  But, the `equals()` method is universal (all classes inherits this method) and is used by other classes for equality tests.  So, in most cases, we can implement a method called `equals()` with the same signature with the semantic that we want[^8].
 
 That's right.  Even though we cannot have two methods with the same signature in the same class, we can have two methods with the same signature, one in the superclass (or the superclass's superclass, and so on), one in the subclass.  The method in the subclass will override the method in the superclass.  For example,
 
@@ -440,9 +440,9 @@ That's right.  Even though we cannot have two methods with the same signature in
 
 Line 7 above compares if the two center points are equals, and the two radius values are equals.  So, we compare if the two circles are semantically the same.  The rest of this code requires some explanation:
 
-- Line 3 uses the same `@Override` annotation that we seen before -- we are telling the compilers that we are overriding a method in the superclass.
-- Line 4 declares the method `equals`, and note that it has to have exactly the same signature as the `equals()` method we are overriding.  Even though we meant to compare two `Circle` objects, we cannot declare it as `public boolean equals(Circle circle)`, since the signature is different and the compiler would complain with an error.
-- Since `obj` is of an `Object` type, we can actually passed in any objects to compare with a `Circle`.  Line 5 checks if the comparison makes sense, by checking if `obj` is instantiated from a `Circle` class, using the `instanceof` keyword.  If `obj` is not even a `Circle` object, then we simply return `false`.
+- Line 3 uses the same `@Override` annotation that we have seen before -- we are telling the compilers that we are overriding a method in the superclass.
+- Line 4 declares the method `equals`, and note that it has to have exactly the same signature as the `equals()` method we are overriding.  Even though we meant to compare two `Circle` objects, we cannot declare it as `public boolean equals(Circle circle)`, since the signature is different and the compiler would complain.
+- Since `obj` is of an `Object` type, we can actually pass in any object to compare with a `Circle`.  Line 5 checks if the comparison makes sense, by checking if `obj` is instantiated from a `Circle` class, using the `instanceof` keyword.  If `obj` is not even a `Circle` object, then we simply return `false`.
 - If `obj` is an instance of `Circle`, we assign `obj` to a variable of type `Circle`, and compare as in Line 7.
 
 For the code above to work, we have to override the `equals` method of `Point` as well.  That is left as an exercise.
