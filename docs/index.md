@@ -1,5 +1,11 @@
 # CS2030 Programming Methodologies II
 
+### 20 August, 2017
+
+[Lecture 2](lec2.md) and [Exercise 2](exercise2.md) are posted.  
+
+You should have received an email from the School of Computing about creating an account on `sunfire`.  If you have not done so, please do so ASAP at https://mysoc.nus.edu.sg/~newacct/.
+
 ### 11 August, 2017
 
 Many of you are starting a new and exciting journey at NUS.  Congratulations, and welcome to NUS Computing!
