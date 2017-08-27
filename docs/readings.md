@@ -11,3 +11,9 @@ Here is a collection of readings related to CS2030 or otherwise.
 * [Best Teacher I Ever Had, by David Owen](http://www.comp.nus.edu.sg/~leonghw/Courses/cattywampus.html): _Mr. Whitson taught sixth-grade science. On the first day of class, he gave us a lecture about a creature called the cattywampus, .._
 
 * [Academic Honesty](http://www.comp.nus.edu.sg/cug/plagiarism): _All students share the responsibility for upholding the academic standards and reputation of the University. Academic honesty is a prerequisite condition in the pursuit and acquisition of knowledge.._
+
+## On UNIX, Vim, and Emacs
+
+* StackExchange: [Time to Drop Emacs and Vim?](https://softwareengineering.stackexchange.com/questions/61738/time-to-drop-emacs-and-vi)
+
+* Book: [The Art of UNIX Programming](http://www.catb.org/~esr/writings/taoup/html/), online version, by Eric Steven Raymond, 2003. 
