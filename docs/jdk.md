@@ -1,4 +1,4 @@
-# Java: Install/Compile/Run 
+# Java: Install/Compile/Run
 
 ## Java Development Kit (JDK)
 
@@ -38,7 +38,7 @@ sudo apt-get install oracle-java9-installer
 
 Line 1 above adds a special package repository (also known as Personal Package Archive (PPA)) to `apt`.  Line 2 instructs `apt` to download the list of packages available from all repositories configured.  One of this packages should be `oracle-java9-installer`.  Line 3 installs the `oracle-java9-installer`.  Note that this install the installer, not Java 9.  After the installer is installed, the installer is executed.  You will be asked questions about license agreements, and then the installer proceeds to download and install Java 9.
 
-For a more detailed instructions, see [the guide from the maintainer of the PPA, webupd8.org](http://www.webupd8.org/2015/02/install-oracle-java-9-in-ubuntu-linux.html). 
+For a more detailed instructions, see [the guide from the maintainer of the PPA, webupd8.org](http://www.webupd8.org/2015/02/install-oracle-java-9-in-ubuntu-linux.html).
 
 ### On Windows 10
 
@@ -50,4 +50,46 @@ Oracle publishes an [installation guide](https://docs.oracle.com/javase/9/instal
 
 ## Compiling
 
-Coming soon.
+Now that you've installed Java on your machine, here's an example of how you can compile and run some Java code.
+
+### Java source files
+
+Create a new Java source file and put it in a new folder (e.g. `CS2030`).
+
+```java
+class HelloWorld {
+  public static void main(String[] args) {
+    System.out.println("Hello, world!");
+  }
+}
+```
+
+By convention, the file should be named `HelloWorld.java`, following the _UpperCamelCase_ name of the class. At this point, our `CS2030` folder only contains that one file.
+
+```
+CS2030 $ ls
+HelloWorld.java
+```
+
+### Java class files
+
+We can go ahead and compile our Java program by running the `javac HelloWorld.java` command. This creates the corresponding Java class file, `HelloWorld.class`.
+
+```
+CS2030 $ javac HelloWorld.java
+CS2030 $ ls
+HelloWorld.class HelloWorld.java
+```
+
+We can now execute it with `java HelloWorld`. Remember to omit the `.class` extension when doing this!
+
+```
+CS2030 $ javac HelloWorld.java
+CS2030 $ java HelloWorld
+Hello, world!
+```
+
+Success! 🎉
+
+!!! note "What actually happens under the hood? Is Java an interpreted or compiled language?"
+    This can get a little mind-boggling at first, but this [diagram](https://stackoverflow.com/questions/1326071/is-java-a-compiled-or-an-interpreted-programming-language/36394113#36394113) summarizes it quite well.
