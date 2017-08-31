@@ -2,6 +2,23 @@
 
 Here is a collection of readings related to CS2030 or otherwise.
 
+## On UNIX, Vim, and Emacs
+
+* StackExchange: [Time to Drop Emacs and Vim?](https://softwareengineering.stackexchange.com/questions/61738/time-to-drop-emacs-and-vi)
+
+* Book: [The Art of UNIX Programming](http://www.catb.org/~esr/writings/taoup/html/), online version, by Eric Steven Raymond, 2003. 
+
+## On Programming Practices
+
+* [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)
+
+## On OOP
+
+* [Why extends in evil](https://www.javaworld.com/article/2073649/core-java/why-extends-is-evil.html) by Allen Holub. _"Good designers write most of their code in terms of interfaces, not concrete base classes."_
+
+* [Goodbye, Object Oriented Programming](https://medium.com/@cscalfani/goodbye-object-oriented-programming-a59cda4c0e53#.nvxhohbjs) by Charles Scalfani. _"One day, my code works and the next day it stops working. Here’s the kicker. I didn’t change my code.
+"_
+
 ## For 1st Year Students
 
 * [Notes to Computer Science Freshmen, From the Future](https://docs.google.com/document/d/1FbCWcnnajHWk594dKmN35b_we50WZf_-cwxqg-cYaRY/edit?pli=1): _Early into the AY12/13 academic year, Prof Tay Yong Chiang organized a supper for Computer Science freshmen at Tembusu College. The bunch of seniors who were gathered there put together a document for NUS computing freshmen. This is that document._
@@ -12,8 +29,3 @@ Here is a collection of readings related to CS2030 or otherwise.
 
 * [Academic Honesty](http://www.comp.nus.edu.sg/cug/plagiarism): _All students share the responsibility for upholding the academic standards and reputation of the University. Academic honesty is a prerequisite condition in the pursuit and acquisition of knowledge.._
 
-## On UNIX, Vim, and Emacs
-
-* StackExchange: [Time to Drop Emacs and Vim?](https://softwareengineering.stackexchange.com/questions/61738/time-to-drop-emacs-and-vi)
-
-* Book: [The Art of UNIX Programming](http://www.catb.org/~esr/writings/taoup/html/), online version, by Eric Steven Raymond, 2003. 
