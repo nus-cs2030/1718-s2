@@ -146,21 +146,24 @@ You may come across examples online or in books that look like the following:
 
 ```Java
 class Point {
-	double x;
-	double y;
+	protected double x;
+	protected double y;
 	  :
 }
 
 class Circle extends Point {
-	double radius;
+	protected double radius;
 	  :
 }
 
 class Cylinder extends Circle {
-	double height;
+	protected double height;
 	  :
 }
 ```
+
+!!! note "Protected fields"
+    The example above have been changed after the class to clarify the access modifier appropriate for this example.  See After Note below for details.
 
 `Circle` implemented like the above would have the center coordinate inherited from the parent (so it has three fields, x, y, and radius), and `Cylinder` would have the fields corresponding to a circle, which is its base, and the height.  So, we are _reusing_ the fields and the code related to initializing and manipulating the fields.
 
@@ -360,3 +363,20 @@ abstract class PaintedShape {
 where `cover` is a new method with default implementation, denoted with keyword `default`.
 
 At this point in CS2030, let's not worry about when to use abstract class or default methods in interfaces, but just be aware that they exists and understand what they mean when you come across them.  After you gain some experience writing OO programs, we will revisit these concepts so that you can better appreciate their differences and usage.
+
+## After Note
+
+There are a couple of points to clarify with regards to Lecture 3.
+
+- When we override `equals()` of `Object` in `Circle`, I said "
+_The method table will update the entry for `equals()` to point to the implementation provided by the `Circle` class, instead of the `Object` class._"
+and in the figure, I showed that the code for `Circle`'s customized `equals` replacing the `equals` for `Object`.  What I should have added, is that, the original implementation of `equals` from `Object` is not completely gone.  Methods from the immediate parent that have been overriden can still be called, with `super` keyword.  Here is a useful example from `Point`'s `toString()`:
+```Java
+@Override
+public String toString() {
+  return super.toString() + " (" + x + "," + y + ")";
+}
+```
+which prefix the string representation of Point with the class and reference address.
+
+- In the example where we inherit `Cylinder` from `Circle`, and `Circle` from `Point`, what should the access modifier of the fields, `x`,`y`, and `radius` be?   If they are declared `private`, then `Circle` has no access to `x` and `y`; `Cylinder` has no access to `x`,`y`, and `radius`.  If they are declared `public`, then they are accessible by everyone, breaking the abstraction barrier!  Fortunately, Java has just the right access modifier for this situation: `x`, `y`, and `radius` should be declared as `protected`.  A `protected` field is less restrictive than `public`, and is accessible by subclass but is not accessible by the whole world. 
