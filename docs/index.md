@@ -1,5 +1,9 @@
 # CS2030 Programming Methodologies II
 
+### 27 August, 2017
+
+[Lecture 3](lec3.md) and [Exercise 3](exercise3.md) are posted.  
+
 ### 20 August, 2017
 
 [Lecture 2](lec2.md) and [Exercise 2](exercise2.md) are posted.  
