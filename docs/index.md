@@ -1,5 +1,12 @@
 # CS2030 Programming Methodologies II
 
+### 5 September, 2017
+
+A bunch of stuffs where updated on this site since 27 August.
+
+- [Lab 2](lab2.md)
+- Lecture 4 [notes](lec4.md), [execise](exercise4.md), [slides](https://www.comp.nus.edu.sg/~cs2030/1718-s1/cs2030-lec4.pdf), [video](https://vimeo.com/232615561).
+
 ### 27 August, 2017
 
 [Lecture 3](lec3.md) and [Exercise 3](exercise3.md) are posted.  

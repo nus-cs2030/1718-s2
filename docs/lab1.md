@@ -144,6 +144,7 @@ Complete the program by implementing the maximum disc coverage algorithm above, 
 ooiwt@cs2030-i:~/lab01[xxx]$ java MaxDiscCover < TESTDATA1.txt
 4
 ```
+(The output `4` above is a sample only -- it might not be the correct answer)
 
 ## 4. What If
 
