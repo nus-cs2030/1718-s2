@@ -9,12 +9,15 @@ pages:
       - 1. Abstraction & Encapsulation: 'lec1.md'
       - 2. Inheritance & Polymorphism: 'lec2.md'
       - 3. Inheritance, Continued : 'lec3.md'
+      - 4. Memory, Exceptions, Generics : 'lec4.md'
   - Exercises:
       - 1. Circles & Points: 'exercise1.md'
       - 2. Square & PaintedSquare: 'exercise2.md'
       - 3. PaintedSquare Revisited: 'exercise3.md'
+      - 4. Exceptions: 'exercise4.md'
   - Labs:
       - 1: 'lab1.md'
+      - 2: 'lab2.md'
   - Software/Tools:
       - Java: 'jdk.md'
       - UNIX: 'unix.md'
