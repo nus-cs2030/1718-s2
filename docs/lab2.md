@@ -31,7 +31,7 @@ Login to `cs2030-i`, copy the files from `~cs2030/lab02` to your local directory
 ## Grading
 
 This lab contributes 4 marks to your final grade (100 marks).  
-You will get another 0-3 marks for your design and encapsulation of the classes.
+You will get 0-3 marks for your design and encapsulation of the classes.
 You will get 1 mark if you code works correctly (but only if you score at least 1 mark for your design and use of encapsulation[^1])
 
 [^1]: This is so that, if you just take the code we give you and submit as is, you cannot claim that it works so we must have you 1 mark.
