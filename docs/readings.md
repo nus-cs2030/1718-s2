@@ -19,6 +19,10 @@ Here is a collection of readings related to CS2030 or otherwise.
 * [Goodbye, Object Oriented Programming](https://medium.com/@cscalfani/goodbye-object-oriented-programming-a59cda4c0e53#.nvxhohbjs) by Charles Scalfani. _"One day, my code works and the next day it stops working. Here’s the kicker. I didn’t change my code.
 "_
 
+* [Why getters and setters methods are evil](https://www.javaworld.com/javaworld/jw-09-2003/jw-0905-toolbox.html), by Allen Holub. "_Though getter/setter methods are commonplace in Java, they are not particularly object oriented (OO). In fact, they can damage your code's maintainability. Moreover, the presence of numerous getter and setter methods is a red flag that the program isn't necessarily well designed from an OO perspective._"
+
+* [Getters/Setters.  Evil.  Period](http://www.yegor256.com/2014/09/16/getters-and-setters-are-evil.html), by Yegor Bygayenko.  "_The gist of the following text is this: getters and setters is a terrible practice and those who use it can't be excused._"
+
 ## For 1st Year Students
 
 * [Notes to Computer Science Freshmen, From the Future](https://docs.google.com/document/d/1FbCWcnnajHWk594dKmN35b_we50WZf_-cwxqg-cYaRY/edit?pli=1): _Early into the AY12/13 academic year, Prof Tay Yong Chiang organized a supper for Computer Science freshmen at Tembusu College. The bunch of seniors who were gathered there put together a document for NUS computing freshmen. This is that document._
