@@ -5,19 +5,22 @@ pages:
   - Prerequisites: 'prereqs.md'
   - Readings: 'readings.md'
   - Policies: 'policies.md'
+  - Review Qs: 'reviews.md'
   - Lectures:
       - 1. Abstraction & Encapsulation: 'lec1.md'
       - 2. Inheritance & Polymorphism: 'lec2.md'
       - 3. Inheritance, Continued : 'lec3.md'
       - 4. Memory, Exceptions, Generics : 'lec4.md'
+      - 5. Numbers, Strings, Collections: 'lec5.md'
   - Exercises:
       - 1. Circles & Points: 'exercise1.md'
       - 2. Square & PaintedSquare: 'exercise2.md'
       - 3. PaintedSquare Revisited: 'exercise3.md'
       - 4. Exceptions: 'exercise4.md'
   - Labs:
-      - 1: 'lab1.md'
-      - 2: 'lab2.md'
+      - 1. Question: 'lab1.md'
+      - 1. Comments: 'lab01-comments.md'
+      - 2. Question:  'lab2.md'
   - Software/Tools:
       - Java: 'jdk.md'
       - UNIX: 'unix.md'
