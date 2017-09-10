@@ -3,8 +3,8 @@
 ## Learning Outcomes
 
 - Familiar with wrapper classes with primitives and autoboxing / unboxing; when to use primitive types and when to use wrapper classes
-- Understand the differences between mutable and immutable objects, using String and StringBuffer as example
-- Familiar with the comparator and iterator interfaces
+- Understand the differences between mutable and immutable objects, using `String` and `StringBuilder` as example
+- Familiar with the `Comparator` and `Iterator` interfaces
 - Understand more about generics: type erasure, generic methods, wildcard types, bounded wild card types.
 - Familiar with Java collection frameworks: `Set`, `List`, `Map` and their concrete class `HashSet`, `LinkedList`, `ArrayList`, and `HashMap`.
 - Aware of the other classes in Java Collection and is comfortable to look them up by reading the Java documentation.
@@ -108,7 +108,7 @@ for (int i = 0; i < Integer.MAX_VALUE; i++)
 }
 ```
 
-The second one is XXX times faster!  Due to autoboxing and unboxing, the cost of creating objects become hidden and often forgotten.
+The second one is 2 times faster!  Due to autoboxing and unboxing, the cost of creating objects become hidden and often forgotten.
 
 ## String and StringBuilder
 
