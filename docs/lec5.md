@@ -74,11 +74,11 @@ cq.enqueue(15);
 ```
 
 !!! note "Type Erasure"
-    The reason why Java compiler does not allow generic class with primitive types, is that internally, the compiler uses _type erasure_ to implement generic class.  Type erasure just means that during compile time, the compiler replaces the type parameter with the most general type.  In the example given in [Lecture 4](lec4.md), `E` in `Queue<E>` is replaced with `Object`,  The compiler then inserts necessary cast to convert the `Object` to the type argument (e.g., `Circle`), exactly like how it is done in the `ObjectQueue` example, and additional checks to ensure that only objects of given type is used as `E` (e.g., cannot add `Point` to `Queue<Circle>`).  Since primitive types are not subclass `Object`, replacing `E` with primitive types would not work with type erasure.  
+    The reason why Java compiler does not allow generic class with primitive types, is that internally, the compiler uses _type erasure_ to implement generic class.  Type erasure just means that during compile time, the compiler replaces the type parameter with the most general type.  In the example given in [Lecture 4](lec4.md), `E` in `Queue<E>` is replaced with `Object`,  The compiler then inserts necessary cast to convert the `Object` to the type argument (e.g., `Circle`), exactly like how it is done in the `ObjectQueue` example, and additional checks to ensure that only objects of given type is used as `E` (e.g., cannot add `Point` to `Queue<Circle>`).  Since primitive types are not subclass `Object`, replacing `E` with primitive types would not work with type erasure.
 
 	Note that, as a consequence of type erasure, at runtime, Java has no information about `E`.
 
-In short, the wrapper class allows us to pass primitive types by references and use primitive types to parameterize a generic class, and we do not have to write code to box and unbox the primitive types.  
+In short, the wrapper class allows us to pass primitive types by references and use primitive types to parameterize a generic class, and we do not have to write code to box and unbox the primitive types.
 
 ### Performance Penalty
 
@@ -112,7 +112,7 @@ The second one is 2 times faster!  Due to autoboxing and unboxing, the cost of c
 
 ## String and StringBuilder
 
-Another place with hidden cost for object creation and allocation is when dealing with `String`. 
+Another place with hidden cost for object creation and allocation is when dealing with `String`.
 
 A `String` object is _immutable_.  What this means is that once you create a `String` object, it cannot be changed.  When we do:
 ```Java
@@ -144,7 +144,7 @@ String s2 = "Hello";
 if (s1 == s2) { ... }
 ```
 
-or 
+or
 ```Java
 Integer i1 = 2342;
 Integer i2 = 2342;
@@ -170,9 +170,9 @@ if (i1.equals(i2)) { ... }
 
 ## Java Collections
 
-Now, we turn our attention to the Java Collection Framework.  Java provides a rich set of classes for managing and manipulating data.  They efficiently implement many useful data structures (hash tables, red black trees, etc.) and algorithms (sorting, searching, etc.) so that we no longer have to.  As computer scientists, it is still very important for us to know how these data structures and algorithms can be implemented, how to prove some behaviors (such as running time) and their correctness, how certain trade offs are made, etc. They are so important that we have two modules dedicated to them: CS2040 and CS3230 in the core CS curriculum.  
+Now, we turn our attention to the Java Collection Framework.  Java provides a rich set of classes for managing and manipulating data.  They efficiently implement many useful data structures (hash tables, red black trees, etc.) and algorithms (sorting, searching, etc.) so that we no longer have to.  As computer scientists, it is still very important for us to know how these data structures and algorithms can be implemented, how to prove some behaviors (such as running time) and their correctness, how certain trade offs are made, etc. They are so important that we have two modules dedicated to them: CS2040 and CS3230 in the core CS curriculum.
 
-For CS2030, however, we focus on how to use them.  
+For CS2030, however, we focus on how to use them.
 
 ### Collection
 
@@ -189,7 +189,7 @@ public interface Collection<E> extends Iterable<E> {
 
   boolean equals(Object o);
   int hashCode();
-  
+
   Object[] toArray();
   <T> T[] toArray(T[] a);
 
@@ -201,7 +201,7 @@ public interface Collection<E> extends Iterable<E> {
 }
 ```
 
-There are some newly added methods in Java 8 that we will visit in the second half of this module, but first, 
+There are some newly added methods in Java 8 that we will visit in the second half of this module, but first,
 let's try to understand what the definition above means.  First, like a generic class that you have seen, `Collection` is a _generic interface_ parameterized with a type parameter `E`.  It extends a generic `Iterable<E>` interface (we will get to this later).
 
 The first six methods of `Collection<E>` should be self-explanatory.  `add` adds an element into the collection; `contains` checks if a given object is in the collection;  `remove` removes a single instance of the given object from the collection;  `clear` removes all objects from the collection;  `isEmpty()` checks if the collection has no elements or not; and finally, `size` returns the number of elements.
@@ -210,14 +210,14 @@ One point of note is that `contains()` relies of the implementation of `equals()
 
 
 !!! note "Non-generic Methods"
-    You might notice that, instead of `contains(E e)`and `remove(E e)`, the `Collection` interface uses `contains(Object o)` and `remove(Object o)`.  This little inconsistency, however, is harmless.  For instance, if you have a collection intended for circles only, adding a non-circle could be disastrous.  Trying to remove an non-circle or checking for a non-circle, would just return false.  
+    You might notice that, instead of `contains(E e)`and `remove(E e)`, the `Collection` interface uses `contains(Object o)` and `remove(Object o)`.  This little inconsistency, however, is harmless.  For instance, if you have a collection intended for circles only, adding a non-circle could be disastrous.  Trying to remove an non-circle or checking for a non-circle, would just return false.
 	More information can be found on this [StackOverflow](https://stackoverflow.com/questions/104799/why-arent-java-collections-remove-methods-generic) thread.
 
 Java Collection Framework allows classes that implements an interface to throw an `UnsupportedOperationException` if the implementation decides not to implement one of the operations (but still need to have the method in the class).
 
 The methods on Lines 9-10 should also be familiar.  A collection can check if it is equal to another collection (which inevitably also a subclass of `Object`).  As before, we will explain why we need `hashCode()` later.  Just bear with it a little longer.
 
-The method `toArray()` on Line 12 returns an array containing all the elements inside this collection.  The second overloaded `toArray` method takes in an array of generic type `T`.  If the collections fit in `a`, `a` is filled and returned.  Else, it allocates a new array of type `T` and returned.  
+The method `toArray()` on Line 12 returns an array containing all the elements inside this collection.  The second overloaded `toArray` method takes in an array of generic type `T`.  If the collections fit in `a`, `a` is filled and returned.  Else, it allocates a new array of type `T` and returned.
 
 The second `toArray` method is a _generic method_.  It is declared with `<T>` to indicate that the method can take any type `T`.  When we call generic method, we do not have to pass in a type argument.  Instead, the Java compiler infers the type from the arguments.  If we call `toArray(new String[10)`, it would return a `String[]`, if we call `toArray(new Point[0])`, it would return a `Point[]` and so on.
 It is the caller resonsibility to pass in the right type, otherwise, an `ArrayStoreException` will be thrown.
@@ -232,19 +232,19 @@ Finally, let's get back to supertype of `Collection<E>`, `Iterable<E>`.  The `It
 
 OK, so far I have talked about lots of methods but haven't showed any code.  This is because Java Collection Framework does not provide a class that implements the `Collection<E>` directly.  The documentation recommends that we implement the `Collection<E>` interface[^1] if we want a collection of objects that allows duplicates and does not care about the orders.
 
-Let's move to somethat Java does have a concrete class implementation.  
+Let's move to somethat Java does have a concrete class implementation.
 
 ## Set and List
 
-The `Set<E>` `List<E>` interfaces extend the `Collection<E>` class.  `Set<E>` is meant for implementing a collection of objects that does not allow duplicates (but still does not care about order of elements), while `List<E>` is for implementing a collection of objects that allow duplicates, but the order of elements matters.  
+The `Set<E>` `List<E>` interfaces extend the `Collection<E>` class.  `Set<E>` is meant for implementing a collection of objects that does not allow duplicates (but still does not care about order of elements), while `List<E>` is for implementing a collection of objects that allow duplicates, but the order of elements matters.
 
 Mathematically, a `Collection<E>` is used to implement a bag, `Set<E>`, a set, and `List<E>`, a sequence.
 
 [^1]: If you want to do so, however, it is likely more useful to inherit from the abstract class `AbstractCollection<E>` (which implements most of the basic methods of the interface) rather than implementing the interface `Collection<E>` directly.
 
-THe `List<E>` interface has additional methods for adding and removing elements.  `add(e)` by default would just add to the end of the list.  `add(i, e)` inserts `e` to position `i`.  `get(i)` returns the element at position `i`, `remove(i)` removes the elements at position `i`; `set(i,e)` replace the `i`-th element with `e`.  
+THe `List<E>` interface has additional methods for adding and removing elements.  `add(e)` by default would just add to the end of the list.  `add(i, e)` inserts `e` to position `i`.  `get(i)` returns the element at position `i`, `remove(i)` removes the elements at position `i`; `set(i,e)` replace the `i`-th element with `e`.
 
-Useful classes in Java collection that implements `List<E>` includes `ArrayList` and `LinkedList`, and useful classhes that implements `Set<E>` includes `HashSet`. 
+Useful classes in Java collection that implements `List<E>` includes `ArrayList` and `LinkedList`, and useful classhes that implements `Set<E>` includes `HashSet`.
 
 Let's see some examples:
 
@@ -265,7 +265,7 @@ List<String> names = new LinkedList();
 
 ### Comparator
 
-The `List<E>` interface also specifies a `sort` method, with the following specification: 
+The `List<E>` interface also specifies a `sort` method, with the following specification:
 ```Java
 default void sort(Comparator<? super E> c)
 ```
@@ -328,7 +328,7 @@ Internally, to implement `put`, `HashMap` calls key's `hashCode` to return a `in
 
 You will learn more about hashing and hash tables in CS2040.
 
-But, what is important here is that, two keys (two objects, in general) which are the same (`equals()` returns `true`), must have the same `hashCode()`.  Otherwise, `HashMap` would fail!  
+But, what is important here is that, two keys (two objects, in general) which are the same (`equals()` returns `true`), must have the same `hashCode()`.  Otherwise, `HashMap` would fail!
 
 So it is important to ensure that if `o1.equals(o2)`, then `o1.hashCode() == o2.hashCode()`.  Note that the reverse does not have to be true -- two objects with the same hash code does not have to be equals.
 

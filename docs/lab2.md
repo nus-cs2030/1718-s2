@@ -30,7 +30,7 @@ Login to `cs2030-i`, copy the files from `~cs2030/lab02` to your local directory
 
 ## Grading
 
-This lab contributes 4 marks to your final grade (100 marks).  
+This lab contributes 4 marks to your final grade (100 marks).
 You will get 0-3 marks for your design and encapsulation of the classes.
 You will get 1 mark if you code works correctly (but only if you score at least 1 mark for your design and use of encapsulation[^1])
 
@@ -42,16 +42,16 @@ A discrete event simulator is a software that simulates a system (often modeled 
 
 In this lab, we start with simulating a specific situation:
 
-- We have a shop with a _server_ (a person providing service to customer).  
-- The server can serve one customer at a time.  
-- We assume for now that the server takes constant time to serve a customer.  
+- We have a shop with a _server_ (a person providing service to customer).
+- The server can serve one customer at a time.
+- We assume for now that the server takes constant time to serve a customer.
   The time taken to serve is called _service time_.
 - When a customer arrives:
     - if the server is idle (not serving any customer), then the server serves the customer immediately (no waiting).
     - if the server is serving another customer, then the customer that just arrives waits.
     - if the server is serving one customer, and another customer is waiting, then the customer that just arrives just leave (no waiting) and go elsewhere.  In other words, there is at most one waiting customer.
 - When the server is done serving a customer:
-    - the served customer leaves.  
+    - the served customer leaves.
 	- if there is another customer waiting, the server starts serving the waiting customer immediately.
 	- if there is no waiting customer, then server becomes idle again.
 
@@ -61,7 +61,7 @@ We are interested in the following.  Given a sequence of customer arrivals (time
 - How many customers are served?
 - How many customers left without being served?
 
-In your Lab 2, you are given a simple discrete event simulator to answer the questions above.  There are two classes: `Simulator` and `Event`.  
+In your Lab 2, you are given a simple discrete event simulator to answer the questions above.  There are two classes: `Simulator` and `Event`.
 
 ### Class `Event`
 
@@ -85,9 +85,9 @@ We handle two types of events for this particular scenario: an event of type `CU
 
 The simulator class is again written in procedural style.  All members are public, and there is no method.
 
-The `Simulator` class contains two configuration parameters, `MAX_NUMBER_OF_EVENTS` indicates the maximum number of events that the simulator can store at one time; `SERVICE_TIME` indicates the time the server takes to serve a customer. 
+The `Simulator` class contains two configuration parameters, `MAX_NUMBER_OF_EVENTS` indicates the maximum number of events that the simulator can store at one time; `SERVICE_TIME` indicates the time the server takes to serve a customer.
 ```Java
-    public int MAX_NUMBER_OF_EVENTS = 100; // Maximum number of events 
+    public int MAX_NUMBER_OF_EVENTS = 100; // Maximum number of events
     public double SERVICE_TIME = 1.0; // Time spent serving a customer
 ```
 
@@ -95,12 +95,12 @@ The `events` is an array of `Event` that store all events scheduled for the futu
 ```Java
     public Event[] events; // Array of events, order of events not guaranteed.
     public int numOfEvents; // The number of events in the event array.
-``` 
+```
 
-The simulator needs to keep track of three states: 
+The simulator needs to keep track of three states:
 
 - is a customer being served?
-- is a customer waiting? 
+- is a customer waiting?
 - if a customer is waiting, when did he start waiting?
 
 These states are represented as:
@@ -109,7 +109,7 @@ These states are represented as:
     public boolean customerBeingServed; // is a customer currently being served?
     public boolean customerWaiting; // is a customer currently waiting?
     public double timeStartedWaiting; // the time the current waiting customer started waiting
-``` 
+```
 
 Remember we are interested in the following statistics:
 
@@ -123,7 +123,7 @@ which can be computing from the following members:
     public double totalWaitingTime; // total time everyone spent waiting
     public int totalNumOfServedCustomer; // how many customer has waited
     public int totalNumOfLostCustomer; // how many customer has been lost
-```  
+```
 
 Finally, for debugging purposes, the simulator assigns unique IDs 1, 2, 3, ... to the customers, in the order of their arrivals.  It then keeps track of the ID of the customer being served (if any) and the customer waiting to be served.
 
@@ -175,9 +175,9 @@ You should read through `LabTwo.java` and clarify if you are not sure about any 
 
 ### Input: Arrival Time
 
-The input consists of a sequence of double values, each is the arrival time of a customer (in any order).  We can read from standard input (if no command line argument is given) 
+The input consists of a sequence of double values, each is the arrival time of a customer (in any order).  We can read from standard input (if no command line argument is given)
 ```
-java LabTwo 
+java LabTwo
 java LabTwo  < TESTDATA1.txt
 ```
 or read from a given filename
@@ -189,7 +189,7 @@ Given an input, the output might not be deterministric, since if two events occu
 
 ## Your Task
 
-The given `LabTwo.java` is written in C style, no minimal encapsulation.  As you read through the code, you should appreciate how messy and difficult to understand the code is.  
+The given `LabTwo.java` is written in C style, no minimal encapsulation.  As you read through the code, you should appreciate how messy and difficult to understand the code is.
 
 Your mission, in Lab 2, is to rewrite the code using encapsulation, applying OO paradigm, properly maintain the abstraction barrier when the objects interact.  Here are some rules:
 
@@ -200,7 +200,7 @@ javac *.java
 java LabTwo < TESTDATA1.txt
 ```
 - You must not change the formatting of the _last line_ of output (`System.out.printf("%.3f %d %d", ..")`).  We rely on it to check for correctness of your logic.
- 
+
 ## Submission
 
 When you are ready to submit your lab, on `cs2030-i`, run the script
@@ -217,6 +217,6 @@ You can submit multiple times, but only the most recent submission will be grade
 You are exposed to three new Java syntax/class in this Lab:
 
 - Nested classes: In the code given to you, we define `Simulator` and `Event` within the class `LabTwo`.  This is called _nested class_ in Java.  Usually, this is useful if we need to create a class that is only useful to another class.  We can group logically relevant classes together.
-- `assert` keyword: `assert` works like in C and Python.  You use `assert` to check for conditions that has to be true in your code.  If an assertion fails, the program will bail, informing you what went wrong.  This is useful to catch bugs quickly.
+- `assert` keyword: `assert` works like in C and Python.  You use `assert` to check for conditions that has to be true in your code.  If an assertion fails, the program will bail, informing you what went wrong.  This is useful to catch bugs quickly.  Use this by passing a `-ea` (enable assertions) flag when running a Java program e.g. `java -ea LabTwo TESTDATA1.txt`
 - [`FileReader`](http://docs.oracle.com/javase/8/docs/api/?java/io/FileReader.html): a useful class for reading a stream of characters from a file.
 
