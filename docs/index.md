@@ -1,5 +1,17 @@
 # CS2030 Programming Methodologies II
 
+### 10 September, 2017
+
+Here's the notes on [Lecture 5](lec5.md)
+
+### 9 September, 2017
+
+Another set of updates:
+
+- [Review Questions](reviews.md) -  I will keep adding to this, do check it out, try to answer them, before verifying them in `jshell` or small Java snippet.  Most important is to understand why.
+- [Lab 1 Comments](lab01-comments.md) - Important lessons for you from your Lab 1.
+- I added two articles on using setters and getters under [Readings](readings.md)
+
 ### 5 September, 2017
 
 A bunch of stuffs where updated on this site since 27 August.
