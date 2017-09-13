@@ -13,82 +13,42 @@
 
 ## Wrapper Classes
 
-Let's consider how to swap two integers:
+!!! Note "Earlier Version of This Note"
+    An earlier version of this note includes a discussion on passing-by-reference and motiving the use of wrapper class through swapping, which is wrong.  Please ignore that.
+
+Recall the generic class `Queue<E>` which we talked in [Lecture 4](lec4.md).  We can declare a `Queue` of `Point`, a `Queue` of `Circle`, etc, but we cannot create a `Queue` of `int` or a `Queue` of `boolean`.  We can only pass in a class name to the type parameter `E`, not a primitive type.  So, to create a queue of integers, we cannot use `Queue<int>` -- we have to use `Queue<Integer>`.
+
+Java provides a set of wrapper class:  one for each primitive type: `Boolean`, `Byte`, `Character`, `Integer`, `Double`, `Long`, `Float`, and `Short`.
 
 ```Java
-class Swapper {
-	public static void swap(int x, int y) {
-		int temp = x;
-		x = y;
-		y = temp;
-	}
-}
+Queue<Integer> iq = new Queue<Integer>(10);
+cq.enqueue(new Integer(4));
+cq.enqueue(new Integer(8));
+cq.enqueue(new Integer(15));
 ```
-
-The above code is a classic example of the `swap` method.  It does not work in Java.  Recall that Java uses pass-by-value for primitive types -- changing x and y only changes the local copies of the variables on the call stack of `swap`, not the variables belonging to the caller.
-
-We should use pass-by-reference.  In Java, since all objects are passed by reference, we need to pass in an object that represents an integer.  Java provides a set of wrapper class:  one for each primitive type: `Boolean`, `Byte`, `Character`, `Integer`, `Double`, `Long`, `Float`, and `Short`.  So, we could write the `swap` method as:
-
-```Java
-class Swapper {
-	public static void swap(Integer x, Integer y) {
-		Integer temp = x;
-		x = y;
-		y = temp;
-	}
-}
-```
-
-The above would successfully swap the two integers.
-
-An old fashion way (before Java 5) of calling the `swap` method to swap two `int` values is:
-
-```Java
-int x = 1;
-int y = 2;
-Integer wrapX = new Integer(x);
-Integer wrapY = new Integer(y);
-Swapper.swap(wrapX, wrapY);
-x = wrapX.intValue();
-y = wrapY.intValue();
-```
-
-Tedious to write.  Not very easy to read.
 
 Java 5 introduces something called _autoboxing_ and _unboxing_, which creates the wrapper objects automatically (autoboxing) and retrieves its value (unboxing) automatically.  With autoboxing and unboxing, we can just write:
+
+
 ```Java
-int x = 1;
-int y = 2;
-Swapper.swap(x, y);
-```
-
-Note that `swap` expects two `Integer` objects, but we pass in two `int`.  This would cause the `int` variable to automatically be boxed (i.e., be wrapped in Integer object) and put onto the call stack of `swap`.  After `swap` is done executing, before we clear the call stacks, the values are unboxed and copied to the calling method.
-
-The wrapper class around primitive types is useful in another way.  Recall the generic class `Queue<E>` which we talked in [Lecture 4](lec4.md).  We can declare a `Queue` of `Point`, a `Queue` of `Circle`, etc, but we cannot create a `Queue` of `int` or a `Queue` of `boolean`.  We can only pass in a class name to the type parameter `E`, not a primitive type.  So, to create a queue of integers, we cannot use `Queue<int>` -- we have to use `Queue<Integer>`.
-
-```
 Queue<Integer> iq = new Queue<Integer>(10);
 cq.enqueue(4);
 cq.enqueue(8);
 cq.enqueue(15);
 ```
 
+Note that `enqueue` expects an `Integer` object, but we pass in an `int`.  This would cause the `int` variable to automatically be boxed (i.e., be wrapped in Integer object) and put onto the call stack of `enqueue`.  
+
 !!! note "Type Erasure"
     The reason why Java compiler does not allow generic class with primitive types, is that internally, the compiler uses _type erasure_ to implement generic class.  Type erasure just means that during compile time, the compiler replaces the type parameter with the most general type.  In the example given in [Lecture 4](lec4.md), `E` in `Queue<E>` is replaced with `Object`,  The compiler then inserts necessary cast to convert the `Object` to the type argument (e.g., `Circle`), exactly like how it is done in the `ObjectQueue` example, and additional checks to ensure that only objects of given type is used as `E` (e.g., cannot add `Point` to `Queue<Circle>`).  Since primitive types are not subclass `Object`, replacing `E` with primitive types would not work with type erasure.
 
 	Note that, as a consequence of type erasure, at runtime, Java has no information about `E`.
 
-In short, the wrapper class allows us to pass primitive types by references and use primitive types to parameterize a generic class, and we do not have to write code to box and unbox the primitive types.
+In short, wrapper class allows us to use primitive types to parameterize a generic class, and we do not have to write code to box and unbox the primitive types.
 
 ### Performance Penalty
 
-If the wrapper class is so great, why not use it all the time and forget about primitive types?  Like:
-
-```Java
-Integer x = 1;
-Integer y = 2;
-Swapper.swap(x, y);
-```
+If the wrapper class is so great, why not use it all the time and forget about primitive types?  
 
 The answer: performance.  Because using an object comes with the cost of allocating memory for the object and collecting of garbage afterwards, it is less efficient than primitive types.  Consider the following two programs:
 
@@ -110,11 +70,15 @@ for (int i = 0; i < Integer.MAX_VALUE; i++)
 
 The second one is 2 times faster!  Due to autoboxing and unboxing, the cost of creating objects become hidden and often forgotten.
 
+All primitive wrapper class objects are immutable.  
+What this means is that once you create an object, it cannot be changed.  Thus, everytime `sum` in the example above is updated, a new object gets created!
+
 ## String and StringBuilder
 
 Another place with hidden cost for object creation and allocation is when dealing with `String`.
 
-A `String` object is _immutable_.  What this means is that once you create a `String` object, it cannot be changed.  When we do:
+A `String` object is also _immutable_.  
+When we do:
 ```Java
 String words = "";
 words += "Hello ";
@@ -139,8 +103,8 @@ The following is a common bug, so worthy of a special mention here, with its own
 One common mistake when comparing strings and numbers is to do the following:
 
 ```Java
-String s1 = "Hello";
-String s2 = "Hello";
+String s1 = new String("Hello");
+String s2 = new String("Hello");
 if (s1 == s2) { ... }
 ```
 
@@ -158,15 +122,22 @@ if (s1.equals(s2)) { ... }
 if (i1.equals(i2)) { ... }
 ```
 
-!!! note "Integer Cache"
-    If you try:
+If you try:
 		```Java
 		Integer i1 = 1;
 		Integer i2 = 1;
 		if (i1 == i2) { ... }
 		```
-		and it might return `true`!  This behaviour is caused by some autoboxing optimization in the Integer class so that it does not create too many objects for frequently requested values.  It is called `Integer caching`.  If another `Integer` object with the same value has been autoboxed before, JVM just returns that object instead of returning a new one.
+It might return `true`!  This behaviour is caused by some autoboxing optimization in the Integer class so that it does not create too many objects for frequently requested values.  It is called `Integer caching`.  If another `Integer` object with the same value has been autoboxed before, JVM just returns that object instead of returning a new one.
 		Do not rely on Integer caching for proper comparisons of `==`.  Use `equals()`, always.
+
+Similarly, if you try:
+```Java
+String s1 = "hello";
+String s2 = "hello";
+if (s1 == s2) { ... } 
+```
+Java always returns `true`.  This is because, the Java `String` class internally maintain a pool of _interned string_ objects for all string literals and expression, as an optimization.  
 
 ## Java Collections
 
@@ -307,7 +278,7 @@ The two most important methods for `Map` is `put` and `get`:
 
 ```Java
 	V put(K key, V value);
-	K get(Object k);
+	V get(Object k);
 ```
 
 A useful class that implements `Map` interface is `HashMap`:
@@ -347,6 +318,6 @@ Java provides many collection classes, more than what we have time to go through
 - Use `ArrayList` if you have a collection of elements with possibly duplicates and order is important, and retriving a specific location is more important than removing elements from the list.
 - Use `LinkedList` if you have a collection of elements with possibly duplicates and order is important, retriving a specific location is less important than removing elements from the list.
 
-Further, if you want to check if a given object is contained in the list, then `ArrayList` and `LinkedList` are not good candidates.
+You should understand the reasons above after CS2040.
 
-You should understand why after CS2040.
+Further, if you want to check if a given object is contained in the list, then `ArrayList` and `LinkedList` are not good candidates.  `HashSet`, on the other hand, can quickly check if an item is already contained in the set.  There is unfortunately no standard collection class that supports fast `contain` and allow duplicates.  Maybe CS2040, you can build you own collection class :)
