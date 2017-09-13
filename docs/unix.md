@@ -130,6 +130,14 @@ Circle.java
 ```
 The command above copy the files Circle.java from the HOME of user `cs2030`, under directory `lab01`, to the current directory.
 
+If you want to copy the whole directory, use `-r` flag, where `r` stands for recursive copy.
+
+```
+happytan@cs2030-i:~/lab01[xxx]$ cp -r ~cs2030/lab01 .
+```
+
+The directory `lab01` and everything under it will be copied.
+
 - `mv`:	MoVe files from one directory to another; can also be used to rename files.
 ```
 happytan@cs2030-i:~/lab01[xxx]$ mv Circle.java Test.java
@@ -224,6 +232,8 @@ The expression `*.java` is a regular expression that means all files with filena
 ```shell
 scp Circle.java Point.java happytan@cs2030-i:~/test
 ```
+
+`scp` supports `-r` (recursive copy) as well.
 
 ### Setting up SSH Keys
 
