@@ -6,6 +6,7 @@ pages:
   - Readings: 'readings.md'
   - Policies: 'policies.md'
   - Review Qs: 'reviews.md'
+  - Coding Style: 'style.md'
   - Lectures:
       - 1. Abstraction & Encapsulation: 'lec1.md'
       - 2. Inheritance & Polymorphism: 'lec2.md'
@@ -20,9 +21,11 @@ pages:
   - Labs:
       - 1. Question: 'lab1.md'
       - 1. Comments: 'lab01-comments.md'
-      - 2. Question:  'lab2.md'
+      - 2. Question: 'lab2.md'
+      - 3. Question: 'lab3.md'
   - Software/Tools:
       - Java: 'jdk.md'
+      - Javadoc: 'javadoc.md'
       - UNIX: 'unix.md'
 
 # pip install pymdown-extensions
