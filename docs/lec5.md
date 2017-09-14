@@ -37,18 +37,18 @@ cq.enqueue(8);
 cq.enqueue(15);
 ```
 
-Note that `enqueue` expects an `Integer` object, but we pass in an `int`.  This would cause the `int` variable to automatically be boxed (i.e., be wrapped in Integer object) and put onto the call stack of `enqueue`.  
+Note that `enqueue` expects an `Integer` object, but we pass in an `int`.  This would cause the `int` variable to automatically be boxed (i.e., be wrapped in Integer object) and put onto the call stack of `enqueue`.
 
 !!! note "Type Erasure"
     The reason why Java compiler does not allow generic class with primitive types, is that internally, the compiler uses _type erasure_ to implement generic class.  Type erasure just means that during compile time, the compiler replaces the type parameter with the most general type.  In the example given in [Lecture 4](lec4.md), `E` in `Queue<E>` is replaced with `Object`,  The compiler then inserts necessary cast to convert the `Object` to the type argument (e.g., `Circle`), exactly like how it is done in the `ObjectQueue` example, and additional checks to ensure that only objects of given type is used as `E` (e.g., cannot add `Point` to `Queue<Circle>`).  Since primitive types are not subclass `Object`, replacing `E` with primitive types would not work with type erasure.
 
-	Note that, as a consequence of type erasure, at runtime, Java has no information about `E`.
+	Note that, due to type erasure at compile time, Java has no information about `E` at runtime.
 
 In short, wrapper class allows us to use primitive types to parameterize a generic class, and we do not have to write code to box and unbox the primitive types.
 
 ### Performance Penalty
 
-If the wrapper class is so great, why not use it all the time and forget about primitive types?  
+If the wrapper class is so great, why not use it all the time and forget about primitive types?
 
 The answer: performance.  Because using an object comes with the cost of allocating memory for the object and collecting of garbage afterwards, it is less efficient than primitive types.  Consider the following two programs:
 
@@ -70,14 +70,14 @@ for (int i = 0; i < Integer.MAX_VALUE; i++)
 
 The second one is 2 times faster!  Due to autoboxing and unboxing, the cost of creating objects become hidden and often forgotten.
 
-All primitive wrapper class objects are immutable.  
+All primitive wrapper class objects are immutable.
 What this means is that once you create an object, it cannot be changed.  Thus, everytime `sum` in the example above is updated, a new object gets created!
 
 ## String and StringBuilder
 
 Another place with hidden cost for object creation and allocation is when dealing with `String`.
 
-A `String` object is also _immutable_.  
+A `String` object is also _immutable_.
 When we do:
 ```Java
 String words = "";
@@ -135,9 +135,9 @@ Similarly, if you try:
 ```Java
 String s1 = "hello";
 String s2 = "hello";
-if (s1 == s2) { ... } 
+if (s1 == s2) { ... }
 ```
-Java always returns `true`.  This is because, the Java `String` class internally maintain a pool of _interned string_ objects for all string literals and expression, as an optimization.  
+Java always returns `true`.  This is because, the Java `String` class internally maintain a pool of _interned string_ objects for all string literals and expression, as an optimization.
 
 ## Java Collections
 
