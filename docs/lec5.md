@@ -321,3 +321,76 @@ Java provides many collection classes, more than what we have time to go through
 You should understand the reasons above after CS2040.
 
 Further, if you want to check if a given object is contained in the list, then `ArrayList` and `LinkedList` are not good candidates.  `HashSet`, on the other hand, can quickly check if an item is already contained in the set.  There is unfortunately no standard collection class that supports fast `contain` and allow duplicates.  Maybe CS2040, you can build you own collection class :)
+
+## Sample Code
+
+Requested by some students, I am dumping the code I used in class here.  They are badly written code (not following style guidelines, no comments, etc) edited live in class to demonstrate the concepts -- not meant to be a model of how code should be written.  Here they are:
+
+The following code was used to demonstrate the overhead of using wrapper class unnecessary.
+```Java
+class Dable {
+  public static void main(String[] args) {
+    // Double sum = 0.0;
+    double sum = 0.0;
+    for (int i = 0; i < Integer.MAX_VALUE; i++)
+    {
+          sum += i;
+    }
+  }
+}
+```
+
+The following code was used to demonstrate sorting of an `ArrayList`.
+```Java
+import java.util.*;
+
+class NameComparator implements Comparator<String> {
+  public int compare(String s1, String s2) {
+    // return (s1.compareTo(s2));
+    // return (s2.compareTo(s1));
+    return (s2.length() - s1.length());
+  }
+}
+
+class SortedList {
+  public static void main(String[] args) {
+    List<String> names = new ArrayList<String>();
+
+    names.add(0, "Joffrey");
+    names.add(1, "Cersei");
+    names.add(2, "Meryn");
+    names.add(3, "Walder");
+    names.add(4, "Gregor");
+    names.add(5, "Sandor");
+
+    System.out.println("Initial List");
+    for (String i: names) {
+      System.out.println(i);
+    }
+
+    names.sort(new NameComparator());
+
+    System.out.println("Sorted List");
+    for (String i: names) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+The following was used to demonstrate `HashMap`.
+```Java
+import java.util.*;
+
+class Population {
+  public static void main(String[] args) {
+    Map<String,Integer> population = new HashMap<String,Integer>();
+    population.put("Oldtown",500000);
+    population.put("Kings Landing",500000);
+    population.put("Lannisport",300000);
+    System.out.println(population.get("Lannisport"));
+  }
+}
+```
+
+
