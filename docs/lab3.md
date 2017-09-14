@@ -161,7 +161,6 @@ Your mission, in Lab 3, is update your solution in Lab 2 to:
 - use randomly generated service time and arrival time, specified by a new input file format
 - improve your existing encapsulations, create new encapsultions, etc. if necessary
 
-
 The `main` method should remain in a class named `LabThree`.  We must be able to run your code with:
 ```
 javac *.java
@@ -172,6 +171,7 @@ You also must not change the formatting of the _last line_ of output:
 ```Java
 System.out.printf("%.3f %d %d", ..")
 ```
+
 We rely on it to check for correctness of your logic.
 
 ## Submission
