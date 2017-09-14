@@ -60,7 +60,7 @@ This lab contributes another 4 marks to your final grade (100 marks).
 
 The first change you need to do in this assignment is to use one of the Java Collection classes to manage the events.  In `LabTwo.java`, we keep all the events in an array, and scanned through it to find the event with the smallest (i.e., earliest) timestamp.  This is not efficient, since scanning through all the events takes time that increases linearly with the number of events[^2].  
 
-Java Collection provides a class that is perfect for our use: [`PriorityQueue<E>`](https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html).  A `PriorityQueue` keeps a collection of elements, the elements are given certain priority.  Elements can be added with `[add(E e)](https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html#add-E-)` method.  To retrieve and remove the elements with highest priority, we use the `[poll()](https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html#poll--)` method, which returns an object of type `E`, or `null` is the queue is empty.
+Java Collection provides a class that is perfect for our use: [`PriorityQueue<E>`](https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html).  A `PriorityQueue` keeps a collection of elements, the elements are given certain priority.  Elements can be added with `[add(E e)]`(https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html#add-E-) method.  To retrieve and remove the elements with highest priority, we use the `[poll()]`(https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html#poll--) method, which returns an object of type `E`, or `null` is the queue is empty.
 
 In our case, the event with the smallest timestamp have the highest priority.  To tell the `PriorityQueue<E>` class how to order the events so that smaller timestamp has higher priority, we use the [`PriorityQueue<E>` constructor](https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html#PriorityQueue-java.util.Comparator-) that takes in a `Comparator` object, just like we see in [Lecture 5](lec5.md)[^3].
 
@@ -153,18 +153,20 @@ ooiwt@cs2030-i:~/lab03> java LabThree < TESTDATA5.txt | tail -1
 ## Your Task
 
 Your mission, in Lab 3, is update your solution in Lab 2 to:
+
 - follow the style guideline
 - add `javadoc` comments to code (`javadoc` should not produce any warning)
 - use `PriorityQueue<E>` to manage the events
 - use randomly generated service time and arrival time, specified by a new input file format
 - improve your existing encapsulations, create new encapsultions, etc. if necessary
 
-- The `main` method should remain in a class named `LabThree`.  We must be able to run your code with:
+The `main` method should remain in a class named `LabThree`.  We must be able to run your code with:
 ```
 javac *.java
 java LabThree < TESTDATA1.txt
 ```
-- You must not change the formatting of the _last line_ of output (`System.out.printf("%.3f %d %d", ..")`).  We rely on it to check for correctness of your logic.
+
+You must not change the formatting of the _last line_ of output (`System.out.printf("%.3f %d %d", ..")`).  We rely on it to check for correctness of your logic.
 
 ## Submission
 
