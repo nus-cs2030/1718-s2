@@ -1,5 +1,23 @@
 # CS2030 Programming Methodologies II
 
+### 17 September 2017
+
+Notes for [Lecture 6](lec6.md) posted.
+
+### 15 September 2017
+
+Updates:
+- Lecture 5 video and slides (under [schedule](schedule.md))
+- More [review questions](review.md)
+- Tops for using [vim](vim.md)
+
+### 13 September, 2017
+Updates:
+
+- [Lab 3](lab3.md)
+- [Javadoc](javadoc.md) Guide
+- CS2030 [style guide](style.md)
+
 ### 10 September, 2017
 
 Here's the notes on [Lecture 5](lec5.md)
