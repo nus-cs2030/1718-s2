@@ -1,5 +1,10 @@
 # Review Questions
 
+These set of questions are designed to illustrate certain rules and principles about Java.  
+You can easily find out the answer yourselves using `jshell` or write small programs.  
+It is more important to understand why -- there are some underlying principles/rules in Java that cause the compiler / code to behave the way it does. 
+Note that the code are tersed by designed, and are never meant to be a positive example of good Java code.  
+
 1. Can, or not? 
 
     ```Java
@@ -262,3 +267,251 @@
     a.f();
     a.f(0);
     ```
+
+15. Can, or not?  If can, what will be printed?
+
+	```Java
+    class A {
+      public void f() { 
+        System.out.println("A f"); 
+      }
+    }
+
+    class B extends A {
+      public void f() { 
+        System.out.println("B f"); 
+      }
+    }
+
+	B b = new B();
+	A a = b;
+	a.f();
+	b.f();
+	```
+
+16. Can, or not?  If can, what will be printed?
+
+	```Java
+    class A {
+      private void f() { 
+        System.out.println("A f"); 
+      }
+    }
+
+    class B extends A {
+      public void f() { 
+        System.out.println("B f"); 
+      }
+    }
+
+	B b = new B();
+	A a = b;
+	a.f();
+	b.f();
+	```
+
+17. Can, or not?  If can, what will be printed?
+
+	```Java
+    class A {
+      private void f() { 
+        System.out.println("A f"); 
+      }
+    }
+
+    class B extends A {
+      public void f() { 
+        System.out.println("B f"); 
+      }
+    }
+
+	B b = new B();
+	A a = b;
+	a.f();
+	b.f();
+	```
+
+18. Can, or not?  If can, what will be printed?
+
+	```Java
+    class A {
+      static void f() { 
+        System.out.println("A f"); 
+      }
+    }
+
+    class B extends A {
+      public void f() { 
+        System.out.println("B f"); 
+      }
+    }
+
+	B b = new B();
+	A a = b;
+	a.f();
+	b.f();
+	```
+
+19. Can, or not?  If can, what will be printed?
+
+	```Java
+    class A {
+      static void f() { 
+        System.out.println("A f"); 
+      }
+    }
+
+    class B extends A {
+      static void f() { 
+        System.out.println("B f"); 
+      }
+    }
+
+	B b = new B();
+	A a = b;
+	A.f();
+	B.f();
+	a.f();
+	b.f();
+	```
+
+20. Will the following code compile? Why?
+
+	```Java
+    class A {
+	  public void f(int x) {}
+	  public void f(boolean y) {}
+	}
+	```
+
+21. Will the following code compile? Why?
+
+	```Java
+    class A {
+	  public void f(int x) {}
+	  public void f(int y) {}
+	}
+	```
+
+22. Will the following code compile? Why?
+	```Java
+    class A {
+	  private void f(int x) {}
+	  public void f(int y) {}
+	}
+	```
+
+23. Will the following code compile? Why?
+	```Java
+    class A {
+	  public int f(int x) { 
+		  return x; 
+	  }
+	  public void f(int y) {}
+	}
+	```
+
+24. Will the following code compile?  Why?
+	```Java
+    class A {
+	  public void f(int x, String s) {}
+	  public void f(String s, int y) {}
+	}
+	```
+
+25. Will the following code compile? Why?
+
+	```Java
+    class A {
+	  public void f(int x) {}
+	  public void f(int y) throws IOException {}
+	}
+	```
+
+26. Will the following code compile?  If so, what will be printed?
+
+    ```Java
+	class A {
+	  private int x = 0;
+	}
+
+	class B extends A {
+	  public void f() {
+		System.out.println(x);
+	  }
+	}
+
+	B b = new B();
+	b.f();
+	```
+
+27. Will the following code compile?  If so, what will be printed?
+
+    ```Java
+	class A {
+	  private int x = 0;
+	}
+
+	class B extends A {
+	  public void f() {
+		System.out.println(super.x);
+	  }
+	}
+
+	B b = new B();
+	b.f();
+	```
+
+
+28. Will the following code compile?  If so, what will be printed?
+
+    ```Java
+	class A {
+	  protected int x = 0;
+	}
+
+	class B extends A {
+	  public void f() {
+		System.out.println(x);
+	  }
+	}
+
+	B b = new B();
+	b.f();
+	```
+
+29. Will the following code compile?  If so, what will be printed?
+
+    ```Java
+	class A {
+	  protected int x = 0;
+	}
+
+	class B extends A {
+	  public int x = 1;
+	  public void f() {
+		System.out.println(x);
+	  }
+	}
+
+	B b = new B();
+	b.f();
+	```
+
+30. Will the following code compile?  If so, what will be printed?
+
+    ```Java
+	class A {
+	  protected int x = 0;
+	}
+
+	class B extends A {
+	  public int x = 1;
+	  public void f() {
+		System.out.println(super.x);
+	  }
+	}
+
+	B b = new B();
+	b.f();
+	```
