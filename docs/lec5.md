@@ -8,7 +8,6 @@
 - Understand more about generics: type erasure, generic methods, wildcard types, bounded wild card types.
 - Familiar with Java collection frameworks: `Set`, `List`, `Map` and their concrete class `HashSet`, `LinkedList`, `ArrayList`, and `HashMap`.
 - Aware of the other classes in Java Collection and is comfortable to look them up by reading the Java documentation.
-- Understand the need to override `hashCode` every time `equals` is overriden.
 - Understand there are differences between the collection classes and know when to use which one
 
 ## Wrapper Classes
@@ -294,20 +293,6 @@ Later, if we want to lookup the value, we can:
 ```Java
 population.get("Kings Landing");
 ```
-
-Internally, to implement `put`, `HashMap` calls key's `hashCode` to return a `int`, which it uses to determine which "bucket" to store the (key, value) pair.  When `get`, `HashMap` again calls `hashCode` on the given key to determine which bucket, then it looks for the key in the bucket.  This process, called _hashing_, circumvents the need to look through every pair in the map to find the right key.
-
-You will learn more about hashing and hash tables in CS2040.
-
-But, what is important here is that, two keys (two objects, in general) which are the same (`equals()` returns `true`), must have the same `hashCode()`.  Otherwise, `HashMap` would fail!
-
-So it is important to ensure that if `o1.equals(o2)`, then `o1.hashCode() == o2.hashCode()`.  Note that the reverse does not have to be true -- two objects with the same hash code does not have to be equals.
-
-This property is also useful for implementing `equals()`.  For a complex object, comparing every field for equality can be expensive.  If we can compare the hash code first, we could filter out objects with different hash code (since they cannot be equal).  We only need to compare field by field if the hash code is the same.
-
-Ditto for implementation of `HashSet` -- to checks if an element to add already exists, `HashSet` uses hash code, instead of going through all the elements and compare one by one.
-
-Calculating good hash code is an involved topic, and is best left to the expert (some of you might become expert in this), but for now, we can rely on the static `hashCode` methods in the `Array` class to help us.
 
 ## Which Collection Class?
 
