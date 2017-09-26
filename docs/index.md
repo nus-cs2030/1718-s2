@@ -8,7 +8,7 @@ Notes for [Lecture 6](lec6.md) posted.
 
 Updates:
 - Lecture 5 video and slides (under [schedule](schedule.md))
-- More [review questions](review.md)
+- More [review questions](reviews.md)
 - Tops for using [vim](vim.md)
 
 ### 13 September, 2017
