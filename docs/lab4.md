@@ -1,6 +1,6 @@
 # Lab 4
 
-Submission deadline: 2359, Sunday, September 24, 2017.
+Submission deadline: 2359, <s>Sunday, September 24, 2017.</s> Monday, September 25, 2017.
 
 ## Prerequisites
 
