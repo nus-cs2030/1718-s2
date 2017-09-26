@@ -24,6 +24,7 @@ pages:
       - 1. Comments: 'lab01-comments.md'
       - 2. Question: 'lab2.md'
       - 3. Question: 'lab3.md'
+      - 4. Question: 'lab4.md'
   - Software/Tools:
       - Java: 'jdk.md'
       - Javadoc: 'javadoc.md'
