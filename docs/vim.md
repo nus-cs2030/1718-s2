@@ -110,3 +110,27 @@ Sometimes you want to swap the order of two lines of code, in command mode, `ddp
 ## Goto File
 
 Place your cursor on the name of a class (e.g., `Event`), then in command mode, issue the `gf` command (goto file).  `vim` will open `Event.java`.  You can set the `path` to load files from directories other than the current directory.   "Ctrl-^" will get out and back to the previous file.
+
+## Syntax and Style Checker
+
+I use `syntastic` to check for style and syntax whenever I save a file.  [`syntastic`](https://github.com/vim-syntastic/syntastic) is a `vim` plugin. 
+
+My `.vimrc` configuration file contains the following:
+
+```
+"For syntastic
+set laststatus=2
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_java_checkers = [ "checkstyle", "javac" ]
+let g:syntastic_java_checkstyle_classpath = "~cs2030/bin/checkstyle-8.2-all.jar"
+let g:syntastic_java_checkstyle_conf_file = "~cs2030/bin/cs2030_checks.xml"
+```
+
+The last two lines refer to [`checkstyle`](http://checkstyle.sourceforge.net) tool and its configuration file available from `~cs2030/bin` on the host `cs2030-i.comp.nus.edu.sg`.
