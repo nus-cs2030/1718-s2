@@ -49,7 +49,7 @@ https://robots.thoughtbot.com/tell-dont-ask
 Many students used getter methods to "ask" an object for information, handled some logic, and then used setter methods to update the fields of that object. While this is better than making those fields `public` altogether, this often leads to a poorly-defined abstraction barrier. It is almost all the time better to "tell" your object to do something instead.
 
 !!! note "The Ruby programming language"
-    The code in the second link is written in Ruby, another object-oriented language like Java, except that it is dynamically-typed. Even though it's a different language, you should be able to understand the code well enough to appreciate the examples in the article.
+    The code in the second link is written in Ruby, another object-oriented language like Java, except that it is dynamically-typed. Even though it's a different language, it should be easy enough to understand for you to appreciate the examples in the article.
 
 ### "I still don't understand!"
 
@@ -79,29 +79,27 @@ This is a reasonable way to use getters like `getTime()` and `getType()`. But yo
 
 * **Use constructors to directly instantiate Event and Simulator objects.** You need to tell the class what to do when someone does `new ClassName()`.
 
-* **The expected initial state of an object should always be defined in the constructor.** Don't pass in those initial values as arguments. Otherwise, someone can possibly instantiate an object that has a wrong starting state. Ideally, you want to guarantee that every object contains valid values right from the moment it gets created.
+* **The expected initial state of an object should always be defined in the constructor. Don't pass in those initial values as arguments.** Otherwise, someone can possibly instantiate an object that has a wrong starting state. Some students had a `Simulator` constructor that took in 7 arguments. This violates encapsulation because `LabTwo` now needs to know that `Simulator` has fields such as `customerWaiting` and `customerBeingServed`, and worse, set them to `false` on `Simulator`'s behalf. You should try to guarantee that every object contains valid values right from the moment it gets created.
 
-* **Also don't provide a "default constructor" that sets dummy values.** For example, some students had an `Event()` constructor that takes in no arguments and sets `time` and `eventType` to 0. Can you see how this might go wrong? Don't give yourself (and other people) an option to do things that will lead to unexpected mistakes down the road.
+* **Also don't provide a "default constructor" that sets dummy values.** For example, some students had an extra `Event` constructor that took in no arguments and set `time` and `eventType` to 0. Can you see how this might go wrong? Don't give yourself (and other people) an option to do things that will lead to unexpected mistakes down the road.
 
-* Some students implemented a `public Event getEventAt(int index)` method in the `Simulator`. This clearly breaks the abstraction barrier, because external classes should never have direct access to the ordering of `Event`s and how they are stored inside `Simulator`.
+* **Some students implemented a `public Event getEventAt(int index)` method in the `Simulator`.** This clearly breaks the abstraction barrier, because external classes should never have direct access to the ordering of `Event`s and how they are stored inside `Simulator`.
 
-* A few students misunderstood the meaning of encapsulation. If a method deals with `Event` objects or has the word "event" in its name, that doesn't mean it should belong inside the `Event` class.
+* **A few students misunderstood the meaning of encapsulation.** If a method deals with `Event` objects or has the word "event" in its name, that doesn't mean it should belong inside the `Event` class.
 
-* Another example of separating concerns is to shift `printStats()` into the `run()` method of your `Simulator`. `LabTwo` doesn't need to know that `Simulator` prints out its stats when it finishes running. Instead, `Simulator` maintains ownership and control over that behavior. Notice that after you do this, you no longer need to define getters such as `sim.getAverageWaitingTime()`.
+* **Another way to improve your design is to shift `printStats()` into the `run()` method of your `Simulator`.** `LabTwo` doesn't need to know that `Simulator` prints stats when it finishes running. Instead, `Simulator` maintains ownership and control over that behavior. In a 3 mark submission with well-separated concerns, the `Simulator` would fetch stats such as `totalNumOfCustomersServed` from the `Server` class.
 
 * **Don't define constants in more than one place.** You should only have one source of truth.
 
-* **Constants should be declared _and assigned_ at one go, with the proper modifiers.** Here's how you should do it: `private static final MY_CONSTANT = 123;`. Changing `private` to `public` is perfectly acceptable if many classes need access to that constant (e.g. `Event.CUSTOMER_ARRIVE`). If a "constant" might have a different value depending on arguments that you pass in, then it's not a constant anymore, is it?
+* **Constants should be declared _and assigned_ at one go, with the proper modifiers.** Here's how you should do it: `private static final MY_CONSTANT = 123`. Changing `private` to `public` is perfectly acceptable if many classes need access to that constant (e.g. `Event.CUSTOMER_ARRIVE`). If a "constant" might have a different value depending on arguments that you pass in, then it's not a constant anymore, is it?
 
 * **Avoid nesting classes.** There are very few situations where nested classes are acceptable.
 
 * **Methods for internal use only should all be `private`.** For that matter, all fields and methods should either be `public` or `private`. Don't be lazy and skimp on the access modifier - so many students left `createScanner()` exposed to classes outside of `LabTwo`. The only time you might need to think about other levels of access control is when you're dealing with subclasses.
 
-* It's not strictly required but it's a good practice to **use `this` to refer to fields** so that you distinguish them from other variables or arguments.
+* It's not strictly required but it's a good practice to **use `this` to refer to fields** so that you distinguish them from other variables or arguments. Methods in the same class, however, should just be called directly without `this`. Same for static fields in the same class.
 
-* Methods in the same class, however, should just be called directly without `this`. Same for static fields in the same class.
-
-* When you're accessing a static method or field from outside the class, always reference the class rather than the instance. For example, do `Event.CUSTOMER_ARRIVE` and not `e.CUSTOMER_ARRIVE`.
+* When you're accessing a static method or field from outside the class, **always reference the class rather than the instance**. For example, do `Event.CUSTOMER_ARRIVE` and not `e.CUSTOMER_ARRIVE`.
 
 * **Simplicity is underrated.** Always prefer to structure your code in the simplest way possible. Writing simple code is actually very difficult and takes a lot of conscious effort.
 
