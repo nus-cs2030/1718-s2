@@ -89,9 +89,9 @@ This is a reasonable way to use getters like `getTime()` and `getType()`. But yo
 
 * **Another way to improve your design is to shift `printStats()` into the `run()` method of your `Simulator`.** `LabTwo` doesn't need to know that `Simulator` prints stats when it finishes running. Instead, `Simulator` maintains ownership and control over that behavior. In a 3 mark submission with well-separated concerns, the `Simulator` would fetch stats such as `totalNumOfCustomersServed` from the `Server` class.
 
-* **Don't define constants in more than one place.** You should only have one source of truth.
-
 * **Constants should be declared _and assigned_ at one go, with the proper modifiers.** Here's how you should do it: `private static final MY_CONSTANT = 123`. Changing `private` to `public` is perfectly acceptable if many classes need access to that constant (e.g. `Event.CUSTOMER_ARRIVE`). If a "constant" might have a different value depending on arguments that you pass in, then it's not a constant anymore, is it?
+
+* **Don't define constants in more than one place.** You should only have one source of truth. To achieve this, some students created a `Constants` class and put all their constants in there, but the correct way would be to put them in their appropriate classes. Do also note that not all constants need to be `public` (e.g. `MAX_NUMBER_OF_EVENTS` should be encapsulated in `Simulator`).
 
 * **Avoid nesting classes.** There are very few situations where nested classes are acceptable.
 
