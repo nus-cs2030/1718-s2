@@ -220,10 +220,10 @@ Let's see some examples:
 
 ```Java
 List<String> names = new ArrayList();
-aryaList.add("Cersei");
-aryaList.add("Joffrey");
-aryaList.add(0, "Gregor");
-System.out.println(aryaList.get(1));
+names.add("Cersei");
+names.add("Joffrey");
+names.add(0, "Gregor");
+System.out.println(names.get(1));
 ```
 
 Line 1 above creates a empty array list.  The second line adds two strings into the list, each appending them to the list.  After executing Line 3, it would contain the sequence `<"Cersei","Joffrey">`.  Line 4 inserts the string `"Gregor"` to position 0, moving the rest of the list down by 1 position.  The sequence is now `<"Gregor","Cersei","Joffrey">`.  Finally, calling `get(1)` would return the string `"Cersei"`.
