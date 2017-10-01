@@ -16,7 +16,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     d = (double) i;
     ```
 
-2. Can, or not? 
+1. Can, or not? 
 
     ```Java
     int i;
@@ -27,7 +27,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     b = (boolean) i;
     ```
 
-3. Can, or not? 
+1. Can, or not? 
 
     ```Java
     class A {
@@ -40,7 +40,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     B b = new A();
     ```
 
-4. Can, or not? 
+1. Can, or not? 
 
     ```Java
     class A {
@@ -55,7 +55,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     a = (A)b;
     ```
 
-5. Can, or not? 
+1. Can, or not? 
 
     ```Java
     interface I {
@@ -70,7 +70,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     A a2 = (A)i2;
     ```
 
-6. Can, or not? 
+1. Can, or not? 
 
     ```Java
     interface I {
@@ -94,7 +94,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     a = (A)j;
     ```
 
-7. Can, or not? 
+1. Can, or not? 
 
     ```Java
     interface I {
@@ -119,7 +119,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     a = (A)j;
     ```
 
-8. Can, or not? 
+1. Can, or not? 
 
     ```Java
     class A {
@@ -138,7 +138,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     C c = (C)b;
     ```
 
-9. Can, or not? If can, print what?
+1. Can, or not? If can, print what?
 
     ```Java
     class A {
@@ -154,7 +154,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     a.f();
     ```
 
-10. Can, or not? If can, print what?
+1. Can, or not? If can, print what?
 
     ```Java
     class A {
@@ -177,7 +177,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     a.f();
     ```
 
-11. Can, or not? If can, print what?
+1. Can, or not? If can, print what?
 
     ```Java
     class A {
@@ -199,7 +199,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     a.f();
     ```
 
-12. Can, or not? If can, print what?
+1. Can, or not? If can, print what?
 
     ```Java
     class A {
@@ -222,7 +222,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     ```
 
 
-13. Can, or not? If can, print what?
+1. Can, or not? If can, print what?
 
     ```Java
     class A {
@@ -244,7 +244,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     a.f();
     ```
 
-14. Can, or not? If can, print what?
+1. Can, or not? If can, print what?
 
     ```Java
     class A {
@@ -268,7 +268,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     a.f(0);
     ```
 
-15. Can, or not?  If can, what will be printed?
+1. Can, or not?  If can, what will be printed?
 
 	```Java
     class A {
@@ -289,28 +289,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	b.f();
 	```
 
-16. Can, or not?  If can, what will be printed?
-
-	```Java
-    class A {
-      private void f() { 
-        System.out.println("A f"); 
-      }
-    }
-
-    class B extends A {
-      public void f() { 
-        System.out.println("B f"); 
-      }
-    }
-
-	B b = new B();
-	A a = b;
-	a.f();
-	b.f();
-	```
-
-17. Can, or not?  If can, what will be printed?
+1. Can, or not?  If can, what will be printed?
 
 	```Java
     class A {
@@ -331,7 +310,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	b.f();
 	```
 
-18. Can, or not?  If can, what will be printed?
+1. Can, or not?  If can, what will be printed?
 
 	```Java
     class A {
@@ -352,7 +331,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	b.f();
 	```
 
-19. Can, or not?  If can, what will be printed?
+1. Can, or not?  If can, what will be printed?
 
 	```Java
     class A {
@@ -375,7 +354,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	b.f();
 	```
 
-20. Will the following code compile? Why?
+1. Will the following code compile? Why?
 
 	```Java
     class A {
@@ -384,7 +363,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	}
 	```
 
-21. Will the following code compile? Why?
+1. Will the following code compile? Why?
 
 	```Java
     class A {
@@ -393,7 +372,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	}
 	```
 
-22. Will the following code compile? Why?
+1. Will the following code compile? Why?
 	```Java
     class A {
 	  private void f(int x) {}
@@ -401,7 +380,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	}
 	```
 
-23. Will the following code compile? Why?
+1. Will the following code compile? Why?
 	```Java
     class A {
 	  public int f(int x) { 
@@ -411,7 +390,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	}
 	```
 
-24. Will the following code compile?  Why?
+1. Will the following code compile?  Why?
 	```Java
     class A {
 	  public void f(int x, String s) {}
@@ -419,7 +398,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	}
 	```
 
-25. Will the following code compile? Why?
+1. Will the following code compile? Why?
 
 	```Java
     class A {
@@ -428,7 +407,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	}
 	```
 
-26. Will the following code compile?  If so, what will be printed?
+1. Will the following code compile?  If so, what will be printed?
 
     ```Java
 	class A {
@@ -445,7 +424,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	b.f();
 	```
 
-27. Will the following code compile?  If so, what will be printed?
+1. Will the following code compile?  If so, what will be printed?
 
     ```Java
 	class A {
@@ -463,7 +442,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	```
 
 
-28. Will the following code compile?  If so, what will be printed?
+1. Will the following code compile?  If so, what will be printed?
 
     ```Java
 	class A {
@@ -480,7 +459,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	b.f();
 	```
 
-29. Will the following code compile?  If so, what will be printed?
+1. Will the following code compile?  If so, what will be printed?
 
     ```Java
 	class A {
@@ -498,7 +477,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	b.f();
 	```
 
-30. Will the following code compile?  If so, what will be printed?
+1. Will the following code compile?  If so, what will be printed?
 
     ```Java
 	class A {
