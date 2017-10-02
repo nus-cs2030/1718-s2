@@ -219,7 +219,7 @@ Useful classes in Java collection that implements `List<E>` includes `ArrayList`
 Let's see some examples:
 
 ```Java
-List<String> names = new ArrayList();
+List<String> aryaList = new ArrayList();
 aryaList.add("Cersei");
 aryaList.add("Joffrey");
 aryaList.add(0, "Gregor");
