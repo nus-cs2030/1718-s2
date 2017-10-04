@@ -95,7 +95,7 @@ ArrayList<Object> l = new ArrayList<Integer>();
 
 The above will result in an error.
 
-The first time I showed you the wildcard type is in the signature of the `Collection<E>` class:
+The first time I showed you the wildcard type is in the signature of the `Collection<E>` interface:
 
 ```Java
 public boolean containsAll(Collection<?> c);
@@ -149,7 +149,7 @@ Consider the following code:
 boolean descendingOrder = false;
 class EventComparator implements Comparator<Event> {
   public int compare(Event e1, Event e2) {
-	if (reverseOrder) {
+	if (descendingOrder) {
 		return e2.compareTo(e1);
 	} else {
 		return e1.compareTo(e2);

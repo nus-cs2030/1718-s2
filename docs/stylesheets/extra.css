@@ -5,3 +5,7 @@ article p, article li {
 article p.admonition-title {
   font-family: "Roboto";
 }
+
+h1 {
+  font-weight: bold;
+}

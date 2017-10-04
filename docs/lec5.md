@@ -212,18 +212,18 @@ Mathematically, a `Collection<E>` is used to implement a bag, `Set<E>`, a set, a
 
 [^1]: If you want to do so, however, it is likely more useful to inherit from the abstract class `AbstractCollection<E>` (which implements most of the basic methods of the interface) rather than implementing the interface `Collection<E>` directly.
 
-THe `List<E>` interface has additional methods for adding and removing elements.  `add(e)` by default would just add to the end of the list.  `add(i, e)` inserts `e` to position `i`.  `get(i)` returns the element at position `i`, `remove(i)` removes the elements at position `i`; `set(i,e)` replace the `i`-th element with `e`.
+The `List<E>` interface has additional methods for adding and removing elements.  `add(e)` by default would just add to the end of the list.  `add(i, e)` inserts `e` to position `i`.  `get(i)` returns the element at position `i`, `remove(i)` removes the elements at position `i`; `set(i,e)` replace the `i`-th element with `e`.
 
 Useful classes in Java collection that implements `List<E>` includes `ArrayList` and `LinkedList`, and useful classhes that implements `Set<E>` includes `HashSet`.
 
 Let's see some examples:
 
 ```Java
-List<String> aryaList = new ArrayList();
-aryaList.add("Cersei");
-aryaList.add("Joffrey");
-aryaList.add(0, "Gregor");
-System.out.println(aryaList.get(1));
+List<String> names = new ArrayList();
+names.add("Cersei");
+names.add("Joffrey");
+names.add(0, "Gregor");
+System.out.println(names.get(1));
 ```
 
 Line 1 above creates a empty array list.  The second line adds two strings into the list, each appending them to the list.  After executing Line 3, it would contain the sequence `<"Cersei","Joffrey">`.  Line 4 inserts the string `"Gregor"` to position 0, moving the rest of the list down by 1 position.  The sequence is now `<"Gregor","Cersei","Joffrey">`.  Finally, calling `get(1)` would return the string `"Cersei"`.

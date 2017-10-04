@@ -1,4 +1,4 @@
-# CS2030 Programming Methodologies II
+# CS2030 Programming Methodology II
 
 ### 17 September 2017
 
