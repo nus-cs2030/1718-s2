@@ -1,12 +1,14 @@
 pages:
   - Home: 'index.md'
-  - About: 'about.md'
+  - General:
+      - About: 'about.md'
+      - Prerequisites: 'prereqs.md'
+      - Policies: 'policies.md'
   - Schedule: 'schedule.md'
-  - Prerequisites: 'prereqs.md'
   - Readings: 'readings.md'
-  - Policies: 'policies.md'
   - Review Qs: 'reviews.md'
   - Coding Style: 'style.md'
+  - Midterm: 'midterm.md'
   - Lectures:
       - 1. Abstraction & Encapsulation: 'lec1.md'
       - 2. Inheritance & Polymorphism: 'lec2.md'
@@ -23,8 +25,10 @@ pages:
       - 1. Question: 'lab1.md'
       - 1. Comments: 'lab01-comments.md'
       - 2. Question: 'lab2.md'
+      - 2. Comments: 'lab02-comments.md'
       - 3. Question: 'lab3.md'
       - 4. Question: 'lab4.md'
+      - 5. Question: 'lab5.md'
   - Software/Tools:
       - Java: 'jdk.md'
       - Javadoc: 'javadoc.md'
