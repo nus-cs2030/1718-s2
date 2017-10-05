@@ -206,9 +206,9 @@ Let's move to somethat Java does have a concrete class implementation.
 
 ## Set and List
 
-The `Set<E>` `List<E>` interfaces extend the `Collection<E>` class.  `Set<E>` is meant for implementing a collection of objects that does not allow duplicates (but still does not care about order of elements), while `List<E>` is for implementing a collection of objects that allow duplicates, but the order of elements matters.
+The `Set<E>` and `List<E>` interfaces extend the `Collection<E>` interface.  `Set<E>` is meant for implementing a collection of objects that does not allow duplicates (but still does not care about order of elements), while `List<E>` is for implementing a collection of objects that allow duplicates, but the order of elements matters.
 
-Mathematically, a `Collection<E>` is used to implement a bag, `Set<E>`, a set, and `List<E>`, a sequence.
+Mathematically, a `Collection<E>` is used to represent a bag, `Set<E>`, a set, and `List<E>`, a sequence.
 
 [^1]: If you want to do so, however, it is likely more useful to inherit from the abstract class `AbstractCollection<E>` (which implements most of the basic methods of the interface) rather than implementing the interface `Collection<E>` directly.
 
