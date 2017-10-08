@@ -1,5 +1,13 @@
 # Lecture 7: Functions
 
+## Learning Objectives
+
+After this lecture, students should be familiar with:
+
+- the concept of functions as a side-effect free programming constructs and its relation to functions in mathematics.
+- the `Function` interface in Java 8, including apply and compose methods.
+- the syntax of method reference and lambda expression
+- how to write functions with multiple arguments using curried functions 
 
 Java 8 introduces several new important new features, including lambda expressions and the stream APIs.  We will spend the next few lectures exploring these new features and how it allows us to write more succinct code and hopefully, less buggy code.  The stream APIs also makes it possible for us to parallelize our code for execution on multiple cores/processors with ease.
 
@@ -13,11 +21,11 @@ First, consider the methods to generate random inter-arrival time and random ser
 
 ```Java
 double generateInterArrivalTime() {
-	return -Math.log(rng.nextDouble())/this.arrivalRate;
+  return -Math.log(rng.nextDouble())/this.arrivalRate;
 }
 
 double generateServiceTime() {
-	return -Math.log(rng.nextDouble())/this.serviceRate;
+  return -Math.log(rng.nextDouble())/this.serviceRate;
 }
 ```
 
@@ -25,15 +33,15 @@ You can see that the three methods above have similar implementation.  They all 
 
 ```Java
 double randomExponentialValue(double rate) {
-	return -Math.log(rng.nextDouble())/rate;
+  return -Math.log(rng.nextDouble())/rate;
 }
 
 double generateServiceTime() {
-	return randomExponentialValue(this.serviceRate);
+  return randomExponentialValue(this.serviceRate);
 }
 
 double generateInterArrivalTime() {
-	return randomExponentialValue(this.arrivalRate);
+  return randomExponentialValue(this.arrivalRate);
 }
 ```
 
@@ -102,8 +110,8 @@ class SortedList {
     names.add(1, "Cersei");
     names.add(2, "Meryn");
     names.add(3, "Walder");
-		  :
-			:
+      :
+      :
 
     names.sort(new NameComparator());
   }
@@ -140,12 +148,12 @@ int div(int i, int j) {
 
 int incrCount(int i) {
   return this.count + i; // assume that count is not final.
-	                       // this may give diff results for the same i.
+                         // this may give diff results for the same i.
 }
 
 void incrCount(int i) {
   this.count += i; // does not return a value
-	                 // and has side effects on count
+                   // and has side effects on count
 }
 
 int addToList(ArrayList queue, int i) {
@@ -166,9 +174,9 @@ Let's write a class that implements `Function`.
 
 ```Java
 class Square implements Function<Integer, Integer> {
-	Integer apply(Integer x) {
-		return x*x;
-	}
+  Integer apply(Integer x) {
+    return x*x;
+  }
 }
 ```
 
@@ -186,31 +194,31 @@ int x = square(4);
 So, what is the use of this?  Consider now if we have a `List<Integer>` of integers, and we want to return another list where the elements is the square of the first list.  We can write a method:
 ```Java
 List<Integer> squareList(List<Integer> list) {
-	List<Integer> newList = new ArrayList<Integer>();
-	for (Integer i: list) {
+  List<Integer> newList = new ArrayList<Integer>();
+  for (Integer i: list) {
     newList.add(square(i));
-	}
-	return newList;
+  }
+  return newList;
 }
 ```
 Creating a new list out of an existing list is actually a common pattern.  We might want to, say, create a list with the absolute values:
 ```Java
 List<Integer> negativeList(List<Integer> list) {
-	List<Integer> newList = new ArrayList<Integer>();
-	for (Integer i: list) {
+  List<Integer> newList = new ArrayList<Integer>();
+  for (Integer i: list) {
     newList.add(Math.abs(i));
-	}
-	return newList;
+  }
+  return newList;
 }
 ```
 This is actually a common pattern.  Applying the abstraction principles, we can generalize the method to:
 ```Java
 List<Integer> applyList(List<Integer> list, Function<Integer,Integer> f) {
-	List<Integer> newList = new ArrayList<Integer>();
-	for (Integer i: list) {
+  List<Integer> newList = new ArrayList<Integer>();
+  for (Integer i: list) {
     newList.add(f.apply(f));
-	}
-	return newList;
+  }
+  return newList;
 }
 ```
 
@@ -223,9 +231,9 @@ to return a list of squares.
 If we do not want to create a new class just for this, we can, as before, use an anonymous class:
 ```Java
 applyList(list, new Function<Integer,Integer>() { 
-	Integer apply(Integer x) {
-		return x * x;
-	}
+  Integer apply(Integer x) {
+    return x * x;
+  }
 });
 ```
 
@@ -271,8 +279,8 @@ f.apply(-4);
 
 The `Function` interface has two default methods:
 ```Java
-default <V> Function<T,V>	andThen(Function<? super R,? extends V> after);
-default <V> Function<V,R>	compose(Function<? super V,? extends T> before);
+default <V> Function<T,V> andThen(Function<? super R,? extends V> after);
+default <V> Function<V,R> compose(Function<? super V,? extends T> before);
 ```
 
 for composing two functions.  The term _compose_ here is used in the mathematical sense (i.e., the $\cdot$ operator in $f \cdot g$).
@@ -280,18 +288,81 @@ for composing two functions.  The term _compose_ here is used in the mathematica
 These two methods, `andThen` and `compose`, return another function, and they are generic methods, as they have a type parameter `<V>`.  Suppose we want to write a function that returns the square root of the absolute value of an int, we can write:
 ```Java
 double SquareRootAbs(int x) {
-	return Math.sqrt(Math.abs(x));
+  return Math.sqrt(Math.abs(x));
 }
 ```
 
 or, we can write either
 ```Java
-  Function<Integer,Integer> abs = Math::abs;
-  Function<Integer,Double> sqrt = Math::sqrt;
-	abs.andThen(sqrt)
+Function<Integer,Integer> abs = Math::abs;
+Function<Integer,Double> sqrt = Math::sqrt;
+abs.andThen(sqrt)
 ```
 
 or 
 ```Java
-	sqrt.compose(abs)
+sqrt.compose(abs)
 ```
+
+But isn't writing the plain old method `SquareRootAbs()` clearer?  Why bother with `Function`?  The difference is that, `SquareRootAbs()` has to be written before we compile our code, and is fixed once we compile.  Using the `Function` interface, we can compose functions at _run time_, dynamically as needed!  Here is an example that you might be familiar with, from Lab 5:
+
+```Java
+Function<Customer, Queue> findQueueToSwitchTo;
+if (numOfQueue > 1) {
+  findQueueToSwitchTo = findShortestQueue.andThen(checkIfFewerInFront); 
+} else { // only one queue
+  findQueueToSwitchTo = Customer::getQueue;  // no need to do anything
+}
+```
+
+So instead of relying on the logic that the shortest queue is the same as the only queue and there is always the same number of customer in front if the customer is already is in the shortest queue, we just redefine the function that finds the queue to switch to to return the only queue.
+
+### Other Functions
+
+Java 8 package `java.util.function` provides other useful interfaces, including:
+
+- [`Predicate<T>`](https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html) with a `boolean test(T t)` method 
+- [`Supplier<T>`](https://docs.oracle.com/javase/8/docs/api/java/util/function/Supplier.html) with a `T get()` method
+- [`Consumer<T>`](https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html) with a `void accept(T t)` method
+- [`BiFunction<T,U,R>`](https://docs.oracle.com/javase/8/docs/api/java/util/function/BiFunction.html) with a `R apply(T t, U u)` method
+
+Other variations that involves primitive types are also provided.
+
+### Curried Functions
+
+Functions have an _arity_.  The `Function` interface is for unary functions that take in a single argument; the `BiFunction` inteface for binary functions, with two arguments.  But we can have functions that take more than two arguments.  We can, however, build functions that take in multiple arguments with only unary functions.   Let's look at this mathematically first.  Consider a binary function $f: (X, Y) \rightarrow Z$.  We can introduce $F$ as a set of all functions $f': Y \rightarrow Z$, and rewrite $f$ as $f: X \rightarrow F$, of $f: X \rightarrow Y \rightarrow Z$.
+
+A trivial example for this is the `add` method that adds two `int` values. 
+```Java
+int add(int x, int y) {
+  return x + y;
+}
+```
+
+This can be written as
+```Java
+Function<Integer, Function<Integer, Integer>> add = x -> y -> (x + y);
+```
+
+To calcualte 1 + 1, we call
+```Java
+add.apply(1).apply(1);
+```
+
+Let's break it down a litte, `add` is a function that takes in an `Integer` object and returns a unary `Function` over `Integer`.  So `add.apply(1)` returns the function `y -> 1 + y`.  We could assign this to a variable:
+```
+Function<Integer,Integer> incr = add.apply(1);
+```
+
+Here is the place where you need to change how you think: `add` is not a function that takes two arguments and return a value.  It is a _higher-order function_ that takes in a single argument, and return another function.
+
+The technique that translates a general $n$-ary function to a sequence of $n$ unary functions is called _currying_.  After currying, we have a sequence of _curried_ functions.  
+
+!!! note "Curry"
+    Currying is not related to food, but rather is named after computer scientist Haskell Curry, who popularized the technique.
+    
+Again, you might question why do we need this?  We can simply call `add(1, 1)`, instead of `add.apply(1).apply(1)`?  Well, the verbosity is the fault of Java instead of functional programming techniques.  Other languages like Haskell or Scala have much simpler syntax (e.g., `add 1 1` or `add(1)(1)`).  
+
+If you get past the verbosity, there is another reason why currying is cool.  Consider `add(1, 1)` -- we have to have both arguments available at the same time to compute the function.  With currying, we no longer have to.  We can evaluate the different arguments at different time (as `incr` example above).  This feature is useful in cases where some arguments are not available until later.  We can _partially apply_ a function first.  This is also useful if one of the arguments does not change often, or is expensive to compute.  We can save the partial results as a function and continue applying later.
+
+Again, using Lab 5 as example, you may have a method `serve` that takes in a `Customer` c and a `Server` s in a `Simulation` class.  When a customer is created, you do not know who is the server is yet.  You can partially apply the method first with the customer.  When the customer is served, you apply it again with the server `s` as argument.
