@@ -16,6 +16,7 @@ pages:
       - 4. Memory, Exceptions, Generics : 'lec4.md'
       - 5. Numbers, Strings, Collections: 'lec5.md'
       - 6. Nested Classes, Enums: 'lec6.md'
+      - 7. Lambda and Functions: 'lec7.md'
   - Exercises:
       - 1. Circles & Points: 'exercise1.md'
       - 2. Square & PaintedSquare: 'exercise2.md'
