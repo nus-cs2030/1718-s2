@@ -1,5 +1,17 @@
 # CS2030 Programming Methodology II
 
+### 16 October 2017
+
+[Exercise 5](exercise5.md) on streams are posted -- please try them out.  We will discuss the solution at the beginning of Lab 7.
+
+### 15 October 2017
+
+Notes for [Lecture 8](lec8.md) posted.  [Video for Lecture 7](https://vimeo.com/238037862) is also available now. 
+
+### 9 October 2017
+
+Notes for [Lecture 7](lec7.md) posted.  We will also discuss [midterm](midterm.md) today.
+
 ### 17 September 2017
 
 Notes for [Lecture 6](lec6.md) posted.
