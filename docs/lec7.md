@@ -174,7 +174,7 @@ Let's write a class that implements `Function`.
 
 ```Java
 class Square implements Function<Integer, Integer> {
-  Integer apply(Integer x) {
+  public Integer apply(Integer x) {
     return x*x;
   }
 }
@@ -216,7 +216,7 @@ This is actually a common pattern.  Applying the abstraction principles, we can 
 List<Integer> applyList(List<Integer> list, Function<Integer,Integer> f) {
   List<Integer> newList = new ArrayList<Integer>();
   for (Integer i: list) {
-    newList.add(f.apply(f));
+    newList.add(f.apply(i));
   }
   return newList;
 }
@@ -236,6 +236,9 @@ applyList(list, new Function<Integer,Integer>() {
   }
 });
 ```
+
+!!! note "Map"
+    The `applyList` method above is most commonly refered to as `map`.
 
 ### Lambda Expression
 
