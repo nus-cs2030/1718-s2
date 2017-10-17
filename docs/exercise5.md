@@ -16,13 +16,13 @@ Solve each of this problem using Java 9 streams.  We will discuss the solutions 
     ```Java
     ArrayList<Integer> list1 = new ArrayList<>();
     ArrayList<Integer> list2 = new ArrayList<>();
-    Collections.addAll(s1, 1, 2, 3, 4);
-    Collections.addAll(s2, 10, 20);
+    Collections.addAll(list1, 1, 2, 3, 4);
+    Collections.addAll(list2, 10, 20);
     product(list1, list2, (str1, str2) -> str1 + str2)
         .forEach(System.out::println);
     ```
 
-    Would print
+    gives the output:
     ```
     11
     21
@@ -40,4 +40,4 @@ Solve each of this problem using Java 9 streams.  We will discuss the solutions 
           BiFunction<? super T, ? super U, R> f)
     ```
 
-3. Write a method that returns the first $n$ Fibonacci numbers as a `Stream`.  For instance, the first 10 Fibonacci numbers are 1, 1, 2, 3, 5, 8, 13, 21, 34, 55.  It would be useful to write a new `Pair<T, U>` class that keeps two items around in the stream.  You may also want to use the `BigInteger` class to avoid overflow.
+3. Write a method that returns the first $n$ Fibonacci numbers as a `Stream<BigInteger>`.  For instance, the first 10 Fibonacci numbers are 1, 1, 2, 3, 5, 8, 13, 21, 34, 55.  It would be useful to write a new `Pair<T, U>` class that keeps two items around in the stream.  We use the `BigInteger` class to avoid overflow.
