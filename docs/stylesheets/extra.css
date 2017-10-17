@@ -9,3 +9,7 @@ article p.admonition-title {
 h1 {
   font-weight: bold;
 }
+
+s {
+  color: #900;
+}
