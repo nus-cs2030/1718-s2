@@ -9,9 +9,9 @@ Week | Date       | Topics | Resources |
 5    | 2017-09-11 | 5. Java Collections | [Notes](lec5.md) . [Slides](https://www.comp.nus.edu.sg/~cs2030/1718-s1/cs2030-lec5.pdf) . [Video](https://vimeo.com/233767908)
 6    | 2017-09-18 | 6. Nested Classes, Enums | [Notes](lec6.md) . [Slides](https://www.comp.nus.edu.sg/~cs2030/1718-s1/cs2030-lec6.pdf) . [Video](https://vimeo.com/234777565)
      | 2017-09-25 | Break | |
-7    | 2017-10-02 | Midterm | |
+7    | 2017-10-02 | [Midterm](midterm.md) | |
 8    | 2017-10-09 | 7. Function and Lambdas | [Notes](lec7.md) . [Slides](https://www.comp.nus.edu.sg/~cs2030/1718-s1/cs2030-lec7.pdf) . [Video](https://vimeo.com/238037862) |
-9    | 2017-10-16 | 8. Lambdas and Stream | [Notes](lec8.md) . [Slides](https://www.comp.nus.edu.sg/~cs2030/1718-s1/cs2030-lec8.pdf) . [Video](https://www.youtube.com/watch?v=dQw4w9WgXcQ) |
+9    | 2017-10-16 | 8. Lambdas and Stream | [Notes](lec8.md) . [Slides](https://www.comp.nus.edu.sg/~cs2030/1718-s1/cs2030-lec8.pdf) . [Video](https://vimeo.com/238864721) 
 10   | 2017-10-23 | | |
 11   | 2017-10-30 | | |
 12   | 2017-11-06 | | |
