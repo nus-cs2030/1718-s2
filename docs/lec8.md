@@ -195,8 +195,8 @@ class InfiniteList<T> {
   private Supplier<InfiniteList<T>> tail;
 
   public static InfiniteList<T> generate(Supplier<T> supply) {
-	head = supply;
-	tail = () -> InfiniteList.generate(supply);
+    return new InfiniteList(supply,
+	  () -> InfiniteList.generate(supply));
   }
 }
 ```
@@ -224,18 +224,34 @@ public T findFirst(Predicate<T> predicate) {
 }
 ```
 
+!!! Note "Simpler code"
+    The code shown in the lecture above could be simplified to:
+	```Java
+	public T findFirst(Predicate<T> predicate) {
+	  InfiniteList<T> list = this;
+	  while (true) {
+		T next = list.head.get();
+		if (predicate.test(next)) {
+		  return next;
+		}
+		list = list.tail.get();
+	  }
+	}
+	```
+
+
 In the method above, we repeatedly invoke the supplier, until we find an element that matches the predicate.  This way, we never had to generate every element in the list just to find the first element that matches.
 
-After note: In class, I also showed the `iterate` method to generate a list:
-
-```Java
-  public static <T> InfiniteList<T> iterate(T init, Function<T, T> next) {
-    return new InfiniteList<T>(
-        () -> init, 
-        () -> InfiniteList.iterate(next.apply(init), next)
-      );
-  }
-```
+!!! Note "iterate"
+    In class, I also showed the `iterate` method to generate a list:
+	```Java
+	  public static <T> InfiniteList<T> iterate(T init, Function<T, T> next) {
+		return new InfiniteList<T>(
+			() -> init, 
+			() -> InfiniteList.iterate(next.apply(init), next)
+		  );
+	  }
+	```
 
 ## Stream
 
@@ -339,6 +355,9 @@ boolean isPrime(int x) {
       .matchNone(x % i == 0);
 }
 ```
+
+!!! Warning "Bug"
+    There is a bug in the earlier code where the code showed `IntStream.range(2,x-1)`.  `range(m,n)` returns a stream from `m` to `n-1`.
 
 `IntStream` is a special `Stream` for primitive type `int`, the `range` method generates a stream of `int` in a given range (inclusive)
 
