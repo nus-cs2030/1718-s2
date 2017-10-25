@@ -1,5 +1,13 @@
 # CS2030 Programming Methodology II
 
+### 25 October 2017
+
+[Lab 8](lab8.md) is here.
+
+### 18 October 2017
+
+[Lab 7](lab7.md) is up!
+
 ### 16 October 2017
 
 [Exercise 5](exercise5.md) on streams are posted -- please try them out.  We will discuss the solution at the beginning of Lab 7.
