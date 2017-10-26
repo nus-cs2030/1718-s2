@@ -19,9 +19,21 @@ You are still required to
 - follows the [CS2030 Coding Style](style.md)
 - clearly documented with [`javadoc`](javadoc.md) (this has been done for you, for free!)
 
+## Provided Classes
+
+### BusStop
+
+A `BusStop` encapsulates information about a bus stop.  It has an `id` (e.g., "16181"), a location (longtitude and latitude -- irrelevant for this lab), and a human-friendly name (e.g., "Computer Ctr").  
+
+A `BusStop` also has a collection of `BusService` objects that serve the `BusStop`.  Your tasks involve populating and processing this collection.  To do so, you can call `addBusService` to add a bus service to the collection and call `getBusServices` to retrieve the collection of bus services as a stream.
+
+### BusService
+
+A `BusService` encapsulates information about a bus service.  Each bus service has a string `id` (e.g, "96") and a collection of `BusStop` objects, corresponding to the bus stops served by the given bus service.  Your tasks involve populating and processing this collection.  To do so, you can call `addBusStop` to add a bus stop, and `getBusStops` to retrieve the collection of bus stops as a stream.
+
 ## Tasks
 
-- `readBusStopsAndServices`: Complete this method which takes in a filename, reads line by line, and enters the relationship of which bus service serves which bus stop to the hash maps `busStops` and `busServices`.  The hash maps are of the class `HashMapO` which wraps about Java `HashMap` -- `HashMapO` supports `Optional` return type `get` and `Stream` return type in `entries`.
+- `readBusStopsAndServices`: Complete this method, which takes in a filename, reads line by line, and enters the relationship of which bus service serves which bus stop to the hash maps `busStops` and `busServices`.  The hash maps are of the class `HashMapO` which wraps about Java `HashMap` -- `HashMapO` supports `Optional` return type `get` and `Stream` return type in `entries`.
 
 - `averageNumberOfBusesPerStop` and `averageNumberOfStopsPerBus`. These two code are similar.  You should use `Collectors.averagingDouble` to implement them.
 
