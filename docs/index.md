@@ -1,5 +1,21 @@
 # CS2030 Programming Methodology II
 
+### 15 November 2017
+
+[Lab 11](lab11.md) is out.
+
+### 9 November 2017
+
+[Lab 10](lab10.md) is released.  Video for Lecture 11 is missing due to technical error 😭
+
+### 1 November 2017
+
+[Lab 9](lab9.md) is relesed.  Videos for [Lecture 9](https://vimeo.com/240577618) and [Lecture 10](https://vimeo.com/240834038) were published in the last two days as well.
+
+### 30 October 2017
+
+Here is [Lecture 10](lec10.md)
+
 ### 25 October 2017
 
 [Lab 8](lab8.md) is here.
