@@ -1,11 +1,13 @@
 # Review Questions
 
-These set of questions are designed to illustrate certain rules and principles about Java.  
-You can easily find out the answer yourselves using `jshell` or write small programs.  
-It is more important to understand why -- there are some underlying principles/rules in Java that cause the compiler / code to behave the way it does. 
-Note that the code are tersed by designed, and are never meant to be a positive example of good Java code.  
+These set of questions are designed to illustrate certain rules and principles about Java.
+You can easily find out the answer yourselves using `jshell` or write small programs.
 
-1. Can, or not? 
+It is more important to understand why -- there are some underlying principles/rules in Java that cause the compiler / code to behave the way it does.
+
+Note that the code is terse by design, and is never meant to be a positive example of good Java code.
+
+1. Can, or not?
 
     ```Java
     int i;
@@ -16,7 +18,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     d = (double) i;
     ```
 
-2. Can, or not? 
+2. Can, or not?
 
     ```Java
     int i;
@@ -27,7 +29,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     b = (boolean) i;
     ```
 
-3. Can, or not? 
+3. Can, or not?
 
     ```Java
     class A {
@@ -40,7 +42,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     B b = new A();
     ```
 
-4. Can, or not? 
+4. Can, or not?
 
     ```Java
     class A {
@@ -55,7 +57,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     a = (A)b;
     ```
 
-5. Can, or not? 
+5. Can, or not?
 
     ```Java
     interface I {
@@ -70,7 +72,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     A a2 = (A)i2;
     ```
 
-6. Can, or not? 
+6. Can, or not?
 
     ```Java
     interface I {
@@ -94,7 +96,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     a = (A)j;
     ```
 
-7. Can, or not? 
+7. Can, or not?
 
     ```Java
     interface I {
@@ -119,7 +121,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     a = (A)j;
     ```
 
-8. Can, or not? 
+8. Can, or not?
 
     ```Java
     class A {
@@ -158,14 +160,14 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 
     ```Java
     class A {
-      void f() { 
-        System.out.println("A f"); 
+      void f() {
+        System.out.println("A f");
       }
     }
 
     class B extends A {
-      void f() { 
-        System.out.println("B f"); 
+      void f() {
+        System.out.println("B f");
       }
     }
 
@@ -181,14 +183,14 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 
     ```Java
     class A {
-      void f() { 
-        System.out.println("A f"); 
+      void f() {
+        System.out.println("A f");
       }
     }
 
     class B extends A {
-      void f() { 
-        super.f(); 
+      void f() {
+        super.f();
         System.out.println("B f");
       }
     }
@@ -203,15 +205,15 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 
     ```Java
     class A {
-      void f() { 
-        System.out.println("A f"); 
+      void f() {
+        System.out.println("A f");
       }
     }
 
     class B extends A {
-      void f() { 
-        this.f(); 
-        System.out.println("B f"); 
+      void f() {
+        this.f();
+        System.out.println("B f");
       }
     }
 
@@ -226,14 +228,14 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 
     ```Java
     class A {
-      void f() { 
-        System.out.println("A f"); 
+      void f() {
+        System.out.println("A f");
       }
     }
 
     class B extends A {
-      int f() { 
-        System.out.println("B f"); 
+      int f() {
+        System.out.println("B f");
         return 0;
       }
     }
@@ -248,14 +250,14 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 
     ```Java
     class A {
-      void f() { 
-        System.out.println("A f"); 
+      void f() {
+        System.out.println("A f");
       }
     }
 
     class B extends A {
-      void f(int x) { 
-        System.out.println("B f"); 
+      void f(int x) {
+        System.out.println("B f");
         return x;
       }
     }
@@ -272,14 +274,14 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 
 	```Java
     class A {
-      public void f() { 
-        System.out.println("A f"); 
+      public void f() {
+        System.out.println("A f");
       }
     }
 
     class B extends A {
-      public void f() { 
-        System.out.println("B f"); 
+      public void f() {
+        System.out.println("B f");
       }
     }
 
@@ -293,14 +295,14 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 
 	```Java
     class A {
-      private void f() { 
-        System.out.println("A f"); 
+      private void f() {
+        System.out.println("A f");
       }
     }
 
     class B extends A {
-      public void f() { 
-        System.out.println("B f"); 
+      public void f() {
+        System.out.println("B f");
       }
     }
 
@@ -314,14 +316,14 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 
 	```Java
     class A {
-      private void f() { 
-        System.out.println("A f"); 
+      private void f() {
+        System.out.println("A f");
       }
     }
 
     class B extends A {
-      public void f() { 
-        System.out.println("B f"); 
+      public void f() {
+        System.out.println("B f");
       }
     }
 
@@ -335,14 +337,14 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 
 	```Java
     class A {
-      static void f() { 
-        System.out.println("A f"); 
+      static void f() {
+        System.out.println("A f");
       }
     }
 
     class B extends A {
-      public void f() { 
-        System.out.println("B f"); 
+      public void f() {
+        System.out.println("B f");
       }
     }
 
@@ -356,14 +358,14 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 
 	```Java
     class A {
-      static void f() { 
-        System.out.println("A f"); 
+      static void f() {
+        System.out.println("A f");
       }
     }
 
     class B extends A {
-      static void f() { 
-        System.out.println("B f"); 
+      static void f() {
+        System.out.println("B f");
       }
     }
 
@@ -394,6 +396,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	```
 
 22. Will the following code compile? Why?
+
 	```Java
     class A {
 	  private void f(int x) {}
@@ -402,16 +405,18 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	```
 
 23. Will the following code compile? Why?
+
 	```Java
     class A {
-	  public int f(int x) { 
-		  return x; 
+	  public int f(int x) {
+		  return x;
 	  }
 	  public void f(int y) {}
 	}
 	```
 
 24. Will the following code compile?  Why?
+
 	```Java
     class A {
 	  public void f(int x, String s) {}
