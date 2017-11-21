@@ -823,3 +823,105 @@ Note that the code is terse by design, and is never meant to be a positive examp
     System.out.println(d);
     System.out.println(i);
     ```
+
+50. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    List<Integer> list = new LinkedList<>();
+    list.add(5);
+    list.add(4);
+    list.add(3);
+    list.add(2);
+    list.add(1);
+
+    Iterator<Integer> it = list.iterator();
+    while (it.hasNext()) {
+      System.out.println(it.next());
+    }
+    ```
+
+51. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    ArrayList<Integer> list = new ArrayList<>();
+    list.add(5);
+    list.add(4);
+    list.add(3);
+    list.add(2);
+    list.add(1);
+
+    Collections.sort(list);
+
+    for (int i : list) {
+      System.out.println(i);
+    }
+    ```
+
+52. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    List<Integer> list = Arrays.asList(1, 2, 4, 4, 5);
+
+    Collections.sort(list, new Comparator<>() {
+      @Override
+      public int compare(Integer i1, Integer i2) {
+        return -i1.compareTo(i2);
+      }
+    });
+
+    list.forEach(System.out::println);
+    ```
+
+53. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    Set<Integer> set = new HashSet<>(Arrays.asList(5, 2, 4, 1, 4, 2));
+
+    set.forEach(System.out::println);
+    ```
+
+54. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    Map<Integer, String> map = new HashMap<>();
+    map.put(2, "world");
+    map.put(2, "cs2030");
+    map.put(1, "hello");
+
+    for (Map.Entry<Integer, String> entry : map.entrySet()) {
+      System.out.println(entry.getKey() + ": " + entry.getValue());
+    }
+    ```
+
+55. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    Map<Integer, String> map = new HashMap<>();
+    map.put(1, "bell");
+    map.put(2, "curve");
+    map.put(9001, "god");
+
+    map.forEach((k, v) -> System.out.println(k + ": " + v));
+    ```
+
+56. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    Map<Integer, String> map = new HashMap<>();
+    map.put(2, "bell");
+    map.put(1, "curve");
+    map.put(9001, "god");
+
+    map.forEach((k, v) -> System.out.println(k + ": " + v));
+    ```
+
+57. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    Map<Integer, String> map = new HashMap<>();
+    map.put(10, "bell");
+    map.put(1, "curve");
+    map.put(9001, "god");
+
+    map.forEach((k, v) -> System.out.println(k + ": " + v));
+    ```
