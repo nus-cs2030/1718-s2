@@ -701,3 +701,125 @@ Note that the code is terse by design, and is never meant to be a positive examp
       }
     }
     ```
+
+39. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    List<Integer> list = new ArrayList<>();
+    int one = 1;
+    Integer two = 2;
+
+    list.add(one);
+    list.add(two);
+    list.add(3);
+
+    for (Integer num : list) {
+      System.out.println(num);
+    }
+    ```
+
+40. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    List<Integer> list = new ArrayList<>();
+    int one = 1;
+    Integer two = 2;
+
+    list.add(one);
+    list.add(two);
+    list.add(3);
+
+    for (int num : list) {
+      System.out.println(num);
+    }
+    ```
+
+41. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    List<Integer> list = Arrays.asList(1, 2, 3);
+
+    for (Double num : list) {
+      System.out.println(num);
+    }
+    ```
+
+42. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    List<Integer> list = Arrays.asList(1, 2, 3);
+
+    for (double num : list) {
+      System.out.println(num);
+    }
+    ```
+
+43. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    double d = 5;
+    int i = 2.5;
+
+    System.out.println(d);
+    System.out.println(i);
+    ```
+
+44. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    double d = (int) 5;
+    int i = (double) 2.5;
+
+    System.out.println(d);
+    System.out.println(i);
+    ```
+
+45. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    double d = (int) 5.5;
+    int i = (int) 2.5;
+
+    System.out.println(d);
+    System.out.println(i);
+    ```
+
+46. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    Double d = 5;
+    Integer i = 2.5;
+
+    System.out.println(d);
+    System.out.println(i);
+    ```
+
+47. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    Double d = (double) 5;
+    Integer i = (int) 2.5;
+
+    System.out.println(d);
+    System.out.println(i);
+    ```
+
+48. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    double d = (Integer) 5;
+    int i = (Integer) 2;
+
+    System.out.println(d);
+    System.out.println(i);
+    ```
+
+49. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    double d = (Double) 5;
+    int i = (Integer) 2;
+
+    System.out.println(d);
+    System.out.println(i);
+    ```
