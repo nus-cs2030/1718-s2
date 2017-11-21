@@ -312,26 +312,7 @@ Note that the code is terse by design, and is never meant to be a positive examp
 	b.f();
 	```
 
-17. Can, or not?  If can, what will be printed?
-
-	```Java
-    class A {
-      private void f() {
-        System.out.println("A f");
-      }
-    }
-
-    class B extends A {
-      public void f() {
-        System.out.println("B f");
-      }
-    }
-
-	B b = new B();
-	A a = b;
-	a.f();
-	b.f();
-	```
+17. _Deleted question - duplicate of Q16_
 
 18. Can, or not?  If can, what will be printed?
 
