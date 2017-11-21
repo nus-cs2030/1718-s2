@@ -501,3 +501,203 @@ Note that the code is terse by design, and is never meant to be a positive examp
 	B b = new B();
 	b.f();
 	```
+
+31. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    class Main {
+      static void f() throws IllegalArgumentException {
+        try {
+          System.out.println("Before throw");
+          throw new IllegalArgumentException();
+          System.out.println("After throw");
+        } catch (IllegalArgumentException e) {
+          System.out.println("Caught in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+32. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    class Main {
+      static void f() throws IllegalArgumentException {
+        try {
+          throw new IllegalArgumentException();
+        } catch (IllegalArgumentException e) {
+          System.out.println("Caught in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+33. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    class Main {
+      static void f() throws IllegalArgumentException {
+        try {
+          throw new Exception();
+        } catch (IllegalArgumentException e) {
+          System.out.println("Caught in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+34. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    class Main {
+      static void f() throws Exception {
+        try {
+          throw new IllegalArgumentException();
+        } catch (Exception e) {
+          System.out.println("Caught in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+35. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    class Main {
+      static void f() throws Exception {
+        try {
+          throw new ArrayIndexOutOfBoundsException();
+        } catch (IllegalArgumentException e) {
+          System.out.println("Caught in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+36. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    class Main {
+      static void f() throws Exception {
+        try {
+          throw new ArrayIndexOutOfBoundsException();
+        } catch (IllegalArgumentException e) {
+          System.out.println("Caught IA exception in f");
+        } catch (ArrayIndexOutOfBoundsException e) {
+          System.out.println("Caught AIOOB exception in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+37. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    class Main {
+      static void f() throws Exception {
+        try {
+          throw new ArrayIndexOutOfBoundsException();
+        } catch (Exception e) {
+          System.out.println("Caught exception in f");
+        } catch (ArrayIndexOutOfBoundsException e) {
+          System.out.println("Caught AIOOB exception in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+38. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    class Main {
+      static void f() throws Exception {
+        try {
+          throw new ArrayIndexOutOfBoundsException();
+        } catch (ArrayIndexOutOfBoundsException e) {
+          System.out.println("Caught AIOOB exception in f");
+        } catch (Exception e) {
+          System.out.println("Caught exception in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
