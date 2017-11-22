@@ -1,11 +1,13 @@
 # Review Questions
 
-These set of questions are designed to illustrate certain rules and principles about Java.  
-You can easily find out the answer yourselves using `jshell` or write small programs.  
-It is more important to understand why -- there are some underlying principles/rules in Java that cause the compiler / code to behave the way it does. 
-Note that the code are tersed by designed, and are never meant to be a positive example of good Java code.  
+These set of questions are designed to illustrate certain rules and principles about Java.
+You can easily find out the answer yourselves using `jshell` or write small programs.
 
-1. Can, or not? 
+It is more important to understand why -- there are some underlying principles/rules in Java that cause the compiler / code to behave the way it does.
+
+Note that the code is terse by design, and is never meant to be a positive example of good Java code.
+
+1. Can, or not?
 
     ```Java
     int i;
@@ -16,7 +18,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     d = (double) i;
     ```
 
-2. Can, or not? 
+2. Can, or not?
 
     ```Java
     int i;
@@ -27,7 +29,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     b = (boolean) i;
     ```
 
-3. Can, or not? 
+3. Can, or not?
 
     ```Java
     class A {
@@ -40,7 +42,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     B b = new A();
     ```
 
-4. Can, or not? 
+4. Can, or not?
 
     ```Java
     class A {
@@ -55,7 +57,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     a = (A)b;
     ```
 
-5. Can, or not? 
+5. Can, or not?
 
     ```Java
     interface I {
@@ -70,7 +72,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     A a2 = (A)i2;
     ```
 
-6. Can, or not? 
+6. Can, or not?
 
     ```Java
     interface I {
@@ -94,7 +96,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     a = (A)j;
     ```
 
-7. Can, or not? 
+7. Can, or not?
 
     ```Java
     interface I {
@@ -119,7 +121,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
     a = (A)j;
     ```
 
-8. Can, or not? 
+8. Can, or not?
 
     ```Java
     class A {
@@ -158,14 +160,14 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 
     ```Java
     class A {
-      void f() { 
-        System.out.println("A f"); 
+      void f() {
+        System.out.println("A f");
       }
     }
 
     class B extends A {
-      void f() { 
-        System.out.println("B f"); 
+      void f() {
+        System.out.println("B f");
       }
     }
 
@@ -181,14 +183,14 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 
     ```Java
     class A {
-      void f() { 
-        System.out.println("A f"); 
+      void f() {
+        System.out.println("A f");
       }
     }
 
     class B extends A {
-      void f() { 
-        super.f(); 
+      void f() {
+        super.f();
         System.out.println("B f");
       }
     }
@@ -203,15 +205,15 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 
     ```Java
     class A {
-      void f() { 
-        System.out.println("A f"); 
+      void f() {
+        System.out.println("A f");
       }
     }
 
     class B extends A {
-      void f() { 
-        this.f(); 
-        System.out.println("B f"); 
+      void f() {
+        this.f();
+        System.out.println("B f");
       }
     }
 
@@ -226,14 +228,14 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 
     ```Java
     class A {
-      void f() { 
-        System.out.println("A f"); 
+      void f() {
+        System.out.println("A f");
       }
     }
 
     class B extends A {
-      int f() { 
-        System.out.println("B f"); 
+      int f() {
+        System.out.println("B f");
         return 0;
       }
     }
@@ -248,14 +250,14 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 
     ```Java
     class A {
-      void f() { 
-        System.out.println("A f"); 
+      void f() {
+        System.out.println("A f");
       }
     }
 
     class B extends A {
-      void f(int x) { 
-        System.out.println("B f"); 
+      void f(int x) {
+        System.out.println("B f");
         return x;
       }
     }
@@ -272,14 +274,14 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 
 	```Java
     class A {
-      public void f() { 
-        System.out.println("A f"); 
+      public void f() {
+        System.out.println("A f");
       }
     }
 
     class B extends A {
-      public void f() { 
-        System.out.println("B f"); 
+      public void f() {
+        System.out.println("B f");
       }
     }
 
@@ -293,14 +295,14 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 
 	```Java
     class A {
-      private void f() { 
-        System.out.println("A f"); 
+      private void f() {
+        System.out.println("A f");
       }
     }
 
     class B extends A {
-      public void f() { 
-        System.out.println("B f"); 
+      public void f() {
+        System.out.println("B f");
       }
     }
 
@@ -310,39 +312,20 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	b.f();
 	```
 
-17. Can, or not?  If can, what will be printed?
-
-	```Java
-    class A {
-      private void f() { 
-        System.out.println("A f"); 
-      }
-    }
-
-    class B extends A {
-      public void f() { 
-        System.out.println("B f"); 
-      }
-    }
-
-	B b = new B();
-	A a = b;
-	a.f();
-	b.f();
-	```
+17. _Deleted question - duplicate of Q16_
 
 18. Can, or not?  If can, what will be printed?
 
 	```Java
     class A {
-      static void f() { 
-        System.out.println("A f"); 
+      static void f() {
+        System.out.println("A f");
       }
     }
 
     class B extends A {
-      public void f() { 
-        System.out.println("B f"); 
+      public void f() {
+        System.out.println("B f");
       }
     }
 
@@ -356,14 +339,14 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 
 	```Java
     class A {
-      static void f() { 
-        System.out.println("A f"); 
+      static void f() {
+        System.out.println("A f");
       }
     }
 
     class B extends A {
-      static void f() { 
-        System.out.println("B f"); 
+      static void f() {
+        System.out.println("B f");
       }
     }
 
@@ -394,6 +377,7 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	```
 
 22. Will the following code compile? Why?
+
 	```Java
     class A {
 	  private void f(int x) {}
@@ -402,16 +386,18 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	```
 
 23. Will the following code compile? Why?
+
 	```Java
     class A {
-	  public int f(int x) { 
-		  return x; 
+	  public int f(int x) {
+		  return x;
 	  }
 	  public void f(int y) {}
 	}
 	```
 
 24. Will the following code compile?  Why?
+
 	```Java
     class A {
 	  public void f(int x, String s) {}
@@ -515,3 +501,427 @@ Note that the code are tersed by designed, and are never meant to be a positive 
 	B b = new B();
 	b.f();
 	```
+
+31. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    class Main {
+      static void f() throws IllegalArgumentException {
+        try {
+          System.out.println("Before throw");
+          throw new IllegalArgumentException();
+          System.out.println("After throw");
+        } catch (IllegalArgumentException e) {
+          System.out.println("Caught in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+32. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    class Main {
+      static void f() throws IllegalArgumentException {
+        try {
+          throw new IllegalArgumentException();
+        } catch (IllegalArgumentException e) {
+          System.out.println("Caught in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+33. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    class Main {
+      static void f() throws IllegalArgumentException {
+        try {
+          throw new Exception();
+        } catch (IllegalArgumentException e) {
+          System.out.println("Caught in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+34. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    class Main {
+      static void f() throws Exception {
+        try {
+          throw new IllegalArgumentException();
+        } catch (Exception e) {
+          System.out.println("Caught in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+35. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    class Main {
+      static void f() throws Exception {
+        try {
+          throw new ArrayIndexOutOfBoundsException();
+        } catch (IllegalArgumentException e) {
+          System.out.println("Caught in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+36. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    class Main {
+      static void f() throws Exception {
+        try {
+          throw new ArrayIndexOutOfBoundsException();
+        } catch (IllegalArgumentException e) {
+          System.out.println("Caught IA exception in f");
+        } catch (ArrayIndexOutOfBoundsException e) {
+          System.out.println("Caught AIOOB exception in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+37. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    class Main {
+      static void f() throws Exception {
+        try {
+          throw new ArrayIndexOutOfBoundsException();
+        } catch (Exception e) {
+          System.out.println("Caught exception in f");
+        } catch (ArrayIndexOutOfBoundsException e) {
+          System.out.println("Caught AIOOB exception in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+38. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    class Main {
+      static void f() throws Exception {
+        try {
+          throw new ArrayIndexOutOfBoundsException();
+        } catch (ArrayIndexOutOfBoundsException e) {
+          System.out.println("Caught AIOOB exception in f");
+        } catch (Exception e) {
+          System.out.println("Caught exception in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+39. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    List<Integer> list = new ArrayList<>();
+    int one = 1;
+    Integer two = 2;
+
+    list.add(one);
+    list.add(two);
+    list.add(3);
+
+    for (Integer num : list) {
+      System.out.println(num);
+    }
+    ```
+
+40. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    List<Integer> list = new ArrayList<>();
+    int one = 1;
+    Integer two = 2;
+
+    list.add(one);
+    list.add(two);
+    list.add(3);
+
+    for (int num : list) {
+      System.out.println(num);
+    }
+    ```
+
+41. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    List<Integer> list = Arrays.asList(1, 2, 3);
+
+    for (Double num : list) {
+      System.out.println(num);
+    }
+    ```
+
+42. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    List<Integer> list = Arrays.asList(1, 2, 3);
+
+    for (double num : list) {
+      System.out.println(num);
+    }
+    ```
+
+43. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    double d = 5;
+    int i = 2.5;
+
+    System.out.println(d);
+    System.out.println(i);
+    ```
+
+44. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    double d = (int) 5;
+    int i = (double) 2.5;
+
+    System.out.println(d);
+    System.out.println(i);
+    ```
+
+45. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    double d = (int) 5.5;
+    int i = (int) 2.5;
+
+    System.out.println(d);
+    System.out.println(i);
+    ```
+
+46. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    Double d = 5;
+    Integer i = 2.5;
+
+    System.out.println(d);
+    System.out.println(i);
+    ```
+
+47. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    Double d = (double) 5;
+    Integer i = (int) 2.5;
+
+    System.out.println(d);
+    System.out.println(i);
+    ```
+
+48. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    double d = (Integer) 5;
+    int i = (Integer) 2;
+
+    System.out.println(d);
+    System.out.println(i);
+    ```
+
+49. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    double d = (Double) 5;
+    int i = (Integer) 2;
+
+    System.out.println(d);
+    System.out.println(i);
+    ```
+
+50. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    List<Integer> list = new LinkedList<>();
+    list.add(5);
+    list.add(4);
+    list.add(3);
+    list.add(2);
+    list.add(1);
+
+    Iterator<Integer> it = list.iterator();
+    while (it.hasNext()) {
+      System.out.println(it.next());
+    }
+    ```
+
+51. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    ArrayList<Integer> list = new ArrayList<>();
+    list.add(5);
+    list.add(4);
+    list.add(3);
+    list.add(2);
+    list.add(1);
+
+    Collections.sort(list);
+
+    for (int i : list) {
+      System.out.println(i);
+    }
+    ```
+
+52. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    List<Integer> list = Arrays.asList(1, 2, 4, 4, 5);
+
+    Collections.sort(list, new Comparator<>() {
+      @Override
+      public int compare(Integer i1, Integer i2) {
+        return -i1.compareTo(i2);
+      }
+    });
+
+    list.forEach(System.out::println);
+    ```
+
+53. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    Set<Integer> set = new HashSet<>(Arrays.asList(5, 2, 4, 1, 4, 2));
+
+    set.forEach(System.out::println);
+    ```
+
+54. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    Map<Integer, String> map = new HashMap<>();
+    map.put(2, "world");
+    map.put(2, "cs2030");
+    map.put(1, "hello");
+
+    for (Map.Entry<Integer, String> entry : map.entrySet()) {
+      System.out.println(entry.getKey() + ": " + entry.getValue());
+    }
+    ```
+
+55. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    Map<Integer, String> map = new HashMap<>();
+    map.put(1, "bell");
+    map.put(2, "curve");
+    map.put(9001, "god");
+
+    map.forEach((k, v) -> System.out.println(k + ": " + v));
+    ```
+
+56. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    Map<Integer, String> map = new HashMap<>();
+    map.put(2, "bell");
+    map.put(1, "curve");
+    map.put(9001, "god");
+
+    map.forEach((k, v) -> System.out.println(k + ": " + v));
+    ```
+
+57. Will the following code compile? If so, what will be printed?
+
+    ```Java
+    Map<Integer, String> map = new HashMap<>();
+    map.put(10, "bell");
+    map.put(1, "curve");
+    map.put(9001, "god");
+
+    map.forEach((k, v) -> System.out.println(k + ": " + v));
+    ```
