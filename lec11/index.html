@@ -1,0 +1,1385 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <link rel="shortcut icon" href="../assets/images/favicon.png">
+      
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.4">
+    
+    
+      
+        <title>11. Asynchronous Programming - CS2030 Programming Methodology II</title>
+      
+    
+    
+      <script src="../assets/javascripts/modernizr-1df76c4e58.js"></script>
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application-769c285a91.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    
+    
+  </head>
+  
+  
+  
+  
+    <body>
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <a href="../index.html" title="CS2030 Programming Methodology II" class="md-icon md-icon--home md-header-nav__button">
+          </a>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+                <span class="md-header-nav__parent">
+                  Lectures
+                </span>
+              
+            
+            11. Asynchronous Programming
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result" data-md-lang-search="">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/nus-cs2030/1718-s1" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    
+      <i class="md-icon md-icon--home md-nav__button"></i>
+    
+    CS2030 Programming Methodology II
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/nus-cs2030/1718-s1" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      General
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        General
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../about/index.html" title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../prereqs/index.html" title="Prerequisites" class="md-nav__link">
+      Prerequisites
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../policies/index.html" title="Policies" class="md-nav__link">
+      Policies
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../schedule/index.html" title="Schedule" class="md-nav__link">
+      Schedule
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../readings/index.html" title="Readings" class="md-nav__link">
+      Readings
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../reviews/index.html" title="Review Qs" class="md-nav__link">
+      Review Qs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../style/index.html" title="Coding Style" class="md-nav__link">
+      Coding Style
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../midterm/index.html" title="Midterm" class="md-nav__link">
+      Midterm
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" checked>
+    
+    <label class="md-nav__link" for="nav-8">
+      Lectures
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Lectures
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec1/index.html" title="1. Abstraction & Encapsulation" class="md-nav__link">
+      1. Abstraction & Encapsulation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec2/index.html" title="2. Inheritance & Polymorphism" class="md-nav__link">
+      2. Inheritance & Polymorphism
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec3/index.html" title="3. Inheritance, Continued" class="md-nav__link">
+      3. Inheritance, Continued
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec4/index.html" title="4. Memory, Exceptions, Generics" class="md-nav__link">
+      4. Memory, Exceptions, Generics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec5/index.html" title="5. Numbers, Strings, Collections" class="md-nav__link">
+      5. Numbers, Strings, Collections
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec6/index.html" title="6. Nested Classes, Enums" class="md-nav__link">
+      6. Nested Classes, Enums
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec7/index.html" title="7. Lambda and Functions" class="md-nav__link">
+      7. Lambda and Functions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec8/index.html" title="8. More Lambda and Streams" class="md-nav__link">
+      8. More Lambda and Streams
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec9/index.html" title="9. Functors, Monads, Collectors" class="md-nav__link">
+      9. Functors, Monads, Collectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec10/index.html" title="10. Parallel Streams" class="md-nav__link">
+      10. Parallel Streams
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        11. Asynchronous Programming
+      </label>
+    
+    <a href="index.html" title="11. Asynchronous Programming" class="md-nav__link md-nav__link--active">
+      11. Asynchronous Programming
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" title="Learning Objectives" class="md-nav__link">
+    Learning Objectives
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchronous-vs-asynchronous" title="Synchronous vs. Asynchronous" class="md-nav__link">
+    Synchronous vs. Asynchronous
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future" title="Future" class="md-nav__link">
+    Future
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#completablefuture" title="CompletableFuture" class="md-nav__link">
+    CompletableFuture
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#completablefuture-is-a-functor-monad" title="CompletableFuture is a Functor / Monad" class="md-nav__link">
+    CompletableFuture is a Functor / Monad
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variations" title="Variations" class="md-nav__link">
+    Variations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handling-exceptions" title="Handling Exceptions" class="md-nav__link">
+    Handling Exceptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Exercises
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Exercises
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise1/index.html" title="1. Circles & Points" class="md-nav__link">
+      1. Circles & Points
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise2/index.html" title="2. Square & PaintedSquare" class="md-nav__link">
+      2. Square & PaintedSquare
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise3/index.html" title="3. PaintedSquare Revisited" class="md-nav__link">
+      3. PaintedSquare Revisited
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise4/index.html" title="4. Exceptions" class="md-nav__link">
+      4. Exceptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise5/index.html" title="5. Streams" class="md-nav__link">
+      5. Streams
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise6/index.html" title="6. Functors, Collectors" class="md-nav__link">
+      6. Functors, Collectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise7/index.html" title="7. Mock Exam" class="md-nav__link">
+      7. Mock Exam
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Labs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        Labs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab1/index.html" title="1. Question" class="md-nav__link">
+      1. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab01-comments/index.html" title="1. Comments" class="md-nav__link">
+      1. Comments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab2/index.html" title="2. Question" class="md-nav__link">
+      2. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab02-comments/index.html" title="2. Comments" class="md-nav__link">
+      2. Comments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab3/index.html" title="3. Question" class="md-nav__link">
+      3. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab4/index.html" title="4. Question" class="md-nav__link">
+      4. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab5/index.html" title="5. Question" class="md-nav__link">
+      5. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab6/index.html" title="6. Question" class="md-nav__link">
+      6. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab7/index.html" title="7. Question" class="md-nav__link">
+      7. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab8/index.html" title="8. Question" class="md-nav__link">
+      8. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab9/index.html" title="9. Question" class="md-nav__link">
+      9. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab10/index.html" title="10. Question" class="md-nav__link">
+      10. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab11/index.html" title="11. Question" class="md-nav__link">
+      11. Question
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+    
+    <label class="md-nav__link" for="nav-11">
+      Software/Tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        Software/Tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../jdk/index.html" title="Java" class="md-nav__link">
+      Java
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../javadoc/index.html" title="Javadoc" class="md-nav__link">
+      Javadoc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../unix/index.html" title="UNIX" class="md-nav__link">
+      UNIX
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vim/index.html" title="Vim" class="md-nav__link">
+      Vim
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" title="Learning Objectives" class="md-nav__link">
+    Learning Objectives
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchronous-vs-asynchronous" title="Synchronous vs. Asynchronous" class="md-nav__link">
+    Synchronous vs. Asynchronous
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future" title="Future" class="md-nav__link">
+    Future
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#completablefuture" title="CompletableFuture" class="md-nav__link">
+    CompletableFuture
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#completablefuture-is-a-functor-monad" title="CompletableFuture is a Functor / Monad" class="md-nav__link">
+    CompletableFuture is a Functor / Monad
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variations" title="Variations" class="md-nav__link">
+    Variations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handling-exceptions" title="Handling Exceptions" class="md-nav__link">
+    Handling Exceptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/nus-cs2030/1718-s1/edit/master/docs/lec11.md" title="Edit this page" class="md-icon md-content__icon">edit</a>
+                
+                
+                  <h1>11. Asynchronous Programming</h1>
+                
+                <h2 id="learning-objectives">Learning Objectives</h2>
+<p>After this lecture, students should:</p>
+<ul>
+<li>familiar with the concept of asynchronous method calls and be able to use it effectively</li>
+<li>familiar with the concept of promise through Java 8 <code class="codehilite">CompletableFuture</code> class</li>
+</ul>
+<h2 id="synchronous-vs-asynchronous">Synchronous vs. Asynchronous</h2>
+<p>In synchronous programming, when we call a method, we expect the method to be executed, and when the method returns, the result of the method is available.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="nf">multiple</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kt">int</span> <span class="n">z</span> <span class="o">=</span> <span class="n">multiple</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">);</span>
+</pre></div>
+</td></tr></table>
+
+<p>In the simple example above, our code continues executing after, and only after <code class="codehilite">add()</code> completes.</p>
+<p>If a method takes a long time to run, however, the execution will delay the execution of subsequent methods, and maybe undesirable.</p>
+<p>Asynchronous call to a method allows execution to continue immediately after calling the method, so that we can continue executing the rest of our code, while the long-running method is off doing its job.</p>
+<p>You have seen examples of asynchronous calls: </p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="n">task</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MatrixMultiplyerTask</span><span class="o">(</span><span class="n">m1</span><span class="o">,</span> <span class="n">m2</span><span class="o">);</span>
+    <span class="n">task</span><span class="o">.</span><span class="na">fork</span><span class="o">();</span>
+</pre></div>
+</td></tr></table>
+
+<p>The call above returns immediately even before the matrix multiplication is complete.  We can later return to this task, and call <code class="codehilite">task.join()</code> to get the result (waiting for it if necessary).  </p>
+<p>A <code class="codehilite">RecursiveTask</code> also has a <code class="codehilite">isDone()</code> method that it implements as part of the <code class="codehilite">Future</code> interface.  Now, we can do something like this:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="n">task</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MatrixMultiplyerTask</span><span class="o">(</span><span class="n">m1</span><span class="o">,</span> <span class="n">m2</span><span class="o">);</span>
+    <span class="n">task</span><span class="o">.</span><span class="na">fork</span><span class="o">();</span>
+    <span class="k">while</span> <span class="o">(!</span><span class="n">task</span><span class="o">.</span><span class="na">isDone</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;.&quot;</span><span class="o">);</span>
+        <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;done&quot;</span><span class="o">);</span>
+</pre></div>
+</td></tr></table>
+
+<p>So, while the task is running, we can print out a series of "."s to feedback to the users to indicate that it is running.</p>
+<p><code class="codehilite">Thread.sleep(1000)</code> cause the current running thread to sleep for 1s.  It might throw an <code class="codehilite">InterruptedException</code>, if the user interrupts the program (by Control-C).  To complete the snippet, we should catch the exception and cancel the task. </p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="n">task</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MatrixMultiplyerTask</span><span class="o">(</span><span class="n">m1</span><span class="o">,</span> <span class="n">m2</span><span class="o">);</span>
+    <span class="n">task</span><span class="o">.</span><span class="na">fork</span><span class="o">();</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="k">while</span> <span class="o">(!</span><span class="n">task</span><span class="o">.</span><span class="na">isDone</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;.&quot;</span><span class="o">);</span>
+            <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;done&quot;</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">task</span><span class="o">.</span><span class="na">cancel</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;cancelled&quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="future">Future</h2>
+<p>Let's look at the <code class="codehilite">Future</code> interface a bit more.  <code class="codehilite">Future&lt;T&gt;</code> represents the result (of type <code class="codehilite">T</code>) of an asynchronous task that may not be available yet.  It has five simple operations:</p>
+<ul>
+<li><code class="codehilite">get()</code> returns the result of the computation (waiting for it if needed).</li>
+<li><code class="codehilite">get(timeout, unit)</code> returns the result of the computation (waiting for up to the timeout period if needed).</li>
+<li><code class="codehilite">cancel(interrupt)</code> tries to cancel the task -- if <code class="codehilite">interrupt</code> is true, cancel even if the task has started.  Otherwise, cancel only if the task is still waiting to get started.</li>
+<li><code class="codehilite">isCancelled()</code> returns <code class="codehilite">true</code> of the task has been cancelled.</li>
+<li><code class="codehilite">isDone()</code> returns <code class="codehilite">true</code> if the task has been completed.</li>
+</ul>
+<p>Both <code class="codehilite">RecursiveTask</code> and <code class="codehilite">RecursiveAction</code> implements the <code class="codehilite">Future</code> interface, so you can use the above methods on your tasks.</p>
+<div class="admonition note">
+<p class="admonition-title">In Other Languages</p>
+<p>Scala's <code class="codehilite">Future</code> is more powerful -- it allows us to specify what to do when the task completes, and it hands abnormal completions (e.g., exceptions). 
+    Python 3.2 supports <code class="codehilite">Future</code> through <a href="https://docs.python.org/3/library/concurrent.futures.html"><code class="codehilite">concurrent.futures</code></a> module.  C++11 supports <code class="codehilite">std::future</code>](<a href="http://en.cppreference.com/w/cpp/thread/future">http://en.cppreference.com/w/cpp/thread/future</a>) as well.</p>
+</div>
+<h2 id="completablefuture">CompletableFuture</h2>
+<p>The example code above tries every second to see if task is done.  For some applications, the response time is critical, and we would like to know as soon as a task is done.  For instance, response time is important in stock trading applications and web services.  </p>
+<p>One way to do so, is to sleep for a shorter duration.  Or even not sleeping all together:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="n">task</span><span class="o">.</span><span class="na">fork</span><span class="o">();</span>
+    <span class="k">while</span> <span class="o">(!</span><span class="n">task</span><span class="o">.</span><span class="na">isDone</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;.&quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;done&quot;</span><span class="o">);</span>
+</pre></div>
+</td></tr></table>
+
+<p>This is problematic in many ways, besides printing out too many dots:</p>
+<ul>
+<li>this is known as <em>busy waiting</em> -- and it occupies the CPU while doing nothing.  Such code should be avoided at all cost. </li>
+<li>we may want to continue doing other things besides printing out "."s, so the code won't be a simple for loop anymore.  We can do something like this instead:</li>
+</ul>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="n">task</span><span class="o">.</span><span class="na">fork</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(!</span><span class="n">task</span><span class="o">.</span><span class="na">isDone</span><span class="o">())</span> <span class="o">{</span>
+        <span class="c1">// do something</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="n">task</span><span class="o">.</span><span class="na">join</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(!</span><span class="n">task</span><span class="o">.</span><span class="na">isDone</span><span class="o">())</span> <span class="o">{</span>
+        <span class="c1">// do something else</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="n">task</span><span class="o">.</span><span class="na">join</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(!</span><span class="n">task</span><span class="o">.</span><span class="na">isDone</span><span class="o">())</span> <span class="o">{</span>
+        <span class="c1">// do yet something else</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="n">task</span><span class="o">.</span><span class="na">join</span><span class="o">();</span>
+    <span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>You can see that the code gets out of hand quickly, and this is only if we have one asynchronous call!</p>
+<p>What we need is have a way to specify a <em>callback</em>.  A callback is basically a method that will be executed when a certain event happens.  In this case, we need to specify a callback when an asynchronous task is complete.  This way, we can just call an asynchronous task, specify what to do when the task is completed, and forget about it.  We do not need to check again and again if the task is done.</p>
+<p>Java 8 introduces the class <code class="codehilite">CompletableFuture</code>, which implements the <code class="codehilite">Future</code> interface, and allows us to specify an asynchronous task, and an action to perform when the task completes.</p>
+<p>To create a <code class="codehilite">CompletableFuture</code> object, we can call one of its static method.  For instance, <code class="codehilite">supplyAsync</code> takes in a <code class="codehilite">Supplier</code>:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">Matrix</span><span class="o">&gt;</span> <span class="n">future</span> <span class="o">=</span> <span class="n">CompletableFuture</span><span class="o">.</span><span class="na">supplyAsync</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">m1</span><span class="o">.</span><span class="na">multiply</span><span class="o">(</span><span class="n">m2</span><span class="o">));</span>
+</pre></div>
+</td></tr></table>
+
+<p>To specify the callback, we can use the <code class="codehilite">thenAccept</code> method, which takes in a consumer:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">future</span><span class="o">.</span><span class="na">thenAccept</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+</pre></div>
+</td></tr></table>
+
+<p>Or, you can use the oneliner:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">CompletableFuture</span>
+    <span class="o">.</span><span class="na">supplyAsync</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">m1</span><span class="o">.</span><span class="na">multiply</span><span class="o">(</span><span class="n">m2</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">thenAccept</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+</pre></div>
+</td></tr></table>
+
+<h3 id="completablefuture-is-a-functor-monad">CompletableFuture is a Functor / Monad</h3>
+<p><code class="codehilite">CompletableFuture</code> is a functor.  Recall that a functor, in OO-speak, is a class that implements a (hypothetical) interface that looks like the following:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">interface</span> <span class="nc">Functor</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span> <span class="n">Functor</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">f</span><span class="o">(</span><span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span><span class="n">R</span><span class="o">&gt;</span> <span class="n">func</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>In <code class="codehilite">CompletableFuture</code>, the method that makes <code class="codehilite">CompletableFuture</code> a functor is the <code class="codehilite">thenApply</code> method:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">&lt;</span><span class="nx">U</span><span class="o">&gt;</span> <span class="nx">CompletableFuture</span><span class="o">&lt;</span><span class="nx">U</span><span class="o">&gt;</span> <span class="nx">thenApply</span><span class="p">(</span><span class="nb">Function</span><span class="cp">&lt;?</span> <span class="nx">super</span> <span class="nx">T</span><span class="p">,</span><span class="o">?</span> <span class="k">extends</span> <span class="nx">U</span><span class="o">&gt;</span> <span class="nx">func</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>The method <code class="codehilite">thenApply</code> is similar to <code class="codehilite">thenAccept</code>, except that instead of a <code class="codehilite">Consumer</code>, the callback that gets invoked when the asynchronous task completes is a `Function.  </p>
+<p>There are other variations: </p>
+<ul>
+<li><code class="codehilite">thenRun</code>, which takes a <code class="codehilite">Runnable</code>, </li>
+<li><code class="codehilite">thenAcceptBoth</code>, which takes a <code class="codehilite">BiConsumer</code> and another <code class="codehilite">CompletableFuture</code></li>
+<li><code class="codehilite">thenCombine</code>, which takes a <code class="codehilite">BiFunction</code> and another <code class="codehilite">CompletableFuture</code> </li>
+<li><code class="codehilite">thenCompose</code>, which takes in a <code class="codehilite">Function</code> <code class="codehilite">fn</code>, which instead of returning a "plain" type, <code class="codehilite">fn</code> returns a <code class="codehilite">CompletableFuture</code>. </li>
+</ul>
+<p>All the methods above return a <code class="codehilite">CompletableFuture</code>.</p>
+<p>BTW, <code class="codehilite">CompletableFuture</code> is a monad too!  The <code class="codehilite">thenCompose</code> method is analougous to the <code class="codehilite">flatMap</code> method of <code class="codehilite">Stream</code> and <code class="codehilite">Optional</code>. </p>
+<p>This also means that <code class="codehilite">CompletableFuture</code> satisfies the monad laws, one of which is that there is a method to wrap a value around with a <code class="codehilite">CompletableFuture</code>.  We call this the <code class="codehilite">of</code> method in the context of <code class="codehilite">Stream</code> and <code class="codehilite">Optional</code>, but in <code class="codehilite">CompletableFuture</code>, it is called <code class="codehilite">completedFuture</code>.</p>
+<p>Being a functor and a monad, <code class="codehilite">CompletableFuture</code> objects can be chained together, just like <code class="codehilite">Stream</code> and <code class="codehilite">Optional</code>.  We can write code like this:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">CompletableFuture</span>
+    <span class="o">.</span><span class="na">completedFuture</span><span class="o">(</span><span class="n">Matrix</span><span class="o">.</span><span class="na">generate</span><span class="o">(</span><span class="n">nRows</span><span class="o">,</span> <span class="n">nCols</span><span class="o">,</span> <span class="n">rng</span><span class="o">::</span><span class="n">nextDouble</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">thenApply</span><span class="o">(</span><span class="n">m</span> <span class="o">-&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">multiply</span><span class="o">(</span><span class="n">m1</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">thenApply</span><span class="o">(</span><span class="n">m</span> <span class="o">-&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">m2</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">thenApply</span><span class="o">(</span><span class="n">m</span> <span class="o">-&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">transpose</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">thenAccept</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+</pre></div>
+</td></tr></table>
+
+<p>Another example:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">CompletableFuture</span> <span class="n">left</span> <span class="o">=</span> <span class="n">CompletableFuture</span>
+    <span class="o">.</span><span class="na">supplyAsync</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">a1</span><span class="o">.</span><span class="na">multiply</span><span class="o">(</span><span class="n">b1</span><span class="o">));</span>
+<span class="n">CompletableFuture</span> <span class="n">right</span> <span class="o">=</span> <span class="n">CompletableFuture</span>
+    <span class="o">.</span><span class="na">supplyAsync</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">a2</span><span class="o">.</span><span class="na">multiply</span><span class="o">(</span><span class="n">b2</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">thenCombine</span><span class="o">(</span><span class="n">left</span><span class="o">,</span> <span class="o">(</span><span class="n">m1</span><span class="o">,</span> <span class="n">m2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">m1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">m2</span><span class="o">));</span>
+    <span class="o">.</span><span class="na">thenAccept</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+</pre></div>
+</td></tr></table>
+
+<p>Similar to <code class="codehilite">Stream</code>, some of the methods are terminal (e.g., <code class="codehilite">thenRun</code>, <code class="codehilite">thenAccept</code>), and some are intermediate (<code class="codehilite">thenApply</code>).</p>
+<h3 id="variations">Variations</h3>
+<ul>
+<li>
+<p>There are variations of methods with name containing the word <code class="codehilite">Either</code> or <code class="codehilite">Both</code>, taking in another <code class="codehilite">CompletableFuture</code>.  These methods invoke the given <code class="codehilite">Function</code>/<code class="codehilite">Runnable</code>/<code class="codehilite">Consumer</code> when either one (for <code class="codehilite">Either</code>) or both (for <code class="codehilite">Both</code>) of the <code class="codehilite">CompletableFuture</code> completes.</p>
+</li>
+<li>
+<p>There are variations of methods with name ending with the word <code class="codehilite">Async</code>.  These methods are called asynchronously in another thread</p>
+</li>
+</ul>
+<p>For example, <code class="codehilite">runAfterBothAsync(future, task)</code> would run <code class="codehilite">task</code> only after <code class="codehilite">this</code> and given <code class="codehilite">future</code> is completed.</p>
+<p>Other features of <code class="codehilite">CompletableFuture</code> include:</p>
+<ul>
+<li>
+<p>Some methods take in additional <code class="codehilite">Executor</code> parameter, for cases where running in the default <code class="codehilite">ForkJoinPool</code> is not good enough.</p>
+</li>
+<li>
+<p>Some methods takes in additional <code class="codehilite">Throwable</code> parameter, for cases where earlier calls might throw an exception.</p>
+</li>
+</ul>
+<p>The <a href="http://www.codebulb.ch/2015/07/completablefuture-clean-callbacks-with-java-8s-promises-part-4.html#api">table</a> by Nicolas Hofstetter neatly summarizes all the methods available.  As you can see, the API is quite extensive (bloated?).</p>
+<h3 id="handling-exceptions">Handling Exceptions</h3>
+<p>Handling exceptions is non-trivial for asynchronous methods.  Remember that, in synchronous method calls, the exceptions are repeatedly thrown to the caller up the call stack, until someone catches the exception.  For asynchronous calls, it is not so obvious.  For instance, should we put a catch around <code class="codehilite">fork()</code> or around <code class="codehilite">join()</code>?  A <code class="codehilite">ForkJoinTask</code> doesn't handle exception with catch, but instead requires us to check for <code class="codehilite">isCompletedAbnormally</code> and then call <code class="codehilite">getException</code> to get the exception thrown.</p>
+<p>As <code class="codehilite">CompletableFuture</code> allows chaining, it provides a cleaner way to pass exceptions from one call to the next.  The terminal operation <code class="codehilite">whenComplete</code> takes in a <code class="codehilite">BiConsumer</code> as parameter -- the first argument to the <code class="codehilite">BiConsumer</code> is the result from previous chain (or <code class="codehilite">null</code> if exception thrown); the second argument is an exception (null if completes normally).</p>
+<p><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">CompletableFuture</span>
+    <span class="o">.</span><span class="na">completedFuture</span><span class="o">(</span><span class="n">Matrix</span><span class="o">.</span><span class="na">generate</span><span class="o">(</span><span class="n">nRows</span><span class="o">,</span> <span class="n">nCols</span><span class="o">,</span> <span class="n">rng</span><span class="o">::</span><span class="n">nextDouble</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">thenApply</span><span class="o">(</span><span class="n">m</span> <span class="o">-&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">multiply</span><span class="o">(</span><span class="n">m</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">whenComplete</span><span class="o">((</span><span class="n">result</span><span class="o">,</span> <span class="n">exception</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">exception</span><span class="o">)</span> <span class="o">{</span> 
+            <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">exception</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</pre></div>
+</td></tr></table>
+<code class="codehilite">whenComplete</code> returns a CompletableFuture, surprisingly, despite it taking in a <code class="codehilite">BiConsumer</code> -- in a sense, <code class="codehilite">whenComplete</code> is more similar to <code class="codehilite">peek</code> rather than <code class="codehilite">forEach</code>.</p>
+<p><code class="codehilite">handle</code> is similar to <code class="codehilite">whenComplete</code>, but takes in a <code class="codehilite">BiFunction</code> instead of a <code class="codehilite">BiConsumer</code>, thus allowing the result or exception to be transformed. </p>
+<p>Finally, <code class="codehilite">exceptionally</code> handles exception by replacing a thrown exception with a value, similar to <code class="codehilite">orElse</code> in <code class="codehilite">Optional</code>.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">CompletableFuture</span>
+    <span class="o">.</span><span class="na">completedFuture</span><span class="o">(</span><span class="n">Matrix</span><span class="o">.</span><span class="na">generate</span><span class="o">(</span><span class="n">nRows</span><span class="o">,</span> <span class="n">nCols</span><span class="o">,</span> <span class="n">rng</span><span class="o">::</span><span class="n">nextDouble</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">thenApply</span><span class="o">(</span><span class="n">m</span> <span class="o">-&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">multiply</span><span class="o">(</span><span class="n">m</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">exceptionally</span><span class="o">(</span><span class="n">Matrix</span><span class="o">.</span><span class="na">generate</span><span class="o">(</span><span class="n">nRows</span><span class="o">,</span> <span class="n">nCols</span><span class="o">,</span> <span class="o">()-&gt;</span><span class="mi">0</span><span class="o">);</span>
+</pre></div>
+</td></tr></table>
+
+<div class="admonition note">
+<p class="admonition-title">Promise</p>
+<p><code class="codehilite">CompletableFuture</code> is similar to <code class="codehilite">Promise</code> in other languages, notably JavaScript and C++ (<code class="codehilite">std::promise</code>).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">CompletionStage</p>
+<p>In Java, <code class="codehilite">CompletableFuture</code> also implements a <code class="codehilite">CompletionStage</code> interface.  Thus, you will find references to this interface in many places in the Java documentation.  I find this name unintuitive and makes an already-confusing java documentation even harder to read.</p>
+</div>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../lec10/index.html" title="10. Parallel Streams" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                10. Parallel Streams
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../exercise1/index.html" title="1. Circles & Points" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                1. Circles & Points
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright by Wei Tsang Ooi, Department of Computer Science, National University of Singapore 2017
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application-c35428f87f.js"></script>
+      
+      
+      <script>app.initialize({url:{base:".."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

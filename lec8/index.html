@@ -1,0 +1,1696 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <link rel="shortcut icon" href="../assets/images/favicon.png">
+      
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.4">
+    
+    
+      
+        <title>8. More Lambda and Streams - CS2030 Programming Methodology II</title>
+      
+    
+    
+      <script src="../assets/javascripts/modernizr-1df76c4e58.js"></script>
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application-769c285a91.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    
+    
+  </head>
+  
+  
+  
+  
+    <body>
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <a href="../index.html" title="CS2030 Programming Methodology II" class="md-icon md-icon--home md-header-nav__button">
+          </a>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+                <span class="md-header-nav__parent">
+                  Lectures
+                </span>
+              
+            
+            8. More Lambda and Streams
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result" data-md-lang-search="">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/nus-cs2030/1718-s1" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    
+      <i class="md-icon md-icon--home md-nav__button"></i>
+    
+    CS2030 Programming Methodology II
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/nus-cs2030/1718-s1" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      General
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        General
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../about/index.html" title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../prereqs/index.html" title="Prerequisites" class="md-nav__link">
+      Prerequisites
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../policies/index.html" title="Policies" class="md-nav__link">
+      Policies
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../schedule/index.html" title="Schedule" class="md-nav__link">
+      Schedule
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../readings/index.html" title="Readings" class="md-nav__link">
+      Readings
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../reviews/index.html" title="Review Qs" class="md-nav__link">
+      Review Qs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../style/index.html" title="Coding Style" class="md-nav__link">
+      Coding Style
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../midterm/index.html" title="Midterm" class="md-nav__link">
+      Midterm
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" checked>
+    
+    <label class="md-nav__link" for="nav-8">
+      Lectures
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Lectures
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec1/index.html" title="1. Abstraction & Encapsulation" class="md-nav__link">
+      1. Abstraction & Encapsulation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec2/index.html" title="2. Inheritance & Polymorphism" class="md-nav__link">
+      2. Inheritance & Polymorphism
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec3/index.html" title="3. Inheritance, Continued" class="md-nav__link">
+      3. Inheritance, Continued
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec4/index.html" title="4. Memory, Exceptions, Generics" class="md-nav__link">
+      4. Memory, Exceptions, Generics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec5/index.html" title="5. Numbers, Strings, Collections" class="md-nav__link">
+      5. Numbers, Strings, Collections
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec6/index.html" title="6. Nested Classes, Enums" class="md-nav__link">
+      6. Nested Classes, Enums
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec7/index.html" title="7. Lambda and Functions" class="md-nav__link">
+      7. Lambda and Functions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        8. More Lambda and Streams
+      </label>
+    
+    <a href="index.html" title="8. More Lambda and Streams" class="md-nav__link md-nav__link--active">
+      8. More Lambda and Streams
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" title="Learning Objectives" class="md-nav__link">
+    Learning Objectives
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lambdas-continued" title="Lambdas (continued)" class="md-nav__link">
+    Lambdas (continued)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#composing-functions" title="Composing Functions" class="md-nav__link">
+    Composing Functions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-functions" title="Other Functions" class="md-nav__link">
+    Other Functions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curried-functions" title="Curried Functions" class="md-nav__link">
+    Curried Functions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functional-interface" title="Functional Interface" class="md-nav__link">
+    Functional Interface
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lambda-as-closure" title="Lambda as Closure" class="md-nav__link">
+    Lambda as Closure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-as-delayed-data" title="Function as Delayed Data" class="md-nav__link">
+    Function as Delayed Data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#an-infinite-list" title="An Infinite List" class="md-nav__link">
+    An Infinite List
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stream" title="Stream" class="md-nav__link">
+    Stream
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stream-operations" title="Stream operations" class="md-nav__link">
+    Stream operations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-1-is-this-a-prime" title="Example 1: Is this a prime?" class="md-nav__link">
+    Example 1: Is this a prime?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-simulators-run" title="Example 2: Simulator's run" class="md-nav__link">
+    Example 2: Simulator's run
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec9/index.html" title="9. Functors, Monads, Collectors" class="md-nav__link">
+      9. Functors, Monads, Collectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec10/index.html" title="10. Parallel Streams" class="md-nav__link">
+      10. Parallel Streams
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec11/index.html" title="11. Asynchronous Programming" class="md-nav__link">
+      11. Asynchronous Programming
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Exercises
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Exercises
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise1/index.html" title="1. Circles & Points" class="md-nav__link">
+      1. Circles & Points
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise2/index.html" title="2. Square & PaintedSquare" class="md-nav__link">
+      2. Square & PaintedSquare
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise3/index.html" title="3. PaintedSquare Revisited" class="md-nav__link">
+      3. PaintedSquare Revisited
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise4/index.html" title="4. Exceptions" class="md-nav__link">
+      4. Exceptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise5/index.html" title="5. Streams" class="md-nav__link">
+      5. Streams
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise6/index.html" title="6. Functors, Collectors" class="md-nav__link">
+      6. Functors, Collectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise7/index.html" title="7. Mock Exam" class="md-nav__link">
+      7. Mock Exam
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Labs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        Labs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab1/index.html" title="1. Question" class="md-nav__link">
+      1. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab01-comments/index.html" title="1. Comments" class="md-nav__link">
+      1. Comments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab2/index.html" title="2. Question" class="md-nav__link">
+      2. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab02-comments/index.html" title="2. Comments" class="md-nav__link">
+      2. Comments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab3/index.html" title="3. Question" class="md-nav__link">
+      3. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab4/index.html" title="4. Question" class="md-nav__link">
+      4. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab5/index.html" title="5. Question" class="md-nav__link">
+      5. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab6/index.html" title="6. Question" class="md-nav__link">
+      6. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab7/index.html" title="7. Question" class="md-nav__link">
+      7. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab8/index.html" title="8. Question" class="md-nav__link">
+      8. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab9/index.html" title="9. Question" class="md-nav__link">
+      9. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab10/index.html" title="10. Question" class="md-nav__link">
+      10. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab11/index.html" title="11. Question" class="md-nav__link">
+      11. Question
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+    
+    <label class="md-nav__link" for="nav-11">
+      Software/Tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        Software/Tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../jdk/index.html" title="Java" class="md-nav__link">
+      Java
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../javadoc/index.html" title="Javadoc" class="md-nav__link">
+      Javadoc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../unix/index.html" title="UNIX" class="md-nav__link">
+      UNIX
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vim/index.html" title="Vim" class="md-nav__link">
+      Vim
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" title="Learning Objectives" class="md-nav__link">
+    Learning Objectives
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lambdas-continued" title="Lambdas (continued)" class="md-nav__link">
+    Lambdas (continued)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#composing-functions" title="Composing Functions" class="md-nav__link">
+    Composing Functions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-functions" title="Other Functions" class="md-nav__link">
+    Other Functions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curried-functions" title="Curried Functions" class="md-nav__link">
+    Curried Functions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functional-interface" title="Functional Interface" class="md-nav__link">
+    Functional Interface
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lambda-as-closure" title="Lambda as Closure" class="md-nav__link">
+    Lambda as Closure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-as-delayed-data" title="Function as Delayed Data" class="md-nav__link">
+    Function as Delayed Data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#an-infinite-list" title="An Infinite List" class="md-nav__link">
+    An Infinite List
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stream" title="Stream" class="md-nav__link">
+    Stream
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stream-operations" title="Stream operations" class="md-nav__link">
+    Stream operations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-1-is-this-a-prime" title="Example 1: Is this a prime?" class="md-nav__link">
+    Example 1: Is this a prime?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-simulators-run" title="Example 2: Simulator's run" class="md-nav__link">
+    Example 2: Simulator's run
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/nus-cs2030/1718-s1/edit/master/docs/lec8.md" title="Edit this page" class="md-icon md-content__icon">edit</a>
+                
+                
+                <h1 id="lecture-8-lambdas-and-streams">Lecture 8: Lambdas and Streams</h1>
+<h2 id="learning-objectives">Learning Objectives</h2>
+<p>After this lecture, students should be familiar with:</p>
+<ul>
+<li>how to write functions with multiple arguments using curried functions </li>
+<li>how to compose functions</li>
+<li>general functional interface with single abstract method (SAM)</li>
+<li>the concept of closure and its relation to lambda expression</li>
+<li>the concept of eager evaluation vs. lazy evaluation</li>
+<li>the concept of function as delayed data and its application in defining an infinite list</li>
+<li>Java <code class="codehilite">Stream</code> class and its operations</li>
+<li>using the stream operations to write declarative-style code, avoiding loops and branches</li>
+</ul>
+<p>We continue where we left off in Lecture 7.</p>
+<h2 id="lambdas-continued">Lambdas (continued)</h2>
+<h3 id="composing-functions">Composing Functions</h3>
+<p>The <code class="codehilite">Function</code> interface has two default methods:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">default</span> <span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="nf">andThen</span><span class="o">(</span><span class="n">Function</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">R</span><span class="o">,?</span> <span class="kd">extends</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">after</span><span class="o">);</span>
+<span class="k">default</span> <span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">V</span><span class="o">,</span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">compose</span><span class="o">(</span><span class="n">Function</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">V</span><span class="o">,?</span> <span class="kd">extends</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">before</span><span class="o">);</span>
+</pre></div>
+</td></tr></table></p>
+<p>for composing two functions.  The term <em>compose</em> here is used in the mathematical sense (i.e., the <span>\(\cdot\)</span> operator in <span>\(f \cdot g\)</span>).</p>
+<p>These two methods, <code class="codehilite">andThen</code> and <code class="codehilite">compose</code>, return another function, and they are generic methods, as they have a type parameter <code class="codehilite">&lt;V&gt;</code>.  Suppose we want to write a function that returns the square root of the absolute value of an int, we can write:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">double</span> <span class="nf">SquareRootAbs</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">x</span><span class="o">));</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></p>
+<p>or, we can write either
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">abs</span> <span class="o">=</span> <span class="n">Math</span><span class="o">::</span><span class="n">abs</span><span class="o">;</span>
+<span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span><span class="n">Double</span><span class="o">&gt;</span> <span class="n">sqrt</span> <span class="o">=</span> <span class="n">Math</span><span class="o">::</span><span class="n">sqrt</span><span class="o">;</span>
+<span class="n">abs</span><span class="o">.</span><span class="na">andThen</span><span class="o">(</span><span class="n">sqrt</span><span class="o">)</span>
+</pre></div>
+</td></tr></table></p>
+<p>or 
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">sqrt</span><span class="o">.</span><span class="na">compose</span><span class="o">(</span><span class="n">abs</span><span class="o">)</span>
+</pre></div>
+</td></tr></table></p>
+<p>But isn't writing the plain old method <code class="codehilite">SquareRootAbs()</code> clearer?  Why bother with <code class="codehilite">Function</code>?  The difference is that, <code class="codehilite">SquareRootAbs()</code> has to be written before we compile our code, and is fixed once we compile.  Using the <code class="codehilite">Function</code> interface, we can compose functions at <em>run time</em>, dynamically as needed!  Here is an example that you might be familiar with, from Lab 5:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Customer</span><span class="o">,</span> <span class="n">Queue</span><span class="o">&gt;</span> <span class="n">findQueueToSwitchTo</span><span class="o">;</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">numOfQueue</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">findQueueToSwitchTo</span> <span class="o">=</span> <span class="n">findShortestQueue</span><span class="o">.</span><span class="na">andThen</span><span class="o">(</span><span class="n">checkIfFewerInFront</span><span class="o">);</span> 
+<span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// only one queue</span>
+  <span class="n">findQueueToSwitchTo</span> <span class="o">=</span> <span class="n">Customer</span><span class="o">::</span><span class="n">getQueue</span><span class="o">;</span>  <span class="c1">// no need to do anything</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>So instead of relying on the logic that the shortest queue is the same as the only queue and there is always the same number of customer in front if the customer is already is in the shortest queue, we just redefine the function that finds the queue to switch to to return the only queue.</p>
+<h3 id="other-functions">Other Functions</h3>
+<p>Java 8 package <code class="codehilite">java.util.function</code> provides other useful interfaces, including:</p>
+<ul>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html"><code class="codehilite">Predicate&lt;T&gt;</code></a> with a <code class="codehilite">boolean test(T t)</code> method </li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Supplier.html"><code class="codehilite">Supplier&lt;T&gt;</code></a> with a <code class="codehilite">T get()</code> method</li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html"><code class="codehilite">Consumer&lt;T&gt;</code></a> with a <code class="codehilite">void accept(T t)</code> method</li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/BiFunction.html"><code class="codehilite">BiFunction&lt;T,U,R&gt;</code></a> with a <code class="codehilite">R apply(T t, U u)</code> method</li>
+</ul>
+<p>Other variations that involves primitive types are also provided.</p>
+<h3 id="curried-functions">Curried Functions</h3>
+<p>Functions have an <em>arity</em>.  The <code class="codehilite">Function</code> interface is for unary functions that take in a single argument; the <code class="codehilite">BiFunction</code> inteface for binary functions, with two arguments.  But we can have functions that take more than two arguments.  We can, however, build functions that take in multiple arguments with only unary functions.   Let's look at this mathematically first.  Consider a binary function <span>\(f: (X, Y) \rightarrow Z\)</span>.  We can introduce <span>\(F\)</span> as a set of all functions <span>\(f': Y \rightarrow Z\)</span>, and rewrite <span>\(f\)</span> as <span>\(f: X \rightarrow F\)</span>, of <span>\(f: X \rightarrow Y \rightarrow Z\)</span>.</p>
+<p>A trivial example for this is the <code class="codehilite">add</code> method that adds two <code class="codehilite">int</code> values. 
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></p>
+<p>This can be written as
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">add</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
+</pre></div>
+</td></tr></table></p>
+<p>To calcualte 1 + 1, we call
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">add</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="mi">1</span><span class="o">).</span><span class="na">apply</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</pre></div>
+</td></tr></table></p>
+<p>Let's break it down a litte, <code class="codehilite">add</code> is a function that takes in an <code class="codehilite">Integer</code> object and returns a unary <code class="codehilite">Function</code> over <code class="codehilite">Integer</code>.  So <code class="codehilite">add.apply(1)</code> returns the function <code class="codehilite">y -&gt; 1 + y</code>.  We could assign this to a variable:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Function&lt;Integer,Integer&gt; incr = add.apply(1);
+</pre></div>
+</td></tr></table></p>
+<p>Here is the place where you need to change how you think: <code class="codehilite">add</code> is not a function that takes two arguments and return a value.  It is a <em>higher-order function</em> that takes in a single argument, and return another function.</p>
+<p>The technique that translates a general <span>\(n\)</span>-ary function to a sequence of <span>\(n\)</span> unary functions is called <em>currying</em>.  After currying, we have a sequence of <em>curried</em> functions.  </p>
+<div class="admonition note">
+<p class="admonition-title">Curry</p>
+<p>Currying is not related to food, but rather is named after computer scientist Haskell Curry, who popularized the technique.</p>
+</div>
+<p>Again, you might question why do we need this?  We can simply call <code class="codehilite">add(1, 1)</code>, instead of <code class="codehilite">add.apply(1).apply(1)</code>?  Well, the verbosity is the fault of Java instead of functional programming techniques.  Other languages like Haskell or Scala have much simpler syntax (e.g., <code class="codehilite">add 1 1</code> or <code class="codehilite">add(1)(1)</code>).  </p>
+<p>If you get past the verbosity, there is another reason why currying is cool.  Consider <code class="codehilite">add(1, 1)</code> -- we have to have both arguments available at the same time to compute the function.  With currying, we no longer have to.  We can evaluate the different arguments at different time (as <code class="codehilite">incr</code> example above).  This feature is useful in cases where some arguments are not available until later.  We can <em>partially apply</em> a function first.  This is also useful if one of the arguments does not change often, or is expensive to compute.  We can save the partial results as a function and continue applying later.</p>
+<p>Again, using Lab 5 as example, you can have several functions defined:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">,</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">,</span><span class="n">Double</span><span class="o">&gt;&gt;</span> <span class="n">generateExponetialVariable</span> <span class="o">=</span> 
+    <span class="n">rate</span> <span class="o">-&gt;</span> <span class="n">randDouble</span> <span class="o">-&gt;</span> <span class="o">-</span><span class="n">Math</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="n">randDouble</span><span class="o">)/</span><span class="n">rate</span><span class="o">;</span>
+<span class="n">Function</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">,</span><span class="n">Double</span><span class="o">&gt;</span> <span class="n">generateServiceTime</span> <span class="o">=</span> 
+    <span class="n">generateExponentialVariable</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">param</span><span class="o">.</span><span class="na">lambda</span><span class="o">);</span>
+<span class="n">Function</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">,</span><span class="n">Double</span><span class="o">&gt;</span> <span class="n">generateInterArrivalTime</span> <span class="o">=</span> 
+    <span class="n">generateExponentialVariable</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">param</span><span class="o">.</span><span class="na">mu</span><span class="o">);</span>
+  <span class="o">:</span>
+</pre></div>
+</td></tr></table></p>
+<p>Instead of keeping around the parameters, you could keep the functions to generate the random time as fields, and invoked them:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">this</span><span class="o">.</span><span class="na">generateServiceTime</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">rng</span><span class="o">.</span><span class="na">nextDouble</span><span class="o">());</span>
+</pre></div>
+</td></tr></table></p>
+<h3 id="functional-interface">Functional Interface</h3>
+<p>We are not limited to using lambda expression for the interfaces defined in <code class="codehilite">java.util.function</code>.  We can use lambda expression as a short hand to a class that implements a interface with a single abstract method -- there has to be only one abstract method so that the compiler knows which method the lambda implements.  This is more commonly known as SAM interface.<br />
+Note that a SAM interface can be mulitple methods, but only one can be abstract (others can have default implementation).</p>
+<p>For instance, Java has the following interface:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">interface</span> <span class="nx">Runnable</span> <span class="p">{</span>
+  <span class="k">void</span> <span class="nx">run</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></p>
+<p>There is only one method, and it is abstract (no default implementation).  So it is a valid SAM interface.</p>
+<p>We can annotate a class with <code class="codehilite">@FunctionalInterface</code> to hint our intention to the compiler and to let the compiler helps us to catch unintended error (such as when we add a second abstract method to the interface).</p>
+<p>We can define our own interface as well.  For instance, in Lab 5, we can define:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">@FunctionalInterface</span>
+<span class="kr">interface</span> <span class="nx">FindQueueStrategy</span> <span class="p">{</span>
+  <span class="nx">CustomerQueue</span> <span class="nx">findQueue</span><span class="p">(</span><span class="nx">Shop</span> <span class="nx">shop</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">@FunctionalInterface</span>
+<span class="kr">interface</span> <span class="nx">JoinQueueStrategy</span> <span class="p">{</span>
+  <span class="k">void</span> <span class="nx">joinQueue</span><span class="p">(</span><span class="nx">CustomerQueue</span> <span class="nx">queue</span><span class="p">,</span> <span class="nx">Customer</span> <span class="nx">c</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></p>
+<p>Now, we can avoid three <code class="codehilite">Customer</code> subclasses.  We just need to instantiate a new <code class="codehilite">Customer</code> with different strategies:</p>
+<p>We can set <code class="codehilite">FindQueueStrategy</code> to either <code class="codehilite">shop -&gt; shop.getShortestQueue()</code> or <code class="codehilite">shop -&gt; shop.getRandomQueue()</code> and set the JoinQueueStrategy to either <code class="codehilite">(q, customer) -&gt; q.addToBack(customer)</code> or <code class="codehilite">(q, customer) -&gt; q.addToFront(customer)</code>.</p>
+<h3 id="lambda-as-closure">Lambda as Closure</h3>
+<p>Just like a local class an anonymous classes, a lambda can capture the variables of the enclosing scope.  For instance, if you do not wish to generate the service time of a customer at the time of arrival, you can pass in a <code class="codehilite">Supplier</code> to <code class="codehilite">Customer</code> instead:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Customer c = new Customer(() -&gt; -Math.log(rng.nextDouble())/rate);
+</pre></div>
+</td></tr></table></p>
+<p>Here, <code class="codehilite">rng</code> and <code class="codehilite">rate</code> are variables captured from the enclosing scope.</p>
+<p>And just like in local and anonymous classes, a captured variable must be either explicitly declared as <code class="codehilite">final</code> or is effectively final.</p>
+<p>A lambda expression therefore store more than just the function to invoke -- it also stores the data from the environment where it is defined.  We call such construct which store a function together with the enclosing environments a <em>closure</em>. </p>
+<h3 id="function-as-delayed-data">Function as Delayed Data</h3>
+<p>Consider a function that produces new value or values.  We can consider the function as a promise to give us the given data sometime later, when needed.  For instance:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>() -&gt; -Math.log(rng.nextDouble())/rate)
+</pre></div>
+</td></tr></table></p>
+<p>is not the value of a service time, but rather, a supplier of the service time.  When we need a service time, we just invoke the supplier.</p>
+<p>What's the big deal?  Not so much in the simple example above.  But consider the case where the function is an expensive one.
+We can then delay the execution of the expensive function until it is absolutely needed.  This allows us to do things that we couldn't before, for instance, create and manipulate an infinite list!</p>
+<h3 id="an-infinite-list">An Infinite List</h3>
+<p>How can we represent an infinite list?  If we store the values of each element in the list, then we will run out of memory pretty soon.  If we try to manipulate every element in the list, then we will enter an infinite loop.  </p>
+<p>The trick to building an infinite list, is to treat the elements in the list as <em>delayed data</em>, and store a function that generates the elements, instead of the elements itself.</p>
+<p>We can think of an infinite list as two functions, the first is a function that generates the first element, and the second is a function that generates the rest of the list.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">InfiniteList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">head</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">Supplier</span><span class="o">&lt;</span><span class="n">InfiniteList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">tail</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="n">InfiniteList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">generate</span><span class="o">(</span><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">supply</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">InfiniteList</span><span class="o">(</span><span class="n">supply</span><span class="o">,</span>
+      <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">InfiniteList</span><span class="o">.</span><span class="na">generate</span><span class="o">(</span><span class="n">supply</span><span class="o">));</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>There you go!  We now have an infinite list defined by the supply function.  </p>
+<p>A list defined this way is lazily evaluated.  We won't get the elements until we need it -- this is in constrast to the eager <code class="codehilite">LambdaList</code> you write in Lab 6.</p>
+<p>Let's see how to use this list.  Consider the <code class="codehilite">findFirst</code> method:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="n">T</span> <span class="nf">findFirst</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">predicate</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">T</span> <span class="n">first</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">head</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">predicate</span><span class="o">.</span><span class="na">test</span><span class="o">(</span><span class="n">first</span><span class="o">))</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">first</span><span class="o">;</span>
+  <span class="o">}</span> 
+  <span class="n">InfiniteList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">tail</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+  <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">T</span> <span class="n">next</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">head</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">predicate</span><span class="o">.</span><span class="na">test</span><span class="o">(</span><span class="n">next</span><span class="o">))</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">next</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="n">list</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">tail</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<div class="admonition note">
+<p class="admonition-title">Simpler code</p>
+<p>The code shown in the lecture above could be simplified to:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="n">T</span> <span class="nf">findFirst</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">predicate</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">InfiniteList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">this</span><span class="o">;</span>
+  <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">T</span> <span class="n">next</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">head</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">predicate</span><span class="o">.</span><span class="na">test</span><span class="o">(</span><span class="n">next</span><span class="o">))</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">next</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="n">list</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">tail</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></p>
+</div>
+<p>In the method above, we repeatedly invoke the supplier, until we find an element that matches the predicate.  This way, we never had to generate every element in the list just to find the first element that matches.</p>
+<div class="admonition note">
+<p class="admonition-title">iterate</p>
+<p>In class, I also showed the <code class="codehilite">iterate</code> method to generate a list:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">InfiniteList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">iterate</span><span class="o">(</span><span class="n">T</span> <span class="n">init</span><span class="o">,</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">InfiniteList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;(</span>
+        <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">init</span><span class="o">,</span> 
+        <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">InfiniteList</span><span class="o">.</span><span class="na">iterate</span><span class="o">(</span><span class="n">next</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">init</span><span class="o">),</span> <span class="n">next</span><span class="o">)</span>
+      <span class="o">);</span>
+  <span class="o">}</span>
+</pre></div>
+</td></tr></table></p>
+</div>
+<h2 id="stream">Stream</h2>
+<p>Such a list, possibly infinite, that is lazily evaluated on demand is also known as a <em>stream</em>.  Java 8 provides a set of useful and powerful methods on streams, allowing programmers to manipulate data very easily.  Java 9 adds a couple of useful methods, <code class="codehilite">takeWhile</code> and <code class="codehilite">dropWhile</code>, which is also invaluable.  To take full advantage of streams, we will be using Java 9, not Java 8 for the rest of this class.  </p>
+<h3 id="stream-operations">Stream operations</h3>
+<p>A few things to note before I show you how to use streams.  First, the operations on streams can be classified as either <em>intermediate</em> or <em>terminal</em>.  An <em>intermediate</em> operation returns another stream.  For instance, <code class="codehilite">map</code>, <code class="codehilite">filter</code>, <code class="codehilite">peek</code> are examples of intermediate operations.  An intermediate operation does not cause the stream to be evaluated.  A terminal operation, on the other hand, force the streams to be evaluated.  It does not return a stream.  <code class="codehilite">reduce</code>, <code class="codehilite">findFirst</code>, <code class="codehilite">forEach</code> are examples of terminal operation.  A typical way of writing code that operate on streams is to chain a series of intermediate operation together, ending with a terminal operation.  </p>
+<p>Second, a stream can only be consumed once.  We cannot iterate through a stream mulitple times.  We have to create the stream again if we want to do that:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">);</span>
+<span class="n">s</span><span class="o">.</span><span class="na">count</span><span class="o">();</span>
+<span class="n">s</span><span class="o">.</span><span class="na">count</span><span class="o">();</span> <span class="c1">// &lt;- error</span>
+</pre></div>
+</td></tr></table>
+
+<p>In the example above, we use the <code class="codehilite">of</code> static method with variable number of arguments to create a stream.  We can also create a stream by:</p>
+<ul>
+<li>converting an array to stream using <code class="codehilite">Arrays.stream</code> method</li>
+<li>converting a collection to stream using <code class="codehilite">stream</code> method</li>
+<li>reading from a file using <code class="codehilite">Files.lines</code> method</li>
+<li>using the <code class="codehilite">generate</code> method (provide a <code class="codehilite">Supplier</code>) or <code class="codehilite">interate</code> method (providing the initial value and incremental operation). </li>
+</ul>
+<p>You have seen many of the stream operations before, in Lab 6, including <code class="codehilite">map</code>, <code class="codehilite">reduce</code>, <code class="codehilite">filter</code>, <code class="codehilite">findFirst</code>, <code class="codehilite">peek</code>, and <code class="codehilite">forEach</code>.  Even though they are in the context of an eagerly evaluated list, the semantics are the same.  Here are a few more useful ones.</p>
+<ul>
+<li><code class="codehilite">flatMap</code> is just like <code class="codehilite">map</code>, but it takes in a function that produces another stream (instead of another element), and it <code class="codehilite">flattens</code> the stream by inserting the elements from the stream produced into the stream.</li>
+</ul>
+<p>Let see an example.  The lambda below takes a string and return a stream of <code class="codehilite">Integer</code> objects:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">.</span><span class="na">chars</span><span class="o">().</span><span class="na">boxed</span><span class="o">()</span>
+</pre></div>
+</td></tr></table>
+
+<p>We can create a stream of strings using the static <code class="codehilite">of</code> method from <code class="codehilite">Stream</code>:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&quot;live&quot;</span><span class="o">,</span> <span class="s">&quot;long&quot;</span><span class="o">,</span> <span class="s">&quot;and&quot;</span><span class="o">,</span> <span class="s">&quot;prosper&quot;</span><span class="o">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>If we chain the two together, using <code class="codehilite">map</code>, however, we will produce a stream of stream of <code class="codehilite">Integer</code>.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Steam</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&quot;live&quot;</span><span class="o">,</span> <span class="s">&quot;long&quot;</span><span class="o">,</span> <span class="s">&quot;and&quot;</span><span class="o">,</span> <span class="s">&quot;prosper&quot;</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">.</span><span class="na">chars</span><span class="o">().</span><span class="na">boxed</span><span class="o">())</span>
+</pre></div>
+</td></tr></table>
+
+<p>To produce a stream of <code class="codehilite">Integer</code>s, we use <code class="codehilite">flatMap()</code>:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&quot;live&quot;</span><span class="o">,</span> <span class="s">&quot;long&quot;</span><span class="o">,</span> <span class="s">&quot;and&quot;</span><span class="o">,</span> <span class="s">&quot;prosper&quot;</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">flatMap</span><span class="o">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">.</span><span class="na">chars</span><span class="o">().</span><span class="na">boxed</span><span class="o">())</span>
+</pre></div>
+</td></tr></table>
+
+<ul>
+<li>
+<p><code class="codehilite">sorted</code> is an intermediate operation that returns a stream with the elements in the stream sorted.  Without argument, it sorts according to the natural order.  You can also passed in a <code class="codehilite">Comparator</code> to tell <code class="codehilite">sorted</code> how to sort.</p>
+</li>
+<li>
+<p><code class="codehilite">distinct</code> is another intermediate operation that returns a stream with only distinct elements in the stream. </p>
+</li>
+</ul>
+<p><code class="codehilite">distinct</code> and <code class="codehilite">sorted</code> are stateful operations -- it needs to keep track of states in order to perform the operation.  <code class="codehilite">sorted</code> in particular, need to know every elements in the stream before it can output the result.  They are also known as <code class="codehilite">bounded</code> operations, since call them on an infinite stream is a very bad idea!</p>
+<p>Here is how we print out the unique characters of a given sequence of streams in sorted order
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&quot;live&quot;</span><span class="o">,</span> <span class="s">&quot;long&quot;</span><span class="o">,</span> <span class="s">&quot;and&quot;</span><span class="o">,</span> <span class="s">&quot;prosper&quot;</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">flatMap</span><span class="o">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">.</span><span class="na">chars</span><span class="o">().</span><span class="na">boxed</span><span class="o">())</span>
+    <span class="o">.</span><span class="na">distinct</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">sorted</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">Character</span><span class="o">((</span><span class="kt">char</span><span class="o">)</span><span class="n">x</span><span class="o">.</span><span class="na">intValue</span><span class="o">()))</span>
+    <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">print</span><span class="o">);</span>
+</pre></div>
+</td></tr></table></p>
+<p>There are several intermediate operations that convert from infinite stream to finite stream.  </p>
+<ul>
+<li><em><code class="codehilite">limit</code></em> takes in an <code class="codehilite">int</code> <span>\(n\)</span> and return a stream containing the first <span>\(n\)</span> elements of the stream;</li>
+<li><em><code class="codehilite">takeWhile</code></em> takes in a predicate and return a stream containing the elements of the stream, until the predicate becomes false.  The resulting stream might still be infinite if the predicate never becomes false.</li>
+</ul>
+<p>Here are more useful terminal operations:</p>
+<ul>
+<li><em><code class="codehilite">noneMatch</code></em> return true if none of the elements pass the given predicate.</li>
+<li><em><code class="codehilite">allMatch</code></em> return true if every element passes the given predicate.</li>
+<li><em><code class="codehilite">anyMatch</code></em> return true if no elements passes the given predicate.</li>
+</ul>
+<h3 id="example-1-is-this-a-prime">Example 1: Is this a prime?</h3>
+<p>Consider the method below, which checks if a given <code class="codehilite">int</code> is a prime:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">boolean</span> <span class="nf">isPrime</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">for</span> <span class="o">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>The code coudln't be simpler -- or can it?  With streams, we can write it as:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">boolean</span> <span class="nf">isPrime</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">IntStream</span><span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="o">)</span>
+      <span class="o">.</span><span class="na">matchNone</span><span class="o">(</span><span class="n">x</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></p>
+<div class="admonition warning">
+<p class="admonition-title">Bug</p>
+<p>There is a bug in the earlier code where the code showed <code class="codehilite">IntStream.range(2,x-1)</code>.  <code class="codehilite">range(m,n)</code> returns a stream from <code class="codehilite">m</code> to <code class="codehilite">n-1</code>.</p>
+</div>
+<p><code class="codehilite">IntStream</code> is a special <code class="codehilite">Stream</code> for primitive type <code class="codehilite">int</code>, the <code class="codehilite">range</code> method generates a stream of <code class="codehilite">int</code> in a given range (inclusive)</p>
+<p>What if we want to print out the first 500 prime numbers, starting from 2?  Normally, we would do the following:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">void</span> <span class="nf">fiveHundredPrime</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+  <span class="k">while</span> <span class="o">(</span><span class="n">count</span> <span class="o">&lt;</span> <span class="mi">500</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">isPrime</span><span class="o">(</span><span class="n">i</span><span class="o">))</span> <span class="o">{</span>
+      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+      <span class="n">count</span><span class="o">++;</span>
+    <span class="o">}</span>
+    <span class="n">i</span><span class="o">++;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></p>
+<p>The code is still considered simple, and understandable for many, but I am sure some of us will encounter a bug the first time we write this (either forgot to increment counter, or put the increment in the wrong place).  If you look at the code, there are a couple of compnents:</p>
+<ul>
+<li>Lines 3 and 9 deal with iterating through different numbers for primality testing</li>
+<li>Line 4 is the test</li>
+<li>Lines 2, 4, and 7, deal with limiting the output to 500 primes</li>
+<li>Line 5 is the action to perform on the prime</li>
+</ul>
+<p>With streams, we can write it like the following:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">IntStream</span><span class="o">.</span><span class="na">iterate</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">isPrime</span><span class="o">(</span><span class="n">x</span><span class="o">))</span>
+      <span class="o">.</span><span class="na">limit</span><span class="o">(</span><span class="mi">500</span><span class="o">)</span>
+      <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+</pre></div>
+</td></tr></table></p>
+<p>Notice how each of the four components matches neatly with one operation on stream!  </p>
+<p>With stream, we no longer have to write loops -- as you have done in Lab 6, we have move the iterations to within each operation in stream.  We no longer need to maintain states and counters, they are done within each operation as needed as well.  This has another powerful implication: our code become more <em>declarative</em>, we only need to concern about what we want at each step, much less about how to do it.</p>
+<p>You should take a look at the methods provided by the <code class="codehilite">Stream</code> class, and read through the APIs, a few times, they formed fundamental building blocks for writing data processing code in functional style in Java.</p>
+<h3 id="example-2-simulators-run">Example 2: Simulator's run</h3>
+<p>Let's convert our code from our lab into stream.  Consider this:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="n">Simulation</span> <span class="n">sim</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">schedule</span><span class="o">(</span><span class="n">sim</span><span class="o">.</span><span class="na">firstEvents</span><span class="o">());</span>
+      <span class="k">while</span> <span class="o">(!</span><span class="n">events</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">Event</span> <span class="n">e</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">events</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">happensBefore</span><span class="o">(</span><span class="n">sim</span><span class="o">.</span><span class="na">expireTime</span><span class="o">()))</span> <span class="o">{</span>
+          <span class="n">e</span><span class="o">.</span><span class="na">log</span><span class="o">();</span>
+          <span class="n">Event</span><span class="o">[]</span> <span class="n">newEvents</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="na">handle</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+          <span class="k">if</span> <span class="o">(</span><span class="n">newEvents</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">schedule</span><span class="o">(</span><span class="n">newEvents</span><span class="o">);</span>
+          <span class="o">}</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+          <span class="k">break</span><span class="o">;</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sim</span><span class="o">.</span><span class="na">stats</span><span class="o">);</span>
+</pre></div>
+</td></tr></table>
+
+<p>Again, you can see that the main loop is doing several things at one time: (i) it checks if there is still events in the queue, in Line 3, (ii) it checks if we have reached the end of the simulation in Line 5 and Line 12, (iii) it logs the event for debugging in Line 6, (iv) it runs and generates new events in Line 7, then (v) adds to the events in Lines 8-9.</p>
+<p>Let's try to rewrite this using stream.  First, we need to change our event generation to return a stream of events.  Instead of:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>return new Event[] { event1, event2 };
+</pre></div>
+</td></tr></table>
+
+<p>We can now say:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>return Stream.of(event1, event2);
+</pre></div>
+</td></tr></table>
+
+<p>which is IMHO cleaner and more readable.  We also get to avoid <code class="codehilite">null</code> (which is never a bad thing) by returning <code class="codehilite">Stream.empty()</code> instead of <code class="codehilite">null</code> if we are not going to generate a new event.</p>
+<p>The <code class="codehilite">schedule</code> method becomes:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">schedule</span><span class="o">(</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">Event</span><span class="o">&gt;</span> <span class="n">stream</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">events</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">stream</span><span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">()));</span>
+  <span class="o">}</span>
+</pre></div>
+</td></tr></table></p>
+<p>We will still use <code class="codehilite">PriorityQueue</code> for events, and so <code class="codehilite">addAll</code> expects a collection.  The <code class="codehilite">collect</code> method simply converts a stream to a collection.</p>
+<p>With the above changes, we can now rewrite the while loop in <code class="codehilite">run</code> using stream:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="n">Stream</span><span class="o">.</span><span class="na">generate</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">events</span><span class="o">::</span><span class="n">poll</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">takeWhile</span><span class="o">(</span><span class="n">event</span> <span class="o">-&gt;</span> <span class="n">event</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">event</span> <span class="o">-&gt;</span> <span class="n">event</span><span class="o">.</span><span class="na">happensBefore</span><span class="o">(</span><span class="n">sim</span><span class="o">.</span><span class="na">expireTime</span><span class="o">()))</span> 
+        <span class="o">.</span><span class="na">peek</span><span class="o">(</span><span class="n">event</span> <span class="o">-&gt;</span> <span class="n">event</span><span class="o">.</span><span class="na">log</span><span class="o">())</span>
+        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">event</span> <span class="o">-&gt;</span> <span class="n">sim</span><span class="o">.</span><span class="na">handle</span><span class="o">(</span><span class="n">event</span><span class="o">))</span>
+        <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">eventStream</span> <span class="o">-&gt;</span> <span class="k">this</span><span class="o">.</span><span class="na">schedule</span><span class="o">(</span><span class="n">eventStream</span><span class="o">));</span>
+</pre></div>
+</td></tr></table></p>
+<p>Once you get used to writing code with streams, it might be hard to go back to writing loops and bracnhes again!</p>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../lec7/index.html" title="7. Lambda and Functions" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                7. Lambda and Functions
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../lec9/index.html" title="9. Functors, Monads, Collectors" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                9. Functors, Monads, Collectors
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright by Wei Tsang Ooi, Department of Computer Science, National University of Singapore 2017
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application-c35428f87f.js"></script>
+      
+      
+      <script>app.initialize({url:{base:".."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

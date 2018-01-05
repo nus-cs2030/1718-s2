@@ -1,0 +1,300 @@
+# Lecture 9: Functors, Monads, Collectors
+
+## Learning Objectives
+
+After this lecture, students should:
+
+- Understand what is a functor and monad in the context of Java's `Stream`, `Optional`
+- Understand the laws that a functor and monad must obey and be able to verify them.
+- Be familiar with the `collect` method of `Stream`, the `Collector` interface, and the `Collectors` classes
+- Be able to write their own simple `Collectors`.
+
+## Functor
+
+In this lecture, we are going to abstract out some useful patterns that we have seen so far in functional-style programming in Java, and relates it to concepts in functional programming.  
+Once you see and understand the patterns, hopefully you can reapply the patterns in other context!
+
+Let's start with a simplest one, called _functor_.  This funny name originated from a branch of mathematics, called category theory.  We can think of a functor as something that takes in a function and returns another functor.  If you like, you can think of it as something that implements an interface that looks like:
+
+```Java
+interface Functor<T> {
+  public <R> Functor<R> f(Function<T,R> func);
+}
+```
+
+Wait, that's a recursive definition, and doesn't really explain what is a functor?  In OO-speak, a functor can be any class that implements the interface above (or matches the pattern above).
+
+So, is this a functor?
+
+```Java
+class A {
+  private int x;
+
+  public A(int i) {
+    this.x = i;
+  }
+
+  public A f(Function<Integer,Integer> func) {
+    if (this.x > 0) {
+      return new A(func.apply(x));
+    } else {
+      return new A(0);
+    }
+  }
+
+  public boolean isSameAs(A a) {
+    return this.x == a.x; 
+  }
+}
+```
+
+The class `A` above takes in a function and returns another `A` with `func` applied on the content `x`, if `x` is positive.  Otherwise, it returns another `A` with 0.  
+
+Despite that it does not implement the interface `Functor`[^1], it does match the pattern of having a method that takes in a function and returns itself, it is a special case since both `R` and `T` are `Integer`.
+
+[^1]:  In fact, no functors in Java 8 does, since this is the interface I created just to explain the pattern of a functor.
+
+Matching the patterns syntactically, however, is not enough to be a functor.  A functor have to semantically obey the functor laws, which are:
+
+- if `func` is an identity function `x -> x`, then it should not change the functor.
+- if `func` is a composition of two functions $g \cdot h$, then the resulting functor should be the same as calling `f` with $h$ and then with $g$.
+
+Let's check: 
+```
+A a = new A(-1);
+a.isSameAs(a.f(x -> x));
+a.f(x -> x + 1).g(x -> x * 2).isSameAs(a.f(x -> (x + 1) * 2);
+```
+
+Nope.  Our class `A` violates the first functor law and therefore does not qualify to be a functor.  A simpler version, without all the weird stuff going on in `f`, is, however, a valid functor.
+
+```Java
+class B {
+  private int x;
+
+  public B(int i) {
+    this.x = i;
+  }
+
+  public B f(Function<Integer,Integer> func) {
+    return new B(func.apply(x));
+  }
+
+  public boolean isSameAs(B a) {
+    return this.x == a.x; 
+  }
+}
+```
+
+It is easy to see that if `func` is `x -> x`, then `B(func.apply(x)` is just `B(x)`.  Further, 
+if `func` is `g.compose(h)`, then calling `func.apply(x)` is the same as `g.apply(h.apply(x))`.
+
+Another way to think of a functor, in the OO-way, is that that it is a variable wrapped within a class in some context.  Instead of manipulating the variable directly, we pass in a function to the class to manipulate the variable.  The variable must then interact with the function as if it is not be wrapped.  The class should not interfere with the function (as in the class `A`).
+
+You have actually seen several functors before.  You might recognize by now that `func` is just our old friend `map`!  A `LambdaList` is just a functor with a list of variables stored in an array list.  A `Stream` is another functor.  So is `InfiniteList`.
+
+Once you understand the laws of functor and recognize this pattern, it is easy to learn about new classes -- one just have to tell you that it is a functor, and you will know how the class should behave.
+
+!!! note "Functors in other languages"
+    Haskell, Scala, Python, Javascript, and other functional languages have functors as well.  C++, unfortunately, uses the term functors to mean function object -- a function object is not a functor in the sense of the word in category theory.  So, do not get confused between the two.
+
+### Optional
+
+Let's see another functor in Java 8: the `Optional` class.  Recall that you can wrapped a possibly `null` object in an `Optional` class.  It is unfortunate that Java 8 provides a `get()` method to allow retrieval of the object inside -- it is convinient but that defeats the point of `Optional` -- not to mentioned that Java Collections Framework does not support `Optional`.  But, since Java's `Optional` is a functor, we can manipulate the value[^2] wrapped in an `Optional` with the `map` function, without having to `get()` and put back again!
+
+[^2]: To be more precise, create a new `Optional` with the manipulated value.  
+
+Let's consider the `Simulator` again.  In a better version of Java, we would have a `PriorityQueue<T>` with a `poll` method that returns `Optional<T>`, instead of either an object of type `T` or `null`.  Let's pretend that we have a different `poll`, called `optionalPoll` that does that.  Now, we can process the event returned (maybe?) in the following way:
+
+```Java
+events.optionalPoll()
+    .filter(event -> event.happensBefore(sim.expireTime()))
+    .map(event -> sim.handle(event))
+    .ifPresent(eventStream -> this.schedule(eventStream));
+```
+
+This beats writing code that looks like this:
+
+```Java
+Event event = events.poll();
+if (event != null) {
+  if (event.happensBefore(sim.expireTire())) {
+    Stream<Event> eventStream = sim.handle(event); 
+    if (eventStream != null) {
+      this.schedule(eventStream);
+    }
+  }
+}
+```
+
+`Optional` helps us check for `null` and takes care of the "maybe?" for us.  In `map`, if `event` is `null`, it does nothing, otherwise it invokes `sim.handle` and returns 
+an `Optional<Steam<Event>>`.
+
+!!! note "In other languages"
+    Scale has `Option`; Haskell has `Maybe`. If you use Python, check out the `PyMonad` library that supplies various fuctors and monad, including `Maybe`.
+
+
+## Monad
+
+_Monad_ is another funny name originated from category theory.  A monad also takes in a function and returns a monad.  But, unlike functor, it takes in a function that returns a monad!
+
+```Java
+interface Monad<T> {
+  public <R> Monad<R> f(Function<T,Monad<R>> func);
+}
+```
+
+Looks complicated?  How about now:
+```Java
+interface Stream<T> {
+  public <R> Stream<R> flatMap(Function<T,Stream<R>> mapper);
+}
+```
+
+This interface should look familiar to you[^3].  We have seen monads before!  A Stream is a monad.  In constrast, unless you implemented `flatMap` for `InfiniteList` or `LambdaList`, they are not monads.
+
+Just like functors, there are some laws that a monad have to follow:
+
+- there should be an `of` operation that takes an object (or multiple objects) and wrap it/them into a monad.  Further, 
+
+    - `Monad.of(x).flatMap(f)` should be equal to `f(x)`  (called the _left identity_ law)
+    - `monad.flatMap(x -> Monad.of(x))` should be equal to `monad` (called the _right identity_ law)
+
+- the `flatMap` operation should be associative (associative law):
+`monad.flatMap(f).flatMap(g)` should be equal to `monad.flatMap(x -> f(x).flatMap(g))`
+
+!!! note "In other languages"
+    The `flatMap` and `of` operations are sometimes known as the `bind` and `unit` operations respectively (e.g., in Haskell).
+
+Knowing what is a monad is useful, since if I tell you something is a monad, you should recognize that it supports a given interface.  For instance, I tell you that `Optional` is a monad.  You should know that `Optional` supports the `of` and `flatMap` operation (maybe of a different name, but they exists and follows the monad laws).
+
+[^3]: Just a reminder again that these are not real interfaces in Java but just something to show you the types of input/output to a monad in a language that you are familiar with.
+
+We won't proof formally that `Optional` follows the laws of monad in this class, but let's explore a bit more to convince ourselves that it does.  Let's write the `flatMap` method for `Optional`, which is not that difficult:
+
+```Java
+public<U> Optional<U> flatMap(Function<? super T, Optional<U>> mapper) {
+  if (!isPresent()) {
+    return empty();
+  } else {
+    return mapper.apply(value);
+  }
+}
+```
+
+Let check:
+
+- Left identity law: `Optional.of(1).flatMap(f)` will return `f.apply(1)` (i.e., $f(1)$).
+- Right identity law: `opt.flatMap(x -> Optional.of(x)` will apply `x -> Optional.of(x)` on the value of `opt`, if it exists, resulting in `Optional.of(value)`, which is `opt`. If the value does not exist (`Optional` is empty), then `flatMap` will not apply the lambda, instead it will return `empty()` right away.  So it obeys the law.
+- Associative law: `opt.flatMap(f).flatMap(g)` is the same as `f.apply(value).flatMap(g)`; `opt.flatMap(x -> f(x).flatMap(g))` will apply the lambda to `value`, so we get `f.apply(x).flatMap(g)`.  They are the same.  If `opt` is empty, then `flatMap` returns `empty` for both cases.
+
+So, despite the complicated-sounding laws, they are actually easy to obey!
+
+## Collectors
+
+Going back to streams now.  We previously have seen several terminal operations of streams which are useful and general, such as `reduce` and `forEach`.  Java 8, however, provide something more powerful called `collect`, which you can think of as `reduce` on steroids!  You have seen this used to convert a stream into a `List` collection using `.collect(Collectors.toList())`.  Here are a few, self-explanatory examples using `collect` and predefined `Collector`.
+
+```Java
+Map<Server, List<Customer>> byServer = customers.stream().collect(Collectors.groupingBy(c -> c.servedBy()); 
+```
+
+The code above put the list of customers into a map collection, with server as the key. We can further find out all customers that ever been served by a given server.
+
+```Java
+Map<Boolean, List<Customer>> byServiceTime = customer.stream().collection(Collectors.partitionBy(c -> c.getServiceTime() < 1));
+```
+
+The code above partition the customer into two, those that require less than 1 unit time of service that those that require more.
+
+And how about this one that computes the average waiting time:
+
+```Java
+double avgWaitingTime = customer.stream().collection(Collectors.averagingDouble(c -> c.getWaitingTime()));
+```
+
+You can take a look at the list of predefined [`Collectors`](https://docs.oracle.com/javase/9/docs/api/java/util/stream/Collectors.html) in Java documentation to see what is available.
+
+### The Collector Interface
+
+Let's delve deeper and try to understand what exactly is a `Collector`?  A `Collector` is defined as follows:
+
+```Java
+interface Collector<T, A, R> {
+  BiConsumer<A, T> accumulator();
+  BinaryOperator<A> combiner();
+  Function<A, R> finisher();
+  Supplier<A> supplier();
+   :
+}
+```
+
+It is helpful to understand the type first:
+
+- `T` is the type of the elements we are collecting
+- `R` is the type of the result of the collection
+- `A` is the type of the partial result from the accumulator (ala reduction)
+
+Each of these methods shown above in the `Collector` is returning a function that will be invoked by the `collect` method.  Except combiner, the other three methods are rather straightforward: the `supplier` supplies a "container" of type `A` for the `accumulator` to accumulate into, and finally the `finisher` converts the container into the result of type `R`.
+
+Let's see the `Collector` in action by rewriting the `Collectors.toList()` constructor:
+
+```Java
+class ListCollector implement Collector<T, List<T>, List<T>> {
+  Supplier<List<T>> supplier() {
+    return () -> new ArrayList<T>();
+  }
+
+  BiConsumer<List<T>, T> accumulator() {
+    return (list, item) -> list.add(item);
+  }
+
+  Function<List<T>,List<T>> finisher() {
+    return Function.identity();
+  }
+
+   :
+}
+```
+
+Now, let's discuss what `combiner` does.  A `combiner` is actually required by the `Stream` `reduce` method as well:
+
+```Java
+<U> U reduce(U identity, BiFunction<U,? super T,U> accumulator, BinaryOperator<U> combiner)
+```
+
+But, in our `LambdaList` and `InfiniteList`, we have not been using a `combiner`.
+
+A `combiner` is useful in the context of parallel processing -- which we will cover more in the coming lectures.  The short version of it is that, a stream can be broken up into substreams and process independently (e.g., reduced or collected independently).  After these independent processing, we will need to combined their results back together.  This is where combiner comes in -- it specifies how to combined partial results back into first result.
+
+Let's see two examples: In the case of our `ListCollector`, we will get one `List<T>` each from each substream after collection.  We just need to combine both into the first list:
+
+```Java
+  BinaryOperator<List<T>> combiner() {
+    (list1, list2) -> {
+      list1.addAll(list2);
+      return list1;
+    }
+  }
+```
+
+In the case of reducing a stream, suppose we want to find the product of all numbers:
+```Java
+Stream.of(1,2,3,4).reduce(1, (x,y)->x*y, (x,y)->x*y);
+```
+
+We include the lambda `(x,y)->x*y` twice, the second one is a `combiner` that combines two partial product into one, by multiplying them.  Here is one that count the number of elements:
+```Java
+Stream.of(1,2,3,4).reduce(0, (x,y)->x+1, (x,y)->x+y);
+```
+
+To combine two partial counter, we add them with `(x,y)->x+y`.
+
+Another way we can create a customized collector is to pass lambdas into `collect` method of `Stream` directly.
+
+```Java
+s.collect(()->new LinkedList<Integer>(), 
+    (l,i)->l.add(i), 
+    (l1, l2) -> l1.addAll(l2));
+```
+
+The `collect` method takes in a `Supplier<R>` supplier, `BiConsumer<R,T>` accumulator, and a `BiConsumer<R,R>` combiner.  Note that `combiner` here is a `BiConsumer` which expects the results to be combined into the first argument, and is different from the the combiner of `Collector` interface, which is a `BiOperator`.  Further, there is no finisher so we can't specify anything that requires a more complex finisher (example, an averaging collector).

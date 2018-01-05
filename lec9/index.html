@@ -1,0 +1,1451 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <link rel="shortcut icon" href="../assets/images/favicon.png">
+      
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.4">
+    
+    
+      
+        <title>9. Functors, Monads, Collectors - CS2030 Programming Methodology II</title>
+      
+    
+    
+      <script src="../assets/javascripts/modernizr-1df76c4e58.js"></script>
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application-769c285a91.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    
+    
+  </head>
+  
+  
+  
+  
+    <body>
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <a href="../index.html" title="CS2030 Programming Methodology II" class="md-icon md-icon--home md-header-nav__button">
+          </a>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+                <span class="md-header-nav__parent">
+                  Lectures
+                </span>
+              
+            
+            9. Functors, Monads, Collectors
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result" data-md-lang-search="">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/nus-cs2030/1718-s1" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    
+      <i class="md-icon md-icon--home md-nav__button"></i>
+    
+    CS2030 Programming Methodology II
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/nus-cs2030/1718-s1" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      General
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        General
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../about/index.html" title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../prereqs/index.html" title="Prerequisites" class="md-nav__link">
+      Prerequisites
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../policies/index.html" title="Policies" class="md-nav__link">
+      Policies
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../schedule/index.html" title="Schedule" class="md-nav__link">
+      Schedule
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../readings/index.html" title="Readings" class="md-nav__link">
+      Readings
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../reviews/index.html" title="Review Qs" class="md-nav__link">
+      Review Qs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../style/index.html" title="Coding Style" class="md-nav__link">
+      Coding Style
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../midterm/index.html" title="Midterm" class="md-nav__link">
+      Midterm
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" checked>
+    
+    <label class="md-nav__link" for="nav-8">
+      Lectures
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Lectures
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec1/index.html" title="1. Abstraction & Encapsulation" class="md-nav__link">
+      1. Abstraction & Encapsulation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec2/index.html" title="2. Inheritance & Polymorphism" class="md-nav__link">
+      2. Inheritance & Polymorphism
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec3/index.html" title="3. Inheritance, Continued" class="md-nav__link">
+      3. Inheritance, Continued
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec4/index.html" title="4. Memory, Exceptions, Generics" class="md-nav__link">
+      4. Memory, Exceptions, Generics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec5/index.html" title="5. Numbers, Strings, Collections" class="md-nav__link">
+      5. Numbers, Strings, Collections
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec6/index.html" title="6. Nested Classes, Enums" class="md-nav__link">
+      6. Nested Classes, Enums
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec7/index.html" title="7. Lambda and Functions" class="md-nav__link">
+      7. Lambda and Functions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec8/index.html" title="8. More Lambda and Streams" class="md-nav__link">
+      8. More Lambda and Streams
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        9. Functors, Monads, Collectors
+      </label>
+    
+    <a href="index.html" title="9. Functors, Monads, Collectors" class="md-nav__link md-nav__link--active">
+      9. Functors, Monads, Collectors
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" title="Learning Objectives" class="md-nav__link">
+    Learning Objectives
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functor" title="Functor" class="md-nav__link">
+    Functor
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#optional" title="Optional" class="md-nav__link">
+    Optional
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monad" title="Monad" class="md-nav__link">
+    Monad
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collectors" title="Collectors" class="md-nav__link">
+    Collectors
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-collector-interface" title="The Collector Interface" class="md-nav__link">
+    The Collector Interface
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec10/index.html" title="10. Parallel Streams" class="md-nav__link">
+      10. Parallel Streams
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec11/index.html" title="11. Asynchronous Programming" class="md-nav__link">
+      11. Asynchronous Programming
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Exercises
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Exercises
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise1/index.html" title="1. Circles & Points" class="md-nav__link">
+      1. Circles & Points
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise2/index.html" title="2. Square & PaintedSquare" class="md-nav__link">
+      2. Square & PaintedSquare
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise3/index.html" title="3. PaintedSquare Revisited" class="md-nav__link">
+      3. PaintedSquare Revisited
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise4/index.html" title="4. Exceptions" class="md-nav__link">
+      4. Exceptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise5/index.html" title="5. Streams" class="md-nav__link">
+      5. Streams
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise6/index.html" title="6. Functors, Collectors" class="md-nav__link">
+      6. Functors, Collectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise7/index.html" title="7. Mock Exam" class="md-nav__link">
+      7. Mock Exam
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Labs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        Labs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab1/index.html" title="1. Question" class="md-nav__link">
+      1. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab01-comments/index.html" title="1. Comments" class="md-nav__link">
+      1. Comments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab2/index.html" title="2. Question" class="md-nav__link">
+      2. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab02-comments/index.html" title="2. Comments" class="md-nav__link">
+      2. Comments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab3/index.html" title="3. Question" class="md-nav__link">
+      3. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab4/index.html" title="4. Question" class="md-nav__link">
+      4. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab5/index.html" title="5. Question" class="md-nav__link">
+      5. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab6/index.html" title="6. Question" class="md-nav__link">
+      6. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab7/index.html" title="7. Question" class="md-nav__link">
+      7. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab8/index.html" title="8. Question" class="md-nav__link">
+      8. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab9/index.html" title="9. Question" class="md-nav__link">
+      9. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab10/index.html" title="10. Question" class="md-nav__link">
+      10. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab11/index.html" title="11. Question" class="md-nav__link">
+      11. Question
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+    
+    <label class="md-nav__link" for="nav-11">
+      Software/Tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        Software/Tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../jdk/index.html" title="Java" class="md-nav__link">
+      Java
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../javadoc/index.html" title="Javadoc" class="md-nav__link">
+      Javadoc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../unix/index.html" title="UNIX" class="md-nav__link">
+      UNIX
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vim/index.html" title="Vim" class="md-nav__link">
+      Vim
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" title="Learning Objectives" class="md-nav__link">
+    Learning Objectives
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functor" title="Functor" class="md-nav__link">
+    Functor
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#optional" title="Optional" class="md-nav__link">
+    Optional
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monad" title="Monad" class="md-nav__link">
+    Monad
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collectors" title="Collectors" class="md-nav__link">
+    Collectors
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-collector-interface" title="The Collector Interface" class="md-nav__link">
+    The Collector Interface
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/nus-cs2030/1718-s1/edit/master/docs/lec9.md" title="Edit this page" class="md-icon md-content__icon">edit</a>
+                
+                
+                <h1 id="lecture-9-functors-monads-collectors">Lecture 9: Functors, Monads, Collectors</h1>
+<h2 id="learning-objectives">Learning Objectives</h2>
+<p>After this lecture, students should:</p>
+<ul>
+<li>Understand what is a functor and monad in the context of Java's <code class="codehilite">Stream</code>, <code class="codehilite">Optional</code></li>
+<li>Understand the laws that a functor and monad must obey and be able to verify them.</li>
+<li>Be familiar with the <code class="codehilite">collect</code> method of <code class="codehilite">Stream</code>, the <code class="codehilite">Collector</code> interface, and the <code class="codehilite">Collectors</code> classes</li>
+<li>Be able to write their own simple <code class="codehilite">Collectors</code>.</li>
+</ul>
+<h2 id="functor">Functor</h2>
+<p>In this lecture, we are going to abstract out some useful patterns that we have seen so far in functional-style programming in Java, and relates it to concepts in functional programming.<br />
+Once you see and understand the patterns, hopefully you can reapply the patterns in other context!</p>
+<p>Let's start with a simplest one, called <em>functor</em>.  This funny name originated from a branch of mathematics, called category theory.  We can think of a functor as something that takes in a function and returns another functor.  If you like, you can think of it as something that implements an interface that looks like:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">interface</span> <span class="nc">Functor</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span> <span class="n">Functor</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">f</span><span class="o">(</span><span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span><span class="n">R</span><span class="o">&gt;</span> <span class="n">func</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>Wait, that's a recursive definition, and doesn't really explain what is a functor?  In OO-speak, a functor can be any class that implements the interface above (or matches the pattern above).</p>
+<p>So, is this a functor?</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">A</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">A</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="n">A</span> <span class="nf">f</span><span class="o">(</span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">func</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="n">A</span><span class="o">(</span><span class="n">func</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">x</span><span class="o">));</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="n">A</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isSameAs</span><span class="o">(</span><span class="n">A</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">==</span> <span class="n">a</span><span class="o">.</span><span class="na">x</span><span class="o">;</span> 
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>The class <code class="codehilite">A</code> above takes in a function and returns another <code class="codehilite">A</code> with <code class="codehilite">func</code> applied on the content <code class="codehilite">x</code>, if <code class="codehilite">x</code> is positive.  Otherwise, it returns another <code class="codehilite">A</code> with 0.  </p>
+<p>Despite that it does not implement the interface <code class="codehilite">Functor</code><sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>, it does match the pattern of having a method that takes in a function and returns itself, it is a special case since both <code class="codehilite">R</code> and <code class="codehilite">T</code> are <code class="codehilite">Integer</code>.</p>
+<p>Matching the patterns syntactically, however, is not enough to be a functor.  A functor have to semantically obey the functor laws, which are:</p>
+<ul>
+<li>if <code class="codehilite">func</code> is an identity function <code class="codehilite">x -&gt; x</code>, then it should not change the functor.</li>
+<li>if <code class="codehilite">func</code> is a composition of two functions <span>\(g \cdot h\)</span>, then the resulting functor should be the same as calling <code class="codehilite">f</code> with <span>\(h\)</span> and then with <span>\(g\)</span>.</li>
+</ul>
+<p>Let's check: 
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>A a = new A(-1);
+a.isSameAs(a.f(x -&gt; x));
+a.f(x -&gt; x + 1).g(x -&gt; x * 2).isSameAs(a.f(x -&gt; (x + 1) * 2);
+</pre></div>
+</td></tr></table></p>
+<p>Nope.  Our class <code class="codehilite">A</code> violates the first functor law and therefore does not qualify to be a functor.  A simpler version, without all the weird stuff going on in <code class="codehilite">f</code>, is, however, a valid functor.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">B</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">B</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="n">B</span> <span class="nf">f</span><span class="o">(</span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">func</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">B</span><span class="o">(</span><span class="n">func</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">x</span><span class="o">));</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isSameAs</span><span class="o">(</span><span class="n">B</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">==</span> <span class="n">a</span><span class="o">.</span><span class="na">x</span><span class="o">;</span> 
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>It is easy to see that if <code class="codehilite">func</code> is <code class="codehilite">x -&gt; x</code>, then <code class="codehilite">B(func.apply(x)</code> is just <code class="codehilite">B(x)</code>.  Further, 
+if <code class="codehilite">func</code> is <code class="codehilite">g.compose(h)</code>, then calling <code class="codehilite">func.apply(x)</code> is the same as <code class="codehilite">g.apply(h.apply(x))</code>.</p>
+<p>Another way to think of a functor, in the OO-way, is that that it is a variable wrapped within a class in some context.  Instead of manipulating the variable directly, we pass in a function to the class to manipulate the variable.  The variable must then interact with the function as if it is not be wrapped.  The class should not interfere with the function (as in the class <code class="codehilite">A</code>).</p>
+<p>You have actually seen several functors before.  You might recognize by now that <code class="codehilite">func</code> is just our old friend <code class="codehilite">map</code>!  A <code class="codehilite">LambdaList</code> is just a functor with a list of variables stored in an array list.  A <code class="codehilite">Stream</code> is another functor.  So is <code class="codehilite">InfiniteList</code>.</p>
+<p>Once you understand the laws of functor and recognize this pattern, it is easy to learn about new classes -- one just have to tell you that it is a functor, and you will know how the class should behave.</p>
+<div class="admonition note">
+<p class="admonition-title">Functors in other languages</p>
+<p>Haskell, Scala, Python, Javascript, and other functional languages have functors as well.  C++, unfortunately, uses the term functors to mean function object -- a function object is not a functor in the sense of the word in category theory.  So, do not get confused between the two.</p>
+</div>
+<h3 id="optional">Optional</h3>
+<p>Let's see another functor in Java 8: the <code class="codehilite">Optional</code> class.  Recall that you can wrapped a possibly <code class="codehilite">null</code> object in an <code class="codehilite">Optional</code> class.  It is unfortunate that Java 8 provides a <code class="codehilite">get()</code> method to allow retrieval of the object inside -- it is convenient but that defeats the point of <code class="codehilite">Optional</code> -- not to mentioned that Java Collections Framework does not support <code class="codehilite">Optional</code>.  But, since Java's <code class="codehilite">Optional</code> is a functor, we can manipulate the value<sup id="fnref:2"><a class="footnote-ref" href="#fn:2" rel="footnote">2</a></sup> wrapped in an <code class="codehilite">Optional</code> with the <code class="codehilite">map</code> function, without having to <code class="codehilite">get()</code> and put back again!</p>
+<p>Let's consider the <code class="codehilite">Simulator</code> again.  In a better version of Java, we would have a <code class="codehilite">PriorityQueue&lt;T&gt;</code> with a <code class="codehilite">poll</code> method that returns <code class="codehilite">Optional&lt;T&gt;</code>, instead of either an object of type <code class="codehilite">T</code> or <code class="codehilite">null</code>.  Let's pretend that we have a different <code class="codehilite">poll</code>, called <code class="codehilite">optionalPoll</code> that does that.  Now, we can process the event returned (maybe?) in the following way:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">events</span><span class="o">.</span><span class="na">optionalPoll</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">event</span> <span class="o">-&gt;</span> <span class="n">event</span><span class="o">.</span><span class="na">happensBefore</span><span class="o">(</span><span class="n">sim</span><span class="o">.</span><span class="na">expireTime</span><span class="o">()))</span>
+    <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">event</span> <span class="o">-&gt;</span> <span class="n">sim</span><span class="o">.</span><span class="na">handle</span><span class="o">(</span><span class="n">event</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">eventStream</span> <span class="o">-&gt;</span> <span class="k">this</span><span class="o">.</span><span class="na">schedule</span><span class="o">(</span><span class="n">eventStream</span><span class="o">));</span>
+</pre></div>
+</td></tr></table>
+
+<p>This beats writing code that looks like this:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Event</span> <span class="n">event</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">event</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">happensBefore</span><span class="o">(</span><span class="n">sim</span><span class="o">.</span><span class="na">expireTire</span><span class="o">()))</span> <span class="o">{</span>
+    <span class="n">Stream</span><span class="o">&lt;</span><span class="n">Event</span><span class="o">&gt;</span> <span class="n">eventStream</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="na">handle</span><span class="o">(</span><span class="n">event</span><span class="o">);</span> 
+    <span class="k">if</span> <span class="o">(</span><span class="n">eventStream</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">schedule</span><span class="o">(</span><span class="n">eventStream</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p><code class="codehilite">Optional</code> helps us check for <code class="codehilite">null</code> and takes care of the "maybe?" for us.  In <code class="codehilite">map</code>, if <code class="codehilite">event</code> is <code class="codehilite">null</code>, it does nothing, otherwise it invokes <code class="codehilite">sim.handle</code> and returns 
+an <code class="codehilite">Optional&lt;Steam&lt;Event&gt;&gt;</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">In other languages</p>
+<p>Scale has <code class="codehilite">Option</code>; Haskell has <code class="codehilite">Maybe</code>. If you use Python, check out the <code class="codehilite">PyMonad</code> library that supplies various functors and monad, including <code class="codehilite">Maybe</code>.</p>
+</div>
+<h2 id="monad">Monad</h2>
+<p><em>Monad</em> is another funny name originated from category theory.  A monad also takes in a function and returns a monad.  But, unlike functor, it takes in a function that returns a monad!</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">interface</span> <span class="nc">Monad</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span> <span class="n">Monad</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">f</span><span class="o">(</span><span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span><span class="n">Monad</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;&gt;</span> <span class="n">func</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>Looks complicated?  How about now:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">interface</span> <span class="nc">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">flatMap</span><span class="o">(</span><span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;&gt;</span> <span class="n">mapper</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></p>
+<p>This interface should look familiar to you<sup id="fnref:3"><a class="footnote-ref" href="#fn:3" rel="footnote">3</a></sup>.  We have seen monads before!  A Stream is a monad.  In contrast, unless you implemented <code class="codehilite">flatMap</code> for <code class="codehilite">InfiniteList</code> or <code class="codehilite">LambdaList</code>, they are not monads.</p>
+<p>Just like functors, there are some laws that a monad have to follow:</p>
+<ul>
+<li>
+<p>there should be an <code class="codehilite">of</code> operation that takes an object (or multiple objects) and wrap it/them into a monad.  Further, </p>
+<ul>
+<li><code class="codehilite">Monad.of(x).flatMap(f)</code> should be equal to <code class="codehilite">f(x)</code>  (called the <em>left identity</em> law)</li>
+<li><code class="codehilite">monad.flatMap(x -&gt; Monad.of(x))</code> should be equal to <code class="codehilite">monad</code> (called the <em>right identity</em> law)</li>
+</ul>
+</li>
+<li>
+<p>the <code class="codehilite">flatMap</code> operation should be associative (associative law):
+<code class="codehilite">monad.flatMap(f).flatMap(g)</code> should be equal to <code class="codehilite">monad.flatMap(x -&gt; f(x).flatMap(g))</code></p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">In other languages</p>
+<p>The <code class="codehilite">flatMap</code> and <code class="codehilite">of</code> operations are sometimes known as the <code class="codehilite">bind</code> and <code class="codehilite">unit</code> operations respectively (e.g., in Haskell).</p>
+</div>
+<p>Knowing what is a monad is useful, since if I tell you something is a monad, you should recognize that it supports a given interface.  For instance, I tell you that <code class="codehilite">Optional</code> is a monad.  You should know that <code class="codehilite">Optional</code> supports the <code class="codehilite">of</code> and <code class="codehilite">flatMap</code> operation (maybe of a different name, but they exists and follows the monad laws).</p>
+<p>We won't proof formally that <code class="codehilite">Optional</code> follows the laws of monad in this class, but let's explore a bit more to convince ourselves that it does.  Let's write the <code class="codehilite">flatMap</code> method for <code class="codehilite">Optional</code>, which is not that difficult:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">public</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span> <span class="n">Optional</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span> <span class="nf">flatMap</span><span class="o">(</span><span class="n">Function</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">,</span> <span class="n">Optional</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;&gt;</span> <span class="n">mapper</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(!</span><span class="n">isPresent</span><span class="o">())</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">empty</span><span class="o">();</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">mapper</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>Let check:</p>
+<ul>
+<li>Left identity law: <code class="codehilite">Optional.of(1).flatMap(f)</code> will return <code class="codehilite">f.apply(1)</code> (i.e., <span>\(f(1)\)</span>).</li>
+<li>Right identity law: <code class="codehilite">opt.flatMap(x -&gt; Optional.of(x)</code> will apply <code class="codehilite">x -&gt; Optional.of(x)</code> on the value of <code class="codehilite">opt</code>, if it exists, resulting in <code class="codehilite">Optional.of(value)</code>, which is <code class="codehilite">opt</code>. If the value does not exist (<code class="codehilite">Optional</code> is empty), then <code class="codehilite">flatMap</code> will not apply the lambda, instead it will return <code class="codehilite">empty()</code> right away.  So it obeys the law.</li>
+<li>Associative law: <code class="codehilite">opt.flatMap(f).flatMap(g)</code> is the same as <code class="codehilite">f.apply(value).flatMap(g)</code>; <code class="codehilite">opt.flatMap(x -&gt; f(x).flatMap(g))</code> will apply the lambda to <code class="codehilite">value</code>, so we get <code class="codehilite">f.apply(x).flatMap(g)</code>.  They are the same.  If <code class="codehilite">opt</code> is empty, then <code class="codehilite">flatMap</code> returns <code class="codehilite">empty</code> for both cases.</li>
+</ul>
+<p>So, despite the complicated-sounding laws, they are actually easy to obey!</p>
+<h2 id="collectors">Collectors</h2>
+<p>Going back to streams now.  We previously have seen several terminal operations of streams which are useful and general, such as <code class="codehilite">reduce</code> and <code class="codehilite">forEach</code>.  Java 8, however, provide something more powerful called <code class="codehilite">collect</code>, which you can think of as <code class="codehilite">reduce</code> on steroids!  You have seen this used to convert a stream into a <code class="codehilite">List</code> collection using <code class="codehilite"><span class="na">.collect</span><span class="p">(</span><span class="no">Collectors.toList</span><span class="p">())</span></code>.  Here are a few, self-explanatory examples using <code class="codehilite">collect</code> and predefined <code class="codehilite">Collector</code>.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Server</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Customer</span><span class="o">&gt;&gt;</span> <span class="n">byServer</span> <span class="o">=</span> <span class="n">customers</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">groupingBy</span><span class="o">(</span><span class="n">c</span> <span class="o">-&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">servedBy</span><span class="o">());</span> 
+</pre></div>
+</td></tr></table>
+
+<p>The code above put the list of customers into a map collection, with server as the key. We can further find out all customers that ever been served by a given server.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Customer</span><span class="o">&gt;&gt;</span> <span class="n">byServiceTime</span> <span class="o">=</span> <span class="n">customer</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collection</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">partitionBy</span><span class="o">(</span><span class="n">c</span> <span class="o">-&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">getServiceTime</span><span class="o">()</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">));</span>
+</pre></div>
+</td></tr></table>
+
+<p>The code above partition the customer into two, those that require less than 1 unit time of service that those that require more.</p>
+<p>And how about this one that computes the average waiting time:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">double</span> <span class="n">avgWaitingTime</span> <span class="o">=</span> <span class="n">customer</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collection</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">averagingDouble</span><span class="o">(</span><span class="n">c</span> <span class="o">-&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">getWaitingTime</span><span class="o">()));</span>
+</pre></div>
+</td></tr></table>
+
+<p>You can take a look at the list of predefined <a href="https://docs.oracle.com/javase/9/docs/api/java/util/stream/Collectors.html"><code class="codehilite">Collectors</code></a> in Java documentation to see what is available.</p>
+<h3 id="the-collector-interface">The Collector Interface</h3>
+<p>Let's delve deeper and try to understand what exactly is a <code class="codehilite">Collector</code>?  A <code class="codehilite">Collector</code> is defined as follows:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">interface</span> <span class="nc">Collector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">A</span><span class="o">,</span> <span class="n">R</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="n">BiConsumer</span><span class="o">&lt;</span><span class="n">A</span><span class="o">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="nf">accumulator</span><span class="o">();</span>
+  <span class="n">BinaryOperator</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="nf">combiner</span><span class="o">();</span>
+  <span class="n">Function</span><span class="o">&lt;</span><span class="n">A</span><span class="o">,</span> <span class="n">R</span><span class="o">&gt;</span> <span class="nf">finisher</span><span class="o">();</span>
+  <span class="n">Supplier</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="nf">supplier</span><span class="o">();</span>
+   <span class="o">:</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>It is helpful to understand the type first:</p>
+<ul>
+<li><code class="codehilite">T</code> is the type of the elements we are collecting</li>
+<li><code class="codehilite">R</code> is the type of the result of the collection</li>
+<li><code class="codehilite">A</code> is the type of the partial result from the accumulator (ala reduction)</li>
+</ul>
+<p>Each of these methods shown above in the <code class="codehilite">Collector</code> is returning a function that will be invoked by the <code class="codehilite">collect</code> method.  Except combiner, the other three methods are rather straightforward: the <code class="codehilite">supplier</code> supplies a "container" of type <code class="codehilite">A</code> for the <code class="codehilite">accumulator</code> to accumulate into, and finally the <code class="codehilite">finisher</code> converts the container into the result of type <code class="codehilite">R</code>.</p>
+<p>Let's see the <code class="codehilite">Collector</code> in action by rewriting the <code class="codehilite">Collectors.toList()</code> constructor:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">ListCollector</span> <span class="n">implement</span> <span class="n">Collector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="o">{</span>
+  <span class="n">Supplier</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="nf">supplier</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;();</span>
+  <span class="o">}</span>
+
+  <span class="n">BiConsumer</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="nf">accumulator</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="n">item</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">item</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="n">Function</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;,</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="nf">finisher</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">Function</span><span class="o">.</span><span class="na">identity</span><span class="o">();</span>
+  <span class="o">}</span>
+
+   <span class="o">:</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>Now, let's discuss what <code class="codehilite">combiner</code> does.  A <code class="codehilite">combiner</code> is actually required by the <code class="codehilite">Stream</code> <code class="codehilite">reduce</code> method as well:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span> <span class="n">U</span> <span class="nf">reduce</span><span class="o">(</span><span class="n">U</span> <span class="n">identity</span><span class="o">,</span> <span class="n">BiFunction</span><span class="o">&lt;</span><span class="n">U</span><span class="o">,?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">,</span><span class="n">U</span><span class="o">&gt;</span> <span class="n">accumulator</span><span class="o">,</span> <span class="n">BinaryOperator</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span> <span class="n">combiner</span><span class="o">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>But, in our <code class="codehilite">LambdaList</code> and <code class="codehilite">InfiniteList</code>, we have not been using a <code class="codehilite">combiner</code>.</p>
+<p>A <code class="codehilite">combiner</code> is useful in the context of parallel processing -- which we will cover more in the coming lectures.  The short version of it is that, a stream can be broken up into substreams and process independently (e.g., reduced or collected independently).  After these independent processing, we will need to combined their results back together.  This is where combiner comes in -- it specifies how to combined partial results back into first result.</p>
+<p>Let's see two examples: In the case of our <code class="codehilite">ListCollector</code>, we will get one <code class="codehilite">List&lt;T&gt;</code> each from each substream after collection.  We just need to combine both into the first list:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="n">BinaryOperator</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="nf">combiner</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">(</span><span class="n">list1</span><span class="o">,</span> <span class="n">list2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+      <span class="n">list1</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">list2</span><span class="o">);</span>
+      <span class="k">return</span> <span class="n">list1</span><span class="o">;</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>In the case of reducing a stream, suppose we want to find the product of all numbers:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">).</span><span class="na">reduce</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">)-&gt;</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">)-&gt;</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">);</span>
+</pre></div>
+</td></tr></table></p>
+<p>We include the lambda <code class="codehilite">(x,y)-&gt;x*y</code> twice, the second one is a <code class="codehilite">combiner</code> that combines two partial product into one, by multiplying them.  Here is one that count the number of elements:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">).</span><span class="na">reduce</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">)-&gt;</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">)-&gt;</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">);</span>
+</pre></div>
+</td></tr></table></p>
+<p>To combine two partial counter, we add them with <code class="codehilite">(x,y)-&gt;x+y</code>.</p>
+<p>Another way we can create a customized collector is to pass lambdas into <code class="codehilite">collect</code> method of <code class="codehilite">Stream</code> directly.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="na">collect</span><span class="o">(()-&gt;</span><span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(),</span> 
+    <span class="o">(</span><span class="n">l</span><span class="o">,</span><span class="n">i</span><span class="o">)-&gt;</span><span class="n">l</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> 
+    <span class="o">(</span><span class="n">l1</span><span class="o">,</span> <span class="n">l2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">l1</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">l2</span><span class="o">));</span>
+</pre></div>
+</td></tr></table>
+
+<p>The <code class="codehilite">collect</code> method takes in a <code class="codehilite">Supplier&lt;R&gt;</code> supplier, <code class="codehilite">BiConsumer&lt;R,T&gt;</code> accumulator, and a <code class="codehilite">BiConsumer&lt;R,R&gt;</code> combiner.  Note that <code class="codehilite">combiner</code> here is a <code class="codehilite">BiConsumer</code> which expects the results to be combined into the first argument, and is different from the the combiner of <code class="codehilite">Collector</code> interface, which is a <code class="codehilite">BiOperator</code>.  Further, there is no finisher so we can't specify anything that requires a more complex finisher (example, an averaging collector).</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>In fact, no functors in Java 8 does, since this is the interface I created just to explain the pattern of a functor.&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>To be more precise, create a new <code class="codehilite">Optional</code> with the manipulated value.  &#160;<a class="footnote-backref" href="#fnref:2" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>Just a reminder again that these are not real interfaces in Java but just something to show you the types of input/output to a monad in a language that you are familiar with.&#160;<a class="footnote-backref" href="#fnref:3" rev="footnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../lec8/index.html" title="8. More Lambda and Streams" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                8. More Lambda and Streams
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../lec10/index.html" title="10. Parallel Streams" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                10. Parallel Streams
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright by Wei Tsang Ooi, Department of Computer Science, National University of Singapore 2017
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application-c35428f87f.js"></script>
+      
+      
+      <script>app.initialize({url:{base:".."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

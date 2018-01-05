@@ -1,0 +1,1319 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <link rel="shortcut icon" href="../assets/images/favicon.png">
+      
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.4">
+    
+    
+      
+        <title>1. Comments - CS2030 Programming Methodology II</title>
+      
+    
+    
+      <script src="../assets/javascripts/modernizr-1df76c4e58.js"></script>
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application-769c285a91.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    
+    
+  </head>
+  
+  
+  
+  
+    <body>
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <a href="../index.html" title="CS2030 Programming Methodology II" class="md-icon md-icon--home md-header-nav__button">
+          </a>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+                <span class="md-header-nav__parent">
+                  Labs
+                </span>
+              
+            
+            1. Comments
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result" data-md-lang-search="">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/nus-cs2030/1718-s1" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    
+      <i class="md-icon md-icon--home md-nav__button"></i>
+    
+    CS2030 Programming Methodology II
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/nus-cs2030/1718-s1" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      General
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        General
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../about/index.html" title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../prereqs/index.html" title="Prerequisites" class="md-nav__link">
+      Prerequisites
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../policies/index.html" title="Policies" class="md-nav__link">
+      Policies
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../schedule/index.html" title="Schedule" class="md-nav__link">
+      Schedule
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../readings/index.html" title="Readings" class="md-nav__link">
+      Readings
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../reviews/index.html" title="Review Qs" class="md-nav__link">
+      Review Qs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../style/index.html" title="Coding Style" class="md-nav__link">
+      Coding Style
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../midterm/index.html" title="Midterm" class="md-nav__link">
+      Midterm
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Lectures
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Lectures
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec1/index.html" title="1. Abstraction & Encapsulation" class="md-nav__link">
+      1. Abstraction & Encapsulation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec2/index.html" title="2. Inheritance & Polymorphism" class="md-nav__link">
+      2. Inheritance & Polymorphism
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec3/index.html" title="3. Inheritance, Continued" class="md-nav__link">
+      3. Inheritance, Continued
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec4/index.html" title="4. Memory, Exceptions, Generics" class="md-nav__link">
+      4. Memory, Exceptions, Generics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec5/index.html" title="5. Numbers, Strings, Collections" class="md-nav__link">
+      5. Numbers, Strings, Collections
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec6/index.html" title="6. Nested Classes, Enums" class="md-nav__link">
+      6. Nested Classes, Enums
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec7/index.html" title="7. Lambda and Functions" class="md-nav__link">
+      7. Lambda and Functions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec8/index.html" title="8. More Lambda and Streams" class="md-nav__link">
+      8. More Lambda and Streams
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec9/index.html" title="9. Functors, Monads, Collectors" class="md-nav__link">
+      9. Functors, Monads, Collectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec10/index.html" title="10. Parallel Streams" class="md-nav__link">
+      10. Parallel Streams
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec11/index.html" title="11. Asynchronous Programming" class="md-nav__link">
+      11. Asynchronous Programming
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Exercises
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Exercises
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise1/index.html" title="1. Circles & Points" class="md-nav__link">
+      1. Circles & Points
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise2/index.html" title="2. Square & PaintedSquare" class="md-nav__link">
+      2. Square & PaintedSquare
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise3/index.html" title="3. PaintedSquare Revisited" class="md-nav__link">
+      3. PaintedSquare Revisited
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise4/index.html" title="4. Exceptions" class="md-nav__link">
+      4. Exceptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise5/index.html" title="5. Streams" class="md-nav__link">
+      5. Streams
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise6/index.html" title="6. Functors, Collectors" class="md-nav__link">
+      6. Functors, Collectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise7/index.html" title="7. Mock Exam" class="md-nav__link">
+      7. Mock Exam
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" checked>
+    
+    <label class="md-nav__link" for="nav-10">
+      Labs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        Labs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab1/index.html" title="1. Question" class="md-nav__link">
+      1. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        1. Comments
+      </label>
+    
+    <a href="index.html" title="1. Comments" class="md-nav__link md-nav__link--active">
+      1. Comments
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#most-serious-offences" title="Most Serious Offences" class="md-nav__link">
+    Most Serious Offences
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#design-breaking-abstraction-barrier" title="Design: Breaking abstraction barrier" class="md-nav__link">
+    Design: Breaking abstraction barrier
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-getter-setter" title="Design: Getter / Setter" class="md-nav__link">
+    Design: Getter / Setter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-checking-for-circle-validity" title="Design: Checking for Circle validity" class="md-nav__link">
+    Design: Checking for Circle validity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#correctness-object-references" title="Correctness: Object References" class="md-nav__link">
+    Correctness: Object References
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-double-loops" title="Performance: Double Loops" class="md-nav__link">
+    Performance: Double Loops
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#style-indentation" title="Style: Indentation" class="md-nav__link">
+    Style: Indentation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#style-naming-convention" title="Style: Naming Convention" class="md-nav__link">
+    Style: Naming Convention
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#less-serious-mistakes" title="Less Serious Mistakes" class="md-nav__link">
+    Less Serious Mistakes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#style-this" title="Style: this" class="md-nav__link">
+    Style: this
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#style-too-many-nested-blocks" title="Style: Too Many Nested Blocks" class="md-nav__link">
+    Style: Too Many Nested Blocks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#style-if-x-true" title="Style: if (x == true)" class="md-nav__link">
+    Style: if (x == true)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab2/index.html" title="2. Question" class="md-nav__link">
+      2. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab02-comments/index.html" title="2. Comments" class="md-nav__link">
+      2. Comments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab3/index.html" title="3. Question" class="md-nav__link">
+      3. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab4/index.html" title="4. Question" class="md-nav__link">
+      4. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab5/index.html" title="5. Question" class="md-nav__link">
+      5. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab6/index.html" title="6. Question" class="md-nav__link">
+      6. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab7/index.html" title="7. Question" class="md-nav__link">
+      7. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab8/index.html" title="8. Question" class="md-nav__link">
+      8. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab9/index.html" title="9. Question" class="md-nav__link">
+      9. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab10/index.html" title="10. Question" class="md-nav__link">
+      10. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab11/index.html" title="11. Question" class="md-nav__link">
+      11. Question
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+    
+    <label class="md-nav__link" for="nav-11">
+      Software/Tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        Software/Tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../jdk/index.html" title="Java" class="md-nav__link">
+      Java
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../javadoc/index.html" title="Javadoc" class="md-nav__link">
+      Javadoc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../unix/index.html" title="UNIX" class="md-nav__link">
+      UNIX
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vim/index.html" title="Vim" class="md-nav__link">
+      Vim
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#most-serious-offences" title="Most Serious Offences" class="md-nav__link">
+    Most Serious Offences
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#design-breaking-abstraction-barrier" title="Design: Breaking abstraction barrier" class="md-nav__link">
+    Design: Breaking abstraction barrier
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-getter-setter" title="Design: Getter / Setter" class="md-nav__link">
+    Design: Getter / Setter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-checking-for-circle-validity" title="Design: Checking for Circle validity" class="md-nav__link">
+    Design: Checking for Circle validity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#correctness-object-references" title="Correctness: Object References" class="md-nav__link">
+    Correctness: Object References
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-double-loops" title="Performance: Double Loops" class="md-nav__link">
+    Performance: Double Loops
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#style-indentation" title="Style: Indentation" class="md-nav__link">
+    Style: Indentation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#style-naming-convention" title="Style: Naming Convention" class="md-nav__link">
+    Style: Naming Convention
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#less-serious-mistakes" title="Less Serious Mistakes" class="md-nav__link">
+    Less Serious Mistakes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#style-this" title="Style: this" class="md-nav__link">
+    Style: this
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#style-too-many-nested-blocks" title="Style: Too Many Nested Blocks" class="md-nav__link">
+    Style: Too Many Nested Blocks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#style-if-x-true" title="Style: if (x == true)" class="md-nav__link">
+    Style: if (x == true)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/nus-cs2030/1718-s1/edit/master/docs/lab01-comments.md" title="Edit this page" class="md-icon md-content__icon">edit</a>
+                
+                
+                <h1 id="lab-1-comments">Lab 1: Comments</h1>
+<p>Here are some common mistakes made, in decreasing order of seriousness.</p>
+<h2 id="most-serious-offences">Most Serious Offences</h2>
+<h3 id="design-breaking-abstraction-barrier">Design: Breaking abstraction barrier</h3>
+<p>Some students took the liberty to change the access modifier of instance fields from <code class="codehilite">private</code> to <code class="codehilite">public</code>.</p>
+<p>In doing so, you are violating the fundamental principles of object oriented programming and demonstrating that you do not understand the concept and importance of abstraction barriers and encapsulation.</p>
+<h3 id="design-getter-setter">Design: Getter / Setter</h3>
+<p>If you use getter or setter in your code when you could have easily move the associated tasks to within the encapsulation, you score a major minus in your lab.  Again, using getter and setter to expose the internals is only slightly better than just changing the members to <code class="codehilite">public</code>.</p>
+<p>There are cases where the use of getters and setters are justified.  For instance, a couple of you use complex equations to determine the center and it involves x and y, instead of using <code class="codehilite">move</code>, <code class="codehilite">angleTo</code>, and <code class="codehilite">distanceTo</code>.  One could argue that these solutions heavily rely on the knowledge of x and y.</p>
+<p>For all other uses of x and y in the <code class="codehilite">Circle</code> constructor, such as to calculate gradient, to copy a point, etc, they can all be delegated to the <code class="codehilite">Point</code> class.  Remember, we want the <code class="codehilite">Point</code> class to be the only one who knows the internal representation of a point: whether Euclidean coords or polar coords are used.</p>
+<p>E.g.,
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Point</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="n">q</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">q</span><span class="o">.</span><span class="na">getY</span><span class="o">());</span>
+</pre></div>
+</td></tr></table>
+can be
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Point</span> <span class="n">p</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="na">copy</span><span class="o">();</span>
+</pre></div>
+</td></tr></table>
+or
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">double</span> <span class="n">gradient</span> <span class="o">=</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getY</span><span class="o">()-</span><span class="n">q</span><span class="o">.</span><span class="na">getY</span><span class="o">())/(</span><span class="n">p</span><span class="o">.</span><span class="na">getX</span><span class="o">()-</span><span class="n">q</span><span class="o">.</span><span class="na">getX</span><span class="o">())</span>
+</pre></div>
+</td></tr></table>
+can be
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">double</span> <span class="n">gradient</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">gradientTo</span><span class="o">(</span><span class="n">q</span><span class="o">);</span>
+</pre></div>
+</td></tr></table></p>
+<h3 id="design-checking-for-circle-validity">Design: Checking for Circle validity</h3>
+<p>Along the same line of mistakes, some of you do this in <code class="codehilite">MaxDiscCover.java</code>:</p>
+<p><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="k">if</span> <span class="o">(</span><span class="n">Double</span><span class="o">.</span><span class="na">isNaN</span><span class="o">(</span><span class="n">circle</span><span class="o">.</span><span class="na">getRadius</span><span class="o">())</span> <span class="o">{</span> <span class="o">..</span> <span class="o">}</span>
+</pre></div>
+</td></tr></table>
+or
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="k">if</span> <span class="o">(</span><span class="n">circle</span><span class="o">.</span><span class="na">radiusIsNaN</span><span class="o">())</span> <span class="o">{</span> <span class="o">..</span> <span class="o">}</span>
+</pre></div>
+</td></tr></table></p>
+<p>Suppose now we change an invalid circle to one that has <code class="codehilite">-1</code> radius, or one that has a boolean <code class="codehilite">isValid</code> flag, then this code wouldn't work or has to be renamed.</p>
+<p>A better way is for <code class="codehilite">Circle</code> to decide itself whether it is valid or not, by providing a method <code class="codehilite">isValid()</code>.  Then, <code class="codehilite">MaxDiscCover.java</code> can just call
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="k">if</span> <span class="o">(</span><span class="n">circle</span><span class="o">.</span><span class="na">isValid</span><span class="o">())</span> <span class="o">{</span> <span class="o">..</span> <span class="o">}</span>
+</pre></div>
+</td></tr></table>
+If Circle decides to change its implementation later, it is none of <code class="codehilite">MaxDiscCover</code>'s business.</p>
+<h3 id="correctness-object-references">Correctness: Object References</h3>
+<p>A few students did the following in <code class="codehilite">Circle</code> constructor:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="nf">Circle</span><span class="o">(</span><span class="n">Point</span> <span class="n">p</span><span class="o">,</span> <span class="n">Point</span> <span class="n">q</span><span class="o">,</span> <span class="kt">double</span> <span class="n">r</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">centerOnLeft</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Point</span> <span class="n">m</span> <span class="o">=</span> <span class="n">p</span><span class="o">;</span>
+    <span class="o">:</span>
+    <span class="n">m</span><span class="o">.</span><span class="na">move</span><span class="o">(..)</span>
+    <span class="o">:</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>Remember from the figures drawn in class that <code class="codehilite">m</code> and <code class="codehilite">p</code> are just references to objects.  Now, you are pointing <code class="codehilite">m</code> and <code class="codehilite">p</code> to the same object.  When you move <code class="codehilite">m</code>, <code class="codehilite">p</code> is moved as well, and as a result, one input point from the <code class="codehilite">points[]</code> array gets moved.</p>
+<h3 id="performance-double-loops">Performance: Double Loops</h3>
+<p>Some of you did this in <code class="codehilite">solve()</code>:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">for</span> <span class="o">(</span><span class="n">Point</span> <span class="n">p</span><span class="o">:</span> <span class="n">points</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">Point</span> <span class="n">q</span><span class="o">:</span> <span class="n">points</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">:</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>What happened is that, now, you loop through each pair of points twice, (first with, say, <code class="codehilite">p</code> as <code class="codehilite">points[0]</code>, <code class="codehilite">q</code> as <code class="codehilite">points[1]</code>, and later <code class="codehilite">p</code> as <code class="codehilite">points[1]</code>, <code class="codehilite">q</code> as <code class="codehilite">points[0]</code>).</p>
+<p>This also meant that for each point, you tried to construct a circle through two copies of itself, a wasted effort since the resulting circle is invalid.</p>
+<p>Here's a better way to iterate through all possible pairs of points:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">points</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">points</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">Point</span> <span class="n">p</span> <span class="o">=</span> <span class="n">points</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="n">Point</span> <span class="n">q</span> <span class="o">=</span> <span class="n">points</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+        <span class="o">:</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<h3 id="style-indentation">Style: Indentation</h3>
+<p>It is important to keep your code properly and consistently indented.  If you use a source code editor like <code class="codehilite">vim</code> (with <code class="codehilite">autoindent</code> on and <code class="codehilite">smartindent</code> on), then there is no reason for you to have crooked indentation.</p>
+<p>My favourite example of bad indentation bug: <a href="https://www.synopsys.com/blogs/software-security/understanding-apple-goto-fail-vulnerability-2/">Apple <code class="codehilite">goto fail</code> bug</a></p>
+<h3 id="style-naming-convention">Style: Naming Convention</h3>
+<p>Java has a certain naming convention for class names, variable names, method names, constant variables, etc.  Please follow them.  At the beginning of the lab, we ask all of those who attended to follow, but there are still some who does not.</p>
+<p>From Lab 3 onwards, we will enforce indentation and naming style.</p>
+<h2 id="less-serious-mistakes">Less Serious Mistakes</h2>
+<h3 id="style-this">Style: <code class="codehilite">this</code></h3>
+<p>When referring to the fields of the current object, I prefer to use <code class="codehilite">this</code> reference.  It is redundant, but makes your program much less bug prone and make it more explicit which variable you are referring to.</p>
+<p>Let's suppose I give you a method of about 100 lines and 10 parameters and variables to read, one of the lines said:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="n">center</span> <span class="o">=</span> <span class="n">p</span><span class="o">;</span>
+</pre></div>
+</td></tr></table>
+
+<p>How can you be absolutely sure that this line is updating a member called <code class="codehilite">center</code> of the object?</p>
+<p>To be sure, you have to scan through 100 lines to double check that there is no local variable declared with the same name, and there is no method argument with the same name.</p>
+<p>Now, let's suppose I give you a method of about 100 lines and 10 parameters and variables to read, one of the lines said:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="k">this</span><span class="o">.</span><span class="na">center</span> <span class="o">=</span> <span class="n">p</span><span class="o">;</span>
+</pre></div>
+</td></tr></table>
+
+<p>How can you be absolutely sure that this line is updating a member called <code class="codehilite">center</code> of the object?</p>
+<p>I rest my case :)</p>
+<h3 id="style-too-many-nested-blocks">Style: Too Many Nested Blocks</h3>
+<p>In the <code class="codehilite">solve</code> method, some of you have FIVE levels of nested blocks: two double loops to go through each pair of points, one to check for circle validity, another loop to go through all points, one to check for containment.</p>
+<p>These nested blocks make the code long and hard to read.  One of you have to label the <code class="codehilite">{</code> and <code class="codehilite">}</code> to help with bracket matching.</p>
+<p>As a guideline, if you have more than two nested blocks, it is time to think about breaking down the method into smaller / shorter methods.  For instance, for every pair of points, find out how many points are in the two circles that pass throught this pair.</p>
+<p>Shorter methods are easier to read, understand, and debug.  So do your future self a favour.</p>
+<h3 id="style-if-x-true">Style: <code class="codehilite">if (x == true)</code></h3>
+<p><code class="codehilite">x</code> can be a variable or a function. Some of you wrote as <code class="codehilite">if (x == true)</code> in the condition, some wrote it as <code class="codehilite">if (x)</code>.</p>
+<p><code class="codehilite">if (x)</code> is more succinct, and if you name <code class="codehilite">x</code> properly, it is more readable and understandable than <code class="codehilite">if (x == true)</code>.</p>
+<p>For instance,</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">if</span> <span class="o">(</span><span class="n">circle</span><span class="o">.</span><span class="na">isValid</span><span class="o">())</span> <span class="o">{..}</span>
+</pre></div>
+</td></tr></table>
+
+<p>is perfectly clear that we are checking if the circle is valid.</p>
+<p><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">if</span> <span class="o">(</span><span class="n">circle</span><span class="o">.</span><span class="na">isValid</span><span class="o">()</span> <span class="o">==</span> <span class="kc">true</span><span class="o">))</span> <span class="o">{..}</span>
+</pre></div>
+</td></tr></table>
+is redundant.</p>
+<p>What if we call the function <code class="codehilite">x</code> as something else, say, <code class="codehilite">checkValidity()</code>?  First of all, DON'T.  Second, yes, it is then OK to write:</p>
+<p><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">if</span> <span class="o">(</span><span class="n">circle</span><span class="o">.</span><span class="na">checkValidity</span><span class="o">()</span> <span class="o">==</span> <span class="kc">true</span><span class="o">))</span> <span class="o">{..}</span>
+</pre></div>
+</td></tr></table>
+but can you tell by reading this line of code, whether <code class="codehilite">true</code> means the circle is valid or not?  So, DON'T.  Keep your code short, english-like, and choose a proper name for your variables and methods.</p>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../lab1/index.html" title="1. Question" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                1. Question
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../lab2/index.html" title="2. Question" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                2. Question
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright by Wei Tsang Ooi, Department of Computer Science, National University of Singapore 2017
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application-c35428f87f.js"></script>
+      
+      
+      <script>app.initialize({url:{base:".."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

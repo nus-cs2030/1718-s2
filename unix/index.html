@@ -1,0 +1,1429 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <link rel="shortcut icon" href="../assets/images/favicon.png">
+      
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.4">
+    
+    
+      
+        <title>UNIX - CS2030 Programming Methodology II</title>
+      
+    
+    
+      <script src="../assets/javascripts/modernizr-1df76c4e58.js"></script>
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application-769c285a91.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    
+    
+  </head>
+  
+  
+  
+  
+    <body>
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <a href="../index.html" title="CS2030 Programming Methodology II" class="md-icon md-icon--home md-header-nav__button">
+          </a>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+                <span class="md-header-nav__parent">
+                  Software/Tools
+                </span>
+              
+            
+            UNIX
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result" data-md-lang-search="">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/nus-cs2030/1718-s1" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    
+      <i class="md-icon md-icon--home md-nav__button"></i>
+    
+    CS2030 Programming Methodology II
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/nus-cs2030/1718-s1" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      General
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        General
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../about/index.html" title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../prereqs/index.html" title="Prerequisites" class="md-nav__link">
+      Prerequisites
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../policies/index.html" title="Policies" class="md-nav__link">
+      Policies
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../schedule/index.html" title="Schedule" class="md-nav__link">
+      Schedule
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../readings/index.html" title="Readings" class="md-nav__link">
+      Readings
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../reviews/index.html" title="Review Qs" class="md-nav__link">
+      Review Qs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../style/index.html" title="Coding Style" class="md-nav__link">
+      Coding Style
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../midterm/index.html" title="Midterm" class="md-nav__link">
+      Midterm
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Lectures
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Lectures
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec1/index.html" title="1. Abstraction & Encapsulation" class="md-nav__link">
+      1. Abstraction & Encapsulation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec2/index.html" title="2. Inheritance & Polymorphism" class="md-nav__link">
+      2. Inheritance & Polymorphism
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec3/index.html" title="3. Inheritance, Continued" class="md-nav__link">
+      3. Inheritance, Continued
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec4/index.html" title="4. Memory, Exceptions, Generics" class="md-nav__link">
+      4. Memory, Exceptions, Generics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec5/index.html" title="5. Numbers, Strings, Collections" class="md-nav__link">
+      5. Numbers, Strings, Collections
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec6/index.html" title="6. Nested Classes, Enums" class="md-nav__link">
+      6. Nested Classes, Enums
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec7/index.html" title="7. Lambda and Functions" class="md-nav__link">
+      7. Lambda and Functions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec8/index.html" title="8. More Lambda and Streams" class="md-nav__link">
+      8. More Lambda and Streams
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec9/index.html" title="9. Functors, Monads, Collectors" class="md-nav__link">
+      9. Functors, Monads, Collectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec10/index.html" title="10. Parallel Streams" class="md-nav__link">
+      10. Parallel Streams
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec11/index.html" title="11. Asynchronous Programming" class="md-nav__link">
+      11. Asynchronous Programming
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Exercises
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Exercises
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise1/index.html" title="1. Circles & Points" class="md-nav__link">
+      1. Circles & Points
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise2/index.html" title="2. Square & PaintedSquare" class="md-nav__link">
+      2. Square & PaintedSquare
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise3/index.html" title="3. PaintedSquare Revisited" class="md-nav__link">
+      3. PaintedSquare Revisited
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise4/index.html" title="4. Exceptions" class="md-nav__link">
+      4. Exceptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise5/index.html" title="5. Streams" class="md-nav__link">
+      5. Streams
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise6/index.html" title="6. Functors, Collectors" class="md-nav__link">
+      6. Functors, Collectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise7/index.html" title="7. Mock Exam" class="md-nav__link">
+      7. Mock Exam
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Labs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        Labs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab1/index.html" title="1. Question" class="md-nav__link">
+      1. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab01-comments/index.html" title="1. Comments" class="md-nav__link">
+      1. Comments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab2/index.html" title="2. Question" class="md-nav__link">
+      2. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab02-comments/index.html" title="2. Comments" class="md-nav__link">
+      2. Comments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab3/index.html" title="3. Question" class="md-nav__link">
+      3. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab4/index.html" title="4. Question" class="md-nav__link">
+      4. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab5/index.html" title="5. Question" class="md-nav__link">
+      5. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab6/index.html" title="6. Question" class="md-nav__link">
+      6. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab7/index.html" title="7. Question" class="md-nav__link">
+      7. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab8/index.html" title="8. Question" class="md-nav__link">
+      8. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab9/index.html" title="9. Question" class="md-nav__link">
+      9. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab10/index.html" title="10. Question" class="md-nav__link">
+      10. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab11/index.html" title="11. Question" class="md-nav__link">
+      11. Question
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" checked>
+    
+    <label class="md-nav__link" for="nav-11">
+      Software/Tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        Software/Tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../jdk/index.html" title="Java" class="md-nav__link">
+      Java
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../javadoc/index.html" title="Javadoc" class="md-nav__link">
+      Javadoc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        UNIX
+      </label>
+    
+    <a href="index.html" title="UNIX" class="md-nav__link md-nav__link--active">
+      UNIX
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-environment" title="The Environment" class="md-nav__link">
+    The Environment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#soc-vpn" title="SoC VPN" class="md-nav__link">
+    SoC VPN
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssh" title="SSH" class="md-nav__link">
+    SSH
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-unix-based-os" title="For UNIX-based OS" class="md-nav__link">
+    For UNIX-based OS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-windows-7-or-8" title="For Windows 7 or 8" class="md-nav__link">
+    For Windows 7 or 8
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-unix-commands" title="Basic UNIX Commands" class="md-nav__link">
+    Basic UNIX Commands
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directory-commands" title="Directory commands" class="md-nav__link">
+    Directory commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-commands" title="File commands" class="md-nav__link">
+    File commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-to-display-text-files" title="Command to display text files" class="md-nav__link">
+    Command to display text files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unix-file-permission" title="UNIX File Permission" class="md-nav__link">
+    UNIX File Permission
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secure-copy-scp" title="Secure Copy (scp)" class="md-nav__link">
+    Secure Copy (scp)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-ssh-keys" title="Setting up SSH Keys" class="md-nav__link">
+    Setting up SSH Keys
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vim/index.html" title="Vim" class="md-nav__link">
+      Vim
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-environment" title="The Environment" class="md-nav__link">
+    The Environment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#soc-vpn" title="SoC VPN" class="md-nav__link">
+    SoC VPN
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssh" title="SSH" class="md-nav__link">
+    SSH
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-unix-based-os" title="For UNIX-based OS" class="md-nav__link">
+    For UNIX-based OS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-windows-7-or-8" title="For Windows 7 or 8" class="md-nav__link">
+    For Windows 7 or 8
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-unix-commands" title="Basic UNIX Commands" class="md-nav__link">
+    Basic UNIX Commands
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directory-commands" title="Directory commands" class="md-nav__link">
+    Directory commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-commands" title="File commands" class="md-nav__link">
+    File commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-to-display-text-files" title="Command to display text files" class="md-nav__link">
+    Command to display text files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unix-file-permission" title="UNIX File Permission" class="md-nav__link">
+    UNIX File Permission
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secure-copy-scp" title="Secure Copy (scp)" class="md-nav__link">
+    Secure Copy (scp)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-ssh-keys" title="Setting up SSH Keys" class="md-nav__link">
+    Setting up SSH Keys
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/nus-cs2030/1718-s1/edit/master/docs/unix.md" title="Edit this page" class="md-icon md-content__icon">edit</a>
+                
+                
+                <h1 id="accessing-cs2030-lab-programming-environment">Accessing CS2030 Lab Programming Environment</h1>
+<h2 id="the-environment">The Environment</h2>
+<p>The school has created a VM (virtual machine) for CS2030, with hostname <code class="codehilite">cs2030-i.comp.nus.edu.sg</code>.  The VM is running CentOS, one of the Linux distributions.
+This will be the official programming environment for CS2030 for all your lab assignments.</p>
+<p>I have created your accounts on the VM based on your SoC UNIX account.  You can login with your SoC UNIX username (not your NUSNET username, unless you intentionally set the two to be the same) and password.</p>
+<h2 id="soc-vpn">SoC VPN</h2>
+<p>THe VM can only be accessed from within the School of Computing networks.  If you want to access it from outside, you need to setup a Virtual Private Network (VPN) (See <a href="https://docs.comp.nus.edu.sg/node/5065">instruction here</a>).  The staff at <code class="codehilite">helpdesk@comp.nus.edu.sg</code> or the IT helpdesk in COM1, Level 1, will be able to help with you setting up if needed.</p>
+<h2 id="ssh">SSH</h2>
+<h3 id="for-unix-based-os">For UNIX-based OS</h3>
+<p>If you use either macOS, Windows 10 (with bash on Ubuntu), or Linux, you should have the command line <code class="codehilite">ssh</code> installed.  </p>
+<p>Run:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ssh &lt;username&gt;@cs2030-i.comp.nus.edu.sg
+</pre></div>
+</td></tr></table></p>
+<p>Replace <code class="codehilite">&lt;username&gt;</code> with your SoC UNIX username, for instance, I would do:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ssh ooiwt@cs2030-i.comp.nus.edu.sg
+</pre></div>
+</td></tr></table></p>
+<p>After the command above, following the instructions on screen.  The first time you ever connect to <code class="codehilite">cs2030-i.comp.nus.edu.sg</code>, you will be warned that you are connecting to a previously unknown host.  Said <code class="codehilite">yes</code>, and you will be prompted with your SoC UNIX password.</p>
+<h3 id="for-windows-7-or-8">For Windows 7 or 8</h3>
+<p>The desktop computers in Programming Lab 6 (PL6) runs Windows 7.  If you are using these computers, or your own computers with older versions of Windows, you need to use <code class="codehilite">XShell 5</code> to access the VM.</p>
+<h2 id="basic-unix-commands">Basic UNIX Commands</h2>
+<p>Once you logged into the VM, you will be prompted to enter a command with a prompt that looks like this:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~[xxx]$
+</pre></div>
+</td></tr></table>
+This interface is provided by a UNIX shell -- not unlike <code class="codehilite">jshell</code>, this shell sits in a loop and wait for users to enter a command, then it interprets and executes the command.  There are many versions of shells, the default shell for our VM is <code class="codehilite">bash</code><sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>.</p>
+<p><em>The following are adapted for CS2030 from <a href="http://www.comp.nus.edu.sg/~cs1020/4_misc/cs1010_lect/2014/intro_lab/gettingStarted.html">the instructions created by Aaron Tan</a>. Bugs are mine.</em>  </p>
+<p>The power of UNIX stems from the many commands it offers. The following are a few commonly used commands. This list is by no means exhaustive and you are urged to explore on your own. Note that UNIX commands are case-sensitive.</p>
+<p>In the examples below, bold words are commands which you are expected to enter. All commands are to be entered after the UNIX (local or <code class="codehilite">sunfire</code> or <code class="codehilite">cs2030-i</code>) prompt of the form</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~[xxx]$
+</pre></div>
+</td></tr></table>
+
+<p><code class="codehilite">~</code> indicates that you are currently in your home directory, <code class="codehilite">xxx</code> is a number indicating the number of commands that have been entered.  The following examples assumes that user <code class="codehilite">happytan</code> is logged into cs2030-i; however you can do it on your local UNIX platform too.</p>
+<p>It might be good to understand the directory structure in UNIX, a multi-user system. The directory tree is shown below:</p>
+<p><img alt="UNIX Directory Tree" src="../figures/unix_directory_tree.jpg" /></p>
+<p>Each user has his/her own home directory, which is where he/she will be automatically placed when he/she logs into the system. The above figure shows where the home directory of user <code class="codehilite">happytan</code> resides in the directory tree. The user <code class="codehilite">happytan</code> may create files or directories in his/her home directory, but not elsewhere unless permission is given.</p>
+<h3 id="directory-commands">Directory commands</h3>
+<ul>
+<li>
+<p><code class="codehilite">pwd</code>: Print current Working Directory to show you which directory you are currently in
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~[xxx]$ pwd
+/home/h/happytan
+</pre></div>
+</td></tr></table></p>
+</li>
+<li>
+<p><code class="codehilite">ls</code>: LiSt files in your current directory
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~[xxx]$ ls
+happytan@cs2030-i:~[xxx]$
+</pre></div>
+</td></tr></table>
+   If you do not have any regular files in your home directory, as you should when you first login, you should immediately return to the shell prompt.  </p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Rule of Silence<p>UNIX follows the <em>rule of silence</em>: programs should not print unnecessary output, to allow other programs and users to easily parse the output from one program.  So, if <code class="codehilite">ls</code> has nothing to list, it will list nothing (as oppose to, say, printing "This is an empty directory.")</p>
+</p>
+</div>
+<ul>
+<li>
+<p><code class="codehilite">mkdir</code>: MaKe a subDIRectory in current directory
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~[xxx]$ mkdir lab01
+happytan@cs2030-i:~[xxx]$ ls
+lab01
+happytan@cs2030-i:~[xxx]$ ls -F
+lab01/
+</pre></div>
+</td></tr></table>
+Here, you create a directory called <code class="codehilite">lab01</code>.  Now, when you <code class="codehilite">ls</code>, you can see the directory listed.
+You may also use <code class="codehilite">ls -F</code> for more information (<code class="codehilite">-F</code> is one of the many <em>options</em>/<em>flags</em> available for the <code class="codehilite">ls</code> command. To see a complete list of the options, refer to the man pages, i.e., <code class="codehilite">man ls</code>.)</p>
+<p>The slash <code class="codehilite">/</code> beside the filename tells you that the file is a directory (aka folder in Windows lingo). A normal file does not have a slash beside its name when "ls -F" is used.</p>
+<p>You may also use the <code class="codehilite">ls -l</code> command (hyphen el, not hyphen one) to display almost all the file information, include the size of the file and the date of modification.</p>
+</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Command history</p>
+<p>UNIX maintains a history of your previously executed UNIX commands, and you may use the up and down arrows to go through it. Press the up arrow until you find a previously executed UNIX command. You may then press Enter to execute it, or edit the command before executing it. This is handy when you need to repeatedly executed a long UNIX command.</p>
+</div>
+<ul>
+<li>
+<p><code class="codehilite">cd</code>: Change Directory from current directory to another
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~[xxx]$ cd lab01
+happytan@cs2030-i:~/lab01[xxx]$
+</pre></div>
+</td></tr></table>
+Note that the prompt changes to <code class="codehilite">~/lab01</code> to indicate that you are now in the <code class="codehilite">lab01</code> directory below your <code class="codehilite">HOME</code> directory.</p>
+<p>Entering <code class="codehilite">cd</code> alone brings you back to your <code class="codehilite">HOME</code> directory, i.e.,. the directory in which you started with when you first logged into the system.
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~/lab01[xxx]$ cd
+happytan@cs2030-i:~[xxx]$
+</pre></div>
+</td></tr></table></p>
+</li>
+<li>
+<p><code class="codehilite">rmdir</code>:  to ReMove a subDIRectory in current directory -- note that a directory must be empty before it can be removed.
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~[xxx]$ rmdir lab01
+happytan@cs2030-i:~[xxx]$ ls -F
+happytan@cs2030-i:~[xxx]$ mkdir lab01
+happytan@cs2030-i:~[xxx]$ ls -F
+lab01/
+</pre></div>
+</td></tr></table></p>
+</li>
+</ul>
+<h3 id="file-commands">File commands</h3>
+<ul>
+<li><code class="codehilite">cp</code>:  CoPy files
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~/lab01[xxx]$ cp ~cs2030/lab01/Circle.java .
+happytan@cs2030-i:~/lab01[xxx]$ ls
+Circle.java
+</pre></div>
+</td></tr></table>
+The command above copy the files Circle.java from the HOME of user <code class="codehilite">cs2030</code>, under directory <code class="codehilite">lab01</code>, to the current directory.</li>
+</ul>
+<p>If you want to copy the whole directory, use <code class="codehilite">-r</code> flag, where <code class="codehilite">r</code> stands for recursive copy.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~/lab01[xxx]$ cp -r ~cs2030/lab01 .
+</pre></div>
+</td></tr></table>
+
+<p>The directory <code class="codehilite">lab01</code> and everything under it will be copied.</p>
+<ul>
+<li><code class="codehilite">mv</code>: MoVe files from one directory to another; can also be used to rename files.
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~/lab01[xxx]$ mv Circle.java Test.java
+happytan@cs2030-i:~/lab01[xxx]$ ls
+Test.java
+</pre></div>
+</td></tr></table></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Filename completion</p>
+<p>If you have a very long file name, you may use UNIX's filename completion feature to reduce typing. For instance, you may type:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~/lab01[xxx]$ mv C
+</pre></div>
+</td></tr></table>
+and press the tab key, and UNIX will complete the filename for you if there is only one filename with the prefix "C". Otherwise, it will fill up the filename up to point where you need to type in more characters for disambiguation.</p>
+</div>
+<ul>
+<li><code class="codehilite">rm</code>: ReMove files. Be careful with this command -- files deleted cannot be restored (unless they have been backed up during the normal backup cycle).
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~/lab01[xxx]$ rm Test.java
+rm: remove &#39;Test.java&#39;? y
+happytan@cs2030-i:~/lab01[xxx]$ ls
+happytan@cs2030-i:~/lab01[xxx]$
+</pre></div>
+</td></tr></table></li>
+</ul>
+<h3 id="command-to-display-text-files">Command to display text files</h3>
+<ul>
+<li><code class="codehilite">cat</code>: to string together or display (CATenate) the contents of files onto the screen
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~/lab01[xxx]$ cat Circle.java
+</pre></div>
+</td></tr></table></li>
+<li><code class="codehilite">less</code> - variant of <code class="codehilite">cat</code> (includes features to read each page leisurely)
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~/lab01[xxx]$ less Circle.java
+</pre></div>
+</td></tr></table>
+In <code class="codehilite">less</code>, use <code class="codehilite">&lt;space&gt;</code> to move down one page, <code class="codehilite">b</code> to move Back up one page, and <code class="codehilite">q</code> to Quit from "less".</li>
+</ul>
+<p>An online help facility is available in UNIX via the <code class="codehilite">man</code> command (<code class="codehilite">man</code> stands for MANual). To look for more information about any UNIX command, for example, <code class="codehilite">ls</code>, type <code class="codehilite">man ls</code>. Type <code class="codehilite">man man</code> and refer to Man Pages to find out more about the facility. To exit <code class="codehilite">man</code>, press <code class="codehilite">q</code>.</p>
+<p>Now that you are familiar with how the UNIX shell works, I won't show the command prompt any more in the rest of this article.</p>
+<h3 id="unix-file-permission">UNIX File Permission</h3>
+<p>It is important to guide our files properly on a multi-user system where users share the same file system.  UNIX has a simple mechanism to for ensuring that: every file and directory has nine bits of access permission, corresponds to three access operations, read (<code class="codehilite">r</code>), write (<code class="codehilite">w</code>), and execute (<code class="codehilite">x</code>), for four classes of users, the user who owns of the file (<code class="codehilite">u</code>), users in the same group as the owner (<code class="codehilite">g</code>), all other users (<code class="codehilite">o</code>), and all users (<code class="codehilite">a</code>) (union of all three classes before)</p>
+<p>When you run <code class="codehilite">ls -l</code>, you will see the permission encoded as strings that look like <code class="codehilite">-rw-------</code> or <code class="codehilite">drwx--x--x</code> besides other file information.   </p>
+<ul>
+<li>The first character indicates if the file is a directory (<code class="codehilite">d</code>) or not (<code class="codehilite">-</code>).  </li>
+<li>The next three characters are the permission for the owner.  <code class="codehilite">rwx</code> means that the owner can do all three: reading, writing, and executing, <code class="codehilite">rw-</code> means that the owner can read and write, but cannot execute.</li>
+<li>The next three characters are the permission for the users in the same group.</li>
+<li>The last three characters are the permission for the users in the other groups.</li>
+</ul>
+<p>To change permission, we use the <code class="codehilite">chmod</code> command.  Let's say that we want to remove the read and write permission from all other users in the group.  You can run:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>chmod g-rw &lt;file&gt;
+</pre></div>
+</td></tr></table></p>
+<p>where <code class="codehilite">&lt;file&gt;</code> is the name of the file whose permission you want to change.  This would change the permission from <code class="codehilite">-rw-rw-rw-</code> to <code class="codehilite">-rw----rw-</code>, or from <code class="codehilite">-rwxr--r--</code> to <code class="codehilite">-rwx---r--</code>.</p>
+<p>To add executable permission to everyone, you can run:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>chmod a+x &lt;file&gt;
+</pre></div>
+</td></tr></table></p>
+<p>This would change the permission from <code class="codehilite">-rw-rw-rw-</code> to <code class="codehilite">-rwx--xrwx</code>, or from <code class="codehilite">-rwxr--r--</code> to <code class="codehilite">-rwx--xr-x</code>, and so on.  You get the idea.</p>
+<p>Another way to change the permission is set the permission directly, instead of adding with <code class="codehilite">+</code> and removing with <code class="codehilite">-</code>.  To do this, one convenient way is to treat the permission for each class of user as a 3-bit binary number between 0 to 7.  So, <code class="codehilite">rwx</code> is 7, <code class="codehilite">rw-</code> is 6, <code class="codehilite">-w-</code> is 2, <code class="codehilite">---</code> is 0, etc.  </p>
+<p>To set the permission of a file to <code class="codehilite">-r--r--r--</code> (readable by everyone), run:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>chmod 444 &lt;file&gt;
+</pre></div>
+</td></tr></table></p>
+<p>To set the permission to <code class="codehilite">-rw-------</code>, run:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>chmod 600 &lt;file&gt;
+</pre></div>
+</td></tr></table></p>
+<p>and so on.</p>
+<p>It is important to ensure that your code is not readable and writable by other students, especially for graded lab exercises.</p>
+<h3 id="secure-copy-scp">Secure Copy (<code class="codehilite">scp</code>)</h3>
+<p>Secure copy, or <code class="codehilite">scp</code>, is one way to transfer files from your local computer to <code class="codehilite">cs2030-i</code>.  If you choose not to use <code class="codehilite">emacs</code> or <code class="codehilite">vim</code><sup id="fnref:2"><a class="footnote-ref" href="#fn:2" rel="footnote">2</a></sup> and write your code on <code class="codehilite">cs2030-i</code>, you can write your code on your local computer, and transfer them.  Let's say that you are in the directory with a bunch of java files you want to transfer, and you want them transferred into directory <code class="codehilite">test</code> that you have created, do the following:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>scp *.java happytan@cs2030-i:~/test
+</pre></div>
+</td></tr></table>
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you have files with the same name in the remote directory, the files will be overwritten without warning.  I have lost my code a few times due to <code class="codehilite">scp</code>.  </p>
+</div>
+<p>The expression <code class="codehilite">*.java</code> is a regular expression that means all files with filename ending with <code class="codehilite"><span class="na">.java</span></code>.  You can copy specific files as well.  For instance,</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>scp Circle.java Point.java happytan@cs2030-i:~/test
+</pre></div>
+</td></tr></table>
+
+<p><code class="codehilite">scp</code> supports <code class="codehilite">-r</code> (recursive copy) as well.</p>
+<h3 id="setting-up-ssh-keys">Setting up SSH Keys</h3>
+<p>Once you are comfortable with UNIX, you can set up a pair of public/private keys for authentication.  </p>
+<p>You can use
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ssh-keygen -t rsa
+</pre></div>
+</td></tr></table></p>
+<p>to generate a pair of keys on your local computer.  Keep the private key <code class="codehilite">id_rsa</code> on your local machine in the hidden <code class="codehilite">~/.ssh</code> directory, and copy the public key <code class="codehilite">id_rsa.pub</code> to your home directory on VM <code class="codehilite">cs2030-i</code>.  On <code class="codehilite">cs2030-i</code>, run
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+</pre></div>
+</td></tr></table></p>
+<p>Make sure that the permission for <code class="codehilite"><span class="na">.ssh</span></code> both on local machine and on VM is set to <code class="codehilite">700</code> and the files <code class="codehilite">id_rsa</code> on local machine and <code class="codehilite">authorized_keys</code> on remote machine is set to <code class="codehilite">600</code>.  Once setup, you need not enter your password every time you run <code class="codehilite">ssh</code> or <code class="codehilite">scp</code>.  </p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>I run <code class="codehilite">fish</code> on my macOS, as you might have noticed during the in-class demos.  You can use any shell you like, if you know what you are doing.  Otherwise, <code class="codehilite">bash</code> is a popular one.&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>My personal opinion is that, you should really master one of these two time-tested source code editor if you want a career in software development.&#160;<a class="footnote-backref" href="#fnref:2" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../javadoc/index.html" title="Javadoc" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Javadoc
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../vim/index.html" title="Vim" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Vim
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright by Wei Tsang Ooi, Department of Computer Science, National University of Singapore 2017
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application-c35428f87f.js"></script>
+      
+      
+      <script>app.initialize({url:{base:".."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1577 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <link rel="shortcut icon" href="../assets/images/favicon.png">
+      
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.4">
+    
+    
+      
+        <title>3. Inheritance, Continued - CS2030 Programming Methodology II</title>
+      
+    
+    
+      <script src="../assets/javascripts/modernizr-1df76c4e58.js"></script>
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application-769c285a91.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    
+    
+  </head>
+  
+  
+  
+  
+    <body>
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <a href="../index.html" title="CS2030 Programming Methodology II" class="md-icon md-icon--home md-header-nav__button">
+          </a>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+                <span class="md-header-nav__parent">
+                  Lectures
+                </span>
+              
+            
+            3. Inheritance, Continued
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result" data-md-lang-search="">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/nus-cs2030/1718-s1" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    
+      <i class="md-icon md-icon--home md-nav__button"></i>
+    
+    CS2030 Programming Methodology II
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/nus-cs2030/1718-s1" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      General
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        General
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../about/index.html" title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../prereqs/index.html" title="Prerequisites" class="md-nav__link">
+      Prerequisites
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../policies/index.html" title="Policies" class="md-nav__link">
+      Policies
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../schedule/index.html" title="Schedule" class="md-nav__link">
+      Schedule
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../readings/index.html" title="Readings" class="md-nav__link">
+      Readings
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../reviews/index.html" title="Review Qs" class="md-nav__link">
+      Review Qs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../style/index.html" title="Coding Style" class="md-nav__link">
+      Coding Style
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../midterm/index.html" title="Midterm" class="md-nav__link">
+      Midterm
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" checked>
+    
+    <label class="md-nav__link" for="nav-8">
+      Lectures
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Lectures
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec1/index.html" title="1. Abstraction & Encapsulation" class="md-nav__link">
+      1. Abstraction & Encapsulation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec2/index.html" title="2. Inheritance & Polymorphism" class="md-nav__link">
+      2. Inheritance & Polymorphism
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        3. Inheritance, Continued
+      </label>
+    
+    <a href="index.html" title="3. Inheritance, Continued" class="md-nav__link md-nav__link--active">
+      3. Inheritance, Continued
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" title="Learning Objectives" class="md-nav__link">
+    Learning Objectives
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#method-overriding" title="Method Overriding" class="md-nav__link">
+    Method Overriding
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modeling-has-a-relationship" title="Modeling HAS-A Relationship" class="md-nav__link">
+    Modeling HAS-A Relationship
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modeling-is-a-relationship" title="Modeling IS-A Relationship" class="md-nav__link">
+    Modeling IS-A Relationship
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preventing-inheritance-and-method-overriding" title="Preventing Inheritance and Method Overriding" class="md-nav__link">
+    Preventing Inheritance and Method Overriding
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-class-and-interface-with-default-methods" title="Abstract Class and Interface with Default Methods" class="md-nav__link">
+    Abstract Class and Interface with Default Methods
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#after-note" title="After Note" class="md-nav__link">
+    After Note
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec4/index.html" title="4. Memory, Exceptions, Generics" class="md-nav__link">
+      4. Memory, Exceptions, Generics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec5/index.html" title="5. Numbers, Strings, Collections" class="md-nav__link">
+      5. Numbers, Strings, Collections
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec6/index.html" title="6. Nested Classes, Enums" class="md-nav__link">
+      6. Nested Classes, Enums
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec7/index.html" title="7. Lambda and Functions" class="md-nav__link">
+      7. Lambda and Functions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec8/index.html" title="8. More Lambda and Streams" class="md-nav__link">
+      8. More Lambda and Streams
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec9/index.html" title="9. Functors, Monads, Collectors" class="md-nav__link">
+      9. Functors, Monads, Collectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec10/index.html" title="10. Parallel Streams" class="md-nav__link">
+      10. Parallel Streams
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec11/index.html" title="11. Asynchronous Programming" class="md-nav__link">
+      11. Asynchronous Programming
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Exercises
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Exercises
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise1/index.html" title="1. Circles & Points" class="md-nav__link">
+      1. Circles & Points
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise2/index.html" title="2. Square & PaintedSquare" class="md-nav__link">
+      2. Square & PaintedSquare
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise3/index.html" title="3. PaintedSquare Revisited" class="md-nav__link">
+      3. PaintedSquare Revisited
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise4/index.html" title="4. Exceptions" class="md-nav__link">
+      4. Exceptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise5/index.html" title="5. Streams" class="md-nav__link">
+      5. Streams
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise6/index.html" title="6. Functors, Collectors" class="md-nav__link">
+      6. Functors, Collectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exercise7/index.html" title="7. Mock Exam" class="md-nav__link">
+      7. Mock Exam
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Labs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        Labs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab1/index.html" title="1. Question" class="md-nav__link">
+      1. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab01-comments/index.html" title="1. Comments" class="md-nav__link">
+      1. Comments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab2/index.html" title="2. Question" class="md-nav__link">
+      2. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab02-comments/index.html" title="2. Comments" class="md-nav__link">
+      2. Comments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab3/index.html" title="3. Question" class="md-nav__link">
+      3. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab4/index.html" title="4. Question" class="md-nav__link">
+      4. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab5/index.html" title="5. Question" class="md-nav__link">
+      5. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab6/index.html" title="6. Question" class="md-nav__link">
+      6. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab7/index.html" title="7. Question" class="md-nav__link">
+      7. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab8/index.html" title="8. Question" class="md-nav__link">
+      8. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab9/index.html" title="9. Question" class="md-nav__link">
+      9. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab10/index.html" title="10. Question" class="md-nav__link">
+      10. Question
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab11/index.html" title="11. Question" class="md-nav__link">
+      11. Question
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+    
+    <label class="md-nav__link" for="nav-11">
+      Software/Tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        Software/Tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../jdk/index.html" title="Java" class="md-nav__link">
+      Java
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../javadoc/index.html" title="Javadoc" class="md-nav__link">
+      Javadoc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../unix/index.html" title="UNIX" class="md-nav__link">
+      UNIX
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vim/index.html" title="Vim" class="md-nav__link">
+      Vim
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" title="Learning Objectives" class="md-nav__link">
+    Learning Objectives
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#method-overriding" title="Method Overriding" class="md-nav__link">
+    Method Overriding
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modeling-has-a-relationship" title="Modeling HAS-A Relationship" class="md-nav__link">
+    Modeling HAS-A Relationship
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modeling-is-a-relationship" title="Modeling IS-A Relationship" class="md-nav__link">
+    Modeling IS-A Relationship
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preventing-inheritance-and-method-overriding" title="Preventing Inheritance and Method Overriding" class="md-nav__link">
+    Preventing Inheritance and Method Overriding
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-class-and-interface-with-default-methods" title="Abstract Class and Interface with Default Methods" class="md-nav__link">
+    Abstract Class and Interface with Default Methods
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#after-note" title="After Note" class="md-nav__link">
+    After Note
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/nus-cs2030/1718-s1/edit/master/docs/lec3.md" title="Edit this page" class="md-icon md-content__icon">edit</a>
+                
+                
+                <h1 id="lecture-3-inheritance-continued">Lecture 3: Inheritance, Continued</h1>
+<h2 id="learning-objectives">Learning Objectives</h2>
+<p>At the end of this lecture, students should</p>
+<ul>
+<li>be familiar with how Java dispatches methods that have been overridden</li>
+<li>appreciate the usefulness of overriding <code class="codehilite">equals</code> and <code class="codehilite">toString</code> in the <code class="codehilite">Object</code> class</li>
+<li>be exposed to the <code class="codehilite">String</code> class and its associated methods, especially the <code class="codehilite">+</code> operator</li>
+<li>be aware that inheritance can be abused to provide bad code</li>
+<li>understand the differences between HAS-A and IS-A relationship</li>
+<li>be able to use composition to model classes with HAS-A relationship</li>
+<li>be able to use inheritance to model classes with IS-A relationship</li>
+<li>understand the Liskov Substitution Principle and thus be aware that not all IS-A relationship should be modelled with inheritance</li>
+<li>understand the purposes of the Java keywords <code class="codehilite">this</code>, <code class="codehilite">final</code>, <code class="codehilite">abstract</code> and <code class="codehilite">default</code></li>
+</ul>
+<h2 id="method-overriding">Method Overriding</h2>
+<p>During Lecture 2, I introduced the concept of inheritance.  Today, let's go deeper into how inheritance and its associated concepts work.</p>
+<p>Consider the class <code class="codehilite">Circle</code>, which inherits from <code class="codehilite">Object</code>.  We have seen that <code class="codehilite">Object</code> defines some non-private methods, which can be inherited by <code class="codehilite">Circle</code>.
+These methods will be made available in the <code class="codehilite">Circle</code> class.  In the internal representation of the class, the methods will be made available in the method table of <code class="codehilite">Circle</code>.  You can view the fields and methods of class <code class="codehilite">Circle</code> as containing the fields and methods of <code class="codehilite">Object</code>, followed by fields and methods defined in <code class="codehilite">Circle</code>.</p>
+<p>The figure below illustrates this.  I use a slightly darker green to represent the methods implemented in the <code class="codehilite">Object</code> class, and light green to represent methods implemented in the <code class="codehilite">Circle</code> class.</p>
+<p><img alt="Screenshot" src="../figures/object-representation-jvm/object-representation-jvm.005.png" /></p>
+<p>Recall that when a class implements an interface, an instance of that class can take on the type of that interface.  Similarly, when a class inherits from a parent class, an instance of that class can take on the type of the parent class.  So, we can do the following:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Circle</span> <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Circle</span><span class="o">(</span><span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">),</span> <span class="mi">10</span><span class="o">);</span>
+<span class="n">Object</span> <span class="n">o</span> <span class="o">=</span> <span class="n">c</span><span class="o">;</span>
+</pre></div>
+</td></tr></table>
+
+<p>Line 2 assigns the circle object <code class="codehilite">c</code> to <code class="codehilite">o</code> of type <code class="codehilite">Object</code>.  So, both <code class="codehilite">o</code> and <code class="codehilite">c</code> are referring to the same objects.  Due to type checking at compile time, however, Java does not allow methods and fields in the subclass (e.g., <code class="codehilite">Circle</code>) that is not in the superclass (e.g., <code class="codehilite">Object</code>) to be called.  In this example, only the methods known to <code class="codehilite">Object</code> can be accessed by <code class="codehilite">o</code>.</p>
+<p>Now, consider what would happen if we override the method <code class="codehilite">equals()</code> from the <code class="codehilite">Object</code> class.  This is what we did in the last lecture.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="kd">class</span> <span class="nc">Circle</span> <span class="kd">implements</span> <span class="n">Shape</span><span class="o">,</span> <span class="n">Printable</span> <span class="o">{</span>
+     <span class="o">:</span>
+         <span class="nd">@Override</span>
+         <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
+             <span class="k">if</span> <span class="o">(</span><span class="n">obj</span> <span class="k">instanceof</span> <span class="n">Circle</span><span class="o">)</span> <span class="o">{</span>
+                 <span class="n">Circle</span> <span class="n">circle</span> <span class="o">=</span> <span class="o">(</span><span class="n">Circle</span><span class="o">)</span> <span class="n">obj</span><span class="o">;</span>
+                 <span class="k">return</span> <span class="o">(</span><span class="n">circle</span><span class="o">.</span><span class="na">center</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">center</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">circle</span><span class="o">.</span><span class="na">radius</span> <span class="o">==</span> <span class="n">radius</span><span class="o">);</span>
+             <span class="o">}</span> <span class="k">else</span>
+               <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+         <span class="o">}</span>
+    <span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<div class="admonition note">
+<p class="admonition-title">Equality for Point</p>
+<p>Recall that we override <code class="codehilite">equals</code> because we want to compare the content of the two circles, instead of comparing if two circle references point to the same object.  For the implementation above to be correct, we need to override the <code class="codehilite">equals</code> function for the <code class="codehilite">Point</code> class as well.  This is not shown in class and left as an exercise.</p>
+</div>
+<p>The method table will update the entry for <code class="codehilite">equals()</code> to point to the implementation provided by the <code class="codehilite">Circle</code> class, instead of the <code class="codehilite">Object</code> class.</p>
+<p><img alt="Screenshot" src="../figures/object-representation-jvm/object-representation-jvm.006.png" /></p>
+<p>Now, consider what would happen if we <em>overload</em> the method <code class="codehilite">equals()</code> with one that takes in a <code class="codehilite">Circle</code> object.  I also throw in a couple of <code class="codehilite">System.out.print()</code> to help us figure out what is going on.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="kd">class</span> <span class="nc">Circle</span> <span class="kd">implements</span> <span class="n">Shape</span><span class="o">,</span> <span class="n">Printable</span> <span class="o">{</span>
+     <span class="o">:</span>
+         <span class="nd">@Override</span>
+         <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
+             <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;equals(Object) called\n&quot;</span><span class="o">);</span>
+             <span class="k">if</span> <span class="o">(</span><span class="n">obj</span> <span class="k">instanceof</span> <span class="n">Circle</span><span class="o">)</span> <span class="o">{</span>
+                 <span class="n">Circle</span> <span class="n">circle</span> <span class="o">=</span> <span class="o">(</span><span class="n">Circle</span><span class="o">)</span> <span class="n">obj</span><span class="o">;</span>
+                 <span class="k">return</span> <span class="o">((</span><span class="n">circle</span><span class="o">.</span><span class="na">center</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">center</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">circle</span><span class="o">.</span><span class="na">radius</span> <span class="o">==</span> <span class="n">radius</span><span class="o">);</span>
+             <span class="o">}</span> <span class="k">else</span>
+               <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+         <span class="o">}</span>
+
+         <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Circle</span> <span class="n">circle</span><span class="o">)</span> <span class="o">{</span>
+             <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;equals(Circle) called\n&quot;</span><span class="o">);</span>
+             <span class="k">return</span> <span class="o">((</span><span class="n">circle</span><span class="o">.</span><span class="na">center</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">center</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">circle</span><span class="o">.</span><span class="na">radius</span> <span class="o">==</span> <span class="n">radius</span><span class="o">);</span>
+         <span class="o">}</span>
+    <span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>Since this new <code class="codehilite">equals()</code> method does not override the method in <code class="codehilite">Object</code>, it gets its own slot in the method table of <code class="codehilite">Circle</code>, instead of reusing one from the <code class="codehilite">Object</code>.</p>
+<p><img alt="Screenshot" src="../figures/object-representation-jvm/object-representation-jvm.007.png" /></p>
+<p>Now, consider which version of <code class="codehilite">equals</code> are called by the following:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Circle</span> <span class="n">c1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Circle</span><span class="o">(</span><span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">),</span> <span class="mi">10</span><span class="o">);</span>
+<span class="n">Circle</span> <span class="n">c2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Circle</span><span class="o">(</span><span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">),</span> <span class="mi">10</span><span class="o">);</span>
+<span class="n">Object</span> <span class="n">o1</span> <span class="o">=</span> <span class="n">c1</span><span class="o">;</span>
+<span class="n">Object</span> <span class="n">o2</span> <span class="o">=</span> <span class="n">c2</span><span class="o">;</span>
+
+<span class="n">o1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">o2</span><span class="o">);</span>
+<span class="n">o1</span><span class="o">.</span><span class="na">equals</span><span class="o">((</span><span class="n">Circle</span><span class="o">)</span><span class="n">o2</span><span class="o">);</span>
+<span class="n">o1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">c2</span><span class="o">);</span>
+<span class="n">c1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">o2</span><span class="o">);</span>
+<span class="n">c1</span><span class="o">.</span><span class="na">equals</span><span class="o">((</span><span class="n">Circle</span><span class="o">)</span><span class="n">o2</span><span class="o">);</span>
+<span class="n">c1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">c2</span><span class="o">);</span>
+</pre></div>
+</td></tr></table>
+
+<p>Lines 6-9 call <code class="codehilite">equals(Object)</code> defined in <code class="codehilite">Circle</code>， while Lines 10-11 call <code class="codehilite">equals(Circle)</code> defined in <code class="codehilite">Circle</code>.  Let's look at why for each one:</p>
+<ul>
+<li>Line 6 calls <code class="codehilite">equals</code> of an <code class="codehilite">Object</code> object on an <code class="codehilite">Object</code> object.  Java checks through all methods defined in <code class="codehilite">Object</code>, and finds a method that matches the signature, which is the <code class="codehilite">equals(Object)</code> (which <code class="codehilite">Circle</code> has overridden). This is the one that will get called.</li>
+<li>Line 7-8 call <code class="codehilite">equals</code> of an <code class="codehilite">Object</code> object on a <code class="codehilite">Circle</code> object.  Java checks through all methods defined in <code class="codehilite">Object</code>, and finds one method that matches the signature, which is <code class="codehilite">equals(Object)</code> (which <code class="codehilite">Circle</code> has overridden).  Even though there is another method <code class="codehilite">equals(Circle)</code> defined, it is defined as part of the <code class="codehilite">Circle</code> class, which Java refuses to access because <code class="codehilite">o1</code> is declared to have the type <code class="codehilite">Object</code>.  Since the only method that Java can find has an argument of type <code class="codehilite">Object</code>, the argument is cast as an <code class="codehilite">Object</code> when <code class="codehilite">equals</code> is invoked.</li>
+<li>Line 9 calls <code class="codehilite">equals</code> of a <code class="codehilite">Circle</code> object on an <code class="codehilite">Object</code> object.  Java finds a method with matching signature, <code class="codehilite">equals(Object)</code>, and invokes that.</li>
+<li>Final 10-11 calls <code class="codehilite">equals</code> of a <code class="codehilite">Circle</code> object on a <code class="codehilite">Circle</code> object.  Java finds a method with matching signature, <code class="codehilite">equals(Circle)</code>, and invokes that.</li>
+</ul>
+<p>Another question that came up is why we need to override <code class="codehilite">equals</code> in <code class="codehilite">Object</code>, rather than just using the <code class="codehilite">Circle</code>-specific <code class="codehilite">equals(Circle)</code>.  As shown above, only when an object declared as <code class="codehilite">Circle</code> calls <code class="codehilite">equals</code> on another <code class="codehilite">Circle</code> object, the <code class="codehilite">Circle</code>-specific <code class="codehilite">equals(Circle)</code> is invoked.  </p>
+<p>To write code that is general and reusable, we should exploit OO polymorphism, that means different subclasses of <code class="codehilite">Object</code> implement their own customized version of <code class="codehilite">equals</code>, and the right version of <code class="codehilite">equals</code> will be called.</p>
+<p>One example of where this is called the <code class="codehilite">contains(Object)</code> method from class <code class="codehilite">ArrayList</code> (we will cover this later in class), which checks if an object is already in the list, and to check this, it checks for equality of the given object with every object in the <code class="codehilite">ArrayList</code>, by calling <code class="codehilite">equals(Object)</code>.</p>
+<p>We now turn our attention to another method in <code class="codehilite">Object</code> that we could override, the <code class="codehilite">toString()</code> method.  <code class="codehilite">toString()</code> is called whenever the <code class="codehilite">String</code> representation of an object is needed.  For instance, when we try to print an object.   By default, the <code class="codehilite">toString</code> of <code class="codehilite">Object</code> simply prints the name of the class, followed by <code class="codehilite">@</code>, followed by the reference.   It is often useful to override this to include the content of the object as well, for debugging and logging purposes.  This is a much more useful and flexible than writing our own <code class="codehilite">print()</code> method as we have seen in earlier lectures, since we are not limited to printing to standard output anymore.</p>
+<div class="admonition note">
+<p class="admonition-title">java.lang.String</p>
+<p><code class="codehilite">String</code> is one of many useful classes provided by Java.  You can skim through to see what methods are available and keep the <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html">API reference</a> handy.</p>
+</div>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">Point</span> <span class="o">{</span>
+    <span class="o">:</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">&quot;(&quot;</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="s">&quot;,&quot;</span> <span class="o">+</span> <span class="n">y</span> <span class="s">&quot;)&quot;</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>Now, if we run:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Point</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+</pre></div>
+</td></tr></table></p>
+<p>It should print <code class="codehilite">(0,0)</code> instead of <code class="codehilite"><span class="n">Point</span><span class="mi">@1235</span><span class="n">de</span></code>.</p>
+<p>The ability to override methods that you inherit from a parent, including root class <code class="codehilite">Object</code>, makes overriding an extremely powerful tool.  It allows you to change how existing libraries behave, and customize them to your classes, without changing a single line of their code or even has access to their code!</p>
+<p>As Uncle Ben said, "With great power, comes great responsibility."  We must use overriding and inheritance carefully.  Since we can affect how existing libraries behave, we can easily break existing code and introduce bugs.  Since you may not have access to these existing code, it is often tricky to trace and debug.  </p>
+<h2 id="modeling-has-a-relationship">Modeling HAS-A Relationship</h2>
+<p>Inheritance in OO tends to get overused.  In practice, we seldom use inheritance.  Let's look at some examples of how <em>not</em> to use inheritance, and why.</p>
+<p>You may come across examples online or in books that look like the following:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">Point</span> <span class="o">{</span>
+    <span class="kd">protected</span> <span class="kt">double</span> <span class="n">x</span><span class="o">;</span>
+    <span class="kd">protected</span> <span class="kt">double</span> <span class="n">y</span><span class="o">;</span>
+      <span class="o">:</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Circle</span> <span class="kd">extends</span> <span class="n">Point</span> <span class="o">{</span>
+    <span class="kd">protected</span> <span class="kt">double</span> <span class="n">radius</span><span class="o">;</span>
+      <span class="o">:</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Cylinder</span> <span class="kd">extends</span> <span class="n">Circle</span> <span class="o">{</span>
+    <span class="kd">protected</span> <span class="kt">double</span> <span class="n">height</span><span class="o">;</span>
+      <span class="o">:</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<div class="admonition note">
+<p class="admonition-title">Protected fields</p>
+<p>The example above have been changed after the class to clarify the access modifier appropriate for this example.  See After Note below for details.</p>
+</div>
+<p><code class="codehilite">Circle</code> implemented like the above would have the center coordinate inherited from the parent (so it has three fields, x, y, and radius), and <code class="codehilite">Cylinder</code> would have the fields corresponding to a circle, which is its base, and the height.  So, we are <em>reusing</em> the fields and the code related to initializing and manipulating the fields.</p>
+<p>When we start to consider methods encapsulated with each object, things start to get less intuitive.  What does <code class="codehilite">getPerimeter()</code> and <code class="codehilite">getArea()</code> of <code class="codehilite">Cylinder</code> means?  How about <code class="codehilite">distanceTo</code> between a <code class="codehilite">Cylinder</code> and a <code class="codehilite">Point</code>?   What is the meaning of a <code class="codehilite">Circle</code> containing a <code class="codehilite">Cylinder</code>?</p>
+<p>The inheritance hierarchy above actually models the HAS-A relationship: A circle has a center (which is a point), a cylinder has a base which is a circle.  Therefore, a better way to capture the relationship between the three types of objects is through <em>composition</em>:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">Point</span> <span class="o">{</span>
+    <span class="kt">double</span> <span class="n">x</span><span class="o">;</span>
+    <span class="kt">double</span> <span class="n">y</span><span class="o">;</span>
+      <span class="o">:</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Circle</span> <span class="o">{</span>
+    <span class="n">Point</span> <span class="n">center</span><span class="o">;</span>
+    <span class="kt">double</span> <span class="n">radius</span><span class="o">;</span>
+      <span class="o">:</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Cylinder</span> <span class="o">{</span>
+    <span class="n">Circle</span> <span class="n">base</span><span class="o">;</span>
+    <span class="kt">double</span> <span class="n">height</span><span class="o">;</span>
+      <span class="o">:</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>Composition allows us to build more complex classes from simpler ones, and is usually favored over inheritance.  </p>
+<p>The <code class="codehilite">PaintedShape</code> class from Lecture 2, for instance, could be modeled as a composition of a <code class="codehilite">Style</code> object and <code class="codehilite">GeometricShape</code> object.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">Style</span> <span class="o">{</span>
+    <span class="n">Color</span> <span class="n">fillColor</span><span class="o">;</span>
+    <span class="n">Color</span> <span class="n">borderColor</span><span class="o">;</span>
+      <span class="o">:</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">PaintedShape</span> <span class="o">{</span>
+    <span class="n">Style</span> <span class="n">style</span><span class="o">;</span>
+    <span class="n">GeometricShape</span> <span class="n">shape</span><span class="o">;</span>
+      <span class="o">:</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getArea</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">shape</span><span class="o">.</span><span class="na">getArea</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="o">:</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillWith</span><span class="o">(</span><span class="n">Color</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">style</span><span class="o">.</span><span class="na">fillWith</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+    <span class="o">}</span>
+      <span class="o">:</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>The design above is also known as the <em>forwarding</em> -- calls to methods on <code class="codehilite">PaintedShape</code> gets forwarded to either <code class="codehilite">Style</code> or <code class="codehilite">GeometricShape</code> objects.</p>
+<h2 id="modeling-is-a-relationship">Modeling IS-A Relationship</h2>
+<p>A better situation to use inheritance is to model a IS-A relationship: when the subclass behaves just like parent class, but has some additional behaviors.  For instance, it is natural to model a <code class="codehilite">PaintedCircle</code> as a subclass of <code class="codehilite">Circle</code> -- since a PaintedCircle has all the behavior of <code class="codehilite">Circle</code>, but has <em>additional</em> behaviors related to being painted.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">PaintedCircle</span> <span class="kd">extends</span> <span class="n">Circle</span> <span class="o">{</span>
+    <span class="n">Style</span> <span class="n">style</span><span class="o">;</span>
+      <span class="o">:</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>A more tricky situation for modeling a IS-A relationship occurs when the subclass behaves just like the parent class <em>most</em> of the time, but is slightly different than the parent's behavior.  Consider how do we model a rectangle and a square.  Normally, we consider a square IS-A special case of rectangle.  So, we could model as:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">Rectangle</span> <span class="o">{</span>
+    <span class="kt">double</span> <span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">;</span>
+    <span class="n">Point</span> <span class="n">topLeft</span><span class="o">;</span>
+    <span class="n">Rectangle</span><span class="o">(</span><span class="n">Point</span> <span class="n">topLeft</span><span class="o">,</span> <span class="n">in</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">topLeft</span> <span class="o">=</span> <span class="n">topLeft</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">width</span> <span class="o">=</span> <span class="n">width</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">height</span> <span class="o">=</span> <span class="n">height</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Square</span> <span class="kd">extends</span> <span class="n">Rectangle</span> <span class="o">{</span>
+    <span class="n">Square</span><span class="o">(</span><span class="n">Point</span> <span class="n">topLeft</span><span class="o">,</span> <span class="kt">int</span> <span class="n">width</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">topLeft</span><span class="o">,</span> <span class="n">width</span><span class="o">,</span> <span class="n">width</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<div class="admonition note">
+<p class="admonition-title">this</p>
+<p>The <code class="codehilite">this</code> keyword in Java that refers to the current object.</p>
+</div>
+<p>So far, so good.</p>
+<p>Now, suppose the two classes are written by two different developers.  The developer who wrote Rectangle decides to add the method <code class="codehilite">resizeTo</code>:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">Rectangle</span> <span class="o">{</span>
+      <span class="o">:</span>
+    <span class="kt">void</span> <span class="nf">resizeTo</span><span class="o">(</span><span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">width</span> <span class="o">=</span> <span class="n">width</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">height</span> <span class="o">=</span> <span class="n">height</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>This developer assumes the behavior that, after calling <code class="codehilite">resizeTo(w, h)</code>, the width of the rectangle will be <code class="codehilite">w</code> and the height will be <code class="codehilite">h</code>.  He/she publishes this API, and another developer then assumes this behavior, and wrote some code, like:</p>
+<p><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">void</span> <span class="nf">doSomething</span><span class="o">(</span><span class="n">Rectangle</span> <span class="n">r</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">r</span><span class="o">.</span><span class="na">resizeTo</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+      <span class="o">:</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+What should the developer who develops <code class="codehilite">Square</code> do?  Since <code class="codehilite">Square</code> is a subclass of rectangle, it would inherit <code class="codehilite">resizeTo</code> from its parent, but it does not make sense to call <code class="codehilite">resizeTo</code> with two different parameters.  Sure, <code class="codehilite">Square</code> can overload <code class="codehilite">resizeTo</code> and provide a <code class="codehilite">resizeTo</code> with one parameter only, but that does not prevent someone from calling <code class="codehilite">resizeTo</code> with two parameters on a <code class="codehilite">Square</code>.  Someone could do the following and the code would still compile and run, turning the square into a rectangle!</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Square</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Square</span><span class="o">(</span><span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">),</span> <span class="mi">10</span><span class="o">);</span>
+<span class="n">s</span><span class="o">.</span><span class="na">resize</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="mi">8</span><span class="o">);</span>
+</pre></div>
+</td></tr></table>
+
+<p>The <code class="codehilite">Square</code> developer can try to override <code class="codehilite">resizeTo</code>, to ignore the second parameter:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">Square</span> <span class="o">{</span>
+      <span class="o">:</span>
+    <span class="kt">void</span> <span class="nf">resizeTo</span><span class="o">(</span><span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">width</span> <span class="o">=</span> <span class="n">width</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">height</span> <span class="o">=</span> <span class="n">width</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>This makes more sense and would make everyone who uses <code class="codehilite">Square</code> happy -- a square is always a square -- but it introduces an <em>inconsistency</em> in behavior and will likely break another part of the code the developer is totally unaware of.  The developer for <code class="codehilite">doSomething</code> suddenly cannot assume that <code class="codehilite">resizeTo</code> works as intended and documented.</p>
+<p>It is a developer's responsibility that any inheritance with method overriding does not alter the behavior of existing code.  This brings us to the Liskov Substitution Principle, which says that: "Let <span>\(\phi(x)\)</span> be a property provable about objects <span>\(x\)</span> of type <span>\(T\)</span>. Then <span>\(\phi(y)\)</span> should be true for objects <span>\(y\)</span> of type <span>\(S\)</span> where <span>\(S\)</span> is a subtype of <span>\(T\)</span>."   This means that if <span>\(S\)</span> is a subclass of <span>\(T\)</span>, then an object of type <span>\(T\)</span> can be replaced by an object of type <span>\(S\)</span> without changing the desirable property of the program.</p>
+<p>In the example above, this means that everywhere we can expect rectangles to be used, we can replace a rectangle with a square.  This was no longer true with the introduction of <code class="codehilite">resizeTo</code> method.</p>
+<h2 id="preventing-inheritance-and-method-overriding">Preventing Inheritance and Method Overriding</h2>
+<p>Sometimes, it is useful for a developer to explicitly prevent a class to be inherited.  Not allowing inheritance would make it much easier to argue for the correctness of programs, something important when it comes to writing secure program.  Both the two java classes you have seen, <code class="codehilite">java.lang.Math</code> and <code class="codehilite">java.lang.String</code>, cannot be inherited from.  In Java, we use the keyword <code class="codehilite">final</code> when declaring a class to tell Java that we ban this class from being inherited.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">final</span> <span class="kd">class</span> <span class="nc">Circle</span> <span class="o">{</span>
+    <span class="o">:</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>Alternatively, we can allow inheritance, but still prevent a specific method from being overridden, by declaring a method as <code class="codehilite">final</code>.  Usually, we do this on methods that are critical for the correctness of the class.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">Circle</span> <span class="o">{</span>
+   <span class="o">:</span>
+    <span class="kd">final</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contains</span><span class="o">(</span><span class="n">Point</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">:</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<div class="admonition note">
+<p class="admonition-title">final variable</p>
+<p>The keyword <code class="codehilite">final</code> has another use.   When declaring a variable as <code class="codehilite">final</code>, just like
+    <code class="codehilite">PI</code> in <code class="codehilite">Math</code>, it prevents the variable from being modified.  In other words, the variable becomes constant.
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">PI</span>   <span class="o">=</span> <span class="mf">3.141592653589793</span><span class="o">;</span>
+</pre></div>
+</td></tr></table></p>
+</div>
+<h2 id="abstract-class-and-interface-with-default-methods">Abstract Class and Interface with Default Methods</h2>
+<p>We have seen how a class can inherit from a parent class, and implement one or more interfaces.  So far, the parent class that we have seen is a <em>concrete</em> class -- it has fields and methods, complete with method implementation.  Such concrete parent class can be instantiated into objects.   </p>
+<p>On the other hand, we have interfaces, which is completely virtual, it declared what public methods it should provide -- together with the returned type for each method and the method signature.  There is no field and no implementation.</p>
+<p>Between these two extremes, there are two other possibilities in Java:</p>
+<ul>
+<li>An <em>abstract class</em>, which is just like a class, but it is declared as <code class="codehilite">abstract</code>, and some of its methods are declared as <code class="codehilite">abstract</code>, without implementation.  An abstract class cannot be instantiated, and any subclass who wish to be concrete needs to implement these abstract methods.
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">PaintedShape</span> <span class="o">{</span>
+    <span class="n">Color</span> <span class="n">fillColor</span><span class="o">;</span>
+      <span class="o">:</span>
+  <span class="kt">void</span> <span class="nf">fillWith</span><span class="o">(</span><span class="n">Color</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">fillColor</span> <span class="o">=</span> <span class="n">c</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="o">:</span>
+    <span class="kd">abstract</span> <span class="kt">double</span> <span class="nf">getArea</span><span class="o">();</span>
+    <span class="kd">abstract</span> <span class="kt">double</span> <span class="nf">getPerimeter</span><span class="o">();</span>
+      <span class="o">:</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></li>
+<li>An interface with default implementation.  Introduced only in Java 8, with the goal of allowing interface to evolve, an interface can now contain implementation of the methods.  Such interface still cannot be instantiated into objects, but classes that implement such interface need not provide implementation for a method where a default implementation exists.  For instance, we can have:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="kd">interface</span> <span class="nc">GeometricShape</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getArea</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getPerimeter</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contains</span><span class="o">(</span><span class="n">Point</span> <span class="n">p</span><span class="o">);</span>
+        <span class="k">default</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">cover</span><span class="o">(</span><span class="n">Point</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">contains</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+        <span class="o">}</span>
+</pre></div>
+</td></tr></table>
+where <code class="codehilite">cover</code> is a new method with default implementation, denoted with keyword <code class="codehilite">default</code>.</li>
+</ul>
+<p>At this point in CS2030, let's not worry about when to use abstract class or default methods in interfaces, but just be aware that they exists and understand what they mean when you come across them.  After you gain some experience writing OO programs, we will revisit these concepts so that you can better appreciate their differences and usage.</p>
+<h2 id="after-note">After Note</h2>
+<p>There are a couple of points to clarify with regards to Lecture 3.</p>
+<ul>
+<li>
+<p>When we override <code class="codehilite">equals()</code> of <code class="codehilite">Object</code> in <code class="codehilite">Circle</code>, I said "
+<em>The method table will update the entry for <code class="codehilite">equals()</code> to point to the implementation provided by the <code class="codehilite">Circle</code> class, instead of the <code class="codehilite">Object</code> class.</em>"
+and in the figure, I showed that the code for <code class="codehilite">Circle</code>'s customized <code class="codehilite">equals</code> replacing the <code class="codehilite">equals</code> for <code class="codehilite">Object</code>.  What I should have added, is that, the original implementation of <code class="codehilite">equals</code> from <code class="codehilite">Object</code> is not completely gone.  Methods from the immediate parent that have been overriden can still be called, with <code class="codehilite">super</code> keyword.  Here is a useful example from <code class="codehilite">Point</code>'s <code class="codehilite">toString()</code>:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; (&quot;</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="s">&quot;,&quot;</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="s">&quot;)&quot;</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+which prefix the string representation of Point with the class and reference address.</p>
+</li>
+<li>
+<p>In the example where we inherit <code class="codehilite">Cylinder</code> from <code class="codehilite">Circle</code>, and <code class="codehilite">Circle</code> from <code class="codehilite">Point</code>, what should the access modifier of the fields, <code class="codehilite">x</code>,<code class="codehilite">y</code>, and <code class="codehilite">radius</code> be?   If they are declared <code class="codehilite">private</code>, then <code class="codehilite">Circle</code> has no access to <code class="codehilite">x</code> and <code class="codehilite">y</code>; <code class="codehilite">Cylinder</code> has no access to <code class="codehilite">x</code>,<code class="codehilite">y</code>, and <code class="codehilite">radius</code>.  If they are declared <code class="codehilite">public</code>, then they are accessible by everyone, breaking the abstraction barrier!  Fortunately, Java has just the right access modifier for this situation: <code class="codehilite">x</code>, <code class="codehilite">y</code>, and <code class="codehilite">radius</code> should be declared as <code class="codehilite">protected</code>.  A <code class="codehilite">protected</code> field is less restrictive than <code class="codehilite">public</code>, and is accessible by subclass but is not accessible by the whole world. </p>
+</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../lec2/index.html" title="2. Inheritance & Polymorphism" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                2. Inheritance & Polymorphism
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../lec4/index.html" title="4. Memory, Exceptions, Generics" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                4. Memory, Exceptions, Generics
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright by Wei Tsang Ooi, Department of Computer Science, National University of Singapore 2017
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application-c35428f87f.js"></script>
+      
+      
+      <script>app.initialize({url:{base:".."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>
