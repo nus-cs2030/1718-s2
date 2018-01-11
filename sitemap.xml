@@ -3,7 +3,7 @@
 
     
     <url>
-     <loc>/about/index.html</loc>
+     <loc>/about/</loc>
      <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -12,19 +12,19 @@
     
         
     <url>
-     <loc>/about/index.html</loc>
+     <loc>/about/</loc>
      <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/prereqs/index.html</loc>
+     <loc>/prereqs/</loc>
      <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/policies/index.html</loc>
+     <loc>/policies/</loc>
      <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -33,7 +33,7 @@
 
     
     <url>
-     <loc>/schedule/index.html</loc>
+     <loc>/schedule/</loc>
      <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -41,7 +41,7 @@
 
     
     <url>
-     <loc>/readings/index.html</loc>
+     <loc>/readings/</loc>
      <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -49,7 +49,7 @@
 
     
     <url>
-     <loc>/style/index.html</loc>
+     <loc>/style/</loc>
      <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -58,25 +58,25 @@
     
         
     <url>
-     <loc>/jdk/index.html</loc>
+     <loc>/jdk/</loc>
      <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/javadoc/index.html</loc>
+     <loc>/javadoc/</loc>
      <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/unix/index.html</loc>
+     <loc>/unix/</loc>
      <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/vim/index.html</loc>
+     <loc>/vim/</loc>
      <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
