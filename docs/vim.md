@@ -102,7 +102,7 @@ y+f+char  // yank until char(including the char).
 
 ```
 
-Copy paste in vim
+## Copy paste in vim
 
 method 1
 ```
