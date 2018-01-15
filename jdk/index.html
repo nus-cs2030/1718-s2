@@ -289,6 +289,42 @@
       
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Lectures
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Lectures
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec01/index.html" title="1. Abstraction & Encapsulation" class="md-nav__link">
+      1. Abstraction & Encapsulation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
   <li class="md-nav__item">
     <a href="../style/index.html" title="Coding Style" class="md-nav__link">
       Coding Style
@@ -305,13 +341,13 @@
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
     
-    <label class="md-nav__link" for="nav-6">
+    <label class="md-nav__link" for="nav-7">
       Software/Tools
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
+      <label class="md-nav__title" for="nav-7">
         Software/Tools
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -357,43 +393,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-jdk-9" title="Installing JDK 9" class="md-nav__link">
-    Installing JDK 9
+  <a href="#installing-jdk-or-java-se-9" title="Installing JDK or Java SE 9" class="md-nav__link">
+    Installing JDK or Java SE 9
   </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#on-macos" title="On macOS" class="md-nav__link">
-    On macOS
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#on-ubuntu-linux-mint-debian" title="On Ubuntu / Linux Mint / Debian" class="md-nav__link">
-    On Ubuntu / Linux Mint / Debian
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#on-windows-10" title="On Windows 10" class="md-nav__link">
-    On Windows 10
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-methods" title="Other Methods" class="md-nav__link">
-    Other Methods
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -502,43 +504,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-jdk-9" title="Installing JDK 9" class="md-nav__link">
-    Installing JDK 9
+  <a href="#installing-jdk-or-java-se-9" title="Installing JDK or Java SE 9" class="md-nav__link">
+    Installing JDK or Java SE 9
   </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#on-macos" title="On macOS" class="md-nav__link">
-    On macOS
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#on-ubuntu-linux-mint-debian" title="On Ubuntu / Linux Mint / Debian" class="md-nav__link">
-    On Ubuntu / Linux Mint / Debian
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#on-windows-10" title="On Windows 10" class="md-nav__link">
-    On Windows 10
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-methods" title="Other Methods" class="md-nav__link">
-    Other Methods
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -592,30 +560,11 @@
 <p>There are several variations of JDK available.  For instance, <a href="http://openjdk.java.net">OpenJDK</a> is a free and open source version of JDK.  <a href="http://www.gnu.org">GNU</a> offers a compiler in Java (<a href="https://en.wikipedia.org/wiki/GNU_Compiler_for_Java"><code class="codehilite">gcj</code></a>) and Java core libraries in Gnu classpath.
 Eclipse offers its own version of Java compiler<sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>.  These variations are mostly the same, but for the purpose of this module, we will use the <a href="http://www.oracle.com/technetwork/java/index.html">official Oracle version</a>.</p>
 <p>There are different editions of Java.  The main ones are Java SE (standard edition), Java EE (enterprise edition), and Java ME (micro edition).  We will be using <a href="http://www.oracle.com/technetwork/java/javase/overview/index.html">Java SE</a>.</p>
-<p>The latest version of Java SE is Java 8 (equivalent to version 1.8).
-This is also the earliest version of Java that will work with this module, as many concepts we will cover are only introduced in Java 8.  </p>
-<p>To use <code class="codehilite">jshell</code>, however, you need Java 9, which you can <a href="http://jdk.java.net/9/">download and install from here</a>.</p>
-<h2 id="installing-jdk-9">Installing JDK 9</h2>
-<p>There are multiple ways to setup JDK on various OS.  The following seems to be the simplest possible way to get started.</p>
-<h3 id="on-macos">On macOS</h3>
-<p>Download the <code class="codehilite"><span class="na">.dmg</span></code> file corresponding to JDK 9 from <a href="http://jdk.java.net/9/">http://jdk.java.net/9/</a> and double click the <code class="codehilite"><span class="na">.dmg</span></code> file.  Follow instruction from there.</p>
-<p>For a 6-step description of the above, see <a href="https://docs.oracle.com/javase/9/install/installation-jdk-and-jre-macos.htm#JSJIG-GUID-F575EB4A-70D3-4AB4-A20E-DBE95171AB5F">the installation instruction from Oracle.</a></p>
-<h3 id="on-ubuntu-linux-mint-debian">On Ubuntu / Linux Mint / Debian</h3>
-<p>We are going to use <code class="codehilite">apt</code>, a package management program, in Linux to install JDK.  Run the following in your terminal:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>sudo add-apt-repository ppa:webupd8team/java
-sudo apt-get update
-sudo apt-get install oracle-java9-installer
-</pre></div>
-</td></tr></table>
-
-<p>Line 1 above adds a special package repository (also known as Personal Package Archive (PPA)) to <code class="codehilite">apt</code>.  Line 2 instructs <code class="codehilite">apt</code> to download the list of packages available from all repositories configured.  One of this packages should be <code class="codehilite">oracle-java9-installer</code>.  Line 3 installs the <code class="codehilite">oracle-java9-installer</code>.  Note that this install the installer, not Java 9.  After the installer is installed, the installer is executed.  You will be asked questions about license agreements, and then the installer proceeds to download and install Java 9.</p>
-<p>For a more detailed instructions, see <a href="http://www.webupd8.org/2015/02/install-oracle-java-9-in-ubuntu-linux.html">the guide from the maintainer of the PPA, webupd8.org</a>.</p>
-<h3 id="on-windows-10">On Windows 10</h3>
-<p>Follow the <a href="https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/">instructions to install Bash on Ubuntu on Windows</a>, then install as per the instructions for Ubuntu above.</p>
-<h3 id="other-methods">Other Methods</h3>
-<p>Oracle publishes an <a href="https://docs.oracle.com/javase/9/install/toc.htm">installation guide</a> for JDK 9, including installing it on native Windows (not through Ubuntu emulator).  I find it much more troublesome and complicated.  Unfortunately, if you are using an earlier version of Windows, you will have to follow these instructions.</p>
+<p>The latest version of Java SE is Java 9.0.1.
+Java 8 is the earliest version of Java that will work with this module, as many concepts we will cover are only introduced in Java 8.<br />
+To use <code class="codehilite">jshell</code>, however, you need Java 9.</p>
+<h2 id="installing-jdk-or-java-se-9">Installing JDK or Java SE 9</h2>
+<p>You can <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">download the latest version of Java SE 9</a> from Oracle and follow its <a href="https://docs.oracle.com/javase/9/install/overview-jdk-9-and-jre-9-installation.htm#JSJIG-GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A">installation instructions</a>.</p>
 <h2 id="compiling">Compiling</h2>
 <p>Now that you've installed Java on your machine, here's an example of how you can compile and run some Java code.</p>
 <h3 id="java-source-files">Java source files</h3>
