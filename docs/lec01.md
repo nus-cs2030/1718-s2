@@ -131,7 +131,7 @@ This code would still be correct, but the abstraction barrier is broken since we
 
 ## Data Hiding
 
-Many OO languages allow programmers to explicitly specify if a field or a method can be accessed from outside the abstraction barrier.  Java, for instance, supports `private` and `public` access modifiers[^5].  A field or a method that is declared as `private` cannot be accessed from outside the class, and can only be accessed within the class.  On the other hand, as you can guess, a `public` field or method can be accessed, modified, or invoked from outside the class.
+Many OO languages allow programmers to explicitly specify if a field or a method can be accessed from outside the abstraction barrier.  Java, for instance, supports `private` and `public` access modifiers[^5].  A field or a method that is declared as `private` cannot be accessed from outside the class, and can only be accessed within the class(or by another instance of the same class).  On the other hand, as you can guess, a `public` field or method can be accessed, modified, or invoked from outside the class.
 
 [^5]: Others include `protected` and the _default_ modifier.  For beginners, it is better that we explicitly specify something as `private` or `public`.
 
