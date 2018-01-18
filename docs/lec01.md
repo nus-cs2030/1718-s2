@@ -434,12 +434,12 @@ Java is very strict when it comes to type checking, and is one of the _type-safe
     ```Java
     class A {
     	private int x;
-      public void changeSelf() {
-        x = 1;
-      }
-      public void changeAnother(A a) {
-        a.x = 1;
-      }
+        public void changeSelf() {
+            x = 1;
+        }
+        public void changeAnother(A a) {
+            a.x = 1;
+        }
 
     }
 
