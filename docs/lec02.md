@@ -17,7 +17,7 @@ It turned out that different implementations of Java may store the objects diffe
 
 ![Screenshot](figures/object-representation-jvm/object-representation-jvm.002.png)
 
-In the figure above, there are two objects of the same class.  An object is referred to through its reference, which is a pointer to memory location where the instance fields for the object is stored, along with a pointer to a _method table_.  A method table stores a table of pointers to the methods, along with a table to the class fields.    
+In the figure above, there are two objects of the same class.  An object is referred to through its reference, which is a pointer to the memory location where the instance fields for the object is stored, along with a pointer to a _method table_.  A method table stores a table of pointers to the methods, along with a table to the class fields.    
 
 As an example, consider the following class:
 
@@ -131,7 +131,7 @@ class Circle implements Shape, Printable {
 
 In the above, we call `print()` on the `Point` object as well.  How do we know that `Point` provides a `print()` method?  Well, we can read the implementation code of `Point`, or we can agree with the implementer of `Point` that `Point` provides a `Printable` interface!  
 
-It is important to know that, `interface` provides a _syntactic_ contract on the abstraction barrier, but it does not provide a _semantic_ contract.  It does not, for instance, guarantee that `print()` actually prints something to the screen.  One could still implement interface `Printable` as follows:
+It is important to note that, `interface` provides a _syntactic_ contract on the abstraction barrier, but it does not provide a _semantic_ contract.  It does not, for instance, guarantee that `print()` actually prints something to the screen.  One could still implement interface `Printable` as follows:
 
 ```Java
 class Circle implements Shape, Printable {
@@ -148,7 +148,7 @@ and the code still compiles!
 Not all programming languages that support classes support interface.  C++, Javascript, and Python, for instance, do not support similar concepts.
 
 !!! note "Default Access Modifier for Interface"
-    In the examples above, I explicitly specify the methods in the `Printable` and `Shape` intefaces as `public`.  In Java, all methods in an interface is public by default, so the keywords `public` could be omitted.
+    In the examples above, I explicitly specify the methods in the `Printable` and `Shape` interfaces as `public`.  In Java, all methods in an interface are public by default, so the keywords `public` could be omitted.
 
 ## Interface as Type
 
@@ -355,7 +355,7 @@ class PaintedSquare extends PaintedShape implements Shape, Printable {
 }
 ```
 
-This mechanism for a class to inherit the properties and behavior from a parent is called _inheritance_, and is the forth and final basic OO principles we cover[^5].
+This mechanism for a class to inherit the properties and behavior from a parent is called _inheritance_, and is the fourth and final basic OO principles we cover[^5].
 
 [^5]: The other three is encapsulation, abstraction, and polymorphism.
 
@@ -375,7 +375,7 @@ The method table now includes pointers to methods defined in the parent (and gra
 
 ## Overloading
 
-Now consider the constructor for `PaintedCircle`.   We need to initialize the geometric shape as well as the painting style.  But, we define the fields `fillColor`, etc `private`, and subclasses have no access to `private` fields in the parent.  We need to call the constructor of the parent to initialize these private fields.  The way to do this is to use the `super` keyword, like such:
+Now consider the constructor for `PaintedCircle`.   We need to initialize the geometric shape as well as the painting style.  But, we define the fields `fillColor`, etc `private`, and subclasses have no access to `private` fields in the parent.  We need to call the constructor of the parent to initialize these private fields.  The way to do this is to use the `super` keyword, as such:
 
 ```Java
   public PaintedCircle(Point initCenter, double initRadius, Color initFillColor, Color initBorderColor, double initBorderThickness) {
@@ -385,7 +385,7 @@ Now consider the constructor for `PaintedCircle`.   We need to initialize the ge
 	}
 ```
 
-You can see that the constructor for `PaintedCircle` now takes in five parameters.  You can imagine that as the class get more sophisticated with more fields, we need to pass in more parameters to the class to initialize the fields.  It is not uncommon to provide alternative constructors with fewer parameters and assign some _default_ values to the fields.
+You can see that the constructor for `PaintedCircle` now takes in five parameters.  You can imagine that as the class gets more sophisticated with more fields, we need to pass in more parameters to the class to initialize the fields.  It is not uncommon to provide alternative constructors with fewer parameters and assign some _default_ values to the fields.
 
 ```Java
   // create circle with default style (white with black border of thickness 1)
