@@ -6,7 +6,7 @@ After this lecture, students should:
 
 - understand that Java is a type-safe language, in contrast to C
 - be familiar with Java variable and primitive types
-- understand the concepts of object-oriented programming, including interface, polymorphism, late binding, inheritance, method overriding and method overloading, and their purposes of introducing them as a method of programming.
+- understand the concepts of object-oriented programming, including interface, polymorphism, late binding, inheritance, method overriding and method overloading, and the usage of these concepts in programming.
 - know the purpose and usage of Java keywords `implements`, `extends`, `super`, `instanceof`, and `@Override`
 - understand Java concepts of arrays, enhanced `for` loop, method signature, `Object` class, and object equality. 
 
@@ -14,7 +14,7 @@ After this lecture, students should:
 
 Recall that the _type_ of a variable tells the compiler how to interpret the bits that represent the value of a variable and how to manipulate the variable.  The compiler also uses the type to decide how much memory is allocated for each variable.  
 
-Some languages are stricter in terms of type "compatibility" than others.  C compilers, however, are not very strict.  If it detects something strange with the type you used, it will issue a warning, but still let your code compiles and run.
+Some languages are stricter in terms of type "compatibility" than others.  C compilers, however, are not very strict.  If it detects something strange with the type you used, it will issue a warning, but still let your code compile and run.
 
 Take:
 
@@ -28,7 +28,7 @@ int main()
 
 In Line 4, we treat the address to a string as integer.  This generates a compiler's warning.
 
-In C, you can _type cast_ a variable from one type into another, i.e., force the compiler to treat a variable of one type as another type.  The compiler would listen and do that for you.  The following code would print out gibberish and would compile perfectly without error.
+In C, you can _type cast_ a variable from one type into another, i.e., force the compiler to treat a variable of one type as another type.  The compiler would compile without error.  However, the following code would print out gibberish.
 
 ```C
 #include <stdio.h>
@@ -38,25 +38,25 @@ int main()
 }
 ```
 
-Such flexibility and loose rules for type compatibility could be useful, if you know what you are doing, but for most programmers, it could be a major source of unintentional bugs, especially if one does not pay attention to compiler's warning or one forces the warning to go away without fully understanding what is going on.
+Such flexibility and loose rules for type compatibility could be useful, if you know what you are doing.  However, it could be a major source of unintentional bugs for most programmers, especially if one does not pay attention to the compiler's warning or forces the warning to go away without fully understanding what is going on.
 
-Java is very strict when it comes to type checking, and is one of the _type-safe_ languages. Java ensures that basic operations (such as `+`, `-`, etc) and method calls apply to values in a way that makes sense.  If you try to pull the same trick as above, you will receive an error:
+Java is very strict when it comes to type checking, and is one of the _type-safe_ languages.  Java ensures that basic operations (such as `+`, `-`, etc) and method calls are reasonably applied to the values.  If you pull the same trick like what was done in C (above), you will receive an error:
 
 <script type="text/javascript" src="https://asciinema.org/a/133995.js" id="asciicast-133995" async></script>
 
 !!! note "Java Primitive Data Types"
-    Java supports eight _primitive_ data types: `byte`, `short`, `int`, `long`, `float`, `double`, `boolean` and `char`.  If you are familiar with C, these data types should not be foreign to you.  One important difference is that a `char` variable stores a 16-bit Unicode character, not an 8-bit character like in C.  Java uses `byte` for that.  The other notable difference is that Java defines `true` and `false` as possible value to a `boolean`, unlike C which uses `0` for false and non-`0` for true.  
+    Java supports eight _primitive_ data types: `byte`, `short`, `int`, `long`, `float`, `double`, `boolean` and `char`.  If you are familiar with C, these data types should seem familiar to you.  One of the differences is that a `char` variable in Java stores a 16-bit Unicode character, while C stores it in an 8-bit character.  Java uses `byte` to store an 8-bit character instead.  Another notable difference is that Java defines `true` and `false` as a possible value to a `boolean`, unlike C which uses `0` for false and non-`0` for true.  
 
 	You can read all about Java [variables](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/variables.html) and [primitive data types](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html) in Oracle's Java Tutorial.
 
 
 ## Enforcing Abstraction Barrier with Interface
 
-Recall the concept of encapsulation. When we develop a large piece of software, it is important to hide the details about data representation and implementation, and only exposes certain `public` methods for the users to use.  We imagine that there is an abstraction barrier between the code that implements the internals of a class (called the _implementer_) and the code that uses the class (called the _user_) to achieve a higher level task.
+Recall the concept of encapsulation. When we develop a large piece of software, it is important to hide the details on data representation and implementation, and only expose `public` methods for the users to use.  We can imagine that there is an abstraction barrier between the code that implements the internals of a class (called the _implementer_) and the code that uses the class (called the _user_) to achieve a higher level task.
 
-We have seen that we use `private` to enforce data hiding -- to hide certain fields and methods from outside of the barrier.  Now, we are going to see how we enforce that the right set of methods are defined, implemented, and used on both sides of the barrier.
+We have seen that we use `private` to enforce data hiding -- to hide certain fields and methods from outside the barrier.  Now, we are going to see how we can enforce that the right set of methods are defined, implemented, and used on both sides of the barrier.
 
-The mechanism to do this is through defining an _interface_ (aka a _protocol_ as it is called in Objective-C or Swift).  An interface is kinda like a contract between the implementer of a class and the user of a class.  If a class promises to implement an interface, then we are guaranteed that the methods defined in the interface are implemented in the class as it is promised.  Otherwise, the code would not compile.
+The mechanism to do so is through defining an _interface_ (aka a _protocol_ as it is called in Objective-C or Swift).  An interface is like a contract between the implementer of a class and the user of a class.  If a class promises to implement an interface, then we are guaranteed that the methods defined in the interface are already implemented in the class.  Otherwise, the code would not compile.
 
 In Java, we can define an interface using `interface` keyword:
 
@@ -107,11 +107,11 @@ class Circle implements GeometricShape {
 This is very similar to the code you saw in Lecture 1 and Exercise 1, except that in Line 2, we say that `class Circle implements GeometricShape`.  This line informs the compiler that the programmer intends to implement all the methods included in the interface `GeometricShape` exactly as declared (in terms of names, the number of arguments, the types of arguments, returned type, and access modifier).  The rest of the class is the same, except that we renamed `getCircumference` with `getPerimeter`, which is more general and apply to all shapes.  You will also see that we added _annotations_ to our code by adding the line `@Override` before methods in `Circle` that implements the methods declared in `GeometricShape`.  This annotation is optional, but it informs our intention to the compiler and helps make the intention of the programmer clearer to others who read the code.
 
 !!! note "Java Annotation"
-    Annotations are metadata we add that is not part of the code.  Annotation does not affect execution.  They are useful to compilers and other software tools, as well as humans who read the code.  While we can similarly make the code more human-friendly with comments, an annotation is structured and so can be easily parsed by software.  `@Override` is probably going to be the only annotation useful for us in this class.
+    Annotations are metadata that is not part of the code.  They do not affect execution.  They are useful to compilers and other software tools, as well as humans who read the code.  While we can similarly make the code more human-friendly with comments, an annotation is structured and so can be easily parsed by software.  `@Override` is probably going to be the only annotation useful for us in this class.
 
 Note that we can have other methods (such as `moveTo`) in the class beyond what is promised in the interface the class implements.
 
-A class can implement more than one interfaces.  For instance, let's say that we have another interface called `Printable`[^1] with a single method defined:
+A class can implement more than one interface.  For instance, let's define another interface called `Printable`[^1] with a single method:
 
 ```
 interface Printable {
@@ -150,11 +150,11 @@ class Circle implements GeometricShape, Printable {
 
 and the code still compiles!
 
-Not all programming languages that support classes support interface.  Javascript and Python, for instance, does not support similar concepts.
+Not all programming languages that support classes support interface.  For example, Javascript and Python does not support similar concepts.
 
 ## Interface as Types
 
-In Java, an interface is a type.  What this means is that:
+In Java, an interface is a type.  This means that:
 
 - We can declare a variable with an interface type, such as:
 ```Java
@@ -164,8 +164,8 @@ or
 ```Java
 	Printable circle;
 ```
-We cannot, however, instantiate an object from an interface
-since an interface is a "template", an "abstraction", and does not have an implementation.  For instance:
+However, We cannot, instantiate an object from an interface
+since an interface is a "template", an "abstraction", and does not have an implementation.  For example:
 
 ```Java
 	// this is not OK
@@ -176,7 +176,7 @@ since an interface is a "template", an "abstraction", and does not have an imple
 
 - Similarly, we can pass arguments of an interface type into a method, and the return type of a method can be an interface.
 
-- An object can be an instance of multiple types.  Recall that Java is a statically typed language. We associate a type with a variable.  We can assign a variable to an object if the object is an instance of the type of the variable.  Line 4 above, for instance, creates a new circle, which is an instance of three types: `Circle`, `GeometricShape`, and `Printable`.  It is ok to assign this new circle to a variable of type `Printable`.
+- An object can be an instance of multiple types.  Recall that Java is a statically typed language. We associate a type with a variable.  We can assign a variable to an object if the object is an instance of the type of the variable.  For example, Line 4 above creates a new circle, which is an instance of three types: `Circle`, `GeometricShape`, and `Printable`.  It is ok to assign this new circle to a variable of type `Printable`.
 
 We can now do something cool like this:
 ```Java
@@ -190,19 +190,19 @@ We can now do something cool like this:
 ```
 
 Let's look at this code in more details.  Line 1 declares an array of objects of type `Printable`.  We skip over the code to initialize the content of the array for now, and
-jump to Line 5-7, which is a `for` loop.  Line 5 declares a loop variable `obj` of type `Printable` and loops through all objects in the array `objectsToPrint`, and Line 6 invoke the method `print` of `obj`.
+jump to Line 5-7, which is a `for` loop.  Line 5 declares a loop variable `obj` of type `Printable` and loops through all objects in the array `objectsToPrint`, and Line 6 invokes the method `print` of `obj`.
 
 !!! note "Array and For Loops in Java"
 	See Oracle's tutorial on [array](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/arrays.html) and [enhanced loop](h]ttps://docs.oracle.com/javase/tutorial/java/nutsandbolts/for.html)
 
 The magic happens in Line 6:
 
-- First, since we now that any object in the array has the type `Printable`, this means that they must implement the `Printable` interface and support the method `print()`.  
+- First, since we know that any object in the array has the type `Printable`, this means that they must implement the `Printable` interface and support the method `print()`.  
 - Second, we do not know, and we do not _need_ to know which class an object is an instance of.
 - Third, we can actually have objects of completely unrelated classes in the same array. We can have objects of type `Circle`, and objects of type `Point`.  We can have objects of type `Factory`, or objects of type `Student`, or objects of type `Cushion`.  As long as the objects implement the `Printable` interface, we can put them into the same array.
-- Forth, at _run time_, Java looks at `obj`, and determines its class, and invoke the right implementation of `print()` corresponding to the `obj`.  That is, if `obj` is an instance of a class `Circle`, then it will call `print()` method of `Circle`; if `obj` is an instance of a class `Point`, then it will call `print()` method of `Point`, and so on.
+- Forth, at _run time_, Java looks at `obj`, and determines its class, and invokes the right implementation of `print()` corresponding to the `obj`.  That is, if `obj` is an instance of a class `Circle`, then it will call `print()` method of `Circle`; if `obj` is an instance of a class `Point`, then it will call `print()` method of `Point`, and so on.
 
-To further appreciate the magic that happens in Line 6, especially the last point above, consider how function call is done in C.  In C, you cannot have two functions of the same name within the same scope, so if you call a function `print()`, you know exactly which set of instructions will be called[^2].  So, the name `print` is bound to the corresponding set of instructions at compilation time.  This is called _static binding_ or _early binding_.
+To further appreciate the magic in Line 6, especially on the last point above, consider how a function call is done in C.  In C, you cannot have two functions of the same name within the same scope, so if you call a function `print()`, you know exactly which set of instructions will be called[^2].  So, the name `print` is bound to the corresponding set of instructions at compilation time.  This is called _static binding_ or _early binding_.
 To have `print()` for different types, we need to name them differently to avoid naming conflicts: e.g., `print_point()`, `print_circle()`.
 
 [^2]: Remember a function is just an abstraction over a set of instructions.
@@ -221,17 +221,17 @@ together in an array, you need to do something like the following pseudocode:
 		   :
 ```
 
-Not only is the code verbose and ugly, if you want to define a new compound data type that supports printing, you need to remember to come to this place and add in a new condition and call the corresponding print function.
+Not only is the code verbose and ugly, it would be very troublesome if you define a new compound data type that supports printing, since you would need to add a new if-else condition in order to call for a corresponding print function.
 
 In OO languages, you can have methods named `print()` implemented differently in different classes.  When we compile the code above, the compiler will have no way to know which implementation will be called.  The bindings of `print()` to the actual set of instructions will only be done at run time, after `obj` is instantiated from a class.  This is known as _dynamic binding_, or _late binding_, or _dynamic dispatch_.
 
 ![Screenshot](figures/object-representation-jvm/object-representation-jvm.003.png)
 
-If you understand how an object is represented internally, this is not so magical after all.  Referring to the figure above, the array `objectsToPrint[]` contains an array of references to objects, the first one is a `Circle` object, and the next two are `Point` objects.  When `obj.print()` is invoked, Java refers to the method table, which points to either the method table for `Circle` or for `Point`, based on the class the object is an instance of.
+If you understand how an object is represented internally, this is not so magical after all.  Referring to the figure above, the array `objectsToPrint[]` contains an array of references to objects, the first one is a `Circle` object, and the following two are `Point` objects.  When `obj.print()` is invoked, Java refers to the method table, which points to either the method table for `Circle` or for `Point`, based on the class the object is an instance of.
 
 This behavior, which is common to OO programming languages, is known as _polymorphism_[^3].
 
-[^3]: In biology, polymorphism means that an organism can have many different forms.
+[^3]: In biology, an organism is said to be polymorphic if it can have many different forms.
 
 ## DRY - Don't Repeat Yourself
 
@@ -303,7 +303,7 @@ class PaintedSquare implements GeometricShape, Printable {
 
 and for other shapes.
 
-Great!  We now have colorful shapes.  The code above, however, is not _good_ code, even though it is _correct_.  Consider what would need to be done if say, we decided to support border styles (dotted border, solid border, dashed border, etc).  We would have to edit every single class that supports colors and borders.!
+Great!  We now have colorful shapes.  The code above, however, is not _good_ code, even though it is _correct_.  Consider what needs to be done if we decide to support border styles (dotted border, solid border, dashed border, etc).  We would have to edit every single class that supports colors and borders!
 
 One principle that we can follow is the _abstraction principle_, which says "Each significant piece of functionality in a program should be implemented in just one place in the source code. Where similar functions are carried out by distinct pieces of code, it is generally beneficial to combine them into one by abstracting out the varying parts."[^4]
 
@@ -353,11 +353,11 @@ class PaintedSquare extends PaintedShape implements GeometricShape, Printable {
 }
 ```
 
-This mechanism for a class to inherit the properties and behavior from a parent is called _Inheritance_, and is the forth and final basic OO principles we cover[^5].
+This mechanism for a class to inherit the properties and behavior from a parent is called _Inheritance_, and is the fourth and final basic OO principles we cover[^5].
 
 [^5]: The other three is encapsulation, abstraction, and polymorphism.
 
-With inheritance, we do not have to repeat the declaration of fields `fillColor`, `borderColor`, `borderThickness` and the associated methods in them.  This software engineering principle is also known as the DRY principle -- "_don't repeat yourself_" principle.  We are going to see DRY again and again in future lectures.
+With inheritance, we do not have to repeat the declaration of fields `fillColor`, `borderColor`, `borderThickness` and the associated methods in them.  This software engineering principle is also known as the DRY principle -- "_don't repeat yourself_" principle.  We are going to see DRY very frequently in future lectures.
 
 We also call the `PaintedShape` the superclass (or base class) of `PaintedCircle` and `PaintedSquare`, and call `PaintedCircle` and `PaintedSquare` the subclass (or derived class)[^6] of `PaintedShape`.
 
@@ -365,7 +365,7 @@ We also call the `PaintedShape` the superclass (or base class) of `PaintedCircle
 
 A `PaintedCircle` object can now call `fillWith()` even if the method `fillWith()` is not defined in `PaintedCircle` -- it is defined in `PaintedCircle`'s parent `PaintedShape`.  
 
-Now consider the constructor for `PaintedCircle`.   We need to initialize the geometric shape as well as the painting style.  But, we define the fields `fillColor`, etc `private`, and subclasses have no access to `private` fields in the parent.  We need to call the constructor of the parent to initialize these private fields.  The way to do this is to use the `super` keyword, like such:
+Now consider the constructor for `PaintedCircle`.   We need to initialize the geometric shape as well as the painting style.  But, we define the fields `fillColor`, etc `private`, and thus subclasses have no access to `private` fields in the parent.  We need to call the constructor of the parent to initialize these private fields.  The way to do this is to use the `super` keyword, like such:
 
 ```Java
   public PaintedCircle(Point initCenter, double initRadius, Color initFillColor, Color initBorderColor, double initBorderThickness) {
@@ -438,7 +438,7 @@ That's right.  Even though we cannot have two methods with the same signature in
 	}
 ```
 
-Line 7 above compares if the two center points are equals, and the two radius values are equals.  So, we compare if the two circles are semantically the same.  The rest of this code requires some explanation:
+As shown in Line 7 above, if we compare the two center points and radius values, we can tell whether two circles are semantically the same.  The rest of this code requires some explanation:
 
 - Line 3 uses the same `@Override` annotation that we have seen before -- we are telling the compilers that we are overriding a method in the superclass.
 - Line 4 declares the method `equals`, and note that it has to have exactly the same signature as the `equals()` method we are overriding.  Even though we meant to compare two `Circle` objects, we cannot declare it as `public boolean equals(Circle circle)`, since the signature is different and the compiler would complain.
@@ -447,6 +447,6 @@ Line 7 above compares if the two center points are equals, and the two radius va
 
 For the code above to work, we have to override the `equals` method of `Point` as well.  That is left as an exercise.
 
-One final note: polymorphism works here as well.  If we have an object reference `obj` of type `Object` that refers to an instance of a `Circle`, calling `obj.equals()` will invoke the `equals()` method of `Circle`, not `Object`, just like the case of interfaces.
+One final note: polymorphism works here as well.  If we have an object reference `obj` of type `Object` that refers to an instance of a `Circle`, calling `obj.equals()` will invoke the `equals()` method of `Circle`, not `Object`, just like the case for interfaces.
 
 [^8]: If you override `equals()` you should generally override `hashCode()` as well, but let's leave that for another lesson on another day.
