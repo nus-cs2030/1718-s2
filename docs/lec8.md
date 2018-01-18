@@ -455,4 +455,4 @@ With the above changes, we can now rewrite the while loop in `run` using stream:
         .forEach(eventStream -> this.schedule(eventStream));
 ```
 
-Once you get used to writing code with streams, it might be hard to go back to writing loops and bracnhes again!
+Once you get used to writing code with streams, it might be hard to go back to writing loops and branches again!
