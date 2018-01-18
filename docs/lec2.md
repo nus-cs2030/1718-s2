@@ -45,7 +45,7 @@ Java is very strict when it comes to type checking, and is one of the _type-safe
 <script type="text/javascript" src="https://asciinema.org/a/133995.js" id="asciicast-133995" async></script>
 
 !!! note "Java Primitive Data Types"
-    Java supports eight _primitive_ data types: `byte`, `short`, `int`, `long`, `float`, `double`, `boolean` and `char`.  If you are familiar with C, these data types should seem familiar to you.  One of the differences is that a `char` variable in Java stores a 16-bit Unicode character, while C stores it in an 8-bit character.  Java uses `byte` to store an 8-bit character instead.  Another notable difference is that Java defines `true` and `false` as a possible value to a `boolean`, unlike C which uses `0` for false and non-`0` for true.  
+    Java supports eight _primitive_ data types: `byte`, `short`, `int`, `long`, `float`, `double`, `boolean` and `char`.  If you are familiar with C, these data types should seem familiar to you.  One of the differences is that a `char` variable in Java stores a 16-bit Unicode character, while C stores an 8-bit character.  Java's `byte` stores an 8-bit character instead.  Another notable difference is that Java defines `true` and `false` as a possible value to a `boolean`, unlike C which uses `0` for false and non-`0` for true.  
 
 	You can read all about Java [variables](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/variables.html) and [primitive data types](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html) in Oracle's Java Tutorial.
 
