@@ -5,7 +5,7 @@
 After this lecture, students should:
 
 - be able to build a mental model for how objects and classes are represented in Java
-- understand the concepts of object-oriented programming, including interface, polymorphism, late binding, inheritance, method overriding and method overloading, and their purposes of introducing them as a method of programming.
+- understand the concepts of object-oriented programming, including interface, polymorphism, late binding, inheritance, method overriding and method overloading, and the usage of these concepts in programming.
 - know the purpose and usage of Java keywords `implements`, `extends`, `super`, `instanceof`, and `@Override`
 - understand Java concepts of arrays, enhanced `for` loop, method signature, `Object` class, and object equality. 
 
@@ -46,11 +46,11 @@ Note that, we have only one copy of the `static` class field `y`, regardless of 
 
 ## Enforcing Abstraction Barrier with Interface
 
-Recall the concept of encapsulation. When we develop a large piece of software, it is important to hide the details about data representation and implementation, and only exposes certain `public` methods for the users to use.  We imagine that there is an abstraction barrier between the code that implements the internals of a class (called the _implementer_) and the code that uses the class (called the _client_) to achieve a higher level task.
+Recall the concept of encapsulation. When we develop a large piece of software, it is important to hide the details on data representation and implementation, and only expose certain `public` methods for the users to use.  We can imagine that there is an abstraction barrier between the code that implements the internals of a class (called the _implementer_) and the code that uses the class (called the _client_) to achieve a higher level task.
 
-We have seen that we use `private` to enforce data hiding -- to hide certain fields and methods from outside of the barrier.  Now, we are going to see how we enforce that the right set of methods are defined, implemented, and used on both sides of the barrier.
+We have seen that we use `private` to enforce data hiding -- to hide certain fields and methods from outside of the barrier.  Now, we are going to see how we can enforce that the right set of methods are defined, implemented, and used on both sides of the barrier.
 
-The mechanism to do this is through defining an _interface_ (aka a _protocol_ as it is called in Objective-C or Swift).  An interface is kinda like a contract between the implementer of a class and the client of a class.  If a class promises to implement an interface, then we are guaranteed that the methods defined in the interface are provided by the class as it is promised.  Otherwise, the code would not compile.
+The mechanism to do this is through defining an _interface_ (aka a _protocol_ as it is called in Objective-C or Swift).  An interface is like a contract between the implementer of a class and the client of a class.  If a class promises to implement an interface, then we are guaranteed that the methods defined in the interface are already implemented in the class.  Otherwise, the code would not compile.
 
 In Java, we can define an interface using `interface` keyword:
 
@@ -102,11 +102,11 @@ class Circle implements Shape {
 This is very similar to the code you saw in Lecture 1, except that in Line 2, we say `class Circle implements Shape`.  This line informs the compiler that the programmer intends to implement all the methods included in the interface `Shape` exactly as declared (in terms of names, the number of arguments, the types of arguments, returned type, and access modifier).  The rest of the class is the same, except that we renamed `getCircumference` with `getPerimeter`, which is more general and applies to all shapes.  We also added _annotations_ to our code by adding the line `@Override` before methods in `Circle` that implement the methods declared in `Shape`.  This annotation is optional, but it informs the compiler of our intention and helps make the intention of the programmer clearer to others who read the code.
 
 !!! note "Java Annotation"
-    Annotations are metadata we add that is not part of the code.  Annotation does not affect execution.  They are useful to compilers and other software tools, as well as humans who read the code.  While we can similarly make the code more human-friendly with comments, an annotation is structured and so can be easily parsed by software.  You will see 1-2 more useful annotations in this module.
+    Annotations are metadata that is not part of the code.  They do not affect execution.  They are useful to compilers and other software tools, as well as humans who read the code.  While we can similarly make the code more human-friendly with comments, an annotation is structured and so can be easily parsed by software.  You will see 1-2 more useful annotations in this module.
 
 Note that we can have other methods (such as `moveTo`) in the class beyond what is promised in the interface the class implements.
 
-_A class can implement more than one interfaces._  For instance, let's say that we have another interface called `Printable`[^1] with a single method defined:
+_A class can implement more than one interface._  For instance, let's say that we have another interface called `Printable`[^1] with a single method defined:
 
 ```
 interface Printable {
@@ -174,7 +174,7 @@ since an interface is a "template", an "abstraction", and does not have an imple
 
 - Similarly, we can pass arguments of an interface type into a method, and the return type of a method can be an interface.
 
-- An object can be an instance of multiple types.  Recall that Java is a statically typed language. We associate a type with a variable.  We can assign a variable to an object if the object is an instance of the type of the variable.  Line 4 above, for instance, creates a new circle, which is an instance of three types: `Circle`, `Shape`, and `Printable`.  It is ok to assign this new circle to a variable of type `Printable`.
+- An object can be an instance of multiple types.  Recall that Java is a statically typed language. We associate a type with a variable.  We can assign a variable to an object if the object is an instance of the type of the variable.  For example, Line 4 above creates a new circle, which is an instance of three types: `Circle`, `Shape`, and `Printable`.  It is ok to assign this new circle to a variable of type `Printable`.
 
 We say that `Shape` and `Printable` are _supertypes_ of `Circle`, and `Circle` is a subtype of `Shape` and `Printable`.
 
@@ -202,9 +202,9 @@ The magic happens in Line 6:
 - First, since we know that any object in the array has the type `Printable`, this means that they must implement the `Printable` interface and support the method `print()`.  
 - Second, we do not know, and we do not _need_ to know which class an object is an instance of.
 - Third, we can actually have objects of completely unrelated classes in the same array. We can have objects of type `Circle`, and objects of type `Point`.  We can have objects of type `Factory`, or objects of type `Student`, or objects of type `Cushion`.  As long as the objects implement the `Printable` interface, we can put them into the same array.
-- Forth, at _run time_, Java looks at the object `o`, and determines its class, and invokes the right implementation of `print()` corresponding to the `o`.  That is, if `o` is an instance of a class `Circle`, then it will call `print()` method of `Circle`; if `o` is an instance of a class `Point`, then it will call `print()` method of `Point`, and so on.
+- Fourth, at _run time_, Java looks at the object `o`, and determines its class, and invokes the right implementation of `print()` corresponding to the `o`.  That is, if `o` is an instance of a class `Circle`, then it will call `print()` method of `Circle`; if `o` is an instance of a class `Point`, then it will call `print()` method of `Point`, and so on.
 
-To further appreciate the magic that happens in Line 6, especially the last point above, consider how function call is done in C.  In C, you cannot have two functions of the same name within the same scope, so if you call a function `print()`, you know exactly which set of instructions will be called[^2].  So, the name `print` is bound to the corresponding set of instructions at compilation time.  This is called _static binding_ or _early binding_.
+To further appreciate the magic in Line 6, especially on last point above, consider how a function call is done in C.  In C, you cannot have two functions of the same name within the same scope, so if you call a function `print()`, you know exactly which set of instructions will be called[^2].  So, the name `print` is bound to the corresponding set of instructions at compilation time.  This is called _static binding_ or _early binding_.
 To have `print()` for different types, we need to name them differently to avoid naming conflicts: e.g., `print_point()`, `print_circle()`.
 
 [^2]: Remember a function is just an abstraction over a set of instructions.
@@ -223,13 +223,13 @@ together in an array, you need to do something like the following pseudocode:
 		   :
 ```
 
-Not only is the code verbose and ugly, if you want to add a new compound data type that supports printing, you need to remember to come to this place and add in a new condition and call the corresponding print function.
+Not only is the code verbose and ugly, it would be cumbersome if you define a new compound data type that supports printing, since you would need to remember to add a new if-else condition to call for a corresponding print function.
 
 In OO languages, you can have methods named `print()` implemented differently in different classes.  When we compile the code above, the compiler will have no way to know which implementation will be called.  The bindings of `print()` to the actual set of instructions will only be done at run time, after the object `o` is instantiated from a class.  This is known as _dynamic binding_, or _late binding_, or _dynamic dispatch_.
 
 ![Screenshot](figures/object-representation-jvm/object-representation-jvm.003.png)
 
-If you understand how an object is represented internally, this is not so magical after all.  Referring to the figure above, the array `objs[]` contains an array of references to objects, the first one is a `Circle` object, and the next two are `Point` objects.  When `o.print()` is invoked, Java refers to the method table, which points to either the method table for `Circle` or for `Point`, based on the class the object is an instance of.
+If you understand how an object is represented internally, this is not so magical after all.  Referring to the figure above, the array `objs[]` contains an array of references to objects, the first one is a `Circle` object, and the following two are `Point` objects.  When `o.print()` is invoked, Java refers to the method table, which points to either the method table for `Circle` or for `Point`, based on the class the object is an instance of.
 
 This behavior, which is common to OO programming languages, is known as _polymorphism_[^3].
 
@@ -305,7 +305,7 @@ class PaintedTriangle implements Shape, Printable {
 
 and for other shapes.
 
-Great!  We now have colorful shapes.  The code above, however, is not _good_ code, even though it is _correct_.  Consider what would need to be done if say, we decided to support border styles (dotted border, solid border, dashed border, etc).  We would have to edit every single class that supports colors and borders!
+Great!  We now have colorful shapes.  The code above, however, is not _good_ code, even though it is _correct_.  Just consider what needs to be done if we decide to support border styles (dotted border, solid border, dashed border, etc).  We would have to edit every single class that supports colors and borders!
 
 One principle that we can follow is the _abstraction principle_, which says "Each significant piece of functionality in a program should be implemented in just one place in the source code. Where similar functions are carried out by distinct pieces of code, it is generally beneficial to combine them into one by abstracting out the varying parts."[^4]
 
@@ -359,7 +359,7 @@ This mechanism for a class to inherit the properties and behavior from a parent 
 
 [^5]: The other three is encapsulation, abstraction, and polymorphism.
 
-With inheritance, we do not have to repeat the declaration of fields `fillColor`, `borderColor`, `borderThickness` and the associated methods in them.  This software engineering principle is also known as the DRY principle -- "_don't repeat yourself_" principle.  We are going to see DRY again and again in future lectures.
+With inheritance, we do not have to repeat the declaration of fields `fillColor`, `borderColor`, `borderThickness` and the associated methods in them.  This software engineering principle is also known as the DRY principle -- "_don't repeat yourself_" principle.  We are going to see DRY very regularly in future lectures.
 
 We also call the `PaintedShape` the superclass (or base class) of `PaintedCircle` and `PaintedSquare`, and call `PaintedCircle` and `PaintedSquare` the subclass (or derived class)[^6] of `PaintedShape`.
 
@@ -375,7 +375,7 @@ The method table now includes pointers to methods defined in the parent (and gra
 
 ## Overloading
 
-Now consider the constructor for `PaintedCircle`.   We need to initialize the geometric shape as well as the painting style.  But, we define the fields `fillColor`, etc `private`, and subclasses have no access to `private` fields in the parent.  We need to call the constructor of the parent to initialize these private fields.  The way to do this is to use the `super` keyword, as such:
+Now consider the constructor for `PaintedCircle`.   We need to initialize the geometric shape as well as the painting style.  But, we define the fields `fillColor`, etc `private`, and thus subclasses have no access to `private` fields in the parent.  We need to call the constructor of the parent to initialize these private fields.  The way to do this is to use the `super` keyword, as such:
 
 ```Java
   public PaintedCircle(Point initCenter, double initRadius, Color initFillColor, Color initBorderColor, double initBorderThickness) {
