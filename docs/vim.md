@@ -65,6 +65,79 @@ to label each line with a line number.
 
 If the compiler tells you there is an error on Line $x$, you can issue `:<x>` to jump to Line $x$.  For instance, `:40` will go to Line 40.
 
+## Navigation
+
+```
+w   // jump to the beginning of the next word
+b   // jump to the beginning of the previous word( reverse of w )
+e   // jump to the end of the word( or next word when pressed again )
+f + char  // search forward in the line and sit on the next matching char
+t + char  // search forward in the line and sit on one space before the matching char
+
+<CTRL-d> // jump forward half page
+<CTRL-u> // jump backward half page
+
+$ // jump to end of line
+0 // jump to the beginning of the line
+* // jump between matching parentheses
+
+```
+## Navigationg + Editing
+
+```
+c+w // chang word( delete the current word and enter insert mode )
+d+w //  delete the current word
+y+w // yank word ( copy word into buffer )
+d+d // delete the whole line
+y+y // yank the whole line
+
+A // $ + a  ( jump to end of line and enter insert mode )
+o // open next line and enter insert mode
+O // open previous line and enter insert mode
+
+d+t+char  // delete until before char. For example delete until ")", or delete until ";".
+d+f+char  // delete until char(including the char).
+y+t+char  // yank until before char
+y+f+char  // yank until char(including the char).
+
+```
+
+## Copy paste in vim
+
+method 1
+```
+ %s/oldWord/newWord/gc 
+```
+% means apply to the whole document. s means substitute. g means global. c means interactive, meaning it will confirm with you before replacing. 
+
+method 2
+```
+y+w // yank the word into buffer
+
+v+e+p // v means enter visual mode. e means goes to the end of the word(u will see the word getting selected). p means put(paste).
+```
+
+## Commenting blocks of code
+
+Sometimes we need to comment out a whole block of code in Java for testing purposes. There is an easy way to do it in vim
+```
+//when you are at the first line
+0            //jump to the beginning of the line
+<CTRL-v>    // enter block visual mode
+arrow key   // you will start dragging the visual(seleted) box down the code(just a single vertical line of selection will do). Until the whole block you want to comment is covered
+shift+i     // some sort of insert mode
+"//"        //type "//" which is the syntax for commenting. At this point, you will only see "//" at one line. But don't worry.
+ESC         //without doing anything else, press escape key. You will see the rest of the selected line will be filled with "//" as well. 
+```
+uncommenting
+```
+0          // go to the beginning of the line
+<CTRL-v>   // enter block visual mode
+arrow key  //navigate your arrow key until the whole block of "//" is selected
+x          //delete them
+```
+
+
 ## Shell Command
 
 If you need to issue a shell command quickly, you don't have to exit `vim`, run the command, and launch `vim` again.  You can use `!`, 
@@ -134,3 +207,4 @@ let g:syntastic_java_checkstyle_conf_file = "~cs2030/bin/cs2030_checks.xml"
 ```
 
 The last two lines refer to [`checkstyle`](http://checkstyle.sourceforge.net) tool and its configuration file available from `~cs2030/bin` on the host `cs2030-i.comp.nus.edu.sg`.
+
