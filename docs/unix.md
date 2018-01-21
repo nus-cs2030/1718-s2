@@ -11,11 +11,16 @@ I have created your accounts on the VM based on your SoC UNIX account.  You can 
 
 THe VM can only be accessed from within the School of Computing networks.  If you want to access it from outside, you need to setup a Virtual Private Network (VPN) (See [instruction here](https://docs.comp.nus.edu.sg/node/5065)).  The staff at `helpdesk@comp.nus.edu.sg` or the IT helpdesk in COM1, Level 1, will be able to help with you setting up if needed.
 
+## Tunneling through Sunfire
+
+Alternatively, you can also tunnel through SoC's Sunfire. Sunfire is configured to allow your connection if it's originating from a local telco. (See [more details here](https://docs.comp.nus.edu.sg/node/1824)). 
+Connect to sunfire `sunfire.comp.nus.edu.sg` via your favourite terminal. After logging in, run the command `ssh cs2030-i` to connect to the CS2030 VM. Refer to instructions below on how to connect via SSH.
+
 ## SSH
 
 ### For UNIX-based OS
 
-If you use either macOS, Windows 10 (with bash on Ubuntu), or Linux, you should have the command line `ssh` installed.  
+If you use either macOS, Windows 10 (requires [Linux Subsystem on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10)), or Linux, you should have the command line `ssh` installed.  
 
 Run:
 ```
@@ -29,10 +34,9 @@ ssh ooiwt@cs2030-i.comp.nus.edu.sg
 
 After the command above, following the instructions on screen.  The first time you ever connect to `cs2030-i.comp.nus.edu.sg`, you will be warned that you are connecting to a previously unknown host.  Said `yes`, and you will be prompted with your SoC UNIX password.
 
+### For Windows 7 or 8 (or Windows 10 without Linux Subsystem)
 
-### For Windows 7 or 8
-
-The desktop computers in Programming Lab 6 (PL6) runs Windows 7.  If you are using these computers, or your own computers with older versions of Windows, you need to use `XShell 5` to access the VM.
+The desktop computers in Programming Lab 6 (PL6) runs Windows 7.  If you are using these computers, or your own computers with older versions of Windows, you need to use programs like [`PuTTY`](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) to access the VM.
 
 
 ## Basic UNIX Commands
