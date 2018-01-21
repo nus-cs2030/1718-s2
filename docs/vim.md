@@ -67,76 +67,71 @@ If the compiler tells you there is an error on Line $x$, you can issue `:<x>` to
 
 ## Navigation
 
+- `w`   jump to the beginning of the next word
+- `b`   jump to the beginning of the previous word (reverse of `w`)
+- `e`   jump to the end of the word (or next word when pressed again)
+- `f` + char: search forward in the line and sit on the next matching char
+- `t` + char:  search forward in the line and sit on one space before the matching char
+- <CTRL-d> jump forward half page
+- <CTRL-u> jump backward half page
+- `$` jump to end of line
+- `0` jump to the beginning of the line
+- `%` jump between matching parentheses
+
+## Navigation + Editing
+
+`vim` is powerful because you can combine _operations_ with _navigation_.  For instance `c` to change, `d` to delete, `y` to yank (copy).  Since `w` is the navigation command to move over the current word, combining them we get:
+
+- `cw` change the current word (delete the current word and enter insert mode)
+- `dw` delete the current word
+- `yw` yank the current word (copy word into buffer)
+
+Can you guess what `df)`, `dt)`, `c$`, `y0` do?
+
+If you repeat the operation `c`, `d`, and `y`, it applies to the whole line, so:
+
+- `cc` change the whole line
+- `dd` delete the whole line
+- `yy` yank the whole line
+
+You can add a number before an operation to specify how many times you want to repeat an operation.  So `5dd` deletes 5 lines, `5dw` deletes 5 words, etc.
+
+See the article [Operator, the True Power of `Vim`](http://whileimautomaton.net/2008/11/vimm3/operator) for more details.
+
+## Other Editing Operations
+
+- `A` jump to end of line and enter insert mode
+- `o` open next line and enter insert mode
+- `O` open previous line and enter insert mode
+
+## Search and Replace in `vim`
+
+
 ```
-w   // jump to the beginning of the next word
-b   // jump to the beginning of the previous word( reverse of w )
-e   // jump to the end of the word( or next word when pressed again )
-f + char  // search forward in the line and sit on the next matching char
-t + char  // search forward in the line and sit on one space before the matching char
-
-<CTRL-d> // jump forward half page
-<CTRL-u> // jump backward half page
-
-$ // jump to end of line
-0 // jump to the beginning of the line
-* // jump between matching parentheses
-
-```
-## Navigationg + Editing
-
-```
-c+w // chang word( delete the current word and enter insert mode )
-d+w //  delete the current word
-y+w // yank word ( copy word into buffer )
-d+d // delete the whole line
-y+y // yank the whole line
-
-A // $ + a  ( jump to end of line and enter insert mode )
-o // open next line and enter insert mode
-O // open previous line and enter insert mode
-
-d+t+char  // delete until before char. For example delete until ")", or delete until ";".
-d+f+char  // delete until char(including the char).
-y+t+char  // yank until before char
-y+f+char  // yank until char(including the char).
-
+:%s/oldWord/newWord/gc 
 ```
 
-## Copy paste in vim
-
-method 1
-```
- %s/oldWord/newWord/gc 
-```
-% means apply to the whole document. s means substitute. g means global. c means interactive, meaning it will confirm with you before replacing. 
-
-method 2
-```
-y+w // yank the word into buffer
-
-v+e+p // v means enter visual mode. e means goes to the end of the word(u will see the word getting selected). p means put(paste).
-```
+`:` enters the command mode.  `%` means apply to the whole document, `s` means substitute, `g` means global (otherwise, only the first occurance of each line is replaced). `c` is optional -- adding it cause `vim` to confirm with you before each replacement  
 
 ## Commenting blocks of code
 
-Sometimes we need to comment out a whole block of code in Java for testing purposes. There is an easy way to do it in vim
-```
-//when you are at the first line
-0            //jump to the beginning of the line
-<CTRL-v>    // enter block visual mode
-arrow key   // you will start dragging the visual(seleted) box down the code(just a single vertical line of selection will do). Until the whole block you want to comment is covered
-shift+i     // some sort of insert mode
-"//"        //type "//" which is the syntax for commenting. At this point, you will only see "//" at one line. But don't worry.
-ESC         //without doing anything else, press escape key. You will see the rest of the selected line will be filled with "//" as well. 
-```
-uncommenting
-```
-0          // go to the beginning of the line
-<CTRL-v>   // enter block visual mode
-arrow key  //navigate your arrow key until the whole block of "//" is selected
-x          //delete them
-```
+Sometimes we need to comment out a whole block of code in Java for testing purposes. There are several ways to do it in `vim`:
 
+- Place the cursor on the first line of the block of code you want to comment.
+- `0` to jump to the beginning of the line
+- `V` enter visual mode
+- Use arrow key to select the block of code you want to comment. 
+- `I` to insert at the beginning of the line (here, since we already selected the block, we will insert at the beginning of every selected)
+- `//` to insert the Java comment character (you will see it inserted in the current line, but don't worry)
+- <ESC> to escape from the visual code.
+
+To uncomment, 
+
+- Place the cursor on the first line of the block of code you want to comment.
+- `0` to jump to the beginning of the line
+- `<CTRL-v>` enter block visual mode
+- Use arrow key to select the columns of text containing `//`
+- `x` to delete them
 
 ## Shell Command
 
