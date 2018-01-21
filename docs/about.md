@@ -1,4 +1,5 @@
 # CS2030 Programming Methodology II
+### AY17/18 Semester 2
 
 ## About
 This module is a follow up to CS1010.  It explores two modern programming paradigms, object-oriented programming and functional programming.  Through a series of integrated assignments, students will learn to develop medium-scale software programs in the order of thousands of lines of code and tens of classes using object-oriented design principles and advanced programming constructs available in the two paradigms.  Topics include objects and classes, composition, association, inheritance, interface, polymorphism, abstract classes, dynamic binding, lambda expression, effect-free programming, first class functions, closures, continuations, monad, etc.  
@@ -8,10 +9,30 @@ This module is a follow up to CS1010.  It explores two modern programming paradi
 * **Lecture:** 10am - 12noon, every Monday
 * **Venue:** LT19
 * **Instructor:** [Ooi Wei Tsang](http://www.comp.nus.edu.sg/~ooiwt) (ooiwt@comp.nus.edu.sg)
-* **Teaching Assistant:** Kenneth Lu (lu.yang.kenneth@u.nus.edu)
-* **Lab:** Every Thursday (Week 3 - Week 13)
-* **Midterm Test:** October 2, 2017, Monday, 10am
-* **Final Assessment:** November 29, 2017, Wednesday, 9am.
+* **Teaching Assistant:** 
+    * Lan Ziquan (ziquan@comp.nus.edu.sg)
+* **UG Tutors:**
+	* Bernard Teo Zhi Yi
+    * Chang Ho Huan
+    * Chung Zhi Li, Denzel
+    * Evan Tay
+    * Ho Boon Wee Addison
+    * Jeremy Lim Yu Xuan
+    * Joshi Atharv Abhay
+    * Lim Heng Guang
+    * Lin Si Jie
+    * Ong Yan Zhi
+    * Qiu Siyu
+    * Tan Thong Cai, Nelvin
+    * Tay Hui Chun
+    * Teh Zi Cong Nicholas
+    * Thangavel Sharan
+    * Triston Pang Erh Syen
+    * Winson Heng Yong Seng
+    * Yuen Jun Rong
+* **Lab:** Every Tuesday (Week 3 - Week 13)
+* **Midterm Test:** March 5, 2018, Monday, 10am
+* **Final Assessment:** May 3, 2018, Thursday
 
 ## Workload
 
