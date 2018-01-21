@@ -615,9 +615,9 @@
 <p>After this lecture, students should:</p>
 <ul>
 <li>be able to build a mental model for how objects and classes are represented in Java</li>
-<li>understand the concepts of object-oriented programming, including interface, polymorphism, late binding, inheritance, method overriding and method overloading, and the usage of these concepts in programming.</li>
-<li>know the purpose and usage of Java keywords <code class="codehilite">implements</code>, <code class="codehilite">extends</code>, <code class="codehilite">super</code>, <code class="codehilite">instanceof</code>, and <code class="codehilite">@Override</code></li>
-<li>understand Java concepts of arrays, enhanced <code class="codehilite">for</code> loop, method signature, <code class="codehilite">Object</code> class, and object equality. </li>
+<li>understand the concepts of object-oriented programming, including interface, polymorphism, late binding, inheritance, method overloading, and the usage of these concepts in programming.</li>
+<li>know the purpose and usage of Java keywords <code class="codehilite">implements</code>, <code class="codehilite">extends</code>, <code class="codehilite">super</code>, <code class="codehilite">this</code>, and <code class="codehilite">@Override</code></li>
+<li>understand Java concepts of arrays, enhanced <code class="codehilite">for</code> loop, and method signature.</li>
 </ul>
 <h2 id="memory-model-for-objects">Memory Model for Objects</h2>
 <p>To help understand how classes and objects work, it is useful to visualize how they are stored in the memory.  We mentioned last week that data (e.g., fields) and code (e.g., methods) are stored in two different regions in the memory.  Since an object contains both fields and methods, where do we keep an object?</p>
@@ -642,11 +642,11 @@
   <span class="kd">private</span> <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
   <span class="kd">static</span> <span class="kd">public</span> <span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
 
-  <span class="kt">void</span> <span class="nf">foo</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">foo</span><span class="o">()</span> <span class="o">{</span>
     <span class="o">:</span>
   <span class="o">}</span>
 
-  <span class="kt">void</span> <span class="nf">bar</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">bar</span><span class="o">()</span> <span class="o">{</span>
     <span class="o">:</span>
   <span class="o">}</span>
 
@@ -668,9 +668,9 @@
 3
 4
 5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">interface</span> <span class="nc">Shape</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getArea</span><span class="o">();</span>
-    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getPerimeter</span><span class="o">();</span>
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contains</span><span class="o">(</span><span class="n">Point</span> <span class="n">p</span><span class="o">);</span>
+  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getArea</span><span class="o">();</span>
+  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getPerimeter</span><span class="o">();</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contains</span><span class="o">(</span><span class="n">Point</span> <span class="n">p</span><span class="o">);</span>
 <span class="o">}</span>
 </pre></div>
 </td></tr></table>
@@ -753,7 +753,7 @@
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">interface</span> <span class="nx">Printable</span> <span class="p">{</span>
-    <span class="kr">public</span> <span class="k">void</span> <span class="nx">print</span><span class="p">();</span>
+  <span class="kr">public</span> <span class="k">void</span> <span class="nx">print</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </td></tr></table>
@@ -771,12 +771,12 @@
 10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">Circle</span> <span class="kd">implements</span> <span class="n">Shape</span><span class="o">,</span> <span class="n">Printable</span> <span class="o">{</span>
      <span class="o">:</span>
      <span class="o">:</span>
-     <span class="nd">@Override</span>
-     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">print</span><span class="o">()</span> <span class="o">{</span>
-         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">&quot;radius: %f\n&quot;</span><span class="o">,</span> <span class="n">radius</span><span class="o">);</span>
-         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">&quot;center:&quot;</span><span class="o">);</span>
-         <span class="n">center</span><span class="o">.</span><span class="na">print</span><span class="o">();</span>
-     <span class="o">}</span>
+   <span class="nd">@Override</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">print</span><span class="o">()</span> <span class="o">{</span>
+     <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">&quot;radius: %f\n&quot;</span><span class="o">,</span> <span class="n">radius</span><span class="o">);</span>
+     <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">&quot;center:&quot;</span><span class="o">);</span>
+     <span class="n">center</span><span class="o">.</span><span class="na">print</span><span class="o">();</span>
+   <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
 </td></tr></table>
@@ -792,9 +792,9 @@
 7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">Circle</span> <span class="kd">implements</span> <span class="n">Shape</span><span class="o">,</span> <span class="n">Printable</span> <span class="o">{</span>
      <span class="o">:</span>
      <span class="o">:</span>
-     <span class="nd">@Override</span>
-     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">print</span><span class="o">()</span> <span class="o">{</span>
-     <span class="o">}</span>
+   <span class="nd">@Override</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">print</span><span class="o">()</span> <span class="o">{</span>
+   <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
 </td></tr></table>
@@ -809,11 +809,11 @@
 <p>In Java, an interface is a type.  What this means is that:</p>
 <ul>
 <li>We can declare a variable with an interface type, such as:
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="n">Shape</span> <span class="n">circle</span><span class="o">;</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="n">Shape</span> <span class="n">circle</span><span class="o">;</span>
 </pre></div>
 </td></tr></table>
 or
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="n">Printable</span> <span class="n">circle</span><span class="o">;</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="n">Printable</span> <span class="n">circle</span><span class="o">;</span>
 </pre></div>
 </td></tr></table>
 We cannot, however, instantiate an object from an interface
@@ -822,10 +822,10 @@ since an interface is a "template", an "abstraction", and does not have an imple
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="c1">// this is not OK</span>
-    <span class="n">Printable</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Printable</span><span class="o">();</span>
-    <span class="c1">// this is OK</span>
-    <span class="n">Printable</span> <span class="n">circle</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Circle</span><span class="o">(</span><span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">),</span> <span class="mi">10</span><span class="o">);</span>
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="c1">// this is not OK</span>
+  <span class="n">Printable</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Printable</span><span class="o">();</span>
+  <span class="c1">// this is OK</span>
+  <span class="n">Printable</span> <span class="n">circle</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Circle</span><span class="o">(</span><span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">),</span> <span class="mi">10</span><span class="o">);</span>
 </pre></div>
 </td></tr></table>
 
@@ -846,20 +846,20 @@ since an interface is a "template", an "abstraction", and does not have an imple
 4
 5
 6
-7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="n">Printable</span><span class="o">[]</span> <span class="n">objs</span><span class="o">;</span>
-      <span class="o">:</span>
-      <span class="c1">// initialize array objs</span>
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="n">Printable</span><span class="o">[]</span> <span class="n">objs</span><span class="o">;</span>
     <span class="o">:</span>
-    <span class="k">for</span> <span class="o">(</span><span class="n">Printable</span> <span class="n">o</span><span class="o">:</span> <span class="n">objs</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">o</span><span class="o">.</span><span class="na">print</span><span class="o">();</span>
-    <span class="o">}</span>
+    <span class="c1">// initialize array objs</span>
+  <span class="o">:</span>
+  <span class="k">for</span> <span class="o">(</span><span class="n">Printable</span> <span class="n">o</span><span class="o">:</span> <span class="n">objs</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">o</span><span class="o">.</span><span class="na">print</span><span class="o">();</span>
+  <span class="o">}</span>
 </pre></div>
 </td></tr></table></p>
 <p>Let's examine this code.  Line 1 declares an array of objects of type <code class="codehilite">Printable</code>.  We skip over the code to initialize the content of the array for now, and
 jump to Line 5-7, which is a <code class="codehilite">for</code> loop.  Line 5 declares a loop variable <code class="codehilite">o</code> of type <code class="codehilite">Printable</code> and loops through all objects in the array <code class="codehilite">objs</code>, and Line 6 invokes the method <code class="codehilite">print</code> of <code class="codehilite">o</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Array and For Loops in Java</p>
-<p>See Oracle's tutorial on <a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/arrays.html">array</a> and <a href="../h]ttps://docs.oracle.com/javase/tutorial/java/nutsandbolts/for.html">enhanced loop</a></p>
+<p>See Oracle's tutorial on <a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/arrays.html">array</a> and <a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/for.html">enhanced loop</a></p>
 </div>
 <p>The magic happens in Line 6:</p>
 <ul>
@@ -934,22 +934,22 @@ together in an array, you need to do something like the following pseudocode:
 
 <span class="kd">class</span> <span class="nc">PaintedCircle</span> <span class="kd">implements</span> <span class="n">Shape</span><span class="o">,</span> <span class="n">Printable</span> <span class="o">{</span>
   <span class="kd">private</span> <span class="n">Color</span>  <span class="n">fillColor</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">Color</span>  <span class="n">borderColor</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kt">double</span> <span class="n">borderThickness</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">Color</span>  <span class="n">borderColor</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="kt">double</span> <span class="n">borderThickness</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillWith</span><span class="o">(</span><span class="n">Color</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">fillColor</span> <span class="o">=</span> <span class="n">c</span><span class="o">;</span>
-    <span class="o">}</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillWith</span><span class="o">(</span><span class="n">Color</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">fillColor</span> <span class="o">=</span> <span class="n">c</span><span class="o">;</span>
+  <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setBorderThickness</span><span class="o">(</span><span class="kt">double</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">borderThickness</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span>
-    <span class="o">}</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setBorderThickness</span><span class="o">(</span><span class="kt">double</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">borderThickness</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span>
+  <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setBorderColor</span><span class="o">(</span><span class="n">Color</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">borderColor</span> <span class="o">=</span> <span class="n">c</span><span class="o">;</span>
-    <span class="o">}</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setBorderColor</span><span class="o">(</span><span class="n">Color</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">borderColor</span> <span class="o">=</span> <span class="n">c</span><span class="o">;</span>
+  <span class="o">}</span>
 
-    <span class="c1">// other methods and fields for Circle from before</span>
+  <span class="c1">// other methods and fields for Circle from before</span>
 
 <span class="o">}</span>
 </pre></div>
