@@ -13,8 +13,23 @@ THe VM can only be accessed from within the School of Computing networks.  If yo
 
 ## Tunneling through Sunfire
 
-Alternatively, you can also tunnel through SoC's Sunfire. Sunfire is configured to allow your connection if it's originating from a local telco. (See [more details here](https://docs.comp.nus.edu.sg/node/1824)). 
-Connect to sunfire `sunfire.comp.nus.edu.sg` via your favourite terminal. After logging in, run the command `ssh cs2030-i` to connect to the CS2030 VM. Refer to instructions below on how to connect via SSH.
+Well, you don't actually need to setup a VPN.
+
+SoC's Sunfire is configured to allow your connection if it's originating from a local telco. (See [more details here](https://docs.comp.nus.edu.sg/node/1824).)  Since Sunfire is situated within the School of Computing network, Sunfire is able to access the VM.  This opens the possibility of connecting from your device (using an Internet connection from a local telco)) to Sunfire, and then from Sunfire to the VM.
+
+There are two ways to achieve this, and in both ways it appears to the CS2030 VM that Sunfire is the client.
+
+### SSH Using Sunfire's Terminal
+
+Connect to Sunfire at `sunfire.comp.nus.edu.sg` via your favourite SSH client.  After logging in, run the command `ssh cs2030-i` to connect to the CS2030 VM.  This effectively starts an SSH session to the VM from within your existing SSH session to Sunfire.  Refer to instructions below on how to connect via SSH.
+
+### SSH Port Forwarding
+
+SSH has built-in support for local and remote port forwarding, and local port forwarding can be used to commect to the CS2030 VM.  Local port forwarding means that a port of the SSH client (your machine) is forwarded to the SSH server (`sunfire`), which opens a connection to a preset destination server (`cs2030-i`).  This method causes the CS2030 VM to seem as if it is hosted on a local port, e.g. `localhost:2030`, allowing you to use your favourite SCP program (e.g. [FileZilla](https://filezilla-project.org/) to access the VM.
+
+To use local port forwarding (from local port `2030`), connect to Sunfire using `ssh -L 2030:cs2030-i.comp.nus.edu.sg:22 sunfire.comp.nus.edu.sg`.  This opens an SSH tunnel from port `2030` of your machine to port `22` (the default SSH port) of `cs2030-i.comp.nus.edu.sg` via Sunfire.  After successful login, open a separate SSH (or SCP) connection from your machine to `localhost:2030` to access the VM.
+
+[`PuTTY`](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) supports SSH port forwarding, so this setup can also be used on Windows.
 
 ## SSH
 
