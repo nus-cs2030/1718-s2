@@ -315,6 +315,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec02/index.html" title="2. Interface, Inheritance & Polymorphism" class="md-nav__link">
+      2. Interface, Inheritance & Polymorphism
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -471,6 +483,41 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#navigation" title="Navigation" class="md-nav__link">
+    Navigation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#navigation-editing" title="Navigation + Editing" class="md-nav__link">
+    Navigation + Editing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-editing-operations" title="Other Editing Operations" class="md-nav__link">
+    Other Editing Operations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search-and-replace-in-vim" title="Search and Replace in vim" class="md-nav__link">
+    Search and Replace in vim
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commenting-blocks-of-code" title="Commenting blocks of code" class="md-nav__link">
+    Commenting blocks of code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#shell-command" title="Shell Command" class="md-nav__link">
     Shell Command
   </a>
@@ -603,6 +650,41 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#navigation" title="Navigation" class="md-nav__link">
+    Navigation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#navigation-editing" title="Navigation + Editing" class="md-nav__link">
+    Navigation + Editing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-editing-operations" title="Other Editing Operations" class="md-nav__link">
+    Other Editing Operations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search-and-replace-in-vim" title="Search and Replace in vim" class="md-nav__link">
+    Search and Replace in vim
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commenting-blocks-of-code" title="Commenting blocks of code" class="md-nav__link">
+    Commenting blocks of code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#shell-command" title="Shell Command" class="md-nav__link">
     Shell Command
   </a>
@@ -711,6 +793,66 @@
 <p>to label each line with a line number.</p>
 <h2 id="jumping-to-a-line">Jumping to a Line</h2>
 <p>If the compiler tells you there is an error on Line <span>\(x\)</span>, you can issue <code class="codehilite">:&lt;x&gt;</code> to jump to Line <span>\(x\)</span>.  For instance, <code class="codehilite">:40</code> will go to Line 40.</p>
+<h2 id="navigation">Navigation</h2>
+<ul>
+<li><code class="codehilite">w</code>   jump to the beginning of the next word</li>
+<li><code class="codehilite">b</code>   jump to the beginning of the previous word (reverse of <code class="codehilite">w</code>)</li>
+<li><code class="codehilite">e</code>   jump to the end of the word (or next word when pressed again)</li>
+<li><code class="codehilite">f</code> + char: search forward in the line and sit on the next matching char</li>
+<li><code class="codehilite">t</code> + char:  search forward in the line and sit on one space before the matching char</li>
+<li><CTRL-d> jump forward half page</li>
+<li><CTRL-u> jump backward half page</li>
+<li><code class="codehilite">$</code> jump to end of line</li>
+<li><code class="codehilite">0</code> jump to the beginning of the line</li>
+<li><code class="codehilite"><span class="c">%</span></code> jump between matching parentheses</li>
+</ul>
+<h2 id="navigation-editing">Navigation + Editing</h2>
+<p><code class="codehilite">vim</code> is powerful because you can combine <em>operations</em> with <em>navigation</em>.  For instance <code class="codehilite">c</code> to change, <code class="codehilite">d</code> to delete, <code class="codehilite">y</code> to yank (copy).  Since <code class="codehilite">w</code> is the navigation command to move over the current word, combining them we get:</p>
+<ul>
+<li><code class="codehilite">cw</code> change the current word (delete the current word and enter insert mode)</li>
+<li><code class="codehilite">dw</code> delete the current word</li>
+<li><code class="codehilite">yw</code> yank the current word (copy word into buffer)</li>
+</ul>
+<p>Can you guess what <code class="codehilite">df)</code>, <code class="codehilite">dt)</code>, <code class="codehilite">c$</code>, <code class="codehilite">y0</code> do?</p>
+<p>If you repeat the operation <code class="codehilite">c</code>, <code class="codehilite">d</code>, and <code class="codehilite">y</code>, it applies to the whole line, so:</p>
+<ul>
+<li><code class="codehilite">cc</code> change the whole line</li>
+<li><code class="codehilite">dd</code> delete the whole line</li>
+<li><code class="codehilite">yy</code> yank the whole line</li>
+</ul>
+<p>You can add a number before an operation to specify how many times you want to repeat an operation.  So <code class="codehilite">5dd</code> deletes 5 lines, <code class="codehilite">5dw</code> deletes 5 words, etc.</p>
+<p>See the article <a href="http://whileimautomaton.net/2008/11/vimm3/operator">Operator, the True Power of <code class="codehilite">Vim</code></a> for more details.</p>
+<h2 id="other-editing-operations">Other Editing Operations</h2>
+<ul>
+<li><code class="codehilite">A</code> jump to end of line and enter insert mode</li>
+<li><code class="codehilite">o</code> open next line and enter insert mode</li>
+<li><code class="codehilite">O</code> open previous line and enter insert mode</li>
+</ul>
+<h2 id="search-and-replace-in-vim">Search and Replace in <code class="codehilite">vim</code></h2>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>:%s/oldWord/newWord/gc 
+</pre></div>
+</td></tr></table>
+
+<p><code class="codehilite">:</code> enters the command mode.  <code class="codehilite"><span class="c">%</span></code> means apply to the whole document, <code class="codehilite">s</code> means substitute, <code class="codehilite">g</code> means global (otherwise, only the first occurance of each line is replaced). <code class="codehilite">c</code> is optional -- adding it cause <code class="codehilite">vim</code> to confirm with you before each replacement  </p>
+<h2 id="commenting-blocks-of-code">Commenting blocks of code</h2>
+<p>Sometimes we need to comment out a whole block of code in Java for testing purposes. There are several ways to do it in <code class="codehilite">vim</code>:</p>
+<ul>
+<li>Place the cursor on the first line of the block of code you want to comment.</li>
+<li><code class="codehilite">0</code> to jump to the beginning of the line</li>
+<li><code class="codehilite">V</code> enter visual mode</li>
+<li>Use arrow key to select the block of code you want to comment. </li>
+<li><code class="codehilite">I</code> to insert at the beginning of the line (here, since we already selected the block, we will insert at the beginning of every selected)</li>
+<li><code class="codehilite">//</code> to insert the Java comment character (you will see it inserted in the current line, but don't worry)</li>
+<li><ESC> to escape from the visual code.</li>
+</ul>
+<p>To uncomment, </p>
+<ul>
+<li>Place the cursor on the first line of the block of code you want to comment.</li>
+<li><code class="codehilite">0</code> to jump to the beginning of the line</li>
+<li><code class="codehilite">&lt;CTRL-v&gt;</code> enter block visual mode</li>
+<li>Use arrow key to select the columns of text containing <code class="codehilite">//</code></li>
+<li><code class="codehilite">x</code> to delete them</li>
+</ul>
 <h2 id="shell-command">Shell Command</h2>
 <p>If you need to issue a shell command quickly, you don't have to exit <code class="codehilite">vim</code>, run the command, and launch <code class="codehilite">vim</code> again.  You can use <code class="codehilite">!</code>, </p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>:!&lt;command&gt;

@@ -4,7 +4,7 @@
     
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/index.html</loc>
-     <lastmod>2018-01-19</lastmod>
+     <lastmod>2018-01-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -13,19 +13,19 @@
         
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/about/index.html</loc>
-     <lastmod>2018-01-19</lastmod>
+     <lastmod>2018-01-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/prereqs/index.html</loc>
-     <lastmod>2018-01-19</lastmod>
+     <lastmod>2018-01-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/policies/index.html</loc>
-     <lastmod>2018-01-19</lastmod>
+     <lastmod>2018-01-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -34,7 +34,7 @@
     
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/schedule/index.html</loc>
-     <lastmod>2018-01-19</lastmod>
+     <lastmod>2018-01-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -42,7 +42,7 @@
     
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/readings/index.html</loc>
-     <lastmod>2018-01-19</lastmod>
+     <lastmod>2018-01-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -51,7 +51,13 @@
         
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lec01/index.html</loc>
-     <lastmod>2018-01-19</lastmod>
+     <lastmod>2018-01-21</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://nus-cs2030.github.io/1718-s2/lec02/index.html</loc>
+     <lastmod>2018-01-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -60,7 +66,7 @@
     
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/style/index.html</loc>
-     <lastmod>2018-01-19</lastmod>
+     <lastmod>2018-01-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -69,25 +75,25 @@
         
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/jdk/index.html</loc>
-     <lastmod>2018-01-19</lastmod>
+     <lastmod>2018-01-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/javadoc/index.html</loc>
-     <lastmod>2018-01-19</lastmod>
+     <lastmod>2018-01-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/unix/index.html</loc>
-     <lastmod>2018-01-19</lastmod>
+     <lastmod>2018-01-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/vim/index.html</loc>
-     <lastmod>2018-01-19</lastmod>
+     <lastmod>2018-01-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
