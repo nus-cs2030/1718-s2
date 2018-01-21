@@ -6,43 +6,10 @@ pages:
       - Policies: 'policies.md'
   - Schedule: 'schedule.md'
   - Readings: 'readings.md'
-  - Review Qs: 'reviews.md'
-  - Coding Style: 'style.md'
-  - Midterm: 'midterm.md'
   - Lectures:
-      - 1. Abstraction & Encapsulation: 'lec1.md'
-      - 2. Inheritance & Polymorphism: 'lec2.md'
-      - 3. Inheritance, Continued : 'lec3.md'
-      - 4. Memory, Exceptions, Generics : 'lec4.md'
-      - 5. Numbers, Strings, Collections: 'lec5.md'
-      - 6. Nested Classes, Enums: 'lec6.md'
-      - 7. Lambda and Functions: 'lec7.md'
-      - 8. More Lambda and Streams: 'lec8.md'
-      - 9. Functors, Monads, Collectors: 'lec9.md'
-      - 10. Parallel Streams: 'lec10.md'
-      - 11. Asynchronous Programming: 'lec11.md'
-  - Exercises:
-      - 1. Circles & Points: 'exercise1.md'
-      - 2. Square & PaintedSquare: 'exercise2.md'
-      - 3. PaintedSquare Revisited: 'exercise3.md'
-      - 4. Exceptions: 'exercise4.md'
-      - 5. Streams: 'exercise5.md'
-      - 6. Functors, Collectors: 'exercise6.md'
-      - 7. Mock Exam: 'exercise7.md'
-  - Labs:
-      - 1. Question: 'lab1.md'
-      - 1. Comments: 'lab01-comments.md'
-      - 2. Question: 'lab2.md'
-      - 2. Comments: 'lab02-comments.md'
-      - 3. Question: 'lab3.md'
-      - 4. Question: 'lab4.md'
-      - 5. Question: 'lab5.md'
-      - 6. Question: 'lab6.md'
-      - 7. Question: 'lab7.md'
-      - 8. Question: 'lab8.md'
-      - 9. Question: 'lab9.md'
-      - 10. Question: 'lab10.md'
-      - 11. Question: 'lab11.md'
+      - 1. Abstraction & Encapsulation: 'lec01.md'
+      - 2. Interface, Inheritance & Polymorphism: 'lec02.md'
+  - Coding Style: 'style.md'
   - Software/Tools:
       - Java: 'jdk.md'
       - Javadoc: 'javadoc.md'
@@ -52,8 +19,9 @@ pages:
 # pip install pymdown-extensions
 # pip install pygments
 site_name: CS2030 Programming Methodology II
-repo_url: https://github.com/nus-cs2030/1718-s1
-copyright: Copyright by Wei Tsang Ooi, Department of Computer Science, National University of Singapore 2017
+repo_url: https://github.com/nus-cs2030/1718-s2
+site_url: https://nus-cs2030.github.io/1718-s2
+copyright: Copyright by Wei Tsang Ooi, Department of Computer Science, National University of Singapore 2018
 remote_branch: gh-pages
 use_directory_urls: false
 markdown_extensions:
