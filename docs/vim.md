@@ -203,3 +203,8 @@ let g:syntastic_java_checkstyle_conf_file = "~cs2030/bin/cs2030_checks.xml"
 
 The last two lines refer to [`checkstyle`](http://checkstyle.sourceforge.net) tool and its configuration file available from `~cs2030/bin` on the host `cs2030-i.comp.nus.edu.sg`.
 
+## Splitting `vim`'s Viewport
+
+- `:sp file.java` splits the `vim` window horizontally
+- `:vsp file.java` splits the `vim` window vertically
+- `Ctrl-w Ctrl-w` moves between the different `vim` viewports
