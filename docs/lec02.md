@@ -73,9 +73,9 @@ class Circle implements Shape {
   private Point center;
   private double radius;
 
-  public Circle(Point initCenter, double initR) {
-    center = initCenter;
-    radius = initR;
+  public Circle(Point center, double radius) {
+    this.center = center;
+    this.radius = radius;
   }
 
   public void moveTo(Point p) {
@@ -103,6 +103,9 @@ This is very similar to the code you saw in Lecture 1, except that in Line 2, we
 
 !!! note "Java Annotation"
     Annotations are metadata that is not part of the code.  They do not affect execution.  They are useful to compilers and other software tools, as well as humans who read the code.  While we can similarly make the code more human-friendly with comments, an annotation is structured and so can be easily parsed by software.  You will see 1-2 more useful annotations in this module.
+
+!!! note "this"
+    The `this` keyword in Java that refers to the current object.  In the example above, we use `this` to disambiguate the argument `center` and the field `center`.  In general, it is a good practice to use `this` when referring the instance variable of the current object to make your intention clear.
 
 Note that we can have other methods (such as `moveTo`) in the class beyond what is promised in the interface the class implements.
 
@@ -241,7 +244,7 @@ With the interface `Shape`, we can implement other classes, such as `Rectangle`,
 
 ```Java
 class Rectangle implements Shape, Printable {
-		 // left as exercise (See Exercise 2)
+   // left as exercise (See Exercise 2)
 }
 ```
 
@@ -283,22 +286,22 @@ import java.awt.Color;
 
 class PaintedTriangle implements Shape, Printable {
   private Color  fillColor;
-	private Color  borderColor;
-	private double borderThickness;
+  private Color  borderColor;
+  private double borderThickness;
 
-	public void fillWith(Color c) {
-		fillColor = c;
-	}
+  public void fillWith(Color c) {
+    fillColor = c;
+  }
 
-	public void setBorderThickness(double t) {
-		borderThickness = t;
-	}
+  public void setBorderThickness(double t) {
+    borderThickness = t;
+  }
 
-	public void setBorderColor(Color c) {
-		borderColor = c;
-	}
+  public void setBorderColor(Color c) {
+    borderColor = c;
+  }
 
-	// other methods and fields written for Triangle
+  // other methods and fields written for Triangle
 
 }
 ```
@@ -320,26 +323,26 @@ The OO-way to do this is to create a _parent class_, and put all common fields a
 ```Java
 class PaintedShape {
   private Color  fillColor;
-	private Color  borderColor;
-	private double borderThickness;
+  private Color  borderColor;
+  private double borderThickness;
 
-  public PaintedShape(Color initFillColor, Color initBorderColor, double initBorderThickness) {
-		fillColor = initFillColor;
-		borderColor = initBorderColor;
-		borderThickness = initBorderThickness;
-	}
+  public PaintedShape(Color fillColor, Color borderColor, double borderThickness) {
+    this.fillColor = fillColor;
+    this.borderColor = borderColor;
+    this.borderThickness = borderThickness;
+  }
 
-	public void fillWith(Color c) {
-		fillColor = c;
-	}
+  public void fillWith(Color c) {
+    fillColor = c;
+  }
 
-	public void setBorderThickness(double t) {
-		borderThickness = t;
-	}
+  public void setBorderThickness(double t) {
+    borderThickness = t;
+  }
 
-	public void setBorderColor(Color c) {
-		borderColor = c;
-	}
+  public void setBorderColor(Color c) {
+    borderColor = c;
+  }
 }
 ```
 
@@ -378,29 +381,29 @@ The method table now includes pointers to methods defined in the parent (and gra
 Now consider the constructor for `PaintedCircle`.   We need to initialize the geometric shape as well as the painting style.  But, we define the fields `fillColor`, etc `private`, and thus subclasses have no access to `private` fields in the parent.  We need to call the constructor of the parent to initialize these private fields.  The way to do this is to use the `super` keyword, as such:
 
 ```Java
-  public PaintedCircle(Point initCenter, double initRadius, Color initFillColor, Color initBorderColor, double initBorderThickness) {
-		super(initFillColor, initBorderColor, initBorderThickness);
-		c = initCenter;
-		r = initRadius;
-	}
+  public PaintedCircle(Point center, double radius, Color fillColor, Color borderColor, double borderThickness) {
+    super(fillColor, borderColor, borderThickness);
+    this.center = center;
+    this.radius = radius;
+  }
 ```
 
 You can see that the constructor for `PaintedCircle` now takes in five parameters.  You can imagine that as the class gets more sophisticated with more fields, we need to pass in more parameters to the class to initialize the fields.  It is not uncommon to provide alternative constructors with fewer parameters and assign some _default_ values to the fields.
 
 ```Java
   // create circle with default style (white with black border of thickness 1)
-  public PaintedCircle(Point initCenter, double initRadius) {
-	  super(Color.WHITE, Color.BLACK, 1.0);
-	  c = initCenter;
-	  r = initRadius;
+  public PaintedCircle(Point center, double radius) {
+    super(Color.WHITE, Color.BLACK, 1.0);
+    this.center = center;
+    this.radius = radius;
   }
 
-	// create circle with customized styles  
-  public PaintedCircle(Point initCenter, double initRadius, Color initFillColor, Color initBorderColor, double initBorderThickness) {
-		super(initFillColor, initBorderColor, initBorderThickness);
-		c = initCenter;
-		r = initRadius;
-	}
+  // create circle with customized styles  
+  public PaintedCircle(Point center, double radius, Color fillColor, Color borderColor, double borderThickness) {
+    super(fillColor, borderColor, borderThickness);
+    this.center = center;
+    this.radius = radius;
+  }
 ```
 
 Two methods in a class can have the same name and still co-exist peacefully together.  This is called _overloading_.  When a method is called, we look at the _signature_ of the method, which consists of (i) the name of the method, (ii) the number, order, and type of the arguments, to determine which method is called.  To be precise, the first sentence of this paragraph should read: Two methods in a class can have the same name and still co-exist peacefully together, as long as they have different signatures.  Note that the return type is not part of the method signature, so you cannot have two methods with the same name and same arguments but different return type.  
@@ -409,5 +412,30 @@ Even though the example above shows overloading of the constructor, we can overl
 
 ## Exercise
 
-1. Write another class `Rectangle` that implements these two interfaces.  You should make use of the class `Point` that you implemented from Lecture 1's exercise.  Then write another class `PaintedRectangle` that implements the two interfaces and inherits from `PaintedShape` that implements the two interfaces and inherits from `PaintedShape`.  You can assume that the sides of the rectangles are parallel with the x- and y-axes (in other words, the sides are either horizontal or vertical).
+1. Consider what happen when we do the following:
 
+    ```Java
+    Shape c1 = new Circle(new Point(0,0), 10);
+    Printable c2 = c1;
+    ```
+
+    Are the following statements allowed?  Why do you think Java does not allow some of the following statements?
+
+    ```
+    c1.print();
+    c2.print();
+    c1.getArea();
+    c2.getArea();
+    ```
+
+2. Write another class `Rectangle` that implements these two interfaces.  You should make use of the class `Point` that you implemented from Lecture 1's exercise.  Then write another class `PaintedRectangle` that implements the two interfaces and inherits from `PaintedShape` that implements the two interfaces and inherits from `PaintedShape`.  You can assume that the sides of the rectangles are parallel with the x- and y-axes (in other words, the sides are either horizontal or vertical).
+
+3. (i) Write an interface called `Shape3D` that supports a method `getVolume`.  Write a class called `Cuboid` that implements `Shape3D` and has three private `double` fields `length`, `height`, and `breadth`.  `getVolume()` should return the volume of the `Cuboid` object.  The constructor for `Shape3D` should allow the client to create a `Shape3D` object by specifying the three fields `length`, `height` and `breadth`.
+ 
+    (ii) We can extend one interface from another as well.  Find out how, and write a new interface `Solid3D` that inherits from interface `Shape3D` that supports a method `getDensity` and `getMass`.  
+	
+	(iii) Now, write a new class called `SolidCuboid` with an additional private `double` field `density`.  The implementation of `getDensity()` should return this field while `getMass()` should return the mass of the cuboid.  The `SolidCuboid` should call the constructor of `Cuboid` via `super` and provides two constructors: one constructor allows the client to specify the density, and the other does not and just set the default density to 1.0.
+
+4.  Write a class `Rectangle` that implements `Shape`.  A `Rectangle` class has two `double` fields, `length` and `width`, and a public method `setSize(int length, int width)` that allows the client to change its size.  
+
+	Now, write a class `Square` that inherits from `Rectangle`.  A `Square` has an additional constraint that `length` must be the same as `width`.  How should `Square` implement the `setSize(int length, int width)` method?  Do you think `Square` should inherit from `Rectangle`?  Or should it be another way around?  Or maybe they should not inherit from each other?
