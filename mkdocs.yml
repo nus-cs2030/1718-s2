@@ -6,12 +6,9 @@ pages:
       - Policies: 'policies.md'
   - Schedule: 'schedule.md'
   - Readings: 'readings.md'
-  - Review Qs: 'reviews.md'
-  - Coding Style: 'style.md'
-  - Midterm: 'midterm.md'
   - Lectures:
       - 1. Abstraction & Encapsulation: 'lec01.md'
-      - 2. Inheritance & Polymorphism: 'lec02.md'
+      - 2. Interface, Inheritance & Polymorphism: 'lec02.md'
       - 3. Inheritance, Continued : 'lec03.md'
       - 4. Memory, Exceptions, Generics : 'lec04.md'
       - 5. Numbers, Strings, Collections: 'lec05.md'
@@ -43,6 +40,7 @@ pages:
       - 9. Question: 'lab9.md'
       - 10. Question: 'lab10.md'
       - 11. Question: 'lab11.md'
+  - Coding Style: 'style.md'
   - Software/Tools:
       - Java: 'jdk.md'
       - Javadoc: 'javadoc.md'
@@ -52,8 +50,9 @@ pages:
 # pip install pymdown-extensions
 # pip install pygments
 site_name: CS2030 Programming Methodology II
-repo_url: https://github.com/nus-cs2030/1718-s1
-copyright: Copyright by Wei Tsang Ooi, Department of Computer Science, National University of Singapore 2017
+repo_url: https://github.com/nus-cs2030/1718-s2
+site_url: https://nus-cs2030.github.io/1718-s2
+copyright: Copyright by Wei Tsang Ooi, Department of Computer Science, National University of Singapore 2018
 remote_branch: gh-pages
 use_directory_urls: false
 markdown_extensions:
