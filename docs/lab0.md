@@ -74,7 +74,7 @@ should return
 
 `atan2()` takes in 2 double as arguments for coordinate x & y. It returns theta, the angle in radian, counted in 
 anti-clockwise direction with respect to origin. One mathematical trick here is if you subtract the coordinates 
-of `Point p` from `Point q`, you basically reduce `Point p` to be an origin. 
+of `Point p` from `Point q`, you basically reduce `Point p` to be an origin to `Point q`. 
 For more detail, please refer to https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#atan2-double-double-
 
 ![Angle To](figures/lab01/lab01.001.png)
@@ -164,4 +164,4 @@ When you are ready to submit your lab, on `cs2030-i`, run the script
 
 which will copy your the three java files `MaxDiscCover.java`, `Point.java`, and `Circle.java` (and nothing else) from your `~/lab01` directory on `cs2030-i` to an internal grading directory.
 
-You can submit multiple times, but only the most recent submission will be graded. This lab is a warm-up lab, which will not be graded. 
+You can submit multiple times, but only the most recent submission will be graded for the next lab onwards. This lab is a warm-up lab, which will not be graded. 
