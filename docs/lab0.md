@@ -1,8 +1,8 @@
-# Lab 1
+# Lab 0
 
 This is a warm up, ungraded, lab.  
 
-Submission deadline: 2359, Sunday, September 3, 2017.
+Submission deadline: 2359, Sunday, February  4, 2018.
 
 ## Learning Objectives
 
@@ -34,9 +34,9 @@ Read through the files above.  Although we have seen `Circles` and `Points` as e
 Augment the class `Point` with the following public methods and constructors.
 You may find the static methods provided by [`java.lang.Math`](https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html) useful.
 
-### 1.1. Constructor for midpoint
+### 1.1. Static Method to construct mid point
 ```Java
-public Point(Point p, Point q)
+public static Point midPoint(Point p, Point q)
 ```
 
 Given two points `p` and `q`, create and return the midpoint of `p` and `q`.
@@ -53,7 +53,7 @@ You should have written something like this from your Exercise 1.  This method r
 public double angleTo(Point q) 
 ```
 
-This method returns the angle between the current point and point `q`.  In the figure below, it returns the angle $\theta$.  You can compute this using the `atan2()` function.  For instance, 
+This method returns the angle between the current point and point `q`.  In the figure below, it returns the angle $\theta$.  You can compute this using the `atan2()` function. For instance, 
 ```Java
 Point p = new Point(0, 0);
 p.angleTo(new Point(1, 1));
@@ -63,6 +63,7 @@ should return
 0.7853981633974483
 ```
 which is $\pi/4$.
+
 ```
 p.angleTo(new Point(1, 0));
 ```
@@ -70,6 +71,11 @@ should return
 ```
 0.0
 ```
+
+`atan2()` takes in 2 double as arguments for coordinate x & y. It returns theta, the angle in radian, counted in 
+anti-clockwise direction with respect to origin. One mathematical trick here is if you subtract the coordinates 
+of `Point p` from `Point q`, you basically reduce `Point p` to be an origin to `Point q`. 
+For more detail, please refer to https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#atan2-double-double-
 
 ![Angle To](figures/lab01/lab01.001.png)
 
@@ -83,6 +89,8 @@ Move the point by a given distance at direction theta (in radian).  See Figure:
 ![Move point with distance and angle](figures/lab01/lab01.002.png)
 
 The new point should have the coordinate ($x + d\cos\theta, y + d\sin\theta$).
+Note in this method, you are given angle(theta) and want to find length. Hence
+you need to use cosine and sine.
 
 After
 ```
@@ -96,12 +104,12 @@ Augment the class `Circle` with the following methods and constructors:
 
 ### 2.1 Constructor
 ```Java
-public Circle(Point p, Point q, double radius, boolean centerOnLeft)
+public Circle(Point p, Point q, double radius)
 ```
 
 The constructor above takes in two points `p` and `q`, and returns a circle  that passes through both `p` and `q`, with radius `radius`.  
 
-There are two such possible circles (see figures below) if distance between `p` and `q` is no greater than 2x`radius`[^1].  Imagine if you walk from `p` to `q`, one of the circle will have the center on your left, the other will have the center on your right.  If the parameter `centerOnLeft` is `true`, then the constructor will return the circle on the left, otherwise it will return the circle on the right.  See figure below.
+There are two such possible circles (see figures below) if distance between `p` and `q` is no greater than 2x`radius`[^1].  Imagine if you walk from `p` to `q`, one of the circle will have the center on your left, the other will have the center on your right. In this method, we will only consider the circle on the left because the circle on the right will be considered when you walk from `q` to `p`. See figure below.
 
 ![Constructor for Circle from two points](figures/lab01/lab01.003.png)
 
@@ -146,9 +154,6 @@ ooiwt@cs2030-i:~/lab01[xxx]$ java MaxDiscCover < TESTDATA1.txt
 ```
 (The output `4` above is a sample only -- it might not be the correct answer)
 
-## 4. What If
-
-Suppose now, hypothetically, we replace Point's implementation with one that represents a point with polar coordinates internally, but has exactly the same public methods and constructors.  How many lines of code in `MaxDiscCover.java` and `Circle.java` do you need to change?
 
 ## Submission
 
@@ -159,4 +164,4 @@ When you are ready to submit your lab, on `cs2030-i`, run the script
 
 which will copy your the three java files `MaxDiscCover.java`, `Point.java`, and `Circle.java` (and nothing else) from your `~/lab01` directory on `cs2030-i` to an internal grading directory.
 
-You can submit multiple times, but only the most recent submission will be graded.
+You can submit multiple times, but only the most recent submission will be graded for the next lab onwards. This lab is a warm-up lab, which will not be graded. 

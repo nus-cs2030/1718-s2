@@ -1,4 +1,15 @@
-# Schedule (Tentative)
+# Lab Timetable
+
+All labs are on Tuesday.
+
+Time        | COM1-B109 | COM1-B111 | COM1-B112 |
+------------| --------- | --------- | --------- |
+1000 - 1200 | (1) Wei Tsang | (5) Ziquan, Yi Chong | - |
+1200 - 1400 | -         | (6) Ziquan, Jun Rong | - |
+1400 - 1600 | (3) Nelvin, Nicholas | (7) Siyu, Hui Chun | - | 
+1600 - 1800 | (4) Heng Guang, Jeremy | (8) Winson, Triston | (2) Bernard, Si Jie |
+
+# Lecture Schedule (Tentative)
 
 Week | Date       | Topics | Labs |
 -----| ---------- | ------ | -----|
