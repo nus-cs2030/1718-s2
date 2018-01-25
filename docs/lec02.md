@@ -415,8 +415,9 @@ Even though the example above shows overloading of the constructor, we can overl
 1. Consider what happen when we do the following:
 
     ```Java
-    Shape c1 = new Circle(new Point(0,0), 10);
-    Printable c2 = c1;
+	Circle c = new Circle(new Point(0,0), 10);
+    Shape c1 = c;
+    Printable c2 = c;
     ```
 
     Are the following statements allowed?  Why do you think Java does not allow some of the following statements?
