@@ -436,6 +436,33 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#tunneling-through-sunfire" title="Tunneling through Sunfire" class="md-nav__link">
+    Tunneling through Sunfire
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ssh-using-sunfires-terminal" title="SSH Using Sunfire's Terminal" class="md-nav__link">
+    SSH Using Sunfire's Terminal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssh-port-forwarding" title="SSH Port Forwarding" class="md-nav__link">
+    SSH Port Forwarding
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#ssh" title="SSH" class="md-nav__link">
     SSH
   </a>
@@ -451,8 +478,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#for-windows-7-or-8" title="For Windows 7 or 8" class="md-nav__link">
-    For Windows 7 or 8
+  <a href="#for-windows-7-or-8-or-windows-10-without-linux-subsystem" title="For Windows 7 or 8 (or Windows 10 without Linux Subsystem)" class="md-nav__link">
+    For Windows 7 or 8 (or Windows 10 without Linux Subsystem)
   </a>
   
 </li>
@@ -578,6 +605,33 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#tunneling-through-sunfire" title="Tunneling through Sunfire" class="md-nav__link">
+    Tunneling through Sunfire
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ssh-using-sunfires-terminal" title="SSH Using Sunfire's Terminal" class="md-nav__link">
+    SSH Using Sunfire's Terminal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssh-port-forwarding" title="SSH Port Forwarding" class="md-nav__link">
+    SSH Port Forwarding
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#ssh" title="SSH" class="md-nav__link">
     SSH
   </a>
@@ -593,8 +647,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#for-windows-7-or-8" title="For Windows 7 or 8" class="md-nav__link">
-    For Windows 7 or 8
+  <a href="#for-windows-7-or-8-or-windows-10-without-linux-subsystem" title="For Windows 7 or 8 (or Windows 10 without Linux Subsystem)" class="md-nav__link">
+    For Windows 7 or 8 (or Windows 10 without Linux Subsystem)
   </a>
   
 </li>
@@ -683,9 +737,19 @@ This will be the official programming environment for CS2030 for all your lab as
 <p>I have created your accounts on the VM based on your SoC UNIX account.  You can login with your SoC UNIX username (not your NUSNET username, unless you intentionally set the two to be the same) and password.</p>
 <h2 id="soc-vpn">SoC VPN</h2>
 <p>THe VM can only be accessed from within the School of Computing networks.  If you want to access it from outside, you need to setup a Virtual Private Network (VPN) (See <a href="https://docs.comp.nus.edu.sg/node/5065">instruction here</a>).  The staff at <code class="codehilite">helpdesk@comp.nus.edu.sg</code> or the IT helpdesk in COM1, Level 1, will be able to help with you setting up if needed.</p>
+<h2 id="tunneling-through-sunfire">Tunneling through Sunfire</h2>
+<p>Well, you don't actually need to setup a VPN.</p>
+<p>SoC's Sunfire is configured to allow your connection if it's originating from a local telco. (See <a href="https://docs.comp.nus.edu.sg/node/1824">more details here</a>.)  Since Sunfire is situated within the School of Computing network, Sunfire is able to access the VM.  This opens the possibility of connecting from your device (using an Internet connection from a local telco)) to Sunfire, and then from Sunfire to the VM.</p>
+<p>There are two ways to achieve this, and in both ways it appears to the CS2030 VM that Sunfire is the client.</p>
+<h3 id="ssh-using-sunfires-terminal">SSH Using Sunfire's Terminal</h3>
+<p>Connect to Sunfire at <code class="codehilite">sunfire.comp.nus.edu.sg</code> via your favourite SSH client.  After logging in, run the command <code class="codehilite">ssh cs2030-i</code> to connect to the CS2030 VM.  This effectively starts an SSH session to the VM from within your existing SSH session to Sunfire.  Refer to instructions below on how to connect via SSH.</p>
+<h3 id="ssh-port-forwarding">SSH Port Forwarding</h3>
+<p>SSH has built-in support for local and remote port forwarding, and local port forwarding can be used to commect to the CS2030 VM.  Local port forwarding means that a port of the SSH client (your machine) is forwarded to the SSH server (<code class="codehilite">sunfire</code>), which opens a connection to a preset destination server (<code class="codehilite">cs2030-i</code>).  This method causes the CS2030 VM to seem as if it is hosted on a local port, e.g. <code class="codehilite"><span class="n">localhost</span><span class="o">:</span><span class="mi">2030</span></code>, allowing you to use your favourite SCP program (e.g. <a href="https://filezilla-project.org/">FileZilla</a> to access the VM.</p>
+<p>To use local port forwarding (from local port <code class="codehilite">2030</code>), connect to Sunfire using <code class="codehilite">ssh -L 2030:cs2030-i.comp.nus.edu.sg:22 &lt;username&gt;@sunfire.comp.nus.edu.sg</code>.  This opens an SSH tunnel from port <code class="codehilite">2030</code> of your machine to port <code class="codehilite">22</code> (the default SSH port) of <code class="codehilite">cs2030-i.comp.nus.edu.sg</code> via Sunfire.  After successful login, open a separate SSH (or SCP) connection from your machine to <code class="codehilite"><span class="n">localhost</span><span class="o">:</span><span class="mi">2030</span></code> to access the VM.</p>
+<p><a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html"><code class="codehilite">PuTTY</code></a> supports SSH port forwarding, so this setup can also be used on Windows.</p>
 <h2 id="ssh">SSH</h2>
 <h3 id="for-unix-based-os">For UNIX-based OS</h3>
-<p>If you use either macOS, Windows 10 (with bash on Ubuntu), or Linux, you should have the command line <code class="codehilite">ssh</code> installed.  </p>
+<p>If you use either macOS, Windows 10 (requires <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">Linux Subsystem on Windows</a>), or Linux, you should have the command line <code class="codehilite">ssh</code> installed.  </p>
 <p>Run:
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ssh &lt;username&gt;@cs2030-i.comp.nus.edu.sg
 </pre></div>
@@ -694,9 +758,9 @@ This will be the official programming environment for CS2030 for all your lab as
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ssh ooiwt@cs2030-i.comp.nus.edu.sg
 </pre></div>
 </td></tr></table></p>
-<p>After the command above, following the instructions on screen.  The first time you ever connect to <code class="codehilite">cs2030-i.comp.nus.edu.sg</code>, you will be warned that you are connecting to a previously unknown host.  Said <code class="codehilite">yes</code>, and you will be prompted with your SoC UNIX password.</p>
-<h3 id="for-windows-7-or-8">For Windows 7 or 8</h3>
-<p>The desktop computers in Programming Lab 6 (PL6) runs Windows 7.  If you are using these computers, or your own computers with older versions of Windows, you need to use <code class="codehilite">XShell 5</code> to access the VM.</p>
+<p>After the command above, following the instructions on screen.  The first time you ever connect to <code class="codehilite">cs2030-i.comp.nus.edu.sg</code>, you will be warned that you are connecting to a previously unknown host.  Say <code class="codehilite">yes</code>, and you will be prompted with your SoC UNIX password.</p>
+<h3 id="for-windows-7-or-8-or-windows-10-without-linux-subsystem">For Windows 7 or 8 (or Windows 10 without Linux Subsystem)</h3>
+<p>The desktop computers in Programming Lab 6 (PL6) runs Windows 7.  If you are using these computers, or your own computers with older versions of Windows, you need to use programs like <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html"><code class="codehilite">PuTTY</code></a> to access the VM.</p>
 <h2 id="basic-unix-commands">Basic UNIX Commands</h2>
 <p>Once you logged into the VM, you will be prompted to enter a command with a prompt that looks like this:
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~[xxx]$
