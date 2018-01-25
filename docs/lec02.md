@@ -440,3 +440,5 @@ Even though the example above shows overloading of the constructor, we can overl
 4.  Write a class `Rectangle` that implements `Shape`.  A `Rectangle` class has two `double` fields, `length` and `width`, and a public method `setSize(int length, int width)` that allows the client to change its size.  
 
     Now, write a class `Square` that inherits from `Rectangle`.  A `Square` has an additional constraint that `length` must be the same as `width`.  How should `Square` implement the `setSize(int length, int width)` method?  Do you think `Square` should inherit from `Rectangle`?  Or should it be another way around?  Or maybe they should not inherit from each other?
+
+	(Note: to implement the `contains` method in `Shape`, you need to also keep the position of the `Square` (top left corner, for instance).  But, it is not important for this question)
