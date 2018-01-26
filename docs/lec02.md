@@ -431,7 +431,7 @@ Even though the example above shows overloading of the constructor, we can overl
 
 2. Write another class `Rectangle` that implements these two interfaces.  You should make use of the class `Point` that you implemented from Lecture 1's exercise.  Then write another class `PaintedRectangle` that implements the two interfaces and inherits from `PaintedShape` that implements the two interfaces and inherits from `PaintedShape`.  You can assume that the sides of the rectangles are parallel with the x- and y-axes (in other words, the sides are either horizontal or vertical).
 
-3. (i) Write an interface called `Shape3D` that supports a method `getVolume`.  Write a class called `Cuboid` that implements `Shape3D` and has three private `double` fields `length`, `height`, and `breadth`.  `getVolume()` should return the volume of the `Cuboid` object.  The constructor for `Shape3D` should allow the client to create a `Shape3D` object by specifying the three fields `length`, `height` and `breadth`.
+3. (i) Write an interface called `Shape3D` that supports a method `getVolume`.  Write a class called `Cuboid` that implements `Shape3D` and has three private `double` fields `length`, `height`, and `breadth`.  `getVolume()` should return the volume of the `Cuboid` object.  The constructor for `Cuboid` should allow the client to create a `Cuboid` object by specifying the three fields `length`, `height` and `breadth`.
  
     (ii) We can extend one interface from another as well.  Find out how, and write a new interface `Solid3D` that inherits from interface `Shape3D` that supports a method `getDensity` and `getMass`.  
     
