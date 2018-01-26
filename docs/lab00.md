@@ -1,8 +1,8 @@
-# Lab 1
+# Lab 0
 
 This is a warm up, ungraded, lab.  
 
-Submission deadline: 2359, Sunday, September 3, 2017.
+Submission deadline: 2359, Friday, February 2, 2018.
 
 ## Learning Objectives
 
@@ -21,22 +21,21 @@ After completing this lab, students should:
 - experience reading Java API documentation and find out what are the methods available, and what are the arguments and returned types.
 - see an example of how class `Scanner` is used
 - appreciate how encapsulation of class `Point` and class `Circle` allows one to reason about higher-level tasks without worrying about lower level representation
-- appreciate how encapsulation of the class `Points` allow one to change the internal representation without affecting how the class `Point` is used.
 
 ## Setup
 
-Login to `cs2030-i`, copy the files from `~cs2030/lab01` to your local directory under your home `~/lab01`.  You should see three java files (`Point.java`, `Circle.java`, and `MaxDiscCover.java`), and a few data files (`TESTDATA1.txt`, `TESTDATA2.txt`, ..., `TESTDATA5.txt`)
+Login to `cs2030-i`, copy the files from `~cs2030/lab0` to your local directory under your home `~/lab0`.  You should see four java files (`Point.java`, `Circle.java`, `MaxDiscCover.java`, and `LabZero.java`), and a few data files (`TESTDATA1.txt`, `TESTDATA2.txt`, ..., `TESTDATA5.txt`)
 
-Read through the files above.  Although we have seen `Circles` and `Points` as examples in class, these classes are slightly different.
+Read through the files above.  Although we have seen `Circle` and `Point` as examples in class, these classes are slightly different.
 
 ## 1. Augment the class Point
 
 Augment the class `Point` with the following public methods and constructors.
 You may find the static methods provided by [`java.lang.Math`](https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html) useful.
 
-### 1.1. Constructor for midpoint
+### 1.1. Static Method to construct mid point
 ```Java
-public Point(Point p, Point q)
+public static Point midPoint(Point p, Point q)
 ```
 
 Given two points `p` and `q`, create and return the midpoint of `p` and `q`.
@@ -53,7 +52,7 @@ You should have written something like this from your Exercise 1.  This method r
 public double angleTo(Point q) 
 ```
 
-This method returns the angle between the current point and point `q`.  In the figure below, it returns the angle $\theta$.  You can compute this using the `atan2()` function.  For instance, 
+This method returns the angle between the current point and point `q`.  In the figure below, it returns the angle $\theta$.  You can compute this using the `atan2()` function. For instance, 
 ```Java
 Point p = new Point(0, 0);
 p.angleTo(new Point(1, 1));
@@ -63,15 +62,24 @@ should return
 0.7853981633974483
 ```
 which is $\pi/4$.
+
 ```
 p.angleTo(new Point(1, 0));
 ```
+
 should return 
+
 ```
 0.0
 ```
 
-![Angle To](figures/lab01/lab01.001.png)
+`atan2()` takes in two `double` as arguments for coordinate `x` and `y`. It returns `theta`, the angle in radian, counted in 
+anti-clockwise direction with respect to origin. One mathematical trick here is if you subtract the coordinates 
+of `Point p` from `Point q`, you basically reduce `Point p` to be an origin to `Point q`. 
+For more detail, please refer to the Java API for [`atan2`](https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#atan2-double-double-) for more details.
+
+
+![Angle To](figures/lab0/lab0.001.png)
 
 ### 1.4. Move a point 
 ```Java
@@ -80,9 +88,9 @@ public void move(double theta, double d)
 
 Move the point by a given distance at direction theta (in radian).  See Figure:
 
-![Move point with distance and angle](figures/lab01/lab01.002.png)
+![Move point with distance and angle](figures/lab0/lab0.002.png)
 
-The new point should have the coordinate ($x + d\cos\theta, y + d\sin\theta$).
+The new point should have the coordinate ($x + d\cos\theta, y + d\sin\theta$).  Note in this method, you are given the angle (theta) and want to find length. Hence you need to use cosine and sine.
 
 After
 ```
@@ -90,24 +98,27 @@ p.move(p.angleTo(q), p.distanceTo(q));
 ```
 `p` should coincide with `q`.
 
+!!! note "Mutable vs. Immutable"
+    The method `move` is called a _mutable_ method, since it modifies (mutates) the object that it is called on.  Later in CS2030, you will be introduced to the concept of _immutable_ methods.
+    
 ## 2. Augment the class Circle
 
 Augment the class `Circle` with the following methods and constructors:
 
 ### 2.1 Constructor
 ```Java
-public Circle(Point p, Point q, double radius, boolean centerOnLeft)
+public Circle(Point p, Point q, double radius)
 ```
 
 The constructor above takes in two points `p` and `q`, and returns a circle  that passes through both `p` and `q`, with radius `radius`.  
 
-There are two such possible circles (see figures below) if distance between `p` and `q` is no greater than 2x`radius`[^1].  Imagine if you walk from `p` to `q`, one of the circle will have the center on your left, the other will have the center on your right.  If the parameter `centerOnLeft` is `true`, then the constructor will return the circle on the left, otherwise it will return the circle on the right.  See figure below.
+There are two such possible circles (see figures below) if distance between `p` and `q` is no greater than 2x`radius`[^1].  Imagine if you walk from `p` to `q`, one of the circle will have the center on your left, the other will have the center on your right. In this method, we will only consider the circle on the left because the circle on the right will be considered when you walk from `q` to `p`. See figure below.
 
-![Constructor for Circle from two points](figures/lab01/lab01.003.png)
+![Constructor for Circle from two points](figures/lab0/lab0.003.png)
 
 Hint: To find the center $c$ of the new circle, you can first find the midpoint $m$ of line $pq$, the length of line $mc$, and the angle between $m$ and $c$, using the `Point` methods you have written.  We also know that length of $cq$ is `radius`.  See figure below.
 
-![Constructor for Circle from two points](figures/lab01/lab01.004.png)
+![Constructor for Circle from two points](figures/lab0/lab0.004.png)
 
 The constructor should return a `Circle` with [Double.NaN](https://docs.oracle.com/javase/8/docs/api/java/lang/Double.html#NaN) as the radius and (0,0) as center if the distance between `p` and `q` is larger than 2x`radius` or is zero[^2].  Such `Circle` objects are invalid, and you may want to add a method in the `Circle` class to check for validity.  You can use [`Double.isNaN`](https://docs.oracle.com/javase/8/docs/api/java/lang/Double.html#isNaN-double-) for check if a double variable is NaN.
 
@@ -129,7 +140,7 @@ So, the algorithm simply goes through every pair of points, and for each circle 
 
 [^3]: This is a $O(n^3)$ algorithm.  Faster algorithm exists.
 
-The skeleton of the main class, called `MaxDiscCover.java` has been given to you.  This file is placed in the same directory as `Circle.java` and `Point.java`.  
+The skeleton of the main class, called `LabZero.java` has been given to you.  The file `MaxDiscCover.java`, also given, is where you will implement tha maximum disc coverage solution .  These two files are placed in the same directory as `Circle.java` and `Point.java`.  
 
 The skeleton code reads a set of points from the standard input, in the following format:
 
@@ -141,22 +152,29 @@ You can assume that the format of the input is always correct and there is alway
 Complete the program by implementing the maximum disc coverage algorithm above, and print the maximum number of points covered to standard output.  You can add additional methods and fields for `Point` and `Circle` if needed.
 
 ```
-ooiwt@cs2030-i:~/lab01[xxx]$ java MaxDiscCover < TESTDATA1.txt
-4
+ooiwt@cs2030-i:~/lab0[xxx]$ java LabZero < TESTDATA1.txt
+2
 ```
-(The output `4` above is a sample only -- it might not be the correct answer)
 
-## 4. What If
+The test cases and answers should be:
 
-Suppose now, hypothetically, we replace Point's implementation with one that represents a point with polar coordinates internally, but has exactly the same public methods and constructors.  How many lines of code in `MaxDiscCover.java` and `Circle.java` do you need to change?
+TEST | Max Number of Points |
+-----|----------------------|
+1    | 2  |
+2    | 4  |
+3	 | 12 |
+4    | 44 |
+5    | 5  |
+
+Note that it is still possible for your solution to be buggy and you still get the same answer as above.
 
 ## Submission
 
 When you are ready to submit your lab, on `cs2030-i`, run the script
 ```
-~cs2030/submit01
+~cs2030/submit0
 ```
 
-which will copy your the three java files `MaxDiscCover.java`, `Point.java`, and `Circle.java` (and nothing else) from your `~/lab01` directory on `cs2030-i` to an internal grading directory.
+which will copy your the three java files `MaxDiscCover.java`, `Point.java`, and `Circle.java` (and nothing else) from your `~/lab0` directory on `cs2030-i` to an internal grading directory.
 
-You can submit multiple times, but only the most recent submission will be graded.
+You can submit multiple times, but only the most recent submission will be graded for the next lab onwards. This lab is a warm-up lab, which will not be graded. 

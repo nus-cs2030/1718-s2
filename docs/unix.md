@@ -11,11 +11,31 @@ I have created your accounts on the VM based on your SoC UNIX account.  You can 
 
 THe VM can only be accessed from within the School of Computing networks.  If you want to access it from outside, you need to setup a Virtual Private Network (VPN) (See [instruction here](https://docs.comp.nus.edu.sg/node/5065)).  The staff at `helpdesk@comp.nus.edu.sg` or the IT helpdesk in COM1, Level 1, will be able to help with you setting up if needed.
 
+## Tunneling through Sunfire
+
+Well, you don't actually need to setup a VPN.
+
+SoC's Sunfire is configured to allow your connection if it's originating from a local telco. (See [more details here](https://docs.comp.nus.edu.sg/node/1824).)  Since Sunfire is situated within the School of Computing network, Sunfire is able to access the VM.  This opens the possibility of connecting from your device (using an Internet connection from a local telco)) to Sunfire, and then from Sunfire to the VM.
+
+There are two ways to achieve this, and in both ways it appears to the CS2030 VM that Sunfire is the client.
+
+### SSH Using Sunfire's Terminal
+
+Connect to Sunfire at `sunfire.comp.nus.edu.sg` via your favourite SSH client.  After logging in, run the command `ssh cs2030-i` to connect to the CS2030 VM.  This effectively starts an SSH session to the VM from within your existing SSH session to Sunfire.  Refer to instructions below on how to connect via SSH.
+
+### SSH Port Forwarding
+
+SSH has built-in support for local and remote port forwarding, and local port forwarding can be used to commect to the CS2030 VM.  Local port forwarding means that a port of the SSH client (your machine) is forwarded to the SSH server (`sunfire`), which opens a connection to a preset destination server (`cs2030-i`).  This method causes the CS2030 VM to seem as if it is hosted on a local port, e.g. `localhost:2030`, allowing you to use your favourite SCP program (e.g. [FileZilla](https://filezilla-project.org/) to access the VM.
+
+To use local port forwarding (from local port `2030`), connect to Sunfire using `ssh -L 2030:cs2030-i.comp.nus.edu.sg:22 <username>@sunfire.comp.nus.edu.sg`.  This opens an SSH tunnel from port `2030` of your machine to port `22` (the default SSH port) of `cs2030-i.comp.nus.edu.sg` via Sunfire.  After successful login, open a separate SSH (or SCP) connection from your machine to `localhost:2030` to access the VM.
+
+[`PuTTY`](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) supports SSH port forwarding, so this setup can also be used on Windows.
+
 ## SSH
 
 ### For UNIX-based OS
 
-If you use either macOS, Windows 10 (with bash on Ubuntu), or Linux, you should have the command line `ssh` installed.  
+If you use either macOS, Windows 10 (requires [Linux Subsystem on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10)), or Linux, you should have the command line `ssh` installed.  
 
 Run:
 ```
@@ -27,12 +47,11 @@ Replace `<username>` with your SoC UNIX username, for instance, I would do:
 ssh ooiwt@cs2030-i.comp.nus.edu.sg
 ```
 
-After the command above, following the instructions on screen.  The first time you ever connect to `cs2030-i.comp.nus.edu.sg`, you will be warned that you are connecting to a previously unknown host.  Said `yes`, and you will be prompted with your SoC UNIX password.
+After the command above, following the instructions on screen.  The first time you ever connect to `cs2030-i.comp.nus.edu.sg`, you will be warned that you are connecting to a previously unknown host.  Say `yes`, and you will be prompted with your SoC UNIX password.
 
+### For Windows 7 or 8 (or Windows 10 without Linux Subsystem)
 
-### For Windows 7 or 8
-
-The desktop computers in Programming Lab 6 (PL6) runs Windows 7.  If you are using these computers, or your own computers with older versions of Windows, you need to use `XShell 5` to access the VM.
+The desktop computers in Programming Lab 6 (PL6) runs Windows 7.  If you are using these computers, or your own computers with older versions of Windows, you need to use programs like [`PuTTY`](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) to access the VM.
 
 
 ## Basic UNIX Commands

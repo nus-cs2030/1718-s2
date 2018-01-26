@@ -16,9 +16,9 @@
 
 ## Late Submissions
 
-* All graded exercise must be submitted on time.  If you need an extension, please ask for one and provide a justification for approval.  
+* All graded exercise must be submitted on time.  If you need an extension, please ask for one and provide a justification for approval.  Only academic reasons can be considered (e.g., representing NUS for a sports event is OK, going for vacation is not)
 
-* For late submission, there is a 1% penalty (of the assessment grade) for every minute after the deadline, capped at 80%.  For example, if a homework is deserved 40 marks, and it is submitted 20 minutes after the deadline, the student will get 32 marks instead (20% penalty).  If it is submitted 2 hours after the deadline, the student will get 8 marks (as it has hit the cap of 80% penalty).
+* For late submission, there is a 1% penalty (of the assessment grade) for every 5-minute after the deadline, capped at 80%.  For example, if a homework is deserved 40 marks, and it is submitted 100 minutes after the deadline, the student will get 32 marks instead (20% penalty).  If it is submitted 10 hours after the deadline, the student will get 8 marks (as it has hit the cap of 80% penalty).
 
 ## Discussions and Plagiarism
 

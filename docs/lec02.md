@@ -5,9 +5,9 @@
 After this lecture, students should:
 
 - be able to build a mental model for how objects and classes are represented in Java
-- understand the concepts of object-oriented programming, including interface, polymorphism, late binding, inheritance, method overriding and method overloading, and the usage of these concepts in programming.
-- know the purpose and usage of Java keywords `implements`, `extends`, `super`, `instanceof`, and `@Override`
-- understand Java concepts of arrays, enhanced `for` loop, method signature, `Object` class, and object equality. 
+- understand the concepts of object-oriented programming, including interface, polymorphism, late binding, inheritance, method overloading, and the usage of these concepts in programming.
+- know the purpose and usage of Java keywords `implements`, `extends`, `super`, `this`, and `@Override`
+- understand Java concepts of arrays, enhanced `for` loop, and method signature.
 
 ## Memory Model for Objects
 
@@ -26,12 +26,12 @@ class A {
   private int x;
   static public int y;
 
-  void foo() {
-	:
+  public void foo() {
+    :
   }
 
-  void bar() {
-	:
+  public void bar() {
+    :
   }
 
     :
@@ -56,9 +56,9 @@ In Java, we can define an interface using `interface` keyword:
 
 ```Java
 interface Shape {
-	public double getArea();
-	public double getPerimeter();
-	public boolean contains(Point p);
+  public double getArea();
+  public double getPerimeter();
+  public boolean contains(Point p);
 }
 ```
 
@@ -113,7 +113,7 @@ _A class can implement more than one interface._  For instance, let's say that w
 
 ```
 interface Printable {
-	public void print();
+  public void print();
 }
 ```
 
@@ -121,14 +121,14 @@ The implementer of `Circle` wants to inform the clients that the method `void pr
 
 ```Java
 class Circle implements Shape, Printable {
-	 :
-	 :
-	 @Override
-	 public void print() {
-		 System.out.printf("radius: %f\n", radius);
-		 System.out.printf("center:");
-		 center.print();
-	 }
+     :
+     :
+   @Override
+   public void print() {
+     System.out.printf("radius: %f\n", radius);
+     System.out.printf("center:");
+     center.print();
+   }
 }
 ```
 
@@ -138,11 +138,11 @@ It is important to note that, `interface` provides a _syntactic_ contract on the
 
 ```Java
 class Circle implements Shape, Printable {
-	 :
-	 :
-	 @Override
-	 public void print() {
-	 }
+     :
+     :
+   @Override
+   public void print() {
+   }
 }
 ```
 
@@ -159,20 +159,20 @@ In Java, an interface is a type.  What this means is that:
 
 - We can declare a variable with an interface type, such as:
 ```Java
-	Shape circle;
+  Shape circle;
 ```
 or
 ```Java
-	Printable circle;
+  Printable circle;
 ```
 We cannot, however, instantiate an object from an interface
 since an interface is a "template", an "abstraction", and does not have an implementation.  For instance:
 
 ```Java
-	// this is not OK
-	Printable p = new Printable();
-	// this is OK
-	Printable circle = new Circle(new Point(0, 0), 10);
+  // this is not OK
+  Printable p = new Printable();
+  // this is OK
+  Printable circle = new Circle(new Point(0, 0), 10);
 ```
 
 - Similarly, we can pass arguments of an interface type into a method, and the return type of a method can be an interface.
@@ -185,20 +185,20 @@ We say that `Shape` and `Printable` are _supertypes_ of `Circle`, and `Circle` i
 
 We can now do something cool like this:
 ```Java
-	Printable[] objs;
-	  :
-	  // initialize array objs
+  Printable[] objs;
     :
-	for (Printable o: objs) {
-		o.print();
-	}
+    // initialize array objs
+  :
+  for (Printable o: objs) {
+      o.print();
+  }
 ```
 
 Let's examine this code.  Line 1 declares an array of objects of type `Printable`.  We skip over the code to initialize the content of the array for now, and
 jump to Line 5-7, which is a `for` loop.  Line 5 declares a loop variable `o` of type `Printable` and loops through all objects in the array `objs`, and Line 6 invokes the method `print` of `o`.
 
 !!! note "Array and For Loops in Java"
-	See Oracle's tutorial on [array](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/arrays.html) and [enhanced loop](h]ttps://docs.oracle.com/javase/tutorial/java/nutsandbolts/for.html)
+    See Oracle's tutorial on [array](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/arrays.html) and [enhanced loop](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/for.html)
 
 The magic happens in Line 6:
 
@@ -216,14 +216,14 @@ In a language with static binding, suppose you want to mix objects of different 
 together in an array, you need to do something like the following pseudocode:
 ```C
    for each object in the array
-	   if object is a point
-		   print_point(object)
-	   else if object is a circle
-		   print_circle(object)
+       if object is a point
+           print_point(object)
+       else if object is a circle
+           print_circle(object)
      else if object is a square
-		   print_square(object)
-		   :
-		   :
+           print_square(object)
+           :
+           :
 ```
 
 Not only is the code verbose and ugly, it would be cumbersome if you define a new compound data type that supports printing, since you would need to remember to add a new if-else condition to call for a corresponding print function.
@@ -256,22 +256,22 @@ import java.awt.Color;
 
 class PaintedCircle implements Shape, Printable {
   private Color  fillColor;
-	private Color  borderColor;
-	private double borderThickness;
+  private Color  borderColor;
+  private double borderThickness;
 
-	public void fillWith(Color c) {
-		fillColor = c;
-	}
+  public void fillWith(Color c) {
+    fillColor = c;
+  }
 
-	public void setBorderThickness(double t) {
-		borderThickness = t;
-	}
+  public void setBorderThickness(double t) {
+    borderThickness = t;
+  }
 
-	public void setBorderColor(Color c) {
-		borderColor = c;
-	}
+  public void setBorderColor(Color c) {
+    borderColor = c;
+  }
 
-	// other methods and fields for Circle from before
+  // other methods and fields for Circle from before
 
 }
 ```
@@ -350,11 +350,11 @@ The `PaintedCircle` class, `PaintedSquare` class, etc, can now _inherits_ non-pr
 ```Java
 
 class PaintedCircle extends PaintedShape implements Shape, Printable {
-	  :
+      :
 }
 
 class PaintedSquare extends PaintedShape implements Shape, Printable {
-	  :
+      :
 }
 ```
 
@@ -415,8 +415,9 @@ Even though the example above shows overloading of the constructor, we can overl
 1. Consider what happen when we do the following:
 
     ```Java
-    Shape c1 = new Circle(new Point(0,0), 10);
-    Printable c2 = c1;
+	Circle c = new Circle(new Point(0,0), 10);
+    Shape c1 = c;
+    Printable c2 = c;
     ```
 
     Are the following statements allowed?  Why do you think Java does not allow some of the following statements?
@@ -430,12 +431,14 @@ Even though the example above shows overloading of the constructor, we can overl
 
 2. Write another class `Rectangle` that implements these two interfaces.  You should make use of the class `Point` that you implemented from Lecture 1's exercise.  Then write another class `PaintedRectangle` that implements the two interfaces and inherits from `PaintedShape` that implements the two interfaces and inherits from `PaintedShape`.  You can assume that the sides of the rectangles are parallel with the x- and y-axes (in other words, the sides are either horizontal or vertical).
 
-3. (i) Write an interface called `Shape3D` that supports a method `getVolume`.  Write a class called `Cuboid` that implements `Shape3D` and has three private `double` fields `length`, `height`, and `breadth`.  `getVolume()` should return the volume of the `Cuboid` object.  The constructor for `Shape3D` should allow the client to create a `Shape3D` object by specifying the three fields `length`, `height` and `breadth`.
+3. (i) Write an interface called `Shape3D` that supports a method `getVolume`.  Write a class called `Cuboid` that implements `Shape3D` and has three private `double` fields `length`, `height`, and `breadth`.  `getVolume()` should return the volume of the `Cuboid` object.  The constructor for `Cuboid` should allow the client to create a `Cuboid` object by specifying the three fields `length`, `height` and `breadth`.
  
     (ii) We can extend one interface from another as well.  Find out how, and write a new interface `Solid3D` that inherits from interface `Shape3D` that supports a method `getDensity` and `getMass`.  
-	
-	(iii) Now, write a new class called `SolidCuboid` with an additional private `double` field `density`.  The implementation of `getDensity()` should return this field while `getMass()` should return the mass of the cuboid.  The `SolidCuboid` should call the constructor of `Cuboid` via `super` and provides two constructors: one constructor allows the client to specify the density, and the other does not and just set the default density to 1.0.
+    
+    (iii) Now, write a new class called `SolidCuboid` with an additional private `double` field `density`.  The implementation of `getDensity()` should return this field while `getMass()` should return the mass of the cuboid.  The `SolidCuboid` should call the constructor of `Cuboid` via `super` and provides two constructors: one constructor allows the client to specify the density, and the other does not and just set the default density to 1.0.
 
 4.  Write a class `Rectangle` that implements `Shape`.  A `Rectangle` class has two `double` fields, `length` and `width`, and a public method `setSize(int length, int width)` that allows the client to change its size.  
 
-	Now, write a class `Square` that inherits from `Rectangle`.  A `Square` has an additional constraint that `length` must be the same as `width`.  How should `Square` implement the `setSize(int length, int width)` method?  Do you think `Square` should inherit from `Rectangle`?  Or should it be another way around?  Or maybe they should not inherit from each other?
+    Now, write a class `Square` that inherits from `Rectangle`.  A `Square` has an additional constraint that `length` must be the same as `width`.  How should `Square` implement the `setSize(int length, int width)` method?  Do you think `Square` should inherit from `Rectangle`?  Or should it be another way around?  Or maybe they should not inherit from each other?
+
+	(Note: to implement the `contains` method in `Shape`, you need to also keep the position of the `Square` (top left corner, for instance).  But, it is not important for this question)
