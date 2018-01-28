@@ -441,6 +441,33 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#ssh" title="SSH" class="md-nav__link">
+    SSH
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-unix-based-os" title="For UNIX-based OS" class="md-nav__link">
+    For UNIX-based OS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-windows-7-or-8-or-windows-10-without-linux-subsystem" title="For Windows 7 or 8 (or Windows 10 without Linux Subsystem)" class="md-nav__link">
+    For Windows 7 or 8 (or Windows 10 without Linux Subsystem)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#accessing-cs2030-i-from-outside-soc" title="Accessing cs2030-i from Outside SoC" class="md-nav__link">
     Accessing cs2030-i from Outside SoC
   </a>
@@ -479,33 +506,6 @@
         
       </ul>
     </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ssh" title="SSH" class="md-nav__link">
-    SSH
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#for-unix-based-os" title="For UNIX-based OS" class="md-nav__link">
-    For UNIX-based OS
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-windows-7-or-8-or-windows-10-without-linux-subsystem" title="For Windows 7 or 8 (or Windows 10 without Linux Subsystem)" class="md-nav__link">
-    For Windows 7 or 8 (or Windows 10 without Linux Subsystem)
-  </a>
   
 </li>
         
@@ -623,6 +623,33 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#ssh" title="SSH" class="md-nav__link">
+    SSH
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-unix-based-os" title="For UNIX-based OS" class="md-nav__link">
+    For UNIX-based OS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-windows-7-or-8-or-windows-10-without-linux-subsystem" title="For Windows 7 or 8 (or Windows 10 without Linux Subsystem)" class="md-nav__link">
+    For Windows 7 or 8 (or Windows 10 without Linux Subsystem)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#accessing-cs2030-i-from-outside-soc" title="Accessing cs2030-i from Outside SoC" class="md-nav__link">
     Accessing cs2030-i from Outside SoC
   </a>
@@ -661,33 +688,6 @@
         
       </ul>
     </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ssh" title="SSH" class="md-nav__link">
-    SSH
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#for-unix-based-os" title="For UNIX-based OS" class="md-nav__link">
-    For UNIX-based OS
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-windows-7-or-8-or-windows-10-without-linux-subsystem" title="For Windows 7 or 8 (or Windows 10 without Linux Subsystem)" class="md-nav__link">
-    For Windows 7 or 8 (or Windows 10 without Linux Subsystem)
-  </a>
   
 </li>
         
@@ -773,6 +773,20 @@
 <p>The school has created a VM (virtual machine) for CS2030, with hostname <code class="codehilite">cs2030-i.comp.nus.edu.sg</code>.  The VM is running CentOS, one of the Linux distributions.
 This will be the official programming environment for CS2030 for all your lab assignments.</p>
 <p>I have created your accounts on the VM based on your SoC UNIX account.  You can login with your SoC UNIX username (not your NUSNET username, unless you intentionally set the two to be the same) and password.</p>
+<h2 id="ssh">SSH</h2>
+<h3 id="for-unix-based-os">For UNIX-based OS</h3>
+<p>If you use either macOS, Windows 10 (requires <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">Linux Subsystem on Windows</a>), or Linux, you should have the command line <code class="codehilite">ssh</code> installed.  </p>
+<p>Run:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ssh &lt;username&gt;@cs2030-i.comp.nus.edu.sg
+</pre></div>
+</td></tr></table></p>
+<p>Replace <code class="codehilite">&lt;username&gt;</code> with your SoC UNIX username, for instance, I would do:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ssh ooiwt@cs2030-i.comp.nus.edu.sg
+</pre></div>
+</td></tr></table></p>
+<p>After the command above, following the instructions on screen.  The first time you ever connect to <code class="codehilite">cs2030-i.comp.nus.edu.sg</code>, you will be warned that you are connecting to a previously unknown host.  Say <code class="codehilite">yes</code>, and you will be prompted with your SoC UNIX password.</p>
+<h3 id="for-windows-7-or-8-or-windows-10-without-linux-subsystem">For Windows 7 or 8 (or Windows 10 without Linux Subsystem)</h3>
+<p>The desktop computers in Programming Lab 6 (PL6) runs Windows 7.  If you are using these computers, or your own computers with older versions of Windows, you need to use programs like <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html"><code class="codehilite">PuTTY</code></a> to access the VM.</p>
 <h2 id="accessing-cs2030-i-from-outside-soc">Accessing <code class="codehilite">cs2030-i</code> from Outside SoC</h2>
 <p>THe VM can only be accessed from within the School of Computing networks.  If you want to access it from outside, there are two ways</p>
 <h3 id="using-soc-vpn">Using SoC VPN</h3>
@@ -791,20 +805,6 @@ This will be the official programming environment for CS2030 for all your lab as
 </td></tr></table>
 This command opens an SSH tunnel from port <code class="codehilite">2030</code> of your machine to port <code class="codehilite">22</code> (the default SSH port) of <code class="codehilite">cs2030-i.comp.nus.edu.sg</code> via <code class="codehilite">sunfire</code>.  After successful login, open a separate SSH (or SCP) connection from your machine to <code class="codehilite"><span class="n">localhost</span><span class="o">:</span><span class="mi">2030</span></code> to access the VM.</p>
 <p><a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html"><code class="codehilite">PuTTY</code></a> supports SSH port forwarding, so this setup can also be used on Windows.</p>
-<h2 id="ssh">SSH</h2>
-<h3 id="for-unix-based-os">For UNIX-based OS</h3>
-<p>If you use either macOS, Windows 10 (requires <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">Linux Subsystem on Windows</a>), or Linux, you should have the command line <code class="codehilite">ssh</code> installed.  </p>
-<p>Run:
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ssh &lt;username&gt;@cs2030-i.comp.nus.edu.sg
-</pre></div>
-</td></tr></table></p>
-<p>Replace <code class="codehilite">&lt;username&gt;</code> with your SoC UNIX username, for instance, I would do:
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ssh ooiwt@cs2030-i.comp.nus.edu.sg
-</pre></div>
-</td></tr></table></p>
-<p>After the command above, following the instructions on screen.  The first time you ever connect to <code class="codehilite">cs2030-i.comp.nus.edu.sg</code>, you will be warned that you are connecting to a previously unknown host.  Say <code class="codehilite">yes</code>, and you will be prompted with your SoC UNIX password.</p>
-<h3 id="for-windows-7-or-8-or-windows-10-without-linux-subsystem">For Windows 7 or 8 (or Windows 10 without Linux Subsystem)</h3>
-<p>The desktop computers in Programming Lab 6 (PL6) runs Windows 7.  If you are using these computers, or your own computers with older versions of Windows, you need to use programs like <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html"><code class="codehilite">PuTTY</code></a> to access the VM.</p>
 <h2 id="basic-unix-commands">Basic UNIX Commands</h2>
 <p>Once you logged into the VM, you will be prompted to enter a command with a prompt that looks like this:
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~[xxx]$
