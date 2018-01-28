@@ -9,6 +9,7 @@ pages:
   - Lectures:
       - 1. Abstraction & Encapsulation: 'lec01.md'
       - 2. Interface, Inheritance & Polymorphism: 'lec02.md'
+      - 3. More on Inheritance: 'lec03.md'
   - Coding Style: 'style.md'
   - Software/Tools:
       - Java: 'jdk.md'
