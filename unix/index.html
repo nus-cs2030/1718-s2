@@ -482,6 +482,81 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssh" title="SSH" class="md-nav__link">
+    SSH
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-unix-based-os" title="For UNIX-based OS" class="md-nav__link">
+    For UNIX-based OS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-windows-7-or-8-or-windows-10-without-linux-subsystem" title="For Windows 7 or 8 (or Windows 10 without Linux Subsystem)" class="md-nav__link">
+    For Windows 7 or 8 (or Windows 10 without Linux Subsystem)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-unix-commands" title="Basic UNIX Commands" class="md-nav__link">
+    Basic UNIX Commands
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directory-commands" title="Directory commands" class="md-nav__link">
+    Directory commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-commands" title="File commands" class="md-nav__link">
+    File commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-to-display-text-files" title="Command to display text files" class="md-nav__link">
+    Command to display text files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unix-file-permission" title="UNIX File Permission" class="md-nav__link">
+    UNIX File Permission
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secure-copy-scp" title="Secure Copy (scp)" class="md-nav__link">
+    Secure Copy (scp)
+  </a>
+  
+</li>
+        
           <li class="md-nav__item">
   <a href="#setting-up-ssh-keys" title="Setting up SSH Keys" class="md-nav__link">
     Setting up SSH Keys
@@ -589,6 +664,81 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssh" title="SSH" class="md-nav__link">
+    SSH
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-unix-based-os" title="For UNIX-based OS" class="md-nav__link">
+    For UNIX-based OS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-windows-7-or-8-or-windows-10-without-linux-subsystem" title="For Windows 7 or 8 (or Windows 10 without Linux Subsystem)" class="md-nav__link">
+    For Windows 7 or 8 (or Windows 10 without Linux Subsystem)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-unix-commands" title="Basic UNIX Commands" class="md-nav__link">
+    Basic UNIX Commands
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directory-commands" title="Directory commands" class="md-nav__link">
+    Directory commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-commands" title="File commands" class="md-nav__link">
+    File commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-to-display-text-files" title="Command to display text files" class="md-nav__link">
+    Command to display text files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unix-file-permission" title="UNIX File Permission" class="md-nav__link">
+    UNIX File Permission
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secure-copy-scp" title="Secure Copy (scp)" class="md-nav__link">
+    Secure Copy (scp)
+  </a>
+  
+</li>
+        
           <li class="md-nav__item">
   <a href="#setting-up-ssh-keys" title="Setting up SSH Keys" class="md-nav__link">
     Setting up SSH Keys
@@ -635,318 +785,229 @@ This will be the official programming environment for CS2030 for all your lab as
 <p>Connect to Sunfire at <code class="codehilite">sunfire.comp.nus.edu.sg</code> via your favourite SSH client.  After logging in, run the command <code class="codehilite">ssh cs2030-i</code> to connect to the CS2030 VM.  This effectively starts an SSH session to the VM from within your existing SSH session to Sunfire.  Refer to instructions below on how to connect via SSH.</p>
 <h4 id="ssh-port-forwarding">SSH Port Forwarding</h4>
 <p>SSH has built-in support for local and remote port forwarding, and local port forwarding can be used to commect to the CS2030 VM.  Local port forwarding means that a port of the SSH client (your machine) is forwarded to the SSH server (<code class="codehilite">sunfire</code>), which opens a connection to a preset destination server (<code class="codehilite">cs2030-i</code>).  This method causes the CS2030 VM to seem as if it is hosted on a local port, e.g. <code class="codehilite"><span class="n">localhost</span><span class="o">:</span><span class="mi">2030</span></code>, allowing you to use your favourite SCP program (e.g. <a href="https://filezilla-project.org/">FileZilla</a>) to access the VM.</p>
-<p>To use local port forwarding (from local port <code class="codehilite">2030</code>), connect to <code class="codehilite">sunfire</code> using ```
-ssh -L 2030:cs2030-i.comp.nus.edu.sg:22 <username>@sunfire.comp.nus.edu.sg
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>This command opens an SSH tunnel from port `2030` of your machine to port `22` (the default SSH port) of `cs2030-i.comp.nus.edu.sg` via `sunfire`.  After successful login, open a separate SSH (or SCP) connection from your machine to `localhost:2030` to access the VM.
-
-[`PuTTY`](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) supports SSH port forwarding, so this setup can also be used on Windows.
-
-## SSH
-
-### For UNIX-based OS
-
-If you use either macOS, Windows 10 (requires [Linux Subsystem on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10)), or Linux, you should have the command line `ssh` installed.  
-
-Run:
+<p>To use local port forwarding (from local port <code class="codehilite">2030</code>), connect to <code class="codehilite">sunfire</code> using 
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ssh -L 2030:cs2030-i.comp.nus.edu.sg:22 &lt;username&gt;@sunfire.comp.nus.edu.sg
 </pre></div>
 </td></tr></table>
-ssh <username>@cs2030-i.comp.nus.edu.sg
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Replace `&lt;username&gt;` with your SoC UNIX username, for instance, I would do:
+This command opens an SSH tunnel from port <code class="codehilite">2030</code> of your machine to port <code class="codehilite">22</code> (the default SSH port) of <code class="codehilite">cs2030-i.comp.nus.edu.sg</code> via <code class="codehilite">sunfire</code>.  After successful login, open a separate SSH (or SCP) connection from your machine to <code class="codehilite"><span class="n">localhost</span><span class="o">:</span><span class="mi">2030</span></code> to access the VM.</p>
+<p><a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html"><code class="codehilite">PuTTY</code></a> supports SSH port forwarding, so this setup can also be used on Windows.</p>
+<h2 id="ssh">SSH</h2>
+<h3 id="for-unix-based-os">For UNIX-based OS</h3>
+<p>If you use either macOS, Windows 10 (requires <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">Linux Subsystem on Windows</a>), or Linux, you should have the command line <code class="codehilite">ssh</code> installed.  </p>
+<p>Run:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ssh &lt;username&gt;@cs2030-i.comp.nus.edu.sg
+</pre></div>
+</td></tr></table></p>
+<p>Replace <code class="codehilite">&lt;username&gt;</code> with your SoC UNIX username, for instance, I would do:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ssh ooiwt@cs2030-i.comp.nus.edu.sg
+</pre></div>
+</td></tr></table></p>
+<p>After the command above, following the instructions on screen.  The first time you ever connect to <code class="codehilite">cs2030-i.comp.nus.edu.sg</code>, you will be warned that you are connecting to a previously unknown host.  Say <code class="codehilite">yes</code>, and you will be prompted with your SoC UNIX password.</p>
+<h3 id="for-windows-7-or-8-or-windows-10-without-linux-subsystem">For Windows 7 or 8 (or Windows 10 without Linux Subsystem)</h3>
+<p>The desktop computers in Programming Lab 6 (PL6) runs Windows 7.  If you are using these computers, or your own computers with older versions of Windows, you need to use programs like <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html"><code class="codehilite">PuTTY</code></a> to access the VM.</p>
+<h2 id="basic-unix-commands">Basic UNIX Commands</h2>
+<p>Once you logged into the VM, you will be prompted to enter a command with a prompt that looks like this:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~[xxx]$
 </pre></div>
 </td></tr></table>
-ssh <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#111;&#111;&#105;&#119;&#116;&#64;&#99;&#115;&#50;&#48;&#51;&#48;&#45;&#105;&#46;&#99;&#111;&#109;&#112;&#46;&#110;&#117;&#115;&#46;&#101;&#100;&#117;&#46;&#115;&#103;">&#111;&#111;&#105;&#119;&#116;&#64;&#99;&#115;&#50;&#48;&#51;&#48;&#45;&#105;&#46;&#99;&#111;&#109;&#112;&#46;&#110;&#117;&#115;&#46;&#101;&#100;&#117;&#46;&#115;&#103;</a>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>After the command above, following the instructions on screen.  The first time you ever connect to `cs2030-i.comp.nus.edu.sg`, you will be warned that you are connecting to a previously unknown host.  Say `yes`, and you will be prompted with your SoC UNIX password.
-
-### For Windows 7 or 8 (or Windows 10 without Linux Subsystem)
-
-The desktop computers in Programming Lab 6 (PL6) runs Windows 7.  If you are using these computers, or your own computers with older versions of Windows, you need to use programs like [`PuTTY`](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) to access the VM.
-
-
-## Basic UNIX Commands
-
-Once you logged into the VM, you will be prompted to enter a command with a prompt that looks like this:
+This interface is provided by a UNIX shell -- not unlike <code class="codehilite">jshell</code>, this shell sits in a loop and wait for users to enter a command, then it interprets and executes the command.  There are many versions of shells, the default shell for our VM is <code class="codehilite">bash</code><sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>.</p>
+<p><em>The following are adapted for CS2030 from <a href="http://www.comp.nus.edu.sg/~cs1020/4_misc/cs1010_lect/2014/intro_lab/gettingStarted.html">the instructions created by Aaron Tan</a>. Bugs are mine.</em>  </p>
+<p>The power of UNIX stems from the many commands it offers. The following are a few commonly used commands. This list is by no means exhaustive and you are urged to explore on your own. Note that UNIX commands are case-sensitive.</p>
+<p>In the examples below, bold words are commands which you are expected to enter. All commands are to be entered after the UNIX (local or <code class="codehilite">sunfire</code> or <code class="codehilite">cs2030-i</code>) prompt of the form</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~[xxx]$
 </pre></div>
 </td></tr></table>
-happytan@cs2030-i:<sub>[xxx]$
+
+<p><code class="codehilite">~</code> indicates that you are currently in your home directory, <code class="codehilite">xxx</code> is a number indicating the number of commands that have been entered.  The following examples assumes that user <code class="codehilite">happytan</code> is logged into cs2030-i; however you can do it on your local UNIX platform too.</p>
+<p>It might be good to understand the directory structure in UNIX, a multi-user system. The directory tree is shown below:</p>
+<p><img alt="UNIX Directory Tree" src="../figures/unix_directory_tree.jpg" /></p>
+<p>Each user has his/her own home directory, which is where he/she will be automatically placed when he/she logs into the system. The above figure shows where the home directory of user <code class="codehilite">happytan</code> resides in the directory tree. The user <code class="codehilite">happytan</code> may create files or directories in his/her home directory, but not elsewhere unless permission is given.</p>
+<h3 id="directory-commands">Directory commands</h3>
+<ul>
+<li>
+<p><code class="codehilite">pwd</code>: Print current Working Directory to show you which directory you are currently in
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>This interface is provided by a UNIX shell -- not unlike `jshell`, this shell sits in a loop and wait for users to enter a command, then it interprets and executes the command.  There are many versions of shells, the default shell for our VM is `bash`[^1].
-
-[^1]: I run `fish` on my macOS, as you might have noticed during the in-class demos.  You can use any shell you like, if you know what you are doing.  Otherwise, `bash` is a popular one.
-
-_The following are adapted for CS2030 from [the instructions created by Aaron Tan](http://www.comp.nus.edu.sg/~cs1020/4_misc/cs1010_lect/2014/intro_lab/gettingStarted.html). Bugs are mine._  
-
-The power of UNIX stems from the many commands it offers. The following are a few commonly used commands. This list is by no means exhaustive and you are urged to explore on your own. Note that UNIX commands are case-sensitive.
-
-In the examples below, bold words are commands which you are expected to enter. All commands are to be entered after the UNIX (local or `sunfire` or `cs2030-i`) prompt of the form
-</pre></div>
-</td></tr></table>
-happytan@cs2030-i:</sub>[xxx]$
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>`~` indicates that you are currently in your home directory, `xxx` is a number indicating the number of commands that have been entered.  The following examples assumes that user `happytan` is logged into cs2030-i; however you can do it on your local UNIX platform too.
-
-It might be good to understand the directory structure in UNIX, a multi-user system. The directory tree is shown below:
-
-![UNIX Directory Tree](figures/unix_directory_tree.jpg)
-
-Each user has his/her own home directory, which is where he/she will be automatically placed when he/she logs into the system. The above figure shows where the home directory of user `happytan` resides in the directory tree. The user `happytan` may create files or directories in his/her home directory, but not elsewhere unless permission is given.
-
-### Directory commands
-
-- `pwd`: Print current Working Directory to show you which directory you are currently in
-</pre></div>
-</td></tr></table>
-happytan@cs2030-i:~[xxx]$ pwd
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~[xxx]$ pwd
 /home/h/happytan
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>- `ls`: LiSt files in your current directory
+</pre></div>
+</td></tr></table></p>
+</li>
+<li>
+<p><code class="codehilite">ls</code>: LiSt files in your current directory
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~[xxx]$ ls
+happytan@cs2030-i:~[xxx]$
 </pre></div>
 </td></tr></table>
-happytan@cs2030-i:~[xxx]$ ls
-happytan@cs2030-i:<sub>[xxx]$
+   If you do not have any regular files in your home directory, as you should when you first login, you should immediately return to the shell prompt.  </p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Rule of Silence<p>UNIX follows the <em>rule of silence</em>: programs should not print unnecessary output, to allow other programs and users to easily parse the output from one program.  So, if <code class="codehilite">ls</code> has nothing to list, it will list nothing (as oppose to, say, printing "This is an empty directory.")</p>
+</p>
+</div>
+<ul>
+<li>
+<p><code class="codehilite">mkdir</code>: MaKe a subDIRectory in current directory
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
-5
-6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>   If you do not have any regular files in your home directory, as you should when you first login, you should immediately return to the shell prompt.  
-
-!!! note &quot;Rule of Silence&quot;
-        UNIX follows the _rule of silence_: programs should not print unnecessary output, to allow other programs and users to easily parse the output from one program.  So, if `ls` has nothing to list, it will list nothing (as oppose to, say, printing &quot;This is an empty directory.&quot;)
-
-- `mkdir`: MaKe a subDIRectory in current directory
-</pre></div>
-</td></tr></table>
-happytan@cs2030-i:</sub>[xxx]$ mkdir lab01
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~[xxx]$ mkdir lab01
 happytan@cs2030-i:~[xxx]$ ls
 lab01
 happytan@cs2030-i:~[xxx]$ ls -F
 lab01/
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Here, you create a directory called `lab01`.  Now, when you `ls`, you can see the directory listed.
-You may also use `ls -F` for more information (`-F` is one of the many _options_/_flags_ available for the `ls` command. To see a complete list of the options, refer to the man pages, i.e., `man ls`.)
-
-    The slash `/` beside the filename tells you that the file is a directory (aka folder in Windows lingo). A normal file does not have a slash beside its name when &quot;ls -F&quot; is used.
-
-    You may also use the `ls -l` command (hyphen el, not hyphen one) to display almost all the file information, include the size of the file and the date of modification.
-
-!!! tip &quot;Command history&quot;
-    UNIX maintains a history of your previously executed UNIX commands, and you may use the up and down arrows to go through it. Press the up arrow until you find a previously executed UNIX command. You may then press Enter to execute it, or edit the command before executing it. This is handy when you need to repeatedly executed a long UNIX command.
-
-- `cd`: Change Directory from current directory to another
 </pre></div>
 </td></tr></table>
-happytan@cs2030-i:~[xxx]$ cd lab01
-happytan@cs2030-i:<sub>/lab01[xxx]$
+Here, you create a directory called <code class="codehilite">lab01</code>.  Now, when you <code class="codehilite">ls</code>, you can see the directory listed.
+You may also use <code class="codehilite">ls -F</code> for more information (<code class="codehilite">-F</code> is one of the many <em>options</em>/<em>flags</em> available for the <code class="codehilite">ls</code> command. To see a complete list of the options, refer to the man pages, i.e., <code class="codehilite">man ls</code>.)</p>
+<p>The slash <code class="codehilite">/</code> beside the filename tells you that the file is a directory (aka folder in Windows lingo). A normal file does not have a slash beside its name when "ls -F" is used.</p>
+<p>You may also use the <code class="codehilite">ls -l</code> command (hyphen el, not hyphen one) to display almost all the file information, include the size of the file and the date of modification.</p>
+</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Command history</p>
+<p>UNIX maintains a history of your previously executed UNIX commands, and you may use the up and down arrows to go through it. Press the up arrow until you find a previously executed UNIX command. You may then press Enter to execute it, or edit the command before executing it. This is handy when you need to repeatedly executed a long UNIX command.</p>
+</div>
+<ul>
+<li>
+<p><code class="codehilite">cd</code>: Change Directory from current directory to another
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~[xxx]$ cd lab01
+happytan@cs2030-i:~/lab01[xxx]$
+</pre></div>
+</td></tr></table>
+Note that the prompt changes to <code class="codehilite">~/lab01</code> to indicate that you are now in the <code class="codehilite">lab01</code> directory below your <code class="codehilite">HOME</code> directory.</p>
+<p>Entering <code class="codehilite">cd</code> alone brings you back to your <code class="codehilite">HOME</code> directory, i.e.,. the directory in which you started with when you first logged into the system.
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~/lab01[xxx]$ cd
+happytan@cs2030-i:~[xxx]$
+</pre></div>
+</td></tr></table></p>
+</li>
+<li>
+<p><code class="codehilite">rmdir</code>:  to ReMove a subDIRectory in current directory -- note that a directory must be empty before it can be removed.
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Note that the prompt changes to `~/lab01` to indicate that you are now in the `lab01` directory below your `HOME` directory.
-
-    Entering `cd` alone brings you back to your `HOME` directory, i.e.,. the directory in which you started with when you first logged into the system.
-</pre></div>
-</td></tr></table>
-happytan@cs2030-i:</sub>/lab01[xxx]$ cd
-happytan@cs2030-i:<sub>[xxx]$
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>- `rmdir`:  to ReMove a subDIRectory in current directory -- note that a directory must be empty before it can be removed.
-</pre></div>
-</td></tr></table>
-happytan@cs2030-i:</sub>[xxx]$ rmdir lab01
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~[xxx]$ rmdir lab01
 happytan@cs2030-i:~[xxx]$ ls -F
 happytan@cs2030-i:~[xxx]$ mkdir lab01
 happytan@cs2030-i:~[xxx]$ ls -F
 lab01/
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>### File commands
-- `cp`:  CoPy files
-</pre></div>
-</td></tr></table>
-happytan@cs2030-i:~/lab01[xxx]$ cp ~cs2030/lab01/Circle.java .
-happytan@cs2030-i:~/lab01[xxx]$ ls
-Circle.java
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>The command above copy the files Circle.java from the HOME of user `cs2030`, under directory `lab01`, to the current directory.
-
-If you want to copy the whole directory, use `-r` flag, where `r` stands for recursive copy.
-</pre></div>
-</td></tr></table>
-happytan@cs2030-i:~/lab01[xxx]$ cp -r ~cs2030/lab01 .
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>The directory `lab01` and everything under it will be copied.
-
-- `mv`: MoVe files from one directory to another; can also be used to rename files.
-</pre></div>
-</td></tr></table>
-happytan@cs2030-i:~/lab01[xxx]$ mv Circle.java Test.java
-happytan@cs2030-i:~/lab01[xxx]$ ls
-Test.java
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>!!! tip &quot;Filename completion&quot;
-    If you have a very long file name, you may use UNIX&#39;s filename completion feature to reduce typing. For instance, you may type:
-    ```
-    happytan@cs2030-i:~/lab01[xxx]$ mv C
-    ```
-    and press the tab key, and UNIX will complete the filename for you if there is only one filename with the prefix &quot;C&quot;. Otherwise, it will fill up the filename up to point where you need to type in more characters for disambiguation.
-
-
-- `rm`: ReMove files. Be careful with this command -- files deleted cannot be restored (unless they have been backed up during the normal backup cycle).
-</pre></div>
-</td></tr></table>
-happytan@cs2030-i:~/lab01[xxx]$ rm Test.java
-rm: remove 'Test.java'? y
-happytan@cs2030-i:~/lab01[xxx]$ ls
-happytan@cs2030-i:<sub>/lab01[xxx]$
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>### Command to display text files
-- `cat`: to string together or display (CATenate) the contents of files onto the screen
-</pre></div>
-</td></tr></table>
-happytan@cs2030-i:</sub>/lab01[xxx]$ cat Circle.java
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>- `less` - variant of `cat` (includes features to read each page leisurely)
-</pre></div>
-</td></tr></table>
-happytan@cs2030-i:~/lab01[xxx]$ less Circle.java
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>In `less`, use `&lt;space&gt;` to move down one page, `b` to move Back up one page, and `q` to Quit from &quot;less&quot;.
-
-An online help facility is available in UNIX via the `man` command (`man` stands for MANual). To look for more information about any UNIX command, for example, `ls`, type `man ls`. Type `man man` and refer to Man Pages to find out more about the facility. To exit `man`, press `q`.
-
-Now that you are familiar with how the UNIX shell works, I won&#39;t show the command prompt any more in the rest of this article.
-
-### UNIX File Permission
-It is important to guide our files properly on a multi-user system where users share the same file system.  UNIX has a simple mechanism to for ensuring that: every file and directory has nine bits of access permission, corresponds to three access operations, read (`r`), write (`w`), and execute (`x`), for four classes of users, the user who owns of the file (`u`), users in the same group as the owner (`g`), all other users (`o`), and all users (`a`) (union of all three classes before)
-
-When you run `ls -l`, you will see the permission encoded as strings that look like `-rw-------` or `drwx--x--x` besides other file information.   
-
-- The first character indicates if the file is a directory (`d`) or not (`-`).  
-- The next three characters are the permission for the owner.  `rwx` means that the owner can do all three: reading, writing, and executing, `rw-` means that the owner can read and write, but cannot execute.
-- The next three characters are the permission for the users in the same group.
-- The last three characters are the permission for the users in the other groups.
-
-To change permission, we use the `chmod` command.  Let&#39;s say that we want to remove the read and write permission from all other users in the group.  You can run:
-</pre></div>
-</td></tr></table>
-chmod g-rw <file>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>where `&lt;file&gt;` is the name of the file whose permission you want to change.  This would change the permission from `-rw-rw-rw-` to `-rw----rw-`, or from `-rwxr--r--` to `-rwx---r--`.
-
-To add executable permission to everyone, you can run:
-</pre></div>
-</td></tr></table>
-chmod a+x <file>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>This would change the permission from `-rw-rw-rw-` to `-rwx--xrwx`, or from `-rwxr--r--` to `-rwx--xr-x`, and so on.  You get the idea.
-
-Another way to change the permission is set the permission directly, instead of adding with `+` and removing with `-`.  To do this, one convenient way is to treat the permission for each class of user as a 3-bit binary number between 0 to 7.  So, `rwx` is 7, `rw-` is 6, `-w-` is 2, `---` is 0, etc.  
-
-To set the permission of a file to `-r--r--r--` (readable by everyone), run:
-</pre></div>
-</td></tr></table>
-chmod 444 <file>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>To set the permission to `-rw-------`, run:
-</pre></div>
-</td></tr></table>
-chmod 600 <file>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>and so on.
-
-It is important to ensure that your code is not readable and writable by other students, especially for graded lab exercises.
-
-### Secure Copy (`scp`)
-
-Secure copy, or `scp`, is one way to transfer files from your local computer to `cs2030-i`.  If you choose not to use `emacs` or `vim`[^2] and write your code on `cs2030-i`, you can write your code on your local computer, and transfer them.  Let&#39;s say that you are in the directory with a bunch of java files you want to transfer, and you want them transferred into directory `test` that you have created, do the following:
-</pre></div>
-</td></tr></table>
-scp *.java happytan@cs2030-i:~/test
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>!!! warning
-    If you have files with the same name in the remote directory, the files will be overwritten without warning.  I have lost my code a few times due to `scp`.  
-
-The expression `*.java` is a regular expression that means all files with filename ending with `.java`.  You can copy specific files as well.  For instance,
-
-```shell
-scp Circle.java Point.java happytan@cs2030-i:~/test
 </pre></div>
 </td></tr></table></p>
+</li>
+</ul>
+<h3 id="file-commands">File commands</h3>
+<ul>
+<li><code class="codehilite">cp</code>:  CoPy files
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~/lab01[xxx]$ cp ~cs2030/lab01/Circle.java .
+happytan@cs2030-i:~/lab01[xxx]$ ls
+Circle.java
+</pre></div>
+</td></tr></table>
+The command above copy the files Circle.java from the HOME of user <code class="codehilite">cs2030</code>, under directory <code class="codehilite">lab01</code>, to the current directory.</li>
+</ul>
+<p>If you want to copy the whole directory, use <code class="codehilite">-r</code> flag, where <code class="codehilite">r</code> stands for recursive copy.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~/lab01[xxx]$ cp -r ~cs2030/lab01 .
+</pre></div>
+</td></tr></table>
+
+<p>The directory <code class="codehilite">lab01</code> and everything under it will be copied.</p>
+<ul>
+<li><code class="codehilite">mv</code>: MoVe files from one directory to another; can also be used to rename files.
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~/lab01[xxx]$ mv Circle.java Test.java
+happytan@cs2030-i:~/lab01[xxx]$ ls
+Test.java
+</pre></div>
+</td></tr></table></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Filename completion</p>
+<p>If you have a very long file name, you may use UNIX's filename completion feature to reduce typing. For instance, you may type:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~/lab01[xxx]$ mv C
+</pre></div>
+</td></tr></table>
+and press the tab key, and UNIX will complete the filename for you if there is only one filename with the prefix "C". Otherwise, it will fill up the filename up to point where you need to type in more characters for disambiguation.</p>
+</div>
+<ul>
+<li><code class="codehilite">rm</code>: ReMove files. Be careful with this command -- files deleted cannot be restored (unless they have been backed up during the normal backup cycle).
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~/lab01[xxx]$ rm Test.java
+rm: remove &#39;Test.java&#39;? y
+happytan@cs2030-i:~/lab01[xxx]$ ls
+happytan@cs2030-i:~/lab01[xxx]$
+</pre></div>
+</td></tr></table></li>
+</ul>
+<h3 id="command-to-display-text-files">Command to display text files</h3>
+<ul>
+<li><code class="codehilite">cat</code>: to string together or display (CATenate) the contents of files onto the screen
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~/lab01[xxx]$ cat Circle.java
+</pre></div>
+</td></tr></table></li>
+<li><code class="codehilite">less</code> - variant of <code class="codehilite">cat</code> (includes features to read each page leisurely)
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>happytan@cs2030-i:~/lab01[xxx]$ less Circle.java
+</pre></div>
+</td></tr></table>
+In <code class="codehilite">less</code>, use <code class="codehilite">&lt;space&gt;</code> to move down one page, <code class="codehilite">b</code> to move Back up one page, and <code class="codehilite">q</code> to Quit from "less".</li>
+</ul>
+<p>An online help facility is available in UNIX via the <code class="codehilite">man</code> command (<code class="codehilite">man</code> stands for MANual). To look for more information about any UNIX command, for example, <code class="codehilite">ls</code>, type <code class="codehilite">man ls</code>. Type <code class="codehilite">man man</code> and refer to Man Pages to find out more about the facility. To exit <code class="codehilite">man</code>, press <code class="codehilite">q</code>.</p>
+<p>Now that you are familiar with how the UNIX shell works, I won't show the command prompt any more in the rest of this article.</p>
+<h3 id="unix-file-permission">UNIX File Permission</h3>
+<p>It is important to guide our files properly on a multi-user system where users share the same file system.  UNIX has a simple mechanism to for ensuring that: every file and directory has nine bits of access permission, corresponds to three access operations, read (<code class="codehilite">r</code>), write (<code class="codehilite">w</code>), and execute (<code class="codehilite">x</code>), for four classes of users, the user who owns of the file (<code class="codehilite">u</code>), users in the same group as the owner (<code class="codehilite">g</code>), all other users (<code class="codehilite">o</code>), and all users (<code class="codehilite">a</code>) (union of all three classes before)</p>
+<p>When you run <code class="codehilite">ls -l</code>, you will see the permission encoded as strings that look like <code class="codehilite">-rw-------</code> or <code class="codehilite">drwx--x--x</code> besides other file information.   </p>
+<ul>
+<li>The first character indicates if the file is a directory (<code class="codehilite">d</code>) or not (<code class="codehilite">-</code>).  </li>
+<li>The next three characters are the permission for the owner.  <code class="codehilite">rwx</code> means that the owner can do all three: reading, writing, and executing, <code class="codehilite">rw-</code> means that the owner can read and write, but cannot execute.</li>
+<li>The next three characters are the permission for the users in the same group.</li>
+<li>The last three characters are the permission for the users in the other groups.</li>
+</ul>
+<p>To change permission, we use the <code class="codehilite">chmod</code> command.  Let's say that we want to remove the read and write permission from all other users in the group.  You can run:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>chmod g-rw &lt;file&gt;
+</pre></div>
+</td></tr></table></p>
+<p>where <code class="codehilite">&lt;file&gt;</code> is the name of the file whose permission you want to change.  This would change the permission from <code class="codehilite">-rw-rw-rw-</code> to <code class="codehilite">-rw----rw-</code>, or from <code class="codehilite">-rwxr--r--</code> to <code class="codehilite">-rwx---r--</code>.</p>
+<p>To add executable permission to everyone, you can run:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>chmod a+x &lt;file&gt;
+</pre></div>
+</td></tr></table></p>
+<p>This would change the permission from <code class="codehilite">-rw-rw-rw-</code> to <code class="codehilite">-rwx--xrwx</code>, or from <code class="codehilite">-rwxr--r--</code> to <code class="codehilite">-rwx--xr-x</code>, and so on.  You get the idea.</p>
+<p>Another way to change the permission is set the permission directly, instead of adding with <code class="codehilite">+</code> and removing with <code class="codehilite">-</code>.  To do this, one convenient way is to treat the permission for each class of user as a 3-bit binary number between 0 to 7.  So, <code class="codehilite">rwx</code> is 7, <code class="codehilite">rw-</code> is 6, <code class="codehilite">-w-</code> is 2, <code class="codehilite">---</code> is 0, etc.  </p>
+<p>To set the permission of a file to <code class="codehilite">-r--r--r--</code> (readable by everyone), run:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>chmod 444 &lt;file&gt;
+</pre></div>
+</td></tr></table></p>
+<p>To set the permission to <code class="codehilite">-rw-------</code>, run:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>chmod 600 &lt;file&gt;
+</pre></div>
+</td></tr></table></p>
+<p>and so on.</p>
+<p>It is important to ensure that your code is not readable and writable by other students, especially for graded lab exercises.</p>
+<h3 id="secure-copy-scp">Secure Copy (<code class="codehilite">scp</code>)</h3>
+<p>Secure copy, or <code class="codehilite">scp</code>, is one way to transfer files from your local computer to <code class="codehilite">cs2030-i</code>.  If you choose not to use <code class="codehilite">emacs</code> or <code class="codehilite">vim</code><sup id="fnref:2"><a class="footnote-ref" href="#fn:2" rel="footnote">2</a></sup> and write your code on <code class="codehilite">cs2030-i</code>, you can write your code on your local computer, and transfer them.  Let's say that you are in the directory with a bunch of java files you want to transfer, and you want them transferred into directory <code class="codehilite">test</code> that you have created, do the following:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>scp *.java happytan@cs2030-i:~/test
+</pre></div>
+</td></tr></table>
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you have files with the same name in the remote directory, the files will be overwritten without warning.  I have lost my code a few times due to <code class="codehilite">scp</code>.  </p>
+</div>
+<p>The expression <code class="codehilite">*.java</code> is a regular expression that means all files with filename ending with <code class="codehilite"><span class="na">.java</span></code>.  You can copy specific files as well.  For instance,</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>scp Circle.java Point.java happytan@cs2030-i:~/test
+</pre></div>
+</td></tr></table>
+
 <p><code class="codehilite">scp</code> supports <code class="codehilite">-r</code> (recursive copy) as well.</p>
 <h3 id="setting-up-ssh-keys">Setting up SSH Keys</h3>
 <p>Once you are comfortable with UNIX, you can set up a pair of public/private keys for authentication.  </p>
@@ -962,8 +1023,11 @@ scp Circle.java Point.java happytan@cs2030-i:~/test
 <div class="footnote">
 <hr />
 <ol>
+<li id="fn:1">
+<p>I run <code class="codehilite">fish</code> on my macOS, as you might have noticed during the in-class demos.  You can use any shell you like, if you know what you are doing.  Otherwise, <code class="codehilite">bash</code> is a popular one.&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
 <li id="fn:2">
-<p>My personal opinion is that, you should really master one of these two time-tested source code editor if you want a career in software development.&#160;<a class="footnote-backref" href="#fnref:2" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+<p>My personal opinion is that, you should really master one of these two time-tested source code editor if you want a career in software development.&#160;<a class="footnote-backref" href="#fnref:2" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
