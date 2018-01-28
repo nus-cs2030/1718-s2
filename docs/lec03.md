@@ -92,7 +92,7 @@ class Circle implements Shape, Printable {
     :
   @Override
   public boolean equals(Object obj) {
-    System.out.print("equals(Object) called\n");
+    System.out.println("equals(Object) called");
     if (obj == this) {
       return true;
     }
@@ -103,11 +103,11 @@ class Circle implements Shape, Printable {
       return false;
     }
 
-    public boolean equals(Circle circle) {
-      System.out.print("equals(Circle) called\n");
-      return ((circle.center.equals(center) && circle.radius == radius);
-    } 
-  }
+  public boolean equals(Circle circle) {
+    System.out.println("equals(Circle) called");
+    return ((circle.center.equals(center) && circle.radius == radius);
+  } 
+}
 ```
 
 Since this new `equals()` method does not override the method in `Object`, it gets its own slot in the method table of `Circle`, instead of reusing one from the `Object`.
