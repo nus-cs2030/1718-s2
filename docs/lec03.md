@@ -57,12 +57,12 @@ class Circle implements Shape, Printable {
 }
 ```
 
-Line 7 above compares if the two center points are equal, and the two radius values are equal.  So, we compare if the two circles are semantically the same.  The rest of this code requires some explanation:
+Line 10 above compares if the two center points are equal, and the two radius values are equal.  So, we compare if the two circles are semantically the same.  The rest of this code requires some explanation:
 
 - Line 3 uses the same `@Override` annotation that we have seen before -- we are telling the compilers that we are overriding a method in the superclass.
 - Line 4 declares the method `equals`, and note that it has to have exactly the same signature as the `equals()` method we are overriding.  Even though we meant to compare two `Circle` objects, we cannot declare it as `public boolean equals(Circle circle)`, since the signature is different and the compiler would complain.
 - Since `obj` is of an `Object` type, we can actually pass in any object to compare with a `Circle`.  Line 5 checks if the comparison makes sense, by checking if `obj` is instantiated from a `Circle` class, using the `instanceof` keyword.  If `obj` is not even a `Circle` object, then we simply return `false`.
-- If `obj` is an instance of `Circle`, we assign `obj` to a variable of type `Circle` and compare as in Line 7.
+- If `obj` is an instance of `Circle`, we assign `obj` to a variable of type `Circle` and compare as in Line 10.
 
 For the code above to work, we have to override the `equals` method of `Point` as well.  That is left as an exercise[^1].
 
