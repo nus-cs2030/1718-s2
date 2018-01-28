@@ -144,10 +144,10 @@ One example of where this is called the `contains(Object)` method from class `Ar
 
 ## toString
 
-We now turn our attention to another method in `Object` that we could override, the `toString()` method.  `toString()` is called whenever the `String` representation of an object is needed.  For instance, when we try to print an object.   By default, the `toString` of `Object` simply prints the name of the class, followed by `@`, followed by the reference.   It is often useful to override this to include the content of the object as well, for debugging and logging purposes.  This is a much more useful and flexible than writing our own `print()` method as we have seen in earlier lectures, since we are not limited to printing to standard output anymore.
+We now turn our attention to another method in `Object` that we could override, the `toString()` method.  `toString()` is called whenever the `String` representation of an object is needed.  For instance, when we try to print an object.   By default, the `toString` of `Object` simply prints the name of the class, followed by `@`, followed by the reference.   It is often useful to override this to include the content of the object as well, for debugging and logging purposes.  This is a much more useful and flexible way than writing our own `print()` method as we have seen in earlier lectures, since we are not limited to printing to standard output anymore.
 
 !!! note "java.lang.String"
-    `String` is one of many useful classes provided by Java.  You can skim through to see what methods are available and keep the [API reference](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html) handy.
+    `String` is one of the many useful classes provided by Java.  You can skim through to see what methods are available and keep the [API reference](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html) handy.
 
 ```Java
 class Point {
@@ -166,7 +166,7 @@ System.out.println(p);
 
 It should print `(0,0)` instead of `Point@1235de`.
 
-The ability to override methods that you inherit from a parent, including root class `Object`, makes overriding an extremely powerful tool.  It allows you to change how existing libraries behave, and customize them to your classes, without changing a single line of their code or even has access to their code!
+The ability to override methods that you inherit from a parent, including root class `Object`, makes overriding an extremely powerful tool.  It allows you to change how existing libraries behave, and customize them to your classes, without changing a single line of their code or even accessing their code!
 
 As Uncle Ben said, "With great power, comes great responsibility."  We must use overriding and inheritance carefully.  Since we can affect how existing libraries behave, we can easily break existing code and introduce bugs.  Since you may not have access to these existing code, it is often tricky to trace and debug.  
 
@@ -203,7 +203,7 @@ The following table, taken from [Oracle's Java Tutorial](https://docs.oracle.com
 summarizes the access modifiers:
 
 | Access Modifier  | Class  | Package  | Subclass  | World |
-| ----- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| ----- | ---- | ---- | ---- | ---- |
 | public | Y | Y | Y |  Y |
 | protected | Y | Y | Y | N |
 | no modifier | Y | Y | N | N |
@@ -364,7 +364,7 @@ class Square {
 }
 ```
 
-This makes more sense and would make everyone who uses `Square` happy -- a square is always a square -- but it introduces an _inconsistency_ in behavior and will likely break another part of the code the developer is totally unaware of.  The developer of `doSomething` suddenly cannot assume that `setSize` works as intended and documented.
+This makes more sense and would make everyone who uses `Square` happy -- a square is always a square -- but it introduces an _inconsistency_ in behavior and will most likely break another part of the code that the developer is totally unaware of.  The developer of `doSomething` suddenly cannot assume that `setSize` works as intended and documented.
 
 It is a developer's responsibility that any inheritance with method overriding does not alter the behavior of existing code.  This brings us to the _Liskov Substitution Principle_ (LSP), which says that: "Let $\phi(x)$ be a property provable about objects $x$ of type $T$. Then $\phi(y)$ should be true for objects $y$ of type $S$ where $S$ is a subtype of $T$."   
 
