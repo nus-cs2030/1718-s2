@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/index.html",
-            "text": "Piazza Q&A\n\n\nLabs\n\n\nComing soon.. In the meantime, get ready by going through the guide to \nCS2030 Lab Environment\n.\n\n\nLectures\n\n\n3. \nMore on Inheritance\n\n\nFor list of topics coming up, see \nthe class schedule\n.\n\n\n2. \nInheritance and Polymorphism\n\n\nSlides\n | \nVideo\n\n\n1. \nAbstraction and Encapsulation\n\n\nSlides\n | \nVideo",
+            "text": "Piazza Q&A\n\n\nLabs\n\n\n0. \nWarm Up\n\n\nLectures\n\n\n3. \nMore on Inheritance\n\n\nFor list of topics coming up, see \nthe class schedule\n.\n\n\n2. \nInheritance and Polymorphism\n\n\nSlides\n | \nVideo\n\n\n1. \nAbstraction and Encapsulation\n\n\nSlides\n | \nVideo",
             "title": "Home"
         },
         {
@@ -12,8 +12,13 @@
         },
         {
             "location": "/index.html#labs",
-            "text": "Coming soon.. In the meantime, get ready by going through the guide to  CS2030 Lab Environment .",
+            "text": "",
             "title": "Labs"
+        },
+        {
+            "location": "/index.html#0-warm-up",
+            "text": "",
+            "title": "0. Warm Up"
         },
         {
             "location": "/index.html#lectures",
