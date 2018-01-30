@@ -1,0 +1,123 @@
+<% def tdclass(x)
+	if x == 0
+	  return 'style=color:#999;'
+	else
+	  return ""
+    end
+  end
+
+	def badge(str, link)
+		return ('<a href="' + link + '"><span class="badge badge-info">' + str + '</span></a>').html_safe
+	end
+
+	def paid(invoice) 
+		return false if invoice.payment_from_ezri == nil 
+		return true if invoice.payment_from_ezri > 0 
+		return false
+	end
+
+%>
+<% if notice %>
+<div class="alert alert-info" id="notice"><%= notice %></div>
+<% end %>
+<h1>NUH Invoices</h1>
+
+<%
+accumulative_payable = current_user.invoices.sum(:payable)
+accumulative_payout = 0
+current_user.invoices.all.each do |i|
+	accumulative_payout = accumulative_payout + i.total_claim_payout
+end
+accumulative_payment_from_nuh = current_user.invoices.sum(:payment_from_nuh)
+accumulative_due_from_ezri = current_user.invoices.sum(:due_from_ezri)
+%>
+<h3>Payable: <%= number_to_currency(accumulative_payable) %> | Payout: <%= number_to_currency(accumulative_payout) %> | <%= number_to_percentage(accumulative_payout*100/accumulative_payable) %></h3>
+
+<h3>Total NUH Payment: <%= number_to_currency(accumulative_payment_from_nuh) %> | Total Ezri Due: <%= number_to_currency(accumulative_due_from_ezri) %> | Diff: <%= number_to_currency(accumulative_due_from_ezri + accumulative_payment_from_nuh) %></h3>
+
+<%= link_to 'Add Another Invoice', new_invoice_path %><br><br>
+
+<table class="table table-striped" id="datatable">
+  <thead class="thead-default">
+    <tr>
+      <th>Case Number</th>
+      <th>Type</th>
+      <th>Visit Date</th>
+      <th>Payable</th>
+      <!--th>Adjustment</th-->
+      <th>Payment (Ezri)</th>
+      <th>ePayment (AIA)</th>
+      <th>Payment (NUH)</th>
+      <th>Due (Ezri)</th>
+      <!--th>Due (AIA)</th-->
+      <th>Ezri/NUH Payment Date</th>
+			<th>Num of Claims</th>
+			<th>Total Claimable</th>
+			<th>Total Payout</th>
+			<th>Own Pocket</th>
+			<th>Action</th>
+			<th>All Claimed?</th>
+
+      <th data-sortable="false">Edit</th>
+      <th data-sortable="false">Claim</th> <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @invoices.each do |invoice| %>
+			<%
+			case_tdclass = 'vmiddle'
+			if invoice.hardcopy_status == "missing"
+				case_tdclass = 'vmiddle missing'
+			end
+			aia_tdclass = 'vmiddle'
+			if invoice.aia_payment_inconsistent?
+				aia_tdclass = 'vmiddle inconsistent'
+			end
+			nuh_tdclass = 'vmiddle'
+			if invoice.nuh_payment_inconsistent?
+				nuh_tdclass = 'vmiddle inconsistent'
+			end
+			%>
+      <tr>
+        <td class="<%= case_tdclass %>"><%= link_to invoice.case_number, invoice_path(invoice) %></td>
+        <td class="text-capitalize vmiddle"><% if invoice.visit_type %><%= invoice.visit_type.humanize%><% end %> </td>
+        <td class="text-nowrap vmiddle"><%= invoice.visit_date %></td>
+        <td class="vmiddle"><%= number_to_currency(invoice.payable) %></td>
+        <!--td class="vmiddle"><%= number_to_currency(invoice.adjustment) %></td-->
+        <td class="vmiddle" <%= tdclass(invoice.payment_from_ezri) %>><%= number_to_currency(invoice.payment_from_ezri) %></td>
+        <td class="<%= aia_tdclass %>" <%= tdclass(invoice.payment_from_aia) %>><%= number_to_currency(invoice.payment_from_aia) %></td>
+        <td class="<%= nuh_tdclass %>"><%= number_to_currency(invoice.payment_from_nuh) %></td>
+        <td class="<%= nuh_tdclass %>"><%= number_to_currency(invoice.due_from_ezri) %></td>
+        <!--td class="vmiddle" <%= tdclass(invoice.due_from_aia) %>><%= number_to_currency(invoice.due_from_aia) %></td-->
+        <td class="text-nowrap vmiddle"><% if paid(invoice) %><%= invoice.ezri_payment_date %><% else %>N/A<% end %></td>
+				<td class="vmiddle"><% if invoice.claims %><%= invoice.claims.length %><% end %></td>
+				<td class="vmiddle" <%= tdclass(invoice.total_claim_amount) %>><%= number_to_currency(invoice.total_claim_amount) %></td>
+				<td class="vmiddle" <%= tdclass(invoice.total_claim_payout) %>><%= number_to_currency(invoice.total_claim_payout) %></td>
+				<td class="vmiddle" <%= tdclass(invoice.out_of_pocket) %>><%= number_to_currency(invoice.out_of_pocket) %></td>
+				<td class="vmiddle">
+					<% if invoice.wait_for_eclaim? %><%= badge("wait for AIA eClaim", "/invoices/wait_for_eclaim") %><% end %>
+					<% if invoice.to_submit_pre_post? %><%= badge("submit to pre/post", "/invoices/to_submit_pre_post") %><% end %>
+					<% if invoice.wait_for_aia_pre_post? %><%= badge("wait for AIA pre/post", "/invoices/wait_for_aia_pre_post") %><% end %>
+					<% if invoice.to_submit_nus? %><%= badge("submit to NUS", "/invoices/to_submit_nus") %><% end %>
+					<% if invoice.wait_for_nus? %><%= badge("wait for NUS", "/invoices/wait_for_nus") %><% end %>
+					<% if invoice.done? %><%= badge("done", "/invoices/done") %><% end %>
+				</td>
+				<td class="vmiddle">
+					<% if invoice.all_claimed? %>
+						<span class="badge badge-success">done</span><% end %>
+					<% if invoice.net_zero? %>
+						<span class="badge badge-info">$0</span><% end %>
+				</td>
+		    <td><%= link_to 'edit', edit_invoice_path(invoice), class: 'btn btn-primary btn-sm' %></td>
+        <td><%= link_to '+ claim', new_invoice_claim_path(invoice), class: 'btn btn-primary btn-sm' %></td>
+				<td>
+        <%= link_to 'X', invoice, method: :delete, data: { confirm: 'Are you sure you want to delete invoice ' + invoice.case_number + '?' }, class: 'btn btn-danger btn-sm'%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Add Another Invoice', new_invoice_path %>
+
+<br>
