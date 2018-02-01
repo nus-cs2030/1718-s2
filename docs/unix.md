@@ -7,30 +7,6 @@ This will be the official programming environment for CS2030 for all your lab as
 
 I have created your accounts on the VM based on your SoC UNIX account.  You can login with your SoC UNIX username (not your NUSNET username, unless you intentionally set the two to be the same) and password.
 
-## SoC VPN
-
-THe VM can only be accessed from within the School of Computing networks.  If you want to access it from outside, you need to setup a Virtual Private Network (VPN) (See [instruction here](https://docs.comp.nus.edu.sg/node/5065)).  The staff at `helpdesk@comp.nus.edu.sg` or the IT helpdesk in COM1, Level 1, will be able to help with you setting up if needed.
-
-## Tunneling through Sunfire
-
-Well, you don't actually need to setup a VPN.
-
-SoC's Sunfire is configured to allow your connection if it's originating from a local telco. (See [more details here](https://docs.comp.nus.edu.sg/node/1824).)  Since Sunfire is situated within the School of Computing network, Sunfire is able to access the VM.  This opens the possibility of connecting from your device (using an Internet connection from a local telco)) to Sunfire, and then from Sunfire to the VM.
-
-There are two ways to achieve this, and in both ways it appears to the CS2030 VM that Sunfire is the client.
-
-### SSH Using Sunfire's Terminal
-
-Connect to Sunfire at `sunfire.comp.nus.edu.sg` via your favourite SSH client.  After logging in, run the command `ssh cs2030-i` to connect to the CS2030 VM.  This effectively starts an SSH session to the VM from within your existing SSH session to Sunfire.  Refer to instructions below on how to connect via SSH.
-
-### SSH Port Forwarding
-
-SSH has built-in support for local and remote port forwarding, and local port forwarding can be used to commect to the CS2030 VM.  Local port forwarding means that a port of the SSH client (your machine) is forwarded to the SSH server (`sunfire`), which opens a connection to a preset destination server (`cs2030-i`).  This method causes the CS2030 VM to seem as if it is hosted on a local port, e.g. `localhost:2030`, allowing you to use your favourite SCP program (e.g. [FileZilla](https://filezilla-project.org/) to access the VM.
-
-To use local port forwarding (from local port `2030`), connect to Sunfire using `ssh -L 2030:cs2030-i.comp.nus.edu.sg:22 <username>@sunfire.comp.nus.edu.sg`.  This opens an SSH tunnel from port `2030` of your machine to port `22` (the default SSH port) of `cs2030-i.comp.nus.edu.sg` via Sunfire.  After successful login, open a separate SSH (or SCP) connection from your machine to `localhost:2030` to access the VM.
-
-[`PuTTY`](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) supports SSH port forwarding, so this setup can also be used on Windows.
-
 ## SSH
 
 ### For UNIX-based OS
@@ -53,6 +29,37 @@ After the command above, following the instructions on screen.  The first time y
 
 The desktop computers in Programming Lab 6 (PL6) runs Windows 7.  If you are using these computers, or your own computers with older versions of Windows, you need to use programs like [`PuTTY`](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) to access the VM.
 
+## Accessing `cs2030-i` from Outside SoC
+
+THe VM can only be accessed from within the School of Computing networks.  If you want to access it from outside, there are two ways
+
+### Using SoC VPN
+One way is to setup a Virtual Private Network (VPN) (See [instruction here](https://docs.comp.nus.edu.sg/node/5065)).  The staff at `helpdesk@comp.nus.edu.sg` or the IT helpdesk in COM1, Level 1, will be able to help with you setting up if needed.
+
+### Tunneling through Sunfire
+
+The alternative is to use ssh tunnels.
+
+SoC's Sunfire (`sunfire.comp.nus.edu.sg`) is configured to allow your connection if it's originating from a local telco. (See [more details here](https://docs.comp.nus.edu.sg/node/1824).)  Since `sunfire` is situated within the School of Computing network, `sunfire` is able to access the VM.  This opens the possibility of connecting from your device (using an Internet connection from a local telco) to `sunfire`, and then from `sunfire` to the VM.
+
+There are two ways to achieve this, and in both ways it appears to the CS2030 VM that Sunfire is the client.
+
+#### SSH Using Sunfire's Terminal
+
+Connect to Sunfire at `sunfire.comp.nus.edu.sg` via your favourite SSH client.  After logging in, run the command `ssh cs2030-i` to connect to the CS2030 VM.  This effectively starts an SSH session to the VM from within your existing SSH session to Sunfire.  Refer to instructions below on how to connect via SSH.
+
+#### SSH Port Forwarding
+
+SSH has built-in support for local and remote port forwarding, and local port forwarding can be used to commect to the CS2030 VM.  Local port forwarding means that a port of the SSH client (your machine) is forwarded to the SSH server (`sunfire`), which opens a connection to a preset destination server (`cs2030-i`).  This method causes the CS2030 VM to seem as if it is hosted on a local port, e.g. `localhost:2030`, allowing you to use your favourite SCP program (e.g. [FileZilla](https://filezilla-project.org/)) to access the VM.
+
+To use local port forwarding (from local port `2030`), connect to `sunfire` using 
+```
+ssh -L 2030:cs2030-i.comp.nus.edu.sg:22 <username>@sunfire.comp.nus.edu.sg
+```
+This command opens an SSH tunnel from port `2030` of your machine to port `22` (the default SSH port) of `cs2030-i.comp.nus.edu.sg` via `sunfire`.  After successful login, open a separate SSH (or SCP) connection from your machine to `localhost:2030` to access the VM.
+
+[`PuTTY`](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) supports SSH port forwarding, so this setup can also be used on Windows.
+
 
 ## Basic UNIX Commands
 
@@ -64,7 +71,7 @@ This interface is provided by a UNIX shell -- not unlike `jshell`, this shell si
 
 [^1]: I run `fish` on my macOS, as you might have noticed during the in-class demos.  You can use any shell you like, if you know what you are doing.  Otherwise, `bash` is a popular one.
 
-_The following are adapted for CS2030 from [the instructions created by Aaron Tan](http://www.comp.nus.edu.sg/~cs1020/4_misc/cs1010_lect/2014/intro_lab/gettingStarted.html). Bugs are mine._  
+_The following is adapted for CS2030 from [the instructions created by Aaron Tan](http://www.comp.nus.edu.sg/~cs1020/4_misc/cs1010_lect/2014/intro_lab/gettingStarted.html). Bugs are mine._  
 
 The power of UNIX stems from the many commands it offers. The following are a few commonly used commands. This list is by no means exhaustive and you are urged to explore on your own. Note that UNIX commands are case-sensitive.
 

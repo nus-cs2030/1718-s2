@@ -168,10 +168,6 @@ TEST | Max Number of Points |
 
 Note that it is still possible for your solution to be buggy and you still get the same answer as above.
 
-## Adding Methods
-
-You can add new methods as needed into the provided skeleton classes.  You should, however, avoid using setters and getters, and must not break the abstraction barrier by exposing any instance field as `public`.
-
 ## Submission
 
 When you are ready to submit your lab, on `cs2030-i`, run the script

@@ -38,7 +38,7 @@ class HelloWorld {
 By convention, the file should be named `HelloWorld.java`, following the _UpperCamelCase_ name of the class. At this point, our `CS2030` folder only contains that one file.
 
 ```
-CS2030 $ ls
+happytan@cs2030-i:~[xxx]$ ls
 HelloWorld.java
 ```
 
@@ -47,16 +47,15 @@ HelloWorld.java
 We can go ahead and compile our Java program by running the `javac HelloWorld.java` command. This creates the corresponding Java class file, `HelloWorld.class`.
 
 ```
-CS2030 $ javac HelloWorld.java
-CS2030 $ ls
+happytan@cs2030-i:~[xxx]$ javac HelloWorld.java
+happytan@cs2030-i:~[xxx]$ ls
 HelloWorld.class HelloWorld.java
 ```
 
 We can now execute it with `java HelloWorld`. Remember to omit the `.class` extension when doing this!
 
 ```
-CS2030 $ javac HelloWorld.java
-CS2030 $ java HelloWorld
+happytan@cs2030-i:~[xxx]$ java HelloWorld
 Hello, world!
 ```
 

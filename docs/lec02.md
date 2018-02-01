@@ -415,8 +415,9 @@ Even though the example above shows overloading of the constructor, we can overl
 1. Consider what happen when we do the following:
 
     ```Java
-    Shape c1 = new Circle(new Point(0,0), 10);
-    Printable c2 = c1;
+	Circle c = new Circle(new Point(0,0), 10);
+    Shape c1 = c;
+    Printable c2 = c;
     ```
 
     Are the following statements allowed?  Why do you think Java does not allow some of the following statements?
@@ -430,7 +431,7 @@ Even though the example above shows overloading of the constructor, we can overl
 
 2. Write another class `Rectangle` that implements these two interfaces.  You should make use of the class `Point` that you implemented from Lecture 1's exercise.  Then write another class `PaintedRectangle` that implements the two interfaces and inherits from `PaintedShape` that implements the two interfaces and inherits from `PaintedShape`.  You can assume that the sides of the rectangles are parallel with the x- and y-axes (in other words, the sides are either horizontal or vertical).
 
-3. (i) Write an interface called `Shape3D` that supports a method `getVolume`.  Write a class called `Cuboid` that implements `Shape3D` and has three private `double` fields `length`, `height`, and `breadth`.  `getVolume()` should return the volume of the `Cuboid` object.  The constructor for `Shape3D` should allow the client to create a `Shape3D` object by specifying the three fields `length`, `height` and `breadth`.
+3. (i) Write an interface called `Shape3D` that supports a method `getVolume`.  Write a class called `Cuboid` that implements `Shape3D` and has three private `double` fields `length`, `height`, and `breadth`.  `getVolume()` should return the volume of the `Cuboid` object.  The constructor for `Cuboid` should allow the client to create a `Cuboid` object by specifying the three fields `length`, `height` and `breadth`.
  
     (ii) We can extend one interface from another as well.  Find out how, and write a new interface `Solid3D` that inherits from interface `Shape3D` that supports a method `getDensity` and `getMass`.  
     
@@ -439,3 +440,5 @@ Even though the example above shows overloading of the constructor, we can overl
 4.  Write a class `Rectangle` that implements `Shape`.  A `Rectangle` class has two `double` fields, `length` and `width`, and a public method `setSize(int length, int width)` that allows the client to change its size.  
 
     Now, write a class `Square` that inherits from `Rectangle`.  A `Square` has an additional constraint that `length` must be the same as `width`.  How should `Square` implement the `setSize(int length, int width)` method?  Do you think `Square` should inherit from `Rectangle`?  Or should it be another way around?  Or maybe they should not inherit from each other?
+
+	(Note: to implement the `contains` method in `Shape`, you need to also keep the position of the `Square` (top left corner, for instance).  But, it is not important for this question)
