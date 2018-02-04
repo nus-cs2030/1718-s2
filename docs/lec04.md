@@ -1,25 +1,146 @@
-# Lecture 4: Memory, Exception and Generics
+# Lecture 4: Types, Memory, Exception 
 
 ## Learning Outcomes
 After this class, students should:
 
-- be understand when memory are allocated/deallocated from heap vs. from stack
+- understand when memory are allocated/deallocated from the heap vs. from the stack
 - understand the concept of call stack in JVM
 - understand how Java call by reference and call by value
 - know about the keywords `null`, `try`, `catch`, `finally`, `throw`, and `throws`.
-- appreciate why exceptions is useful way of handling errors
+- appreciate why exceptions is a useful way of handling errors
 - aware of the differences between errors, unchecked exception, and checked exception in Java
 - be able to trace through the control flow of `try`/`catch`/`finally` block
 - how to generate an exception and create a new exception
 - not commit bad practices when using exceptions
-- apprecaite why generics is helpful
-- be able to create generic class with type parameter, and instantiate parameterized type by passing in type arguments.
 
-## Where are Objects and Variables Stored?
+## `java` and `javac`
 
-First, let's look at where Java stores the objects and variables when a program is executed.  There are two memory regions, a heap and a stack[^1].  The _heap_ is where all objects are allocated, while the _stack_ is where all variables (including primitive types and object references) are allocated.
+Now that we have gone through the basic concepts of OO programming, let's take a step away from OO for the moment and look at some other important features of Java.
 
-[^1]:The actual memory store is more complex that what is presented here, but for the purpose of this lecture, we only consider heap and stack.  Heap and stack is also common to all the languages and runtime system I am aware of.
+In your [Lab 0](lab00.md), we showed you how to use `javac` to compile your Java program and `java` to execute your program.  
+
+`javac` is a _compiler_. It reads in Java source files as a string, parses the string for syntax errors, and converts the Java code into an intermediate binary format called the _bytecode_.  Bytecode is an instruction set akin to hardware instructions but is typically executed by a software interpreter.
+
+This behavior is different from what `gcc` does for C programs.  `gcc` produces native machine code, corresponding to hardware instructions.  As such, a C program your `gcc` produced on your home machine will not run on `sunfire`.  
+
+Java designers (led by James Gosling) wanted a language that can be compiled into a form that is platform and hardware independent, thus, they developed their own runtime environment called the Java Virtual Machine (JVM), which interprets and executes the bytecode, optimizes the execution, and manages the memory of Java programs.  Bytecode produced (the `.class` files) on one platform can run other platforms.
+
+!!! note "Other Bytecode Languages"
+    Many other programming environments offer compilation to bytecode.  Python, for instance, compiles Python code into `.pyc` files, which contain Python bytecode.  Facebook's HHVM compiles PHP into bytecode.  Google's V8 compiles Javascript into bytecode too.
+  
+!!! note "Other JVM Languages"
+    While JVM was initially designed for Java, its popularity has led to the development of other languages that compile to JVM bytecode and run on JVM, such as Clojure, Groovy, Scala and Kotlin.  
+
+!!! note "Other Java Compilers"
+    While we stick to the Java 9 compiler from Oracle for CS2030, there are other Java compilers: `ecj` is the Java compiler from Eclipse -- if you use Eclipse IDE, this is the default compiler.  `gcj` is the GNU Java Compiler (which has been removed from GCC 7 onwards).
+
+
+Once you produce the `.class` files containing the bytecode corresponding to the code you have written, you can pass the bytecode to JVM for execution by invoking the `java` command.  This is when your code gets executed -- objects get created and stored in memory, methods get called, etc. 
+
+### Compile Time vs Run Time
+It is important to understand the difference between the two stages, compile time (when we invoke `javac`) and run time (when we invoke `java`).
+
+During compile time, the compiler does not always know what value a variable will take, nor will it know the sequence of execution of the programs.  As such, the compiler opts to be conservative and only makes the decision on what it knows for sure.  We have encountered this before -- recall our discussion on late binding:
+```Java
+  for (Printable o: objs) {
+      o.print();
+  }
+```
+
+The compiler cannot always be sure what is the class of the object the variable `o` will refer to during runtime, and thus, it cannot be sure which version of `print` method will be executed.  
+
+In another example, we have
+
+```Java
+	Circle c = new Circle(new Point(0,0), 10);
+  Printable c2 = c;
+  c2.getArea();
+```
+
+At compile time, `c2` has a type `Printable`, and we try to invoke `getArea` which is a method available in `Circle`, not `Printable`.  Even though if we trace through the three lines of code above, we (the humans) can be sure that `c2` is pointing to a `Circle` object and it is fine to call `getArea`, the compiler has to be conservative as it is designed to work on arbitrarily complex programs with an unknown sequence of execution.  The compiler thus does not allow us to call `c2.getArea()`.
+
+## Types
+
+The above discussion brings us back to the topic of types.  Unlike C which is not type safe or  Python and Javascript which is weakly typed, Java belongs to a class of programming language which is statically typed and enforces type safety through a rich set of rules.  Understanding these rules and appreciating them is important to writing good and general Java programs, as well as picking up other programming languages with similar rules.
+
+### Type Conversion
+
+Sometimes a programmer knows better than the compiler the intention of the program.  In this case, it is useful for a programmer to override the compiler's decision.  One possible such override is to force the type of a variable to be something more appropriate, through _type casting_.
+
+We have seen type casting in action when we discussed about type safety (see [Lecture 1](lec01.md)).  Recall that, in C, we can type cast two seemingly incompatible types to each other.  We have also seen it [last week](lec03.md) when we cast an `Object` variable to a `Circle` when we discuss overriding of the `equals()` method.
+
+Type casting is a form of type conversion, in particular, an _explicit type conversion_. 
+
+Let's talk about _implicit type conversion_ first.  Implicit conversion can happen in several contexts:
+
+- Assignment, for instance, assigning a variable of type `Circle` to a variable of type `Shape.
+- Method invocation, for instance, when you pass a variable of type `Circle` to a method expecting `Shape`.
+- String conversion, when one of the operands of `+` is a `String` and the other is not, in which case it will be converted to `String` (by calling `toString()`).
+
+Suppose we have a reference type $S$ and $T$ is a subtype of $S$ (denoted $T <: S$), then converting $T$ to $S$ is checked at compile time.  This conversion is known as _widening reference conversion_.
+
+The converse is not true.  If we want to convert $S$ to $T$ (known as _narrowing reference conversion_), then we need explicit casting.  Such conversion is checked at run time, and it may cause an exception.  
+
+```Java
+class S { }
+class T extends S { }
+class U extends S { } 
+
+S s1, s2;
+T t = new T();
+U u = new U();
+
+s1 = t;  // always OK since this is a widening reference conversion.
+s2 = u;  // always OK since this is a widening reference conversion.
+t  = s1; // not allowed since it is a narrowing reference conversion.
+t  = (T)s1; // explicit conversion allowed by compiler, no problem during run time.
+t  = (T)s2; // explicit conversion allowed by compiler, but cause run time error.
+```
+
+!!! note "Java subtyping and conversion specification"
+    We are not going through all the gory details of Java subtyping and type conversion rules.  Chapter 5 of [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se7/html/jls-5.html) succinctly and precisely defines all the rules on this topic.  For those students who are interested, you can check it out.  Otherwise, we will discover some of the other rules along the way as we learn more about Java in practice.
+
+### Subtyping
+
+We have seen how subtyping works in Java: we say that if a class $T$ extends from class $S$ or implements interface $S$, $T$ is a subtype of $S$.  The notion of subtyping, however, is more general than that.  In the study of programming languages, we say that $T$ is a subtype of $S$ if a piece of code written for variables of type $S$ can also safely be used on variables of type $T$.   In the context of Java and other OO languages, inheritance and implementation of interfaces satisfy these conditions.  In other languages, however, we can create subtypes without these OO notions.  In Ada, for instance, we can create a subtype by restricting the range of values of a type.  E.g., we can create a subtype `digit` from the type `int`, restricting its value to ranging between 0 and 9.
+
+With this more general notion of subtyping, we can define subtype relations between the primitive types, as follows:
+
+`byte` $<:$ `short` $<:$ `int` $<:$ `long` $<:$ `float` $<:$ `double`; and `char` $<:$ `int`
+
+We can also extend the notion of widening conversion and narrowing conversion to primitive types.
+
+### Variance of Types
+
+Given a type $T$, we can create other complex types that depend on $T$.  For instance, we can have an array of type $T$, a generic class parameterized by $T$ (next lecture), a method that takes in $T$ and returns $T$, etc.
+
+The term _variance of types_ refers to how these more complex types relate to each other, given the relationship between the simpler types.
+
+Suppose $A(T)$ is the complex type constructed from $T$.  Then we say that 
+- $A$ is _covariant_ if $T <: S$ implies $A(T) <: A(S)$, 
+- $A$ is _contravariant_ if $T <: S$ implies $A(S) <: A(T)$,
+- $A$ is _bivariant_ if it is both covariant and contravariant, and
+- $A$ is _invariant_ if it is neither covariant nor contravariant.
+
+For example, in Java, arrays (of reference type) are covariant.  This means that, `T[]` is a subtype of `S[]`, if `T` is a subtype of `S`.  Based on the type conversion rule, it is OK to assign any array of reference type to an array of `Object` objects, or pass an array of reference type to a method that expects an array of `Object` objects.  This decision (of making Java arrays covariant) makes it possible to write very generic method that operates on array, as provided by the Java utility class [`Arrays`](https://docs.oracle.com/javase/9/docs/api/java/util/Arrays.html).[^2]
+
+We will see examples of complex type $A$ that is invariant and contravariant later in this module.
+
+[^2]: A utility class is a Java class that contains only class methods and class fields.  You have seen another example in CS2030, `Math`, and will see a few more in this module.
+
+## JVM Memory Model
+
+As mentioned earlier, JVM manages memory of Java programs while its bytecode instructions are interpreted and executed.  Different JVM implementation may implement these differently, but typically a JVM implementation partitions the memory into several regions, including
+- _method area_ for storing the code for the methods;
+- _metaspace_ for storing meta information about classes;
+- _heap_ for storing dynamically allocated objects;
+- _stack_ for local variables and call frames.
+
+Since the concepts of heap and stack are common to all execution environments (either based on bytecode or machine code), we will focus on them here.
+
+### Heap and Stack
+
+The _heap_ is the region in memory where all objects are allocated in and stored, while the _stack_ is the region where all variables (including primitive types and object references) are allocated in and stored.
 
 Considers the following two lines of code.
 ```Java
@@ -29,9 +150,9 @@ c = new Circle(new Point(1, 1), 8);
 Line 1 declares a variable `c`.  When Java executes this line of code, it allocates some memory space for an object reference for `c`, the content is initialized to `null`.  Since `c` is a variable, it resides in the stack.
 
 !!! note "`null` in Java"
-    `null` is a special value for object reference, that signify that this reference is not pointing to any object.  This is similar to the `null` in Javascript, `NULL` macro in C, `nullptr` in C++11, `None` in Python, `nil` in Objective-C.  (Again, you see here computer scientists just can't agree on names!)  [Sir Tony Hoare](https://en.wikipedia.org/wiki/Tony_Hoare) (who also invented quicksort) famously apologized for inventing the null pointer.  He calls it his billion-dollar mistake.
+    `null` is a special value for the object reference, that signifies that this reference is not pointing to any object.  This is similar to the `null` in Javascript, `NULL` macro in C, `nullptr` in C++11, `None` in Python, `nil` in Objective-C.  (Again, you see here computer scientists just can't agree on names!)  [Sir Tony Hoare](https://en.wikipedia.org/wiki/Tony_Hoare) (who also invented quicksort) famously apologized for inventing the null pointer.  He calls it his billion-dollar mistake.
 
-Line 2 creates a new Circle object.  When Java executes this line of code, it allocates some memory space for a `Circle` object on the heap.  The memory address of this memory space becomes the reference of the object, and is assigned to the variable `c`.
+Line 2 creates a new Circle object.  When Java executes this line of code, it allocates some memory space for a `Circle` object on the heap.  The memory address of this memory space becomes the reference of the object and is assigned to the variable `c`.
 
 This is shown in the figure below[^2].
 
@@ -84,16 +205,14 @@ p1.distanceTo(p2);
 After declaring `p1` and `p2` and creating both objects, we have:
 ![stack-and-heap](figures/stack-and-heap/stack-and-heap.005.png)
 
-Let's see what happen when we call `distanceTo`.  How is the argument `q` initialized?  What about `this`?  
-
-When `distanceTo` is called, Java (to be more precise, the Java Virtual Machine, or JVM) creates a _stack frame_ for this instance method call.  This stack frame is a region of memory that tentatively contains (i) the `this` reference, (ii) the method arguments, and (iii) local variables within the method, among other things[^3][^4].  When a class method is called, the stack frame does not contain the `this` reference.
+When `distanceTo` is called, JVM creates a _stack frame_ for this instance method call.  This stack frame is a region of memory that tentatively contains (i) the `this` reference, (ii) the method arguments, and (iii) local variables within the method, among other things[^3][^4].  When a class method is called, the stack frame does not contain the `this` reference.
 
 [^3]: This is not that difference from how an OS handles function call in a machine code, as you will see in CS2100/CS2106.
 [^4]: The other things are JVM implementation independent and not relevant to our discussion here.
 
 ![stack-and-heap](figures/stack-and-heap/stack-and-heap.006.png)
 
-You can see that the _reference_ of the objects `p1` and `p2` are copied onto the stack frame. `p1` and `this` point to the same object, and `p2` and `q` point to the same object.
+You can see that the _references_ to the objects `p1` and `p2` are copied onto the stack frame. `p1` and `this` point to the same object, and `p2` and `q` point to the same object.
 Within the method, any modification done to `this` would change the object referenced to by `p1`, and any change made to `q` would change the object referenced to by `p2` as well.
 After the method returns, the stack frame for that method is destroyed.
 
@@ -109,23 +228,23 @@ Again, we create a stack frame, copy the reference to object `p2` into `this`, c
 
 ![stack-and-heap](figures/stack-and-heap/stack-and-heap.007.png)
 
-What is important here is that, as `theta` and `distance` are primitive types instead of references, we copy the values onto the stack.  If we change `theta` or `d` within `move`, the `theta` and `distance` of the calling function will not change.  This behavior is the same as you would expect in C.  However, unlike in C where you can pass in a pointer to a variable, you cannot pass in a reference to a primitive type in any way in Java.  If you want to pass in a variable of primitive type into a method and have its value changed, you will have to use a _wrapper class_, but we leave the details of that for another lesson on another day.
+What is important here is that, as `theta` and `distance` are primitive types instead of references, we copy the values onto the stack.  If we change `theta` or `d` within `move`, the `theta` and `distance` of the calling function will not change.  This behavior is the same as you would expect in C.  However, unlike in C where you can pass in a pointer to a variable, you cannot pass in a reference to a primitive type in any way in Java.  If you want to pass in a variable of primitive type into a method and have its value changed, you will have to use a _wrapper class_.  The details of how to do this are left as an exercise.
 
-In short, Java uses _call by value_ for primitive types, and _call by reference_ for objects.
+To summarize, Java uses _call by value_ for primitive types, and _call by reference_ for objects.
 
-If we made multiple nested method calls, as we usually do, the stack frames get stacked on top of each other.  For instance, in Lab 1, `main` calls `solve`, which calls the `Circle` constructor, which calls the `angleTo`.  When JVM is executing `angleTo`, the call stack contains the stack frames of (in order of top to bottom): `angleTo`, `Circle` constructor, `solve`, and `main`.
+If we made multiple nested method calls, as we usually do, the stack frames get stacked on top of each other.  For instance, in Lab 0, `main` calls `solve`, which calls the `Circle` constructor, which calls the `angleTo`.  When JVM is executing `angleTo`, the call stack contains the stack frames of (in order of top to bottom): `angleTo`, `Circle` constructor, `solve`, and `main`.
 
 One final note: the memory allocated on the stack are deallocated when a method returns.  The memory allocated on the heap, however, stays there as long as there is a reference to it (either from another object or from a variable in the stack).  Unlike C or C++, in Java, you do not have to free the memory allocated to objects.  The JVM runs a _garbage collector_  that checks for unreferenced objects on the heap and cleans up the memory automatically.
 
 ## Exceptions
 
-One of the nuances of programming is having to write code to deal with exceptions and errors.  Consider writing a method that reads in a series of x and y coordinates from a file, not unlike what you have seen in Lab 1.  Here are some things that could go wrong:
+One of the nuances of programming is having to write code to deal with exceptions and errors.  Consider writing a method that reads in a series of x and y coordinates from a file, not unlike what you have seen in Lab 0.  Here are some things that could go wrong:
 
 - The file to read from may not exist
 - The file to read from exists, but you may not have permission to read it
 - You can open the file for reading, but it might contain non-numeric text where you numerical values
 - The file might contain fewer values than expected
-- The file might become unreadable as you are reading through it (e.g., someone unplug the USB drive)
+- The file might become unreadable as you are reading through it (e.g., someone unplugs the USB drive)
 
 In C, we usually have to write code like this:
 
@@ -155,13 +274,13 @@ if (scanned == EOF) {
 }
 ```
 
-Out of the lines above, only 2 lines correspond to the actual tasks, the others are for exception checking/handling.  How uncool is that?  Furthermore, the actual tasks are intersperse between exception checking code, making reading and understanding the logic of the code difficult.
+Out of the lines above, only 2 lines correspond to the actual tasks, the others are for exception checking/handling.  How uncool is that?  Furthermore, the actual tasks are interspersed between exception checking code, making reading and understanding the logic of the code difficult.
 
-The examples above also have to return different values to the calling method, because the calling method may have to do something to handle the errors.  Note that the POSIX APIs has a global variable `errno` which signifies the detailed error.  First, we have to check for different `errno` values and react accordingly (we can use `perror`, but that has its limits).  Second, `errno` is global and we know that global variable is bad practice.  In fact, I am not even sure that code above works because `fprintf` in Line 3 might have changed `errno`!
+The examples above also have to return different values to the calling method, because the calling method may have to do something to handle the errors.  Note that the POSIX APIs has a global variable `errno` that signifies the detailed error.  First, we have to check for different `errno` values and react accordingly (we can use `perror`, but that has its limits).  Second, `errno` is global and we know that using global variable is bad practice.  In fact, I am not even sure that code above works because `fprintf` in Line 3 might have changed `errno`!
 
-Then, there is the issue of having to repeatedly clean up after an error -- here we `fclose` the file if there is an error reading, twice.  It is easy to forgot to do so if we have to do this in multiple places.   Furthermore, if we need to perform more complex clean up, then we would end up with lots of repeated code.
+Then, there is the issue of having to repeatedly clean up after an error -- here we `fclose` the file if there is an error reading, twice.  It is easy to forget to do so if we have to do this in multiple places.   Furthermore, if we need to perform more complex clean up, then we would end up with lots of repeated code.
 
-Java supports `try`/`catch`/`finally` control statements, which is a way to group statements that check/handle errors together making code easier to read.  The Java equivalent to the above is:
+Fortunately, Java supports `try`/`catch`/`finally` control statements, which is a way to group statements that check/handle errors together making code easier to read.  The Java equivalent to the above is:
 
 ```Java
 try {
@@ -184,7 +303,7 @@ finally {
 }
 ```
 
-Here Lines 2-4 keep the basic tasks together, and all the clean up tasks are grouped together in Lines 18-19.  Lines 8-16 handles the exceptions.  We no longer rely on global variable to convey the type of exceptions, or special return value to indicate exceptions.   What if we want the calling method to handle the exception?  Then, we simply do not do anything (i.e., do not catch the exception) and let the exception propagates to the calling method automatically.
+Here Lines 2-4 keep the basic tasks together, and all the clean up tasks are grouped together in Lines 18-19.  Lines 8-16 handle the exceptions.  We no longer rely on a global variable to convey the type of exceptions, or special return value to indicate exceptions.   What if we want the calling method to handle the exception?  Then, we simply do not do anything (i.e., do not catch the exception) and let the exception propagates to the calling method automatically.
 
 !!! note "Error vs. Exception in Java"  
     We have been using the term error and exception loosely.  Java has different classes for `Error` and `Exception`.  `Error` is for situations where the program should terminate as generally there is no way to recover.  For instance, when the heap is full (`OutOfMemoryError`) or the stack is full (`StackOverflowError`).  Exceptions are for situations where it is still possible to reasonably recover from the error.
@@ -201,10 +320,11 @@ Here is a more detailed description of the control flow of exceptions.  Consider
 
 ![exception control flow](figures/exceptions/exceptions.002.png)
 
-The statements in `try` block is executed, followed by the statements in `finally` block.
+The statements in `try` block are executed, followed by the statements in `finally` block.
 
 Now, let's suppose something went wrong deep inside the nested call, in `m4()`.  One of the statement executes `throw new E2();`, which causes the execution in `m4()` to stop.  JVM now looks for the block of code that catches `E2`, going down the call stack, until it can find a place where the exception is handled.  In this example, we suppose that none of `m1()`-`m4()` handles (i.e., `catch`) the exception.  Thus, JVM then jumps to the code that handles `E2`.  Finally, JVM executes the `finally` block.
 
+Note that the `finally` block is always executed even when `return` or `throw` is called in a `catch` block.
 
 ![exception control flow](figures/exceptions/exceptions.003.png)
 
@@ -213,9 +333,9 @@ Now, let's suppose something went wrong deep inside the nested call, in `m4()`. 
 There are two types of exceptions in Java: _checked_ and _unchecked_ exceptions:
 
 - A checked exception is something that the programmer should anticipate and handle.  For instance, when you open a file, you should anticipate that in some cases, the file cannot be open.   
-- An unchecked exception is something that the programmer does not anticipate, and usually is a result of bugs.  For example, when you try to call `p.distanceTo(q)` but `p` is `null`, resulting in a `NullPointerException` being thrown.  
+- An unchecked exception is something that the programmer does not anticipate, and usually is a result of a bug.  For example, when you try to call `p.distanceTo(q)` but `p` is `null`, `NullPointerException` will be thrown.  
 
-We need to catch all checked exceptions or let it propagate to the calling method.  Otherwise, the program will not compile.  
+_We need to either catch all checked exceptions or let it propagate to the calling method_.  Otherwise, the program will not compile.  
 
 For unchecked exceptions, even though we could catch it, it makes more sense to eliminate the bugs.  In Java, unchecked exceptions are subclasses of `RuntimeException`.  All `Error`s are unchecked.
 
@@ -234,13 +354,13 @@ public static int readIntFromFile(String filename)
 
 Note Line 2 specify that this method might throw `FileNotFoundException`.  
 
-A checked exception must be either caught or thrown to calling function, except `main`, which has no calling function to throw to.  If the main() does not catch an checked exception, the running program exits, and the exception is revealed to the user -- this is generally considered as bad programming.
+A checked exception must be either caught or thrown to calling function, except `main`, which has no calling function to throw to.  If `main` does not catch a checked exception, the program exits, and the exception is revealed to the user -- this is generally considered a bad programming practice.
 
 The two other exceptions from the examples above `InputMismatchException` and `NoSuchElementException` are subclasses of `RuntimeException`, and therefore are unchecked.
 
 ### Generating Exception
 
-The Circle constructor in Lab 1 requires the distance $d$ between two input points to be $0 < d \le 2r$.  If the condition is violated, you are asked to return an invalid circle.  Another way is to throw an unchecked exception `IllegalArgumentException` if one of the above two conditions is met.  
+The Circle constructor in Lab 0 requires the distance $d$ between two input points to be $0 < d \le 2r$.  If the condition is violated, you are asked to return an invalid circle.  A better way is to throw an unchecked exception `IllegalArgumentException` if one of the above two conditions is met.  
 
 ```Java
 public Circle(Point p, Point q, double r, boolean centerOnLeft) {
@@ -266,7 +386,7 @@ When you override a method that throws a checked exception, the overriding metho
 
 #### Catch Exceptions to Clean Up
 
-While it is convenient to just let the calling method deals with exceptions ("Hey! Not my problem!"), it is not always responsible to do so.  Consider the example earlier, where `m1()`, `m2()`, and `m3()` do not handle exception E2.  Let's say that E2 is a checked exception, and it is possible to react to this and let the program continues properly.  Also, suppose that `m2()` allocated some system resources (e.g., temporary files, network connections) at the beginning of the method, and deallocated the resources at the end of the method.  Not handling the exception, means that, code that deallocates these resources does not get called when an exception occur!  It is better for `m2()` to catch the exception, handle the resource deallocation in a `finally` block.  If there is a need for the calling methods to be aware of the exception, `m2()` can always re-throw the exception:
+While it is convenient to just let the calling method deals with exceptions ("Hey! Not my problem!"), it is not always responsible to do so.  Consider the example earlier, where `m1()`, `m2()`, and `m3()` do not handle exception E2.  Let's say that E2 is a checked exception, and it is possible to react to this and let the program continues properly.  Also, suppose that `m2()` allocated some system resources (e.g., temporary files, network connections) at the beginning of the method, and deallocated the resources at the end of the method.  Not handling the exception, means that, code that deallocates these resources does not get called when an exception occurs!  It is better for `m2()` to catch the exception, handle the resource deallocation in a `finally` block.  If there is a need for the calling methods to be aware of the exception, `m2()` can always re-throw the exception:
 
 ```Java
 public void m2() throws E2 {
@@ -283,8 +403,6 @@ public void m2() throws E2 {
 }
 ```
 
-Note that the `finally` block is always executed even when `return` or `throw` is called in a `catch` block.
-
 #### Catch All Exception is Bad
 
 Sometimes, you just want to focus on the main logic of the program and get it working instead of dealing with the exceptions.  Since Java uses checked exceptions, it forces you to handle the exceptions or else your code will not compile.  One way to quickly get around this is to write:
@@ -296,7 +414,7 @@ try {
 catch (Exception e) {}
 ```
 
-to shut the compiler up.  DO NOT DO THIS.  All exceptions thrown are now silently ignored!  
+to shut the compiler up.  DO NOT DO THIS.  All exceptions thrown are now silently ignored!  This is such as bad practice that there is a name for this -- this is call the _Pokemon Exception Handling_.
 
 Can we do _worse_?  How about the following:
 ```Java
@@ -322,7 +440,7 @@ catch (Exception e) {
 
 #### Do Not Break Abstraction Barrier
 
-Sometimes, letting the calling method handles the exception causes the implementation details to be leak, and make it harder to change the implementation later.
+Sometimes, letting the calling method handles the exception causes the implementation details to be leaked, and make it harder to change the implementation later.
 
 For instance, suppose we design a class `ClassRoster` with a method `getStudents()`, which reads the list of students from a text file.  
 ```Java
@@ -344,124 +462,3 @@ class ClassRoster {
 ```
 We should, as much as possible, handle the implementation specific exceptions within the abstraction barrier.  
 
-## Generics
-Third topic of today is on generics.  
-
-Suppose you want to create a new class that encapsulates a queue of circles.  You wrote:
-
-```
-class CircleQueue {
-  private Circle[] circles;
-   :
-  public CircleQueue(int size) {...}
-  public boolean isFull() {...}
-  public boolean isEmpty() {...}
-  public void enqueue(Circle c) {...}
-  public Circle dequeue() {...}
-}
-```
-
-Later, you found that you need a new class that encapsulates a queue of points.  You wrote:
-```
-class PointQueue {
-  private Point[] points;
-   :
-  public PointQueue(int size) {...}
-  public boolean isFull() {...}
-  public boolean isEmpty() {...}
-  public void enqueue(Point p) {...}
-  public Point dequeue() {...}
-}
-```
-
-And you realize that there are actually a lot of similar code.  Invoking the _abstraction principle_, which states that _"Where similar functions are carried out by distinct pieces of code, it is generally beneficial to combine them into one by abstracting out the varying parts_", you decided to create an queue of Objects to replace the two classes above.
-
-```Java
-class ObjectQueue {
-  private Object[] objects;
-   :
-  public ObjectQueue(int size) {...}
-  public boolean isFull() {...}
-  public boolean isEmpty() {...}
-  public void enqueue(Object o) {...}
-  public Object dequeue() {...}
-}
-```
-
-Now you have a very general class, that you can use to store objects of any kind, including a queue of strings, a queue of colors, etc.  You are quite pleased with yourself, as you should!  The early Java collection library contains many such generic data structures that stores elements of type `Object`.
-
-To create a queue of 10 circles and add some circles, you just need:
-```Java
-ObjectQueue cq = new ObjectQueue(10);
-cq.enqueue(new Circle(new Point(0, 0), 10));
-cq.enqueue(new Circle(new Point(1, 1), 5));
- :
-```
-
-Getting a circle out of the queue is a bit more troublesome:
-```Java
-Circle c = cq.dequeue();
-```
-Would generate a compilation error, since we cannot assign a variable of type `Object` to a variable of type `Circle`.
-
-We can get around the compilation error by typecasting it into a `Circle`, since `Circle` is a subclass of `Object`, Java compiler would let it go, assuming that you know what you are doing.
-```Java
-Circle c = (Circle)cq.dequeue();
-```
-
-The code above, however, could be dangerous.  For instance, it might generate a runtime `ClassCastException` if there is an object in the queue that is not `Circle` or its subclass.  To avoid runtime error, we should check the type first:
-
-```Java
-Object o = cq.dequeue();
-if (o instanceof Circle) {
-	Circle c = (Circle)o;
-}
-```
-
-Wouldn't it be nice if we can still have general code, but let the compiler generates an error if we try to add a non-`Circle` into our queue of `Circle` objects, so that we don't have to check for the type of an object all the time?
-
-Java 5 introduces generics, which is a significant improvement to the type systems in Java.  It allows a _generic class_ of some type `T` to be written:
-
-```Java
-class Queue<T> {
-  private T[] objects;
-   :
-  public Queue<T>(int size) {...}
-  public boolean isFull() {...}
-  public boolean isEmpty() {...}
-  public void enqueue(T o) {...}
-  public T dequeue() {...}
-}
-```
-
-`T` is known as _type parameter_.
-The same code as before can be written as:
-
-```Java
-Queue<Circle> cq = new Queue<Circle>(10);
-cq.enqueue(new Circle(new Point(0, 0), 10));
-cq.enqueue(new Circle(new Point(1, 1), 5));
-Circle c = cq.dequeue();
-```
-
-Here, we passed `Circle` as _type argument_ to `T`, creating a _parameterized type_ `Queue<Circle>`.
-
-In Line 4, we no longer need to cast, and there is no danger of runtime error due to object of the wrong class being added to the queue, for doing this:
-```Java
-Queue<Circle> cq = new Queue<Circle>(10);
-cq.enqueue(new Point(1, 3));
-```
-will generate a compile time error! 
-
-!!! note "Diamond Notation"
-    We can use the short form `<>` in the constructor as the compiler can infer the type:
-	```Java
-	Queue<Circle> cq = new Queue<>(10);
-	```
-
-We can use parameterized type anywhere a type is used, including as type argument.  If we want to have a queue of queue of circle, we can:
-	```Java
-	Queue<Queue<Circle>> cqq = new Queue<>(10);
-	```
-
-We will see many examples of generics next lecture.
