@@ -3,6 +3,10 @@
 ## Learning Outcomes
 After this class, students should:
 
+- understand the differences between compile time and run time
+- understand the basic rules for type conversion in Java, including the differenes between narrowing conversion and widening conversion.
+- understand the concept of subtyping in general and the subtype relations in Java
+- understand what is type covariance and that Java arrays are covariance.
 - understand when memory are allocated/deallocated from the heap vs. from the stack
 - understand the concept of call stack in JVM
 - understand how Java call by reference and call by value
