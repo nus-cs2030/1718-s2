@@ -1,0 +1,184 @@
+ 
+## Fibonacci with Memoization
+
+Now, let's do something different.  Let's consider how to write functional-style code that requires state changes.  Pure functions are not supposed to have side effects, so how do we deal with code that requires update of states?  For instance, `Shop` is a state and our events have to update the state.  
+
+Let's use a small example of requires storing of states as we compute: computing the Fibonacci number of a number $n$.  We will use long in the example below, to keep the code readable.  Just like in Exercise 5, this should have been done using `BigInteger` to avoid overflows.  
+
+We will use a `HashMap` to help us remember the Fibonacci number that we have computed before.  But, as mentioned earlier, Java Collections Framework does not use `Optional`, so, let's modify it to do so:
+
+```Java
+class FibCache extends HashMap<Long, Long> {
+
+	public Optional<Long> getFib(long key) {
+		return Optional.ofNullable(super.get(key));
+	}
+
+	public FibCache extends putFib(long key, long value) {
+		super.put(key, value);
+		return this;
+	}
+}
+```
+
+So, everytime we find the $n$-th Fibonacci number, we put into `FibCache`.  Before we compute the $n$-th Fibonacci number, we try to get from `FibCache` first.
+
+We need a recursive version that returns both the Fibonacci number and the FibCache.  We will make use of the `Pair` class, which you have seen for the third time now and should realized that this is something that you will likely use over and over again.
+
+Here is the functional, recursive version of a method that computes the Fibonacci number. The function takes in a number $n$ and a cache, and return the $n$-th Fibonacci number, along with the updated cache.
+
+```Java
+Pair<Long, FibCache> fib(long n, FibCache cache) {
+	return cache.getFib(n).
+	          .map(x -> new Pair<>(x, cache))
+						.orElseGet(() -> {
+							  long result = fib(n - 1, cache).first + fib(n - 2, cache).first;
+								cache.putFib(n, result);
+								return new Pair<>(result, cache);
+						})
+}
+```
+
+The following, old school, way of writing maybe easier to understand:
+```Java
+Pair<Long, FibCache> fib(long n, FibCache cache) {
+	Optional<Long> optValue = cache.getFib(n);
+	if (optValue.isPresent()) {
+		return new Pair<>(optValue.get(), cache);
+	} else {
+		long result = fib(n - 1, cache).first + fib(n - 2, cache).first;
+		cache.putFib(n, result);
+		return new Pair<>(result, cache);
+	}
+}
+```
+
+To complete the code, we initialize the FibCache with two ones ($fib(0) = fib(1) = 1$).  Then, we recursively find the Fibonacci number.
+
+```Java
+long fibonacci(long n) {
+	FibCache cache = new FibCache().putFib(0, 1).putFib(1, 1);
+	return fib(n, cache);
+}
+```
+
+So far so good, it is much longer than the version we did in Exercise 5, but just bear with it, as I am going to use this to show how to manipulate states in a function way.
+
+## Manipulating States, Functional-Style
+
+While pure functional programming does not lead to side effects, you can imagine that such program is not very useful.  In the real world, we need to perform I/O, log things to files, update databases, etc.  We also need to manipulate states of the program.  States here referring to information we need for computation that is not part of the input argument.  In OO, we often store states as part of the objects and we set and get those states.  But in functional style, we want to avoid that.
+
+When we can't avoid having side effects, we prefer to keep the side effects isolated in a few places, instead of peppering them all over the code.  Moreover, we want to side effects to happen in as a few calls as possible, so that most of the program runs without side effects.  One way to do this is to as the "lambda as delayed data` paradigm -- we do not keep around the state and mutate it -- we keep a lambda to mutate the states!  Then, the state does not change until we invoke the lambda.
+
+Let's analyze the code below carefully:
+```Java
+	Optional<Long> optValue = cache.getFib(n);
+	if (optValue.isPresent()) {
+		return new Pair<>(optValue.get(), cache);
+	} else {
+		long result = fib(n - 1, cache).first + fib(n - 2, cache).first;
+		cache.putFib(n, result);
+		return new Pair<>(result, cache);
+	}
+```
+
+When do the state comes from and when do state updates happen?   Our state in this program comes from the intermediate returned value and the cache.  Consider the (value, cache) pair -- the value gets updated if `cache.getFib(n)` found a match in the cache.  Otherwise, both the value and the cache may get updated in the recursive call to n-1 and n-2, and then the cache gets updated when we put the result back into the cache.
+
+Let's retrace the code again, this time focusing on the actual action of updating the state.  We will annotate the code with the notation (cache -> (value, cache)) and explain how the state update happen.
+
+- Optional<Long> optValue = cache.getFib(n); 
+- return new Pair<>(optValue.get(), cache); // cache -> (optValue.get(), cache)
+- result = (fib - 1, cache).first // 
+
+Let's see how we can apply this idea to compute Fibonacci and avoid passing the FibCache around.  We first define a new `State` class, which contains a field `compute` -- an unevaluated lambda that, upon execution, return the Fibonacci number (along with the `FibCache` as a pair).  `compute` takes a `FibCache` as input and return a `Pair` as before.
+
+![State](figures/state-monad/state-monad.001.png)
+
+```Java
+public class State {
+	public final Function<FibCache, Pair<Long, FibCache>> compute;
+
+	public long getFib(FibCache cache) {
+		return compute.apply(cache).first;
+	}
+	:
+	:
+}
+```
+
+The `getFib` method gives a cache to `compute`, which it is applied on the `first` element of `Pair`, which is the Fibonacci number, is returned.
+
+A state can be created and changed in several ways.  First, we can create a state with a fix value.  While this usually means that we set a field to corresponds to the value, we do not have such field here, since we haven't computed anything yet!  So, instead, we update the `compute` function so that it yields the new given value instead:
+
+```Java
+  public static State of(long value) {
+	  return new State(cache -> new Pair(value, cache));
+	}
+```
+![State](figures/state-monad/state-monad.002.png)
+
+A state can be created when we call `getFib` (corresponds to Line 3 of the previous version of `fib` above): 
+
+```Java
+  public static State init(Function<FibCache,Optional<Long>> cache2long) {
+	  return new State(cache -> new Pair(cache2long.apply(cache), cache));
+	}
+```
+
+![State](figures/state-monad/state-monad.003.png)
+
+A state can transit to another if the value and a FitMap transition function is given:
+
+```Java
+  public static State transitTo(Function<FibCache,FitMap> cache2cache, long value) {
+	  return new State(cache -> new Pair(value, cache2cache.apply(cache));
+	}
+```
+
+![State](figures/state-monad/state-monad.004.png)
+
+Finally, we can apply an arbitary `flatMap` 
+We can now rewrite the new version of `fib` with the updated signature:
+
+```Java
+State fib(int n); 
+```
+
+First, we create a state by getting the $n$-Fibonacci from the cache.  This state does not do anything, just remembering that, when evaluated, we will try and find the pre-computed $n$-th Fibonacci number.  The state init doesn't even have access to the `FibCache`!
+
+```Java
+State.newState(m -> m.getFib(n))
+```
+
+But that's OK.  Conceptually, the `State` object remembers the value and the past computed values.  But, the `State` object is not very useful at this time -- becuse we cannot do anything about the states inside.  But we can't do so becase the values does not exist (yet).  So, if we want to do anything with the states, we have to pass another function into the state, and ask it to remember to operate on it, whenever the state become available.
+
+Let's write a `flatMap()` method that takes in a function on the value, then return state.  `flatMap` is lazy -- it just remember that, to invoke this function, it first have to invoke the `compute` method, then apply its function to the result, then update the state.
+
+```Java
+public class State {
+	public final Function<FibCache, Pair<Long, FibCache>> compute;
+
+	public State flatMap(Function<Long, State> f) {
+		return new State(cache -> {
+			Pair p = compute.apply(cache);
+			return f.apply(p.first)
+			        .compute.apply(p.state);
+		})
+	}
+```
+
+What we would like to happen is that, when evaluated, if `init` have found the $n$-th Fibonacci number in `FibCache`, then we need to apply a function to the value (to create a 
+
+   ```Java
+	 init.cache(
+
+```Java
+State fib(long n) {
+	// Create an initial state
+	State init = State.newState(m -> m.getFib(n));
+	return State.newState(m -> m.getFib(n)) // Function to call for this state
+	            .flatMap(u -> u.map(x -> State.of(x))
+							               .orElse(fib(n-1).flatMap(y -> fib(n-2).map(y -> x +y))
+														                                        .flatMap(z -> State.transition(m -> m.addFib(n,z), z))));
+}
+```
