@@ -470,7 +470,6 @@ class ClassRoster {
 }
 ```
 We should, as much as possible, handle the implementation specific exceptions within the abstraction barrier.  
-<<<<<<< Updated upstream
 
 ## Exercise
 
@@ -482,12 +481,12 @@ We should, as much as possible, handle the implementation specific exceptions wi
     ```
 
     Will the following two lines compile?  Will any of the lines cause a run time exception?  Explain.
-    ```
+    ```Java
     shapes = circles;
     shapes[0] = new Square(3.0);
     ```
 
-		(Assume `Square` has a constructor that takes in a single `double` argument.)
+    (Assume `Square` has a constructor that takes in a single `double` argument.)
 
 2. Write a static method with the following signature:
 
