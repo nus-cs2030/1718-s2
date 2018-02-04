@@ -17,6 +17,7 @@ After this class, students should:
 - how to generate an exception and create a new exception
 - not commit bad practices when using exceptions
 
+
 ## `java` and `javac`
 
 Now that we have gone through the basic concepts of OO programming, let's take a step away from OO for the moment and look at some other important features of Java.
@@ -469,6 +470,7 @@ class ClassRoster {
 }
 ```
 We should, as much as possible, handle the implementation specific exceptions within the abstraction barrier.  
+<<<<<<< Updated upstream
 
 ## Exercise
 
