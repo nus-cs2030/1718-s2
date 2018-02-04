@@ -1385,14 +1385,11 @@ We should, as much as possible, handle the implementation specific exceptions wi
 
 <p>Will the following two lines compile?  Will any of the lines cause a run time exception?  Explain.
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>shapes = circles;
-shapes[0] = new Square(3.0);
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">shapes</span> <span class="o">=</span> <span class="n">circles</span><span class="o">;</span>
+<span class="n">shapes</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Square</span><span class="o">(</span><span class="mf">3.0</span><span class="o">);</span>
 </pre></div>
 </td></tr></table></p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>(Assume `Square` has a constructor that takes in a single `double` argument.)
-</pre></div>
-</td></tr></table>
-
+<p>(Assume <code class="codehilite">Square</code> has a constructor that takes in a single <code class="codehilite">double</code> argument.)</p>
 </li>
 <li>
 <p>Write a static method with the following signature:</p>
