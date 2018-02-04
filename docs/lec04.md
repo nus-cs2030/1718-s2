@@ -34,7 +34,6 @@ Java designers (led by James Gosling) wanted a language that can be compiled int
 !!! note "Other Java Compilers"
     While we stick to the Java 9 compiler from Oracle for CS2030, there are other Java compilers: `ecj` is the Java compiler from Eclipse -- if you use Eclipse IDE, this is the default compiler.  `gcj` is the GNU Java Compiler (which has been removed from GCC 7 onwards).
 
-
 Once you produce the `.class` files containing the bytecode corresponding to the code you have written, you can pass the bytecode to JVM for execution by invoking the `java` command.  This is when your code gets executed -- objects get created and stored in memory, methods get called, etc. 
 
 ### Compile Time vs Run Time
@@ -52,16 +51,22 @@ The compiler cannot always be sure what is the class of the object the variable 
 In another example, we have
 
 ```Java
-	Circle c = new Circle(new Point(0,0), 10);
+  Circle c = new Circle(new Point(0,0), 10);
   Printable c2 = c;
   c2.getArea();
 ```
 
 At compile time, `c2` has a type `Printable`, and we try to invoke `getArea` which is a method available in `Circle`, not `Printable`.  Even though if we trace through the three lines of code above, we (the humans) can be sure that `c2` is pointing to a `Circle` object and it is fine to call `getArea`, the compiler has to be conservative as it is designed to work on arbitrarily complex programs with an unknown sequence of execution.  The compiler thus does not allow us to call `c2.getArea()`.
 
-## Types
+### `jshell`
 
-The above discussion brings us back to the topic of types.  Unlike C which is not type safe or  Python and Javascript which is weakly typed, Java belongs to a class of programming language which is statically typed and enforces type safety through a rich set of rules.  Understanding these rules and appreciating them is important to writing good and general Java programs, as well as picking up other programming languages with similar rules.
+If we compile a program with `javac` and then execute it with `java`, we have two distinct phases.  An error reported by `javac` occurs during compilation and is a _compile time error_.  An error reported by `java` occors during run time, and is a _run time error_.  
+
+If we "play" with our classes and with Java syntax using `jshell`, however, the differences between compile time and run time error are blurred.  `jshell` is an "REPL" tool, which stands for "read-eval-print loop", and it does exactly what the name says: it repeatedly reads in a Java statement, evaluates the statement, and prints out the result.  The reading step is analogous to compiling, while the evaluating and printing steps are analogous to running a program.  So, `jshell` produces an error message, it could be due to an error triggered by either compile time or run time.
+
+## 1. Types
+
+The above discussion brings us back to the topic of types.  Unlike C which is not type safe or  Python and Javascript which are weakly typed, Java belongs to a class of programming language which is statically typed and enforces type safety through a rich set of rules.  Understanding these rules and appreciating them is important to writing good and general Java programs, as well as picking up other statically and strongly typed programming languages.
 
 ### Type Conversion
 
@@ -117,18 +122,19 @@ Given a type $T$, we can create other complex types that depend on $T$.  For ins
 The term _variance of types_ refers to how these more complex types relate to each other, given the relationship between the simpler types.
 
 Suppose $A(T)$ is the complex type constructed from $T$.  Then we say that 
+
 - $A$ is _covariant_ if $T <: S$ implies $A(T) <: A(S)$, 
 - $A$ is _contravariant_ if $T <: S$ implies $A(S) <: A(T)$,
 - $A$ is _bivariant_ if it is both covariant and contravariant, and
 - $A$ is _invariant_ if it is neither covariant nor contravariant.
 
-For example, in Java, arrays (of reference type) are covariant.  This means that, `T[]` is a subtype of `S[]`, if `T` is a subtype of `S`.  Based on the type conversion rule, it is OK to assign any array of reference type to an array of `Object` objects, or pass an array of reference type to a method that expects an array of `Object` objects.  This decision (of making Java arrays covariant) makes it possible to write very generic method that operates on array, as provided by the Java utility class [`Arrays`](https://docs.oracle.com/javase/9/docs/api/java/util/Arrays.html).[^2]
+For example, in Java, arrays (of reference type) are covariant.  This means that, `T[]` is a subtype of `S[]`, if `T` is a subtype of `S`.  Based on the type conversion rule, it is OK to assign any array of reference type to an array of `Object` objects, or pass an array of reference type to a method that expects an array of `Object` objects.  This decision (of making Java arrays covariant) makes it possible to write very generic method that operates on array, as provided by the Java utility class [`Arrays`](https://docs.oracle.com/javase/9/docs/api/java/util/Arrays.html).[^1]
 
 We will see examples of complex type $A$ that is invariant and contravariant later in this module.
 
-[^2]: A utility class is a Java class that contains only class methods and class fields.  You have seen another example in CS2030, `Math`, and will see a few more in this module.
+[^1]: A utility class is a Java class that contains only class methods and class fields.  You have seen another example in CS2030, `Math`, and will see a few more in this module.
 
-## JVM Memory Model
+## 2. Heap and Stack
 
 As mentioned earlier, JVM manages memory of Java programs while its bytecode instructions are interpreted and executed.  Different JVM implementation may implement these differently, but typically a JVM implementation partitions the memory into several regions, including
 - _method area_ for storing the code for the methods;
@@ -137,8 +143,6 @@ As mentioned earlier, JVM manages memory of Java programs while its bytecode ins
 - _stack_ for local variables and call frames.
 
 Since the concepts of heap and stack are common to all execution environments (either based on bytecode or machine code), we will focus on them here.
-
-### Heap and Stack
 
 The _heap_ is the region in memory where all objects are allocated in and stored, while the _stack_ is the region where all variables (including primitive types and object references) are allocated in and stored.
 
@@ -182,7 +186,7 @@ After Lines 4-6, we have:
 
 ![stack-and-heap](figures/stack-and-heap/stack-and-heap.004.png)
 
-## Call Stack
+### Call Stack
 
 Now, let's look at what happens when we invoke a method.  Take the `distanceTo` method in `Point` as an example:
 
@@ -236,7 +240,7 @@ If we made multiple nested method calls, as we usually do, the stack frames get 
 
 One final note: the memory allocated on the stack are deallocated when a method returns.  The memory allocated on the heap, however, stays there as long as there is a reference to it (either from another object or from a variable in the stack).  Unlike C or C++, in Java, you do not have to free the memory allocated to objects.  The JVM runs a _garbage collector_  that checks for unreferenced objects on the heap and cleans up the memory automatically.
 
-## Exceptions
+## 3. Exceptions
 
 One of the nuances of programming is having to write code to deal with exceptions and errors.  Consider writing a method that reads in a series of x and y coordinates from a file, not unlike what you have seen in Lab 0.  Here are some things that could go wrong:
 
@@ -462,3 +466,400 @@ class ClassRoster {
 ```
 We should, as much as possible, handle the implementation specific exceptions within the abstraction barrier.  
 
+## Exercise
+
+1. Suppose we have an interface `Shape` and two classes `Circle` and `Square` that implements `Shape`.  We initialize the following variables:
+
+    ```Java
+    Shape[] shapes;
+    Circle[] circles = new Circle[1];
+    ```
+
+    Will the following two lines compile?  Will any of the lines cause a run time exception?  Explain.
+    ```
+    shapes = circles;
+    shapes[0] = new Square(3.0);
+    ```
+
+		(Assume `Square` has a constructor that takes in a single `double` argument.)
+
+2. Write a static method with the following signature:
+
+    ```Java
+    public static boolean search(Object[] a, Object target) 
+    ```
+
+    to search linearly through the array `a` to see if there exists an element of `a` that equals to `target` (the equality is tested using the `equals` method).  The method returns `true` if the `target` is found, and returns `false` otherwise.
+
+    For instance, 
+
+    ```Java
+    Point[] points = { new Point(0,0), new Point(0,1), new Point(0,2) };
+    search(points, new Point(0,1)); // return true
+    search(points, new Point(1,1)); // return false
+    ```
+
+    Take note of how method overriding, polymorphism, widening type conversion, and the covariance property of Java array are used in this question.
+
+3.  In Java, we cannot write a method to swap two primitive types without going through some hoops.  For instance, the following does not work:
+
+    ```Java
+    static void swap(int x, int y) {
+      int tmp = x;
+      x = y;
+      y = tmp;
+    }
+    ```
+
+    Why? 
+
+    To pass a variable of primitive type by reference, we need to wrap the variable in a wrapper class.  For example,
+
+    ```Java
+    class Wrapper {
+      public int x;
+      public int y;
+    }
+    ```
+
+    Using the `Wrapper` class above to pass the two variables `x` and `y` into the `swap` method to swap their values.  Using the method signature:
+
+    ```
+    static void swap(Wrapper w) {
+      // TODO
+    }
+    ```
+
+    Show how you would implement and use the `swap` method.  Convince yourself that it is working by tracing through the content of the stack and heap as you call `swap`.
+
+3. Will the following result in a compile time error?  Run time error?
+
+    (a)
+    ```Java
+    int i;
+    double d;
+    i = d;
+    d = i;
+    i = (int) d;
+    d = (double) i;
+    ```
+
+    (b)
+    ```Java
+    int i;
+    boolean b;
+    i = b;
+    b = i;
+    i = (int) b;
+    b = (boolean) i;
+    ```
+
+    (C)
+    ```Java
+    class A {
+    }
+
+    class B extends A {
+    }
+
+    A a = new A();
+    B b = new B();
+    b = (B)a;
+    a = (A)b;
+    ```
+
+    (d)
+    ```Java
+    interface I {
+    }
+
+    class A implements I {
+    }
+
+    I i1 = new I();
+    I i2 = new A();
+    A a1 = i2;
+    A a2 = (A)i2;
+    ```
+
+    (e)
+    ```Java
+    interface I {
+    }
+
+    interface J extends I {
+    }
+
+    class A implements J {
+    }
+
+    A a = new A();
+    I i = a;
+    J j = a;
+    i = j;
+    j = i;
+    j = (J)i;
+    a = i;
+    a = j;
+    a = (A)i;
+    a = (A)j;
+    ```
+
+    (f)
+    ```Java
+    interface I {
+    }
+
+    interface J {
+    }
+
+    class A implements I, J {
+    }
+
+    A a = new A();
+    I i = a;
+    J j = a;
+    i = j;
+    j = i;
+    j = (J)i;
+    I = (I)j;
+    a = i;
+    a = j;
+    a = (A)i;
+    a = (A)j;
+    ```
+
+    (g)
+    ```Java
+    class A {
+    }
+
+    class B extends A {
+    }
+
+    class C extends A {
+    }
+
+    B b = new B();
+    A a = b;
+    C c = b;
+    A a = (A)b;
+    C c = (C)b;
+    ```
+
+5. Will each of the following programs compile? If so, what will be printed?
+
+    (a)
+    ```Java
+    class Main {
+      static void f() throws IllegalArgumentException {
+        try {
+          System.out.println("Before throw");
+          throw new IllegalArgumentException();
+          System.out.println("After throw");
+        } catch (IllegalArgumentException e) {
+          System.out.println("Caught in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+    (b)
+    ```Java
+    class Main {
+      static void f() throws IllegalArgumentException {
+        try {
+          throw new IllegalArgumentException();
+        } catch (IllegalArgumentException e) {
+          System.out.println("Caught in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+    (C)
+    ```Java
+    class Main {
+      static void f() throws IllegalArgumentException {
+        try {
+          throw new Exception();
+        } catch (IllegalArgumentException e) {
+          System.out.println("Caught in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+    (d)
+    ```Java
+    class Main {
+      static void f() throws Exception {
+        try {
+          throw new IllegalArgumentException();
+        } catch (Exception e) {
+          System.out.println("Caught in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+    (e)
+    ```Java
+    class Main {
+      static void f() throws Exception {
+        try {
+          throw new ArrayIndexOutOfBoundsException();
+        } catch (IllegalArgumentException e) {
+          System.out.println("Caught in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+    (f)
+    ```Java
+    class Main {
+      static void f() throws Exception {
+        try {
+          throw new ArrayIndexOutOfBoundsException();
+        } catch (IllegalArgumentException e) {
+          System.out.println("Caught IA exception in f");
+        } catch (ArrayIndexOutOfBoundsException e) {
+          System.out.println("Caught AIOOB exception in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+    (g)
+    ```Java
+    class Main {
+      static void f() throws Exception {
+        try {
+          throw new ArrayIndexOutOfBoundsException();
+        } catch (Exception e) {
+          System.out.println("Caught exception in f");
+        } catch (ArrayIndexOutOfBoundsException e) {
+          System.out.println("Caught AIOOB exception in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+    (h)
+    ```Java
+    class Main {
+      static void f() throws Exception {
+        try {
+          throw new ArrayIndexOutOfBoundsException();
+        } catch (ArrayIndexOutOfBoundsException e) {
+          System.out.println("Caught AIOOB exception in f");
+        } catch (Exception e) {
+          System.out.println("Caught exception in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
+
+    (i)
+    ```Java
+    class Main {
+      static void f() throws Exception {
+        try {
+          throw new ArrayIndexOutOfBoundsException();
+        } catch (IllegalArgumentException e) {
+          System.out.println("Caught in f");
+        }
+      }
+
+      public static void main(String[] args) {
+        try {
+          System.out.println("Before f");
+          f();
+          System.out.println("After f");
+        } catch (Exception e) {
+          System.out.println("Caught in main");
+        }
+      }
+    }
+    ```
