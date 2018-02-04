@@ -220,7 +220,7 @@ You can see that the _references_ to the objects `p1` and `p2` are copied onto t
 Within the method, any modification done to `this` would change the object referenced to by `p1`, and any change made to `q` would change the object referenced to by `p2` as well.
 After the method returns, the stack frame for that method is destroyed.
 
-Let's call the `move` function from your [Lab 1](lab1.md), with arguments `(double theta, double d)`.
+Let's call the `move` function from your [Lab 0](lab00.md), with arguments `(double theta, double d)`.
 
 ```Java
 double theta = Math.PI/4.0;
