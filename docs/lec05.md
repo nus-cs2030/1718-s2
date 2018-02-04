@@ -10,6 +10,128 @@
 - Aware of the other classes in Java Collection and is comfortable to look them up by reading the Java documentation.
 - Understand there are differences between the collection classes and know when to use which one
 
+## Generics
+Third topic of today is on generics.  
+
+Suppose you want to create a new class that encapsulates a queue of circles.  You wrote:
+
+```
+class CircleQueue {
+  private Circle[] circles;
+   :
+  public CircleQueue(int size) {...}
+  public boolean isFull() {...}
+  public boolean isEmpty() {...}
+  public void enqueue(Circle c) {...}
+  public Circle dequeue() {...}
+}
+```
+
+Later, you found that you need a new class that encapsulates a queue of points.  You wrote:
+```
+class PointQueue {
+  private Point[] points;
+   :
+  public PointQueue(int size) {...}
+  public boolean isFull() {...}
+  public boolean isEmpty() {...}
+  public void enqueue(Point p) {...}
+  public Point dequeue() {...}
+}
+```
+
+And you realize that there are actually a lot of similar code.  Invoking the _abstraction principle_, which states that _"Where similar functions are carried out by distinct pieces of code, it is generally beneficial to combine them into one by abstracting out the varying parts_", you decided to create an queue of Objects to replace the two classes above.
+
+```Java
+class ObjectQueue {
+  private Object[] objects;
+   :
+  public ObjectQueue(int size) {...}
+  public boolean isFull() {...}
+  public boolean isEmpty() {...}
+  public void enqueue(Object o) {...}
+  public Object dequeue() {...}
+}
+```
+
+Now you have a very general class, that you can use to store objects of any kind, including a queue of strings, a queue of colors, etc.  You are quite pleased with yourself, as you should!  The early Java collection library contains many such generic data structures that stores elements of type `Object`.
+
+To create a queue of 10 circles and add some circles, you just need:
+```Java
+ObjectQueue cq = new ObjectQueue(10);
+cq.enqueue(new Circle(new Point(0, 0), 10));
+cq.enqueue(new Circle(new Point(1, 1), 5));
+ :
+```
+
+Getting a circle out of the queue is a bit more troublesome:
+```Java
+Circle c = cq.dequeue();
+```
+Would generate a compilation error, since we cannot assign a variable of type `Object` to a variable of type `Circle`.
+
+We can get around the compilation error by typecasting it into a `Circle`, since `Circle` is a subclass of `Object`, Java compiler would let it go, assuming that you know what you are doing.
+```Java
+Circle c = (Circle)cq.dequeue();
+```
+
+The code above, however, could be dangerous.  For instance, it might generate a runtime `ClassCastException` if there is an object in the queue that is not `Circle` or its subclass.  To avoid runtime error, we should check the type first:
+
+```Java
+Object o = cq.dequeue();
+if (o instanceof Circle) {
+	Circle c = (Circle)o;
+}
+```
+
+Wouldn't it be nice if we can still have general code, but let the compiler generates an error if we try to add a non-`Circle` into our queue of `Circle` objects, so that we don't have to check for the type of an object all the time?
+
+Java 5 introduces generics, which is a significant improvement to the type systems in Java.  It allows a _generic class_ of some type `T` to be written:
+
+```Java
+class Queue<T> {
+  private T[] objects;
+   :
+  public Queue<T>(int size) {...}
+  public boolean isFull() {...}
+  public boolean isEmpty() {...}
+  public void enqueue(T o) {...}
+  public T dequeue() {...}
+}
+```
+
+`T` is known as _type parameter_.
+The same code as before can be written as:
+
+```Java
+Queue<Circle> cq = new Queue<Circle>(10);
+cq.enqueue(new Circle(new Point(0, 0), 10));
+cq.enqueue(new Circle(new Point(1, 1), 5));
+Circle c = cq.dequeue();
+```
+
+Here, we passed `Circle` as _type argument_ to `T`, creating a _parameterized type_ `Queue<Circle>`.
+
+In Line 4, we no longer need to cast, and there is no danger of runtime error due to object of the wrong class being added to the queue, for doing this:
+```Java
+Queue<Circle> cq = new Queue<Circle>(10);
+cq.enqueue(new Point(1, 3));
+```
+will generate a compile time error! 
+
+!!! note "Diamond Notation"
+    We can use the short form `<>` in the constructor as the compiler can infer the type:
+	```Java
+	Queue<Circle> cq = new Queue<>(10);
+	```
+
+We can use parameterized type anywhere a type is used, including as type argument.  If we want to have a queue of queue of circle, we can:
+	```Java
+	Queue<Queue<Circle>> cqq = new Queue<>(10);
+	```
+
+We will see many examples of generics next lecture.
+
 ## Wrapper Classes
 
 !!! Note "Earlier Version of This Note"
