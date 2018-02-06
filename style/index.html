@@ -434,6 +434,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#using-checkstyle" title="Using checkstyle" class="md-nav__link">
+    Using checkstyle
+  </a>
+  
+</li>
+      
       
       
     </ul>
@@ -545,6 +552,13 @@
         <li class="md-nav__item">
   <a href="#cs2030-coding-style" title="CS2030 Coding Style" class="md-nav__link">
     CS2030 Coding Style
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-checkstyle" title="Using checkstyle" class="md-nav__link">
+    Using checkstyle
   </a>
   
 </li>
@@ -836,6 +850,20 @@ is good!</p>
 <p>Static fields and methods must be accessed with class name.</p>
 </li>
 </ol>
+<h2 id="using-checkstyle">Using <code class="codehilite">checkstyle</code></h2>
+<p>To automatically check for style violation, we use a tool call <a href="http://checkstyle.sourceforge.net"><code class="codehilite">checkstyle</code></a>.</p>
+<p>You can copy the files from the directory <code class="codehilite">~cs2030/bin/</code> on host <code class="codehilite">cs2030-i.comp.nus.edu.sg</code>.  There are only two files:</p>
+<ul>
+<li><code class="codehilite">checkstyle-8.2-all.jar</code>: the Java application for <code class="codehilite">checkstyle</code></li>
+<li><code class="codehilite">cs2030_checks.xml</code>: the configuration file</li>
+</ul>
+<p>To run, </p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>java -jar checkstyle-8.2-all.jar -c cs2030_checks.xml *.java 
+</pre></div>
+</td></tr></table>
+
+<p>You can of course change the location of the <code class="codehilite">jar</code> and the <code class="codehilite">xml</code> files to anywhere you like.  The command above assumes they are in the same folder as the java source files.</p>
+<p>Hint: put the command into a <code class="codehilite">bash</code> script so that you do not need to type such a long string all the time.</p>
                 
                   
                 
