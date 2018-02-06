@@ -6,6 +6,9 @@ pages:
       - Policies: 'policies.md'
   - Schedule: 'schedule.md'
   - Readings: 'readings.md'
+  - Labs:
+      - 0. Warm Up: 'lab00.md'
+      - 1. Sim v1.0: 'lab01a.md'
   - Lectures:
       - 1. Abstraction & Encapsulation: 'lec01.md'
       - 2. Interface, Inheritance & Polymorphism: 'lec02.md'
