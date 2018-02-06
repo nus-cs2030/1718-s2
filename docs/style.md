@@ -225,3 +225,22 @@ line into multiple lines to enhance readability, this is called _line wrapping_.
 19. Caught exceptions should not be ignored.
 
 20. Static fields and methods must be accessed with class name.
+
+## Using `checkstyle`
+
+To automatically check for style violation, we use a tool call [`checkstyle`](http://checkstyle.sourceforge.net).
+
+You can copy the files from the directory `~cs2030/bin/` on host `cs2030-i.comp.nus.edu.sg`.  There are only two files:
+
+- `checkstyle-8.2-all.jar`: the Java application for `checkstyle`
+- `cs2030_checks.xml`: the configuration file
+
+To run, 
+
+```
+java -jar checkstyle-8.2-all.jar -c cs2030_checks.xml *.java 
+```
+
+You can of course change the location of the `jar` and the `xml` files to anywhere you like.  The command above assumes they are in the same folder as the java source files.
+
+Hint: put the command into a `bash` script so that you do not need to type such a long string all the time.
