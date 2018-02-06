@@ -7,7 +7,7 @@ Submission deadline: 2359, Friday, February 9, 2018.
 Assume that students are already familiar with:
 
 - the [CS2030 laboratory environment](unix.md)
-- how to [compile and run Java programs](java.md)
+- how to [compile and run Java programs](jdk.md)
 - comfortable with Java syntax
 - looking up Java API documentation
 - understand the concepts of encapsulation and using encapsulated objects
