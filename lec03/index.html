@@ -1462,7 +1462,7 @@ What should the developer who develops <code class="codehilite">Square</code> do
 <span class="kd">class</span> <span class="nc">B</span> <span class="kd">extends</span> <span class="n">A</span> <span class="o">{</span>
   <span class="kt">void</span> <span class="nf">f</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;B f&quot;</span><span class="o">);</span>
-    <span class="k">return</span> <span class="n">x</span><span class="o">;</span>
+    <span class="c1">// return x; &lt;-- this line should not be here.</span>
   <span class="o">}</span>
 <span class="o">}</span>
 
