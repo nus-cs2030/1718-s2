@@ -2,12 +2,13 @@
 
 # Labs
 
+### 1a. [**Simulator ver 1.0**](lab01a.md)
 
 ### 0. [Warm Up](lab00.md)
 
 # Lectures
 
-### 4. [**Types, Memory, Exception**](lec04.md) 
+### 4. [Types, Memory, Exception](lec04.md) 
 
 ### 3. [More on Inheritance](lec03.md) 
 [Slides](https://www.comp.nus.edu.sg/~cs2030/1718-s2/cs2030-lec03.pdf) | [Video](https://vimeo.com/253957708)
