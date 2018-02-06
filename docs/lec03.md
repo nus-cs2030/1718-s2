@@ -51,18 +51,19 @@ class Circle implements Shape, Printable {
     if (obj instanceof Circle) {
       Circle circle = (Circle) obj;
       return (circle.center.equals(center) && circle.radius == radius);
-    } else
+    } else {
       return false;
+	}
   }
 }
 ```
 
-Line 7 above compares if the two center points are equal, and the two radius values are equal.  So, we compare if the two circles are semantically the same.  The rest of this code requires some explanation:
+Line 10 above compares if the two center points are equal, and the two radius values are equal.  So, we compare if the two circles are semantically the same.  The rest of this code requires some explanation:
 
 - Line 3 uses the same `@Override` annotation that we have seen before -- we are telling the compilers that we are overriding a method in the superclass.
 - Line 4 declares the method `equals`, and note that it has to have exactly the same signature as the `equals()` method we are overriding.  Even though we meant to compare two `Circle` objects, we cannot declare it as `public boolean equals(Circle circle)`, since the signature is different and the compiler would complain.
 - Since `obj` is of an `Object` type, we can actually pass in any object to compare with a `Circle`.  Line 5 checks if the comparison makes sense, by checking if `obj` is instantiated from a `Circle` class, using the `instanceof` keyword.  If `obj` is not even a `Circle` object, then we simply return `false`.
-- If `obj` is an instance of `Circle`, we assign `obj` to a variable of type `Circle` and compare as in Line 7.
+- If `obj` is an instance of `Circle`, we assign `obj` to a variable of type `Circle` and compare as in Line 10.
 
 For the code above to work, we have to override the `equals` method of `Point` as well.  That is left as an exercise[^1].
 
@@ -92,22 +93,23 @@ class Circle implements Shape, Printable {
     :
   @Override
   public boolean equals(Object obj) {
-    System.out.print("equals(Object) called\n");
+    System.out.println("equals(Object) called");
     if (obj == this) {
       return true;
     }
     if (obj instanceof Circle) {
       Circle circle = (Circle) obj;
-      return ((circle.center.equals(center) && circle.radius == radius);
-    } else
+      return (circle.center.equals(center) && circle.radius == radius);
+    } else {
       return false;
     }
-
-    public boolean equals(Circle circle) {
-      System.out.print("equals(Circle) called\n");
-      return ((circle.center.equals(center) && circle.radius == radius);
-    } 
   }
+
+  public boolean equals(Circle circle) {
+    System.out.println("equals(Circle) called");
+    return ((circle.center.equals(center) && circle.radius == radius);
+  } 
+}
 ```
 
 Since this new `equals()` method does not override the method in `Object`, it gets its own slot in the method table of `Circle`, instead of reusing one from the `Object`.
@@ -135,7 +137,7 @@ Lines 6-9 call `equals(Object)` defined in `Circle`， while Lines 10-11 call `e
 - Line 6 calls `equals` of an `Object` object on an `Object` object.  Java checks through all methods defined in `Object`, and finds a method that matches the signature, which is the `equals(Object)` (which `Circle` has overridden). This is the one that will get called.
 - Line 7-8 call `equals` of an `Object` object on a `Circle` object.  Java checks through all methods defined in `Object` and finds one method that matches the signature, which is `equals(Object)` (which `Circle` has overridden).  Even though there is another method `equals(Circle)` defined, it is defined as part of the `Circle` class, which Java refuses to access because `o1` is declared to have the type `Object`.  Since the only method that Java can find has an argument of type `Object`, the argument is cast as an `Object` when `equals` is invoked.
 - Line 9 calls `equals` of a `Circle` object on an `Object` object.  Java finds a method with the matching signature, `equals(Object)`, and invokes that.
-- Finally, Lines 10-11 call `equals` of a `Circle` object on a `Circle` object.  Java finds a method with the matching signature, `equals(Circle)`, and invokes that.
+- Finally, Lines 10-11 call `equals` of a `Circle` object on a `Circle` object.  Even though there are two overloaded methods which Java can call without type error, Java always invokes _the most specific method_, in this case, `equals(Circle)`.
 
 Why do we need to override `equals` in `Object`, rather than just using the `Circle`-specific `equals(Circle)`?  As shown above, only when an object declared as `Circle` calls `equals` on another `Circle` object, the `Circle`-specific `equals(Circle)` is invoked.  
 To write code that is general and reusable, we should exploit OO polymorphism, that means different subclasses of `Object` implement their own customized version of `equals`, and the right version of `equals` will be called.
@@ -543,7 +545,7 @@ class Circle {
     class B extends A {
       void f(int x) {
         System.out.println("B f");
-        return x;
+        // return x; <-- this line should not be here.
       }
     }
 
