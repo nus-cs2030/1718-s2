@@ -126,6 +126,9 @@ line into multiple lines to enhance readability, this is called _line wrapping_.
 	```
 	is ok.
 
+!!! note "80 vs 100"
+    While we prefer lines to be limited to 80, we are OK if the length is up to 100.  Any longer, however, will be frowned upon.
+
 10. There should be a blank line between constructors, methods, nested classes and static initializers.  Blank lines can be used between fields to create logical groupings.
 
 11. White space should separate Java keywords from parenthesis and braces, and be added on both sides of binary operators (`+`, `-`, `/`, etc) as well as `:` in enhanced for.  Space should also appears before and after `//` comments
