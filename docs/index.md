@@ -4,7 +4,7 @@
 
 ### 1a. [**Simulator ver 1.0**](lab01a.md)
 
-### 0. [Warm Up](lab00.md)
+### 0. [Warm Up](lab0.md)
 
 # Lectures
 

@@ -79,7 +79,7 @@ of `Point p` from `Point q`, you basically reduce `Point p` to be an origin to `
 For more detail, please refer to the Java API for [`atan2`](https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#atan2-double-double-) for more details.
 
 
-![Angle To](figures/lab00/lab00.001.png)
+![Angle To](figures/lab0/lab0.001.png)
 
 ### 1.4. Move a point 
 ```Java
@@ -88,7 +88,7 @@ public void move(double theta, double d)
 
 Move the point by a given distance at direction theta (in radian).  See Figure:
 
-![Move point with distance and angle](figures/lab00/lab00.002.png)
+![Move point with distance and angle](figures/lab0/lab0.002.png)
 
 The new point should have the coordinate ($x + d\cos\theta, y + d\sin\theta$).  Note in this method, you are given the angle (theta) and want to find length. Hence you need to use cosine and sine.
 
@@ -114,11 +114,11 @@ The constructor above takes in two points `p` and `q`, and returns a circle  tha
 
 There are two such possible circles (see figures below) if distance between `p` and `q` is no greater than 2x`radius`[^1].  Imagine if you walk from `p` to `q`, one of the circle will have the center on your left, the other will have the center on your right. In this method, we will only consider the circle on the left because the circle on the right will be considered when you walk from `q` to `p`. See figure below.
 
-![Constructor for Circle from two points](figures/lab00/lab00.003.png)
+![Constructor for Circle from two points](figures/lab0/lab0.003.png)
 
 Hint: To find the center $c$ of the new circle, you can first find the midpoint $m$ of line $pq$, the length of line $mc$, and the angle between $m$ and $c$, using the `Point` methods you have written.  We also know that length of $cq$ is `radius`.  See figure below.
 
-![Constructor for Circle from two points](figures/lab00/lab00.004.png)
+![Constructor for Circle from two points](figures/lab0/lab0.004.png)
 
 The constructor should return a `Circle` with [Double.NaN](https://docs.oracle.com/javase/8/docs/api/java/lang/Double.html#NaN) as the radius and (0,0) as center if the distance between `p` and `q` is larger than 2x`radius` or is zero[^2].  Such `Circle` objects are invalid, and you may want to add a method in the `Circle` class to check for validity.  You can use [`Double.isNaN`](https://docs.oracle.com/javase/8/docs/api/java/lang/Double.html#isNaN-double-) for check if a double variable is NaN.
 
