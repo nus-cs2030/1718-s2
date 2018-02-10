@@ -9,6 +9,8 @@
 # Lectures
 
 ### 4. [Types, Memory, Exception](lec04.md) 
+[Slides](https://www.comp.nus.edu.sg/~cs2030/1718-s2/cs2030-lec04.pdf) | [**Video**](https://vimeo.com/254977762)
+
 
 ### 3. [More on Inheritance](lec03.md) 
 [Slides](https://www.comp.nus.edu.sg/~cs2030/1718-s2/cs2030-lec03.pdf) | [Video](https://vimeo.com/253957708)
