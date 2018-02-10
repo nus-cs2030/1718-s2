@@ -8,7 +8,7 @@ pages:
   - Readings: 'readings.md'
   - Labs:
       - 0. Warm Up: 'lab0.md'
-      - 1. Sim v1.0: 'lab01a.md'
+      - 1. Simulator v1.0: 'lab1a.md'
   - Lectures:
       - 1. Abstraction & Encapsulation: 'lec01.md'
       - 2. Interface, Inheritance & Polymorphism: 'lec02.md'
