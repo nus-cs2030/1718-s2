@@ -217,9 +217,9 @@ More intuitively, we can replace `? extends X` with type X or any subtype that e
 
 ## Type Erasure
 
-In Java, for backward compatibility, generic typing is implemented with a process called _type erasure_.  The type argument is erased during compile time, and the type parameter `T` is replaced with either `Object` (if it is unbounded) or the bound (if it is bounded). For instance, `Queue<Circle>` will be replaced by `Queue` and `T` will be replaced by `Object`, just like how Java code is written before generic type is introduced in Java 5.  `Queue<? extends Shape>` will be replaced with `Queue` and `T` will be replaced with `Shape`.  The compiler also inserts type casting and additional methods[^1] to preserve the semantics of generic type.
+In Java, for backward compatibility, generic typing is implemented with a process called _type erasure_.  The type argument is erased during compile time, and the type parameter `T` is replaced with either `Object` (if it is unbounded) or the bound (if it is bounded). For instance, `Queue<Circle>` will be replaced by `Queue` and `T` will be replaced by `Object`, just like how Java code is written before generic type is introduced in Java 5.  `Queue<? extends Shape>` will be replaced with `Queue` and `T` will be replaced with `Shape`.  The compiler also inserts type casting and additional methods[^2] to preserve the semantics of generic type.
 
-[^1] Look up bridge methods if you want to know the gory details.
+[^2]: Look up bridge methods if you want to know the gory details.
 
 Java's design decision to use type erasure to implement generics has several important implications.  
 
@@ -381,7 +381,7 @@ In the line above, we use the _diamond operator_ `<>` to ask Java to fill in the
 
 In cases where the type inference finds multiple matching types, the most specific type is chosen.
 
-!!! note "Local variable type inference in Java 10`
+!!! note "Local variable type inference in Java 10"
     Java 10, which is scheduled to be released next month, supports type inference for a local variable.  We can write
     ```Java
     var q = new Queue<Point>();
@@ -445,9 +445,9 @@ In `addAll`, however, `c` is declared as `Collection<? extends E>`.  Since we ar
 !!! note "Iterable" 
     The `Iterable<E>` interface provides only a single method, `Iterator<E> iterator()`, which returns a generic interface called `Iterator<E>` over the collection.  An `Iterator` is another interface that allows us to go through all the elements in a `Collection<E>`.  Useful methods include `hasNext()`, which returns if there is a next element in the `Collection<E>`; `next()`, which returns the next element (with parameterized type `E`); and `remove()`, which removes the last returned element from the `Collection<E>`.
 
-So far we have not seen any example code using `Collection`.  This is because Java Collection Framework does not provide a class that implements the `Collection<E>` directly.  The documentation recommends that we implement the `Collection<E>` interface[^2] if we want a collection of objects that allows duplicates and does not care about the orders.
+So far we have not seen any example code using `Collection`.  This is because Java Collection Framework does not provide a class that implements the `Collection<E>` directly.  The documentation recommends that we implement the `Collection<E>` interface[^3] if we want a collection of objects that allows duplicates and does not care about the orders.
 
-[^2]: If you want to do so, however, it is likely more useful to inherit from the abstract class `AbstractCollection<E>` (which implements most of the basic methods of the interface) rather than implementing the interface `Collection<E>` directly.
+[^3]: If you want to do so, however, it is likely more useful to inherit from the abstract class `AbstractCollection<E>` (which implements most of the basic methods of the interface) rather than implementing the interface `Collection<E>` directly.
 
 ## Set and List
 
@@ -487,7 +487,7 @@ default void sort(Comparator<? super E> c)
 
 This method specification is also interesting and worth looking closer.  It takes in an object `c` with generic interface `Comparator<? super E>`.  The `Comparator` interface allows us to specify how to compare two elements, by implementing a `compare()` method.  `compare(o1,o2)` should return 0 if the two elements are equals, a negative integer if o1 is "less than" o2, and a positive integer otherwise.
 
-Let's write `Comparator` class[^3]:
+Let's write `Comparator` class[^4]:
 
 ```Java
 class NameComparator implements Comparator<String> {
@@ -513,7 +513,7 @@ class NameComparator implements Comparator<String> {
 ```
 if we want to sort by the length of the names.
 
-[^3]: Later in CS2030, you will see how we significantly reduce the verbosity of this code!  But let's do it the hard way first.
+[^4]: Later in CS2030, you will see how we significantly reduce the verbosity of this code!  But let's do it the hard way first.
 
 One last thing to note about the method `sort` is that it takes in `Comparator<? super E>` that is contravariant.  Recall that `Comparator<Object>` is a subtype of `Comparator<? super E>`, so we can pass in more general `Comparator` object to `sort` (e.g., a class that implements `Comprator<Object>` 
 
