@@ -309,7 +309,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../lab00/index.html" title="0. Warm Up" class="md-nav__link">
+    <a href="../lab0/index.html" title="0. Warm Up" class="md-nav__link">
       0. Warm Up
     </a>
   </li>
@@ -321,8 +321,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../lab01a/index.html" title="1. Sim v1.0" class="md-nav__link">
-      1. Sim v1.0
+    <a href="../lab1a/index.html" title="1. Simulator v1.0" class="md-nav__link">
+      1. Simulator v1.0
     </a>
   </li>
 
@@ -597,6 +597,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec05/index.html" title="5. Generics and Collections" class="md-nav__link">
+      5. Generics and Collections
+    </a>
   </li>
 
         
@@ -916,7 +928,7 @@
 </ul>
 <h2 id="java-and-javac"><code class="codehilite">java</code> and <code class="codehilite">javac</code></h2>
 <p>Now that we have gone through the basic concepts of OO programming, let's take a step away from OO for the moment and look at some other important features of Java.</p>
-<p>In your <a href="../lab00/index.html">Lab 0</a>, we showed you how to use <code class="codehilite">javac</code> to compile your Java program and <code class="codehilite">java</code> to execute your program.  </p>
+<p>In your <a href="../lab0/index.html">Lab 0</a>, we showed you how to use <code class="codehilite">javac</code> to compile your Java program and <code class="codehilite">java</code> to execute your program.  </p>
 <p><code class="codehilite">javac</code> is a <em>compiler</em>. It reads in Java source files as a string, parses the string for syntax errors, and converts the Java code into an intermediate binary format called the <em>bytecode</em>.  Bytecode is an instruction set akin to hardware instructions but is typically executed by a software interpreter.</p>
 <p>This behavior is different from what <code class="codehilite">gcc</code> does for C programs.  <code class="codehilite">gcc</code> produces native machine code, corresponding to hardware instructions.  As such, a C program your <code class="codehilite">gcc</code> produced on your home machine will not run on <code class="codehilite">sunfire</code>.  </p>
 <p>Java designers (led by James Gosling) wanted a language that can be compiled into a form that is platform and hardware independent, thus, they developed their own runtime environment called the Java Virtual Machine (JVM), which interprets and executes the bytecode, optimizes the execution, and manages the memory of Java programs.  Bytecode produced (the <code class="codehilite"><span class="na">.class</span></code> files) on one platform can run other platforms.</p>
@@ -1094,7 +1106,7 @@ and the invocation:
 <p>You can see that the <em>references</em> to the objects <code class="codehilite">p1</code> and <code class="codehilite">p2</code> are copied onto the stack frame. <code class="codehilite">p1</code> and <code class="codehilite">this</code> point to the same object, and <code class="codehilite">p2</code> and <code class="codehilite">q</code> point to the same object.
 Within the method, any modification done to <code class="codehilite">this</code> would change the object referenced to by <code class="codehilite">p1</code>, and any change made to <code class="codehilite">q</code> would change the object referenced to by <code class="codehilite">p2</code> as well.
 After the method returns, the stack frame for that method is destroyed.</p>
-<p>Let's call the <code class="codehilite">move</code> function from your <a href="../lab00/index.html">Lab 0</a>, with arguments <code class="codehilite">(double theta, double d)</code>.</p>
+<p>Let's call the <code class="codehilite">move</code> function from your <a href="../lab0/index.html">Lab 0</a>, with arguments <code class="codehilite">(double theta, double d)</code>.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">double</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">PI</span><span class="o">/</span><span class="mf">4.0</span><span class="o">;</span>
@@ -1318,10 +1330,14 @@ But, you should only do so if there is a good reason, for instance, to provide a
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">try</span> <span class="o">{</span>
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">try</span> <span class="o">{</span>
   <span class="c1">// your code</span>
 <span class="o">}</span>
-<span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{}</span>
+<span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+  <span class="o">:</span>
+<span class="o">}</span>
 </pre></div>
 </td></tr></table>
 
@@ -1330,10 +1346,14 @@ But, you should only do so if there is a good reason, for instance, to provide a
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">try</span> <span class="o">{</span>
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">try</span> <span class="o">{</span>
   <span class="c1">// your code</span>
 <span class="o">}</span>
-<span class="k">catch</span> <span class="o">(</span><span class="n">Error</span> <span class="n">e</span><span class="o">)</span> <span class="o">{}</span>
+<span class="k">catch</span> <span class="o">(</span><span class="n">Error</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+  <span class="o">:</span>
+<span class="o">}</span>
 </pre></div>
 </td></tr></table>
 😱</p>
@@ -2074,13 +2094,13 @@ We should, as much as possible, handle the implementation specific exceptions wi
           </a>
         
         
-          <a href="../style/index.html" title="Coding Style" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../lec05/index.html" title="5. Generics and Collections" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Coding Style
+                5. Generics and Collections
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

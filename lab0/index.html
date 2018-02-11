@@ -8,7 +8,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://nus-cs2030.github.io/1718-s2/lab00/index.html">
+        <link rel="canonical" href="https://nus-cs2030.github.io/1718-s2/lab0/index.html">
       
       
       
@@ -448,8 +448,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../lab01a/index.html" title="1. Sim v1.0" class="md-nav__link">
-      1. Sim v1.0
+    <a href="../lab1a/index.html" title="1. Simulator v1.0" class="md-nav__link">
+      1. Simulator v1.0
     </a>
   </li>
 
@@ -522,6 +522,18 @@
   <li class="md-nav__item">
     <a href="../lec04/index.html" title="4. Types, Memory, Exception" class="md-nav__link">
       4. Types, Memory, Exception
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec05/index.html" title="5. Generics and Collections" class="md-nav__link">
+      5. Generics and Collections
     </a>
   </li>
 
@@ -745,7 +757,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/nus-cs2030/1718-s2/edit/master/docs/lab00.md" title="Edit this page" class="md-icon md-content__icon">edit</a>
+                  <a href="https://github.com/nus-cs2030/1718-s2/edit/master/docs/lab0.md" title="Edit this page" class="md-icon md-content__icon">edit</a>
                 
                 
                 <h1 id="lab-0">Lab 0</h1>
@@ -819,14 +831,14 @@ which is <span>\(\pi/4\)</span>.</p>
 anti-clockwise direction with respect to origin. One mathematical trick here is if you subtract the coordinates 
 of <code class="codehilite">Point p</code> from <code class="codehilite">Point q</code>, you basically reduce <code class="codehilite">Point p</code> to be an origin to <code class="codehilite">Point q</code>. 
 For more detail, please refer to the Java API for <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#atan2-double-double-"><code class="codehilite">atan2</code></a> for more details.</p>
-<p><img alt="Angle To" src="../figures/lab00/lab00.001.png" /></p>
+<p><img alt="Angle To" src="../figures/lab0/lab0.001.png" /></p>
 <h3 id="14-move-a-point">1.4. Move a point</h3>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">move</span><span class="o">(</span><span class="kt">double</span> <span class="n">theta</span><span class="o">,</span> <span class="kt">double</span> <span class="n">d</span><span class="o">)</span>
 </pre></div>
 </td></tr></table>
 
 <p>Move the point by a given distance at direction theta (in radian).  See Figure:</p>
-<p><img alt="Move point with distance and angle" src="../figures/lab00/lab00.002.png" /></p>
+<p><img alt="Move point with distance and angle" src="../figures/lab0/lab0.002.png" /></p>
 <p>The new point should have the coordinate (<span>\(x + d\cos\theta, y + d\sin\theta\)</span>).  Note in this method, you are given the angle (theta) and want to find length. Hence you need to use cosine and sine.</p>
 <p>After
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>p.move(p.angleTo(q), p.distanceTo(q));
@@ -846,9 +858,9 @@ For more detail, please refer to the Java API for <a href="https://docs.oracle.c
 
 <p>The constructor above takes in two points <code class="codehilite">p</code> and <code class="codehilite">q</code>, and returns a circle  that passes through both <code class="codehilite">p</code> and <code class="codehilite">q</code>, with radius <code class="codehilite">radius</code>.  </p>
 <p>There are two such possible circles (see figures below) if distance between <code class="codehilite">p</code> and <code class="codehilite">q</code> is no greater than 2x<code class="codehilite">radius</code><sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>.  Imagine if you walk from <code class="codehilite">p</code> to <code class="codehilite">q</code>, one of the circle will have the center on your left, the other will have the center on your right. In this method, we will only consider the circle on the left because the circle on the right will be considered when you walk from <code class="codehilite">q</code> to <code class="codehilite">p</code>. See figure below.</p>
-<p><img alt="Constructor for Circle from two points" src="../figures/lab00/lab00.003.png" /></p>
+<p><img alt="Constructor for Circle from two points" src="../figures/lab0/lab0.003.png" /></p>
 <p>Hint: To find the center <span>\(c\)</span> of the new circle, you can first find the midpoint <span>\(m\)</span> of line <span>\(pq\)</span>, the length of line <span>\(mc\)</span>, and the angle between <span>\(m\)</span> and <span>\(c\)</span>, using the <code class="codehilite">Point</code> methods you have written.  We also know that length of <span>\(cq\)</span> is <code class="codehilite">radius</code>.  See figure below.</p>
-<p><img alt="Constructor for Circle from two points" src="../figures/lab00/lab00.004.png" /></p>
+<p><img alt="Constructor for Circle from two points" src="../figures/lab0/lab0.004.png" /></p>
 <p>The constructor should return a <code class="codehilite">Circle</code> with <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Double.html#NaN">Double.NaN</a> as the radius and (0,0) as center if the distance between <code class="codehilite">p</code> and <code class="codehilite">q</code> is larger than 2x<code class="codehilite">radius</code> or is zero<sup id="fnref:2"><a class="footnote-ref" href="#fn:2" rel="footnote">2</a></sup>.  Such <code class="codehilite">Circle</code> objects are invalid, and you may want to add a method in the <code class="codehilite">Circle</code> class to check for validity.  You can use <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Double.html#isNaN-double-"><code class="codehilite">Double.isNaN</code></a> for check if a double variable is NaN.</p>
 <h2 id="3-maximum-disc-coverage">3. Maximum Disc Coverage</h2>
 <p>We are now going to use the <code class="codehilite">Circle</code> class and <code class="codehilite">Point</code> class to solve the maximum disc coverage problem.  In this problem, we are given a set of points on a 2D plane, and a unit disc (i.e., a circle of radius 1).  We want to place the disc so that it covers as many points as possible.  What is the maximum number of points that we can cover with the disc at any one time?   </p>
@@ -966,13 +978,13 @@ For more detail, please refer to the Java API for <a href="https://docs.oracle.c
           </a>
         
         
-          <a href="../lab01a/index.html" title="1. Sim v1.0" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../lab1a/index.html" title="1. Simulator v1.0" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                1. Sim v1.0
+                1. Simulator v1.0
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

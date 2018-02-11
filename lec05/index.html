@@ -1,0 +1,1808 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://nus-cs2030.github.io/1718-s2/lec05/index.html">
+      
+      
+      
+        <link rel="shortcut icon" href="../assets/images/favicon.png">
+      
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.4">
+    
+    
+      
+        <title>5. Generics and Collections - CS2030 Programming Methodology II</title>
+      
+    
+    
+      <script src="../assets/javascripts/modernizr-1df76c4e58.js"></script>
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application-769c285a91.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    
+    
+  </head>
+  
+  
+  
+  
+    <body>
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <a href="https://nus-cs2030.github.io/1718-s2" title="CS2030 Programming Methodology II" class="md-icon md-icon--home md-header-nav__button">
+          </a>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+                <span class="md-header-nav__parent">
+                  Lectures
+                </span>
+              
+            
+            5. Generics and Collections
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result" data-md-lang-search="">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/nus-cs2030/1718-s2" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    
+      <i class="md-icon md-icon--home md-nav__button"></i>
+    
+    CS2030 Programming Methodology II
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/nus-cs2030/1718-s2" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      General
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        General
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../about/index.html" title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../prereqs/index.html" title="Prerequisites" class="md-nav__link">
+      Prerequisites
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../policies/index.html" title="Policies" class="md-nav__link">
+      Policies
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../schedule/index.html" title="Schedule" class="md-nav__link">
+      Schedule
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../readings/index.html" title="Readings" class="md-nav__link">
+      Readings
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Labs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Labs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab0/index.html" title="0. Warm Up" class="md-nav__link">
+      0. Warm Up
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab1a/index.html" title="1. Simulator v1.0" class="md-nav__link">
+      1. Simulator v1.0
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+    
+    <label class="md-nav__link" for="nav-6">
+      Lectures
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Lectures
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec01/index.html" title="1. Abstraction & Encapsulation" class="md-nav__link">
+      1. Abstraction & Encapsulation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec02/index.html" title="2. Interface, Inheritance & Polymorphism" class="md-nav__link">
+      2. Interface, Inheritance & Polymorphism
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec03/index.html" title="3. More on Inheritance" class="md-nav__link">
+      3. More on Inheritance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec04/index.html" title="4. Types, Memory, Exception" class="md-nav__link">
+      4. Types, Memory, Exception
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        5. Generics and Collections
+      </label>
+    
+    <a href="index.html" title="5. Generics and Collections" class="md-nav__link md-nav__link--active">
+      5. Generics and Collections
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" title="Learning Outcomes" class="md-nav__link">
+    Learning Outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-class-and-interface-with-default-methods" title="Abstract Class and Interface with Default Methods" class="md-nav__link">
+    Abstract Class and Interface with Default Methods
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generics" title="Generics" class="md-nav__link">
+    Generics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variance-of-generic-types" title="Variance of Generic Types" class="md-nav__link">
+    Variance of Generic Types
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wildcards" title="Wildcards" class="md-nav__link">
+    Wildcards
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-erasure" title="Type Erasure" class="md-nav__link">
+    Type Erasure
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#raw-types" title="Raw Types" class="md-nav__link">
+    Raw Types
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wrapper-classes" title="Wrapper Classes" class="md-nav__link">
+    Wrapper Classes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#performance-penalty" title="Performance Penalty" class="md-nav__link">
+    Performance Penalty
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generic-methods" title="Generic Methods" class="md-nav__link">
+    Generic Methods
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-inference" title="Type Inference" class="md-nav__link">
+    Type Inference
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-collections" title="Java Collections" class="md-nav__link">
+    Java Collections
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collection" title="Collection" class="md-nav__link">
+    Collection
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-and-list" title="Set and List" class="md-nav__link">
+    Set and List
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comparator" title="Comparator" class="md-nav__link">
+    Comparator
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#map" title="Map" class="md-nav__link">
+    Map
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#which-collection-class" title="Which Collection Class?" class="md-nav__link">
+    Which Collection Class?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" title="Exercise" class="md-nav__link">
+    Exercise
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../style/index.html" title="Coding Style" class="md-nav__link">
+      Coding Style
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Software/Tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Software/Tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../jdk/index.html" title="Java" class="md-nav__link">
+      Java
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../javadoc/index.html" title="Javadoc" class="md-nav__link">
+      Javadoc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../unix/index.html" title="UNIX" class="md-nav__link">
+      UNIX
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vim/index.html" title="Vim" class="md-nav__link">
+      Vim
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" title="Learning Outcomes" class="md-nav__link">
+    Learning Outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-class-and-interface-with-default-methods" title="Abstract Class and Interface with Default Methods" class="md-nav__link">
+    Abstract Class and Interface with Default Methods
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generics" title="Generics" class="md-nav__link">
+    Generics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variance-of-generic-types" title="Variance of Generic Types" class="md-nav__link">
+    Variance of Generic Types
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wildcards" title="Wildcards" class="md-nav__link">
+    Wildcards
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-erasure" title="Type Erasure" class="md-nav__link">
+    Type Erasure
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#raw-types" title="Raw Types" class="md-nav__link">
+    Raw Types
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wrapper-classes" title="Wrapper Classes" class="md-nav__link">
+    Wrapper Classes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#performance-penalty" title="Performance Penalty" class="md-nav__link">
+    Performance Penalty
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generic-methods" title="Generic Methods" class="md-nav__link">
+    Generic Methods
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-inference" title="Type Inference" class="md-nav__link">
+    Type Inference
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-collections" title="Java Collections" class="md-nav__link">
+    Java Collections
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collection" title="Collection" class="md-nav__link">
+    Collection
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-and-list" title="Set and List" class="md-nav__link">
+    Set and List
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comparator" title="Comparator" class="md-nav__link">
+    Comparator
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#map" title="Map" class="md-nav__link">
+    Map
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#which-collection-class" title="Which Collection Class?" class="md-nav__link">
+    Which Collection Class?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" title="Exercise" class="md-nav__link">
+    Exercise
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/nus-cs2030/1718-s2/edit/master/docs/lec05.md" title="Edit this page" class="md-icon md-content__icon">edit</a>
+                
+                
+                <h1 id="lecture-5-generics-and-collections">Lecture 5: Generics and Collections</h1>
+<h2 id="learning-outcomes">Learning Outcomes</h2>
+<ul>
+<li>Be able to understand the difference between concrete class, abstract class, and interface with default methods</li>
+<li>Appreciate why generics is helpful</li>
+<li>Be able to create a generic class with one or more type parameters, and instantiate the parameterized type(s) by passing in type argument(s).</li>
+<li>Understand the subtype relationships between generic classes</li>
+<li>Understand type erasure, generic methods, wildcard types, bounded wildcard types.</li>
+<li>Familiar with wrapper classes with primitives and autoboxing/unboxing; when to use primitive types and when to use wrapper classes</li>
+<li>Familiar with Java collection frameworks: <code class="codehilite">Set</code>, <code class="codehilite">List</code>, <code class="codehilite">Map</code> and their concrete class <code class="codehilite">HashSet</code>, <code class="codehilite">LinkedList</code>, <code class="codehilite">ArrayList</code>, and <code class="codehilite">HashMap</code>.</li>
+<li>Aware of the other classes in Java Collection and is comfortable to look them up by reading the Java documentation.</li>
+<li>Understand there are differences between the collection classes and know when to use which one</li>
+</ul>
+<h2 id="abstract-class-and-interface-with-default-methods">Abstract Class and Interface with Default Methods</h2>
+<p>We have seen how a class can inherit from a parent class, and implement one or more interfaces.  So far, the parent class that we have seen is a <em>concrete</em> class -- it has fields and methods, complete with method implementation.  Such concrete parent class can be instantiated into objects.   </p>
+<p>On the other hand, we have <em>pure</em> interfaces, which is completely virtual or abstract.  It declares what public methods it should provide -- together with, for each method, the return type, the exception(s) it throws, and its method signature.  It can only have constant fields<sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup> and no implementation.</p>
+<p>Between these two extremes, there are two other possibilities in Java:</p>
+<ul>
+<li>An <em>abstract class</em>, which is just like a class, but it is declared as <code class="codehilite">abstract</code>, and some of its methods are declared as <code class="codehilite">abstract</code>, without implementation.  An abstract class cannot be instantiated, and any subclass who wish to be concrete needs to implement these abstract methods.
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">PaintedShape</span> <span class="o">{</span>
+  <span class="n">Color</span> <span class="n">fillColor</span><span class="o">;</span>
+    <span class="o">:</span>
+  <span class="kt">void</span> <span class="nf">fillWith</span><span class="o">(</span><span class="n">Color</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">fillColor</span> <span class="o">=</span> <span class="n">c</span><span class="o">;</span>
+  <span class="o">}</span>
+    <span class="o">:</span>
+  <span class="kd">abstract</span> <span class="kt">double</span> <span class="nf">getArea</span><span class="o">();</span>
+  <span class="kd">abstract</span> <span class="kt">double</span> <span class="nf">getPerimeter</span><span class="o">();</span>
+    <span class="o">:</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></li>
+<li>An interface with default implementations.  Introduced only in Java 8, with the goal of allowing an interface to evolve, an interface can now contain default implementation of its methods.  Such interface still cannot be instantiated into objects, but classes that implement such interface need not provide an implementation for a method where a default implementation exists.  For instance, we can have:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">interface</span> <span class="nc">Shape</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getArea</span><span class="o">();</span>
+  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getPerimeter</span><span class="o">();</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contains</span><span class="o">(</span><span class="n">Point</span> <span class="n">p</span><span class="o">);</span>
+  <span class="k">default</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">cover</span><span class="o">(</span><span class="n">Point</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">contains</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+where <code class="codehilite">cover</code> is a new method with default implementation, denoted with keyword <code class="codehilite">default</code>.  </li>
+</ul>
+<p>The reason Java 8 introduced default methods for interface is for backward compatibility.  For instance, the implementer of <code class="codehilite">Shape</code> can add <code class="codehilite">cover</code> to a new version of interface <code class="codehilite">Shape</code> without breaking all the existing code that implements <code class="codehilite">Shape</code>.</p>
+<p>Abstract class, however, should be used in general in the design of a class hierarchy -- in a case where it is more meaningful for the subclass to implement its own method than the superclass.  For example, in the <code class="codehilite">PaintedShape</code> abstract class above, it can implement the methods related to styles, but it is not meaningful to provide an implementation of <code class="codehilite">getArea</code> and <code class="codehilite">getPerimeter</code>. We will see more examples of abstract class later.</p>
+<h2 id="generics">Generics</h2>
+<p>Now let's move on to the topic of generics.
+Suppose you want to create a new class that encapsulates a queue of circles.  You wrote:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">CircleQueue</span> <span class="p">{</span>
+  <span class="kr">private</span> <span class="nx">Circle</span><span class="p">[]</span> <span class="nx">circles</span><span class="p">;</span>
+   <span class="o">:</span>
+  <span class="kr">public</span> <span class="nx">CircleQueue</span><span class="p">(</span><span class="kr">int</span> <span class="nx">size</span><span class="p">)</span> <span class="p">{...}</span>
+  <span class="kr">public</span> <span class="kr">boolean</span> <span class="nx">isFull() {</span><span class="p">...}</span>
+  <span class="kr">public</span> <span class="kr">boolean</span> <span class="nx">isEmpty() {</span><span class="p">...}</span>
+  <span class="kr">public</span> <span class="k">void</span> <span class="nx">enqueue</span><span class="p">(</span><span class="nx">Circle</span> <span class="nx">c</span><span class="p">)</span> <span class="p">{...}</span>
+  <span class="kr">public</span> <span class="nx">Circle</span> <span class="nx">dequeue() {</span><span class="p">...}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>Later, you found that you need a new class that encapsulates a queue of points.  You wrote:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">PointQueue</span> <span class="p">{</span>
+  <span class="kr">private</span> <span class="nx">Point</span><span class="p">[]</span> <span class="nx">points</span><span class="p">;</span>
+   <span class="o">:</span>
+  <span class="kr">public</span> <span class="nx">PointQueue</span><span class="p">(</span><span class="kr">int</span> <span class="nx">size</span><span class="p">)</span> <span class="p">{...}</span>
+  <span class="kr">public</span> <span class="kr">boolean</span> <span class="nx">isFull() {</span><span class="p">...}</span>
+  <span class="kr">public</span> <span class="kr">boolean</span> <span class="nx">isEmpty() {</span><span class="p">...}</span>
+  <span class="kr">public</span> <span class="k">void</span> <span class="nx">enqueue</span><span class="p">(</span><span class="nx">Point</span> <span class="nx">p</span><span class="p">)</span> <span class="p">{...}</span>
+  <span class="kr">public</span> <span class="nx">Point</span> <span class="nx">dequeue() {</span><span class="p">...}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></p>
+<p>And you realize that there are actually a lot of similar code.  Invoking the <em>abstraction principle</em>, which states that <em>"Where similar functions are carried out by distinct pieces of code, it is generally beneficial to combine them into one by abstracting out the varying parts</em>", you decided to create a queue of Objects to replace the two classes above.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">ObjectQueue</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">objects</span><span class="o">;</span>
+   <span class="o">:</span>
+  <span class="kd">public</span> <span class="nf">ObjectQueue</span><span class="o">(</span><span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{...}</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isFull</span><span class="o">()</span> <span class="o">{...}</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">()</span> <span class="o">{...}</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">enqueue</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{...}</span>
+  <span class="kd">public</span> <span class="n">Object</span> <span class="nf">dequeue</span><span class="o">()</span> <span class="o">{...}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>Now you have a very general class, that you can use to store objects of any kind, including a queue of strings, a queue of colors, etc.  You are quite pleased with yourself, as you should!  The early Java collection library contains many such generic data structures that stores elements of type <code class="codehilite">Object</code>.</p>
+<p>To create a queue of 10 circles and add some circles, you just need:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">ObjectQueue</span> <span class="n">cq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectQueue</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+<span class="n">cq</span><span class="o">.</span><span class="na">enqueue</span><span class="o">(</span><span class="k">new</span> <span class="n">Circle</span><span class="o">(</span><span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">),</span> <span class="mi">10</span><span class="o">));</span>
+<span class="n">cq</span><span class="o">.</span><span class="na">enqueue</span><span class="o">(</span><span class="k">new</span> <span class="n">Circle</span><span class="o">(</span><span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">),</span> <span class="mi">5</span><span class="o">));</span>
+ <span class="o">:</span>
+</pre></div>
+</td></tr></table></p>
+<p>Getting a circle out of the queue is a bit more troublesome:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Circle</span> <span class="n">c</span> <span class="o">=</span> <span class="n">cq</span><span class="o">.</span><span class="na">dequeue</span><span class="o">();</span>
+</pre></div>
+</td></tr></table>
+Would generate a compilation error, since we are trying to perform a narrowing reference conversion -- we cannot assign a variable of type <code class="codehilite">Object</code> to a variable of type <code class="codehilite">Circle</code> without type casting:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Circle</span> <span class="n">c</span> <span class="o">=</span> <span class="o">(</span><span class="n">Circle</span><span class="o">)</span><span class="n">cq</span><span class="o">.</span><span class="na">dequeue</span><span class="o">();</span>
+</pre></div>
+</td></tr></table>
+
+<p>As we have seen in <a href="../lec04/index.html">Lecture 4</a>, the code above might generate a runtime <code class="codehilite">ClassCastException</code> if there is an object in the queue that is not <code class="codehilite">Circle</code> or its subclass.  To avoid runtime error, we should check the type first:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Object</span> <span class="n">o</span> <span class="o">=</span> <span class="n">cq</span><span class="o">.</span><span class="na">dequeue</span><span class="o">();</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="n">Circle</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Circle</span> <span class="n">c</span> <span class="o">=</span> <span class="o">(</span><span class="n">Circle</span><span class="o">)</span><span class="n">o</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>Wouldn't it be nice if we can still have code that is general, but we let the compiler generates an error if we try to add a non-<code class="codehilite">Circle</code> into our queue of <code class="codehilite">Circle</code> objects, so that we don't have to check for the type of an object all the time?</p>
+<p>Java 5 introduces generics, which is a significant improvement to the type systems in Java.  It allows a <em>generic class</em> or a <em>generic interface</em> of some type <code class="codehilite">T</code> to be written:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">Queue</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">T</span><span class="o">[]</span> <span class="n">objects</span><span class="o">;</span>
+   <span class="o">:</span>
+  <span class="kd">public</span> <span class="n">Queue</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;(</span><span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{...}</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isFull</span><span class="o">()</span> <span class="o">{...}</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">()</span> <span class="o">{...}</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">enqueue</span><span class="o">(</span><span class="n">T</span> <span class="n">o</span><span class="o">)</span> <span class="o">{...}</span>
+  <span class="kd">public</span> <span class="n">T</span> <span class="nf">dequeue</span><span class="o">()</span> <span class="o">{...}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p><code class="codehilite">T</code> is known as <em>type parameter</em>.
+The same code as before can be written as:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Queue</span><span class="o">&lt;</span><span class="n">Circle</span><span class="o">&gt;</span> <span class="n">cq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Circle</span><span class="o">&gt;(</span><span class="mi">10</span><span class="o">);</span>
+<span class="n">cq</span><span class="o">.</span><span class="na">enqueue</span><span class="o">(</span><span class="k">new</span> <span class="n">Circle</span><span class="o">(</span><span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">),</span> <span class="mi">10</span><span class="o">));</span>
+<span class="n">cq</span><span class="o">.</span><span class="na">enqueue</span><span class="o">(</span><span class="k">new</span> <span class="n">Circle</span><span class="o">(</span><span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">),</span> <span class="mi">5</span><span class="o">));</span>
+<span class="n">Circle</span> <span class="n">c</span> <span class="o">=</span> <span class="n">cq</span><span class="o">.</span><span class="na">dequeue</span><span class="o">();</span>
+</pre></div>
+</td></tr></table>
+
+<p>Here, we pass <code class="codehilite">Circle</code> as the <em>type argument</em> to <code class="codehilite">T</code>, creating a <em>parameterized type</em> <code class="codehilite">Queue&lt;Circle&gt;</code>.</p>
+<p>In Line 4, we no longer need to cast, and there is no danger of runtime error due to an object of the wrong class being added to the queue, for doing this:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Queue</span><span class="o">&lt;</span><span class="n">Circle</span><span class="o">&gt;</span> <span class="n">cq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Circle</span><span class="o">&gt;(</span><span class="mi">10</span><span class="o">);</span>
+<span class="n">cq</span><span class="o">.</span><span class="na">enqueue</span><span class="o">(</span><span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">3</span><span class="o">));</span>
+</pre></div>
+</td></tr></table>
+will generate a compile-time error.</p>
+<p>Generic typing is a type of polymorphism as well and is also known as <em>parametric polymorphism</em>.</p>
+<div class="admonition note">
+<p class="admonition-title">In Other Languages</p>
+<p>Many modern programming languages support generics: C++ (known as <em>template</em>), Swift, Kotlin, C#, etc. For dynamically typed languages such as Python, one can already write generic code without regards to the type of the variables, so generic is kinda "build in".  In C (the 2011 version, C11), there is a <code class="codehilite">_Generic</code> expression, which is not to be confused with generics we are talking about here.</p>
+</div>
+<p>We can use parameterized type anywhere a type is used, including as type argument.  If we want to have a queue of a queue of circles, we can:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Queue</span><span class="o">&lt;</span><span class="n">Queue</span><span class="o">&lt;</span><span class="n">Circle</span><span class="o">&gt;&gt;</span> <span class="n">cqq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Queue</span><span class="o">&lt;&gt;(</span><span class="mi">10</span><span class="o">);</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="variance-of-generic-types">Variance of Generic Types</h2>
+<p>In <a href="../lec04/index.html">Lecture 4</a>, we discuss about subtypes and the variance of types.  Recall that <span>\(T\)</span> is a subtype of <span>\(S\)</span> if everywhere we use <span>\(S\)</span>, we can substitute with <span>\(T\)</span>.  </p>
+<p>Suppose a class or interface <code class="codehilite">B</code> is a subtype of <code class="codehilite">A</code>, then <code class="codehilite">B&lt;T&gt;</code> is also a subtype of <code class="codehilite">A&lt;T&gt;</code>, i.e., they are covariant.</p>
+<p>Generics, however, are <em>invariant</em>, with respect to the type parameter.  That is, if a class or interface <code class="codehilite">B</code> is a subtype of <code class="codehilite">A</code>, then neither is <code class="codehilite">C&lt;B&gt;</code> a subtype of <code class="codehilite">C&lt;A&gt;</code>, nor is <code class="codehilite">C&lt;A&gt;</code> a subtype of <code class="codehilite">C&lt;B&gt;</code>.  A parameterized type must be used with exactly with same type argument.  For instance:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Queue</span><span class="o">&lt;</span><span class="n">Circle</span><span class="o">&gt;</span> <span class="n">qc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Shape</span><span class="o">&gt;();</span>  <span class="c1">// error</span>
+<span class="n">Queue</span><span class="o">&lt;</span><span class="n">Shape</span><span class="o">&gt;</span> <span class="n">qs</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Circle</span><span class="o">&gt;();</span> <span class="c1">// error</span>
+<span class="n">Queue</span><span class="o">&lt;</span><span class="n">Shape</span><span class="o">&gt;</span> <span class="n">qs</span> <span class="o">=</span> <span class="o">(</span><span class="n">Queue</span><span class="o">&lt;</span><span class="n">Circle</span><span class="o">&gt;)</span> <span class="k">new</span> <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Circle</span><span class="o">&gt;();</span> <span class="c1">// error</span>
+</pre></div>
+</td></tr></table>
+
+<p>will lead to compile-time error.  Attempting to type cast just like when we do a narrowing reference conversion will fail as well.</p>
+<h2 id="wildcards">Wildcards</h2>
+<p>Subtyping among generic types are achieved through wildcard types <code class="codehilite">?</code>.  <code class="codehilite">?</code> itself is not a type, but a notation to denote variance of generic types.  We can replace type parameter <code class="codehilite">T</code> with <code class="codehilite">?</code>, to indicate that <code class="codehilite">T</code> can be any type.  This creates a subtype relationship.  For instance, <code class="codehilite">Queue&lt;Shape&gt;</code> is a subtype of <code class="codehilite"><span class="nx">Queue</span><span class="cp">&lt;?</span><span class="o">&gt;</span></code>, <code class="codehilite">Queue&lt;Object&gt;</code> is a subtype of <code class="codehilite"><span class="nx">Queue</span><span class="cp">&lt;?</span><span class="o">&gt;</span></code>.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">Queue</span><span class="cp">&lt;?</span><span class="o">&gt;</span> <span class="nx">qc</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Queue</span><span class="o">&lt;</span><span class="nx">Shape</span><span class="o">&gt;</span><span class="p">();</span>   <span class="c1">// OK</span>
+</pre></div>
+</td></tr></table>
+
+<p>Since the wildcard <code class="codehilite">?</code> is not a type, we cannot declare a class like this:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">Bar</span><span class="o">&lt;?&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="o">?</span> <span class="n">x</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+We only use <code class="codehilite">?</code> when specifying the type of a variable, field, or parameter.</p>
+<p>Wildcards can be bounded.  Java uses the keyword <code class="codehilite">extends</code> and <code class="codehilite">super</code> to specify the bound.  For instance, <code class="codehilite">Queue&lt;Circle&gt;</code> and <code class="codehilite">Queue&lt;Shape&gt;</code> are both subtypes of <code class="codehilite"><span class="nx">Queue</span><span class="cp">&lt;?</span> <span class="k">extends</span> <span class="nx">Shape</span><span class="o">&gt;</span></code>, but <code class="codehilite">Queue&lt;Object&gt;</code> is not a subtype of <code class="codehilite"><span class="nx">Queue</span><span class="cp">&lt;?</span><span class="o">&gt;</span></code>.</p>
+<p>To be more general, if <code class="codehilite">T</code> is a subtype of <code class="codehilite">S</code>, then <code class="codehilite">Queue&lt;T&gt;</code> is a subtype of <code class="codehilite"><span class="nx">Queue</span><span class="cp">&lt;?</span> <span class="k">extends</span> <span class="nx">S</span><span class="o">&gt;</span></code>.  In other words, the use of <code class="codehilite">? extends</code> is covariant.  </p>
+<p>The <code class="codehilite">super</code> keyword is used to specify the contravariant relationship.
+If <code class="codehilite">T</code> is a subtype of <code class="codehilite">S</code>, then <code class="codehilite">Queue&lt;S&gt;</code> is a subtype of <code class="codehilite"><span class="nx">Queue</span><span class="cp">&lt;?</span> <span class="nx">super</span> <span class="nx">T</span><span class="o">&gt;</span></code>.  </p>
+<p>More intuitively, we can replace <code class="codehilite">? extends X</code> with type X or any subtype that extends X; <code class="codehilite">? super X</code> with type X or any supertype of X.</p>
+<div class="admonition note">
+<p class="admonition-title">Wildcard type in Other Languages</p>
+<p>The use of wildcard type <code class="codehilite">?</code> is not common in other programming languages.  Partly because Java introduces generics late and has to use type erasure to implement generic types.</p>
+</div>
+<h2 id="type-erasure">Type Erasure</h2>
+<p>In Java, for backward compatibility, generic typing is implemented with a process called <em>type erasure</em>.  The type argument is erased during compile time, and the type parameter <code class="codehilite">T</code> is replaced with either <code class="codehilite">Object</code> (if it is unbounded) or the bound (if it is bounded). For instance, <code class="codehilite">Queue&lt;Circle&gt;</code> will be replaced by <code class="codehilite">Queue</code> and <code class="codehilite">T</code> will be replaced by <code class="codehilite">Object</code>, just like how Java code is written before generic type is introduced in Java 5.  <code class="codehilite"><span class="nx">Queue</span><span class="cp">&lt;?</span> <span class="k">extends</span> <span class="nx">Shape</span><span class="o">&gt;</span></code> will be replaced with <code class="codehilite">Queue</code> and <code class="codehilite">T</code> will be replaced with <code class="codehilite">Shape</code>.  The compiler also inserts type casting and additional methods<sup id="fnref:2"><a class="footnote-ref" href="#fn:2" rel="footnote">2</a></sup> to preserve the semantics of generic type.</p>
+<p>Java's design decision to use type erasure to implement generics has several important implications.  </p>
+<p>First, unlike other languages, such as C++, Java does not support generics of a primitive type.  We cannot create a <code class="codehilite">Queue&lt;int&gt;</code>, for instance.  We can only use reference types as type argument (anything that is a subtype of <code class="codehilite">Object</code>).</p>
+<p>Second, we cannot have code that looks like the following:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">A</span> <span class="o">{</span>
+  <span class="kt">void</span> <span class="nf">foo</span><span class="o">(</span><span class="n">Queue</span><span class="o">&lt;</span><span class="n">Circle</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{}</span>
+  <span class="kt">void</span> <span class="nf">foo</span><span class="o">(</span><span class="n">Queue</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>Even though both <code class="codehilite">foo</code> above seem like they have different method signatures and is a valid application of method overloading, the compiler actually translates them both to:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">A</span> <span class="o">{</span>
+  <span class="kt">void</span> <span class="nf">foo</span><span class="o">(</span><span class="n">Queue</span> <span class="n">c</span><span class="o">)</span> <span class="o">{}</span>
+  <span class="kt">void</span> <span class="nf">foo</span><span class="o">(</span><span class="n">Queue</span> <span class="n">c</span><span class="o">)</span> <span class="o">{}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>and bummer, we have a compilation error!</p>
+<p>Third, using static methods or static fields in generic class becomes trickier.</p>
+<p>Consider the example 
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">Queue</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="kr">static</span> <span class="kr">int</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kr">static</span> <span class="nx">T</span> <span class="nx">y</span><span class="p">;</span>
+  <span class="kr">static</span> <span class="nx">T</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">T</span> <span class="nx">t</span><span class="p">)</span> <span class="p">{};</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></p>
+<p><code class="codehilite">Queue&lt;Circle&gt;</code> and <code class="codehilite">Queue&lt;Point&gt;</code> both gets compiled to <code class="codehilite">Queue</code>.  So they share the same <code class="codehilite">x</code>, even though you might think <code class="codehilite">Queue&lt;CIrcle&gt;</code> and <code class="codehilite">Queue&lt;Point&gt;</code> as two different distinct classes.  </p>
+<p>Further, the next two liens <code class="codehilite">static T y</code> and <code class="codehilite">static T foo(T t) {}</code> will generate a compilation error.  Since there will only be a copy of <code class="codehilite">y</code> shared by both <code class="codehilite">Queue&lt;Circle&gt;</code> and <code class="codehilite">Queue&lt;Point&gt;</code>, the compiler does not know whether to replace <code class="codehilite">T</code> with <code class="codehilite">Circle</code> or <code class="codehilite">Point</code>, and will complain.</p>
+<p>Fourth, we cannot create an array of parameterized types.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Queue</span><span class="o">&lt;</span><span class="n">Circle</span><span class="o">&gt;[]</span> <span class="n">twoQs</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Circle</span><span class="o">&gt;[</span><span class="mi">2</span><span class="o">];</span> <span class="c1">// compiler error</span>
+<span class="n">twoQs</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Circle</span><span class="o">&gt;();</span>
+<span class="n">twoQs</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;();</span>
+</pre></div>
+</td></tr></table>
+
+<p>After type erasure, we get
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Queue</span><span class="o">[]</span> <span class="n">twoQs</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Queue</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span> <span class="c1">// compiler error</span>
+<span class="n">twoQs</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Queue</span><span class="o">();</span>
+<span class="n">twoQs</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Queue</span><span class="o">();</span>
+</pre></div>
+</td></tr></table></p>
+<p>If Java would have allowed us to create an array of a parameterized type, then we could have added an element of incompatible type <code class="codehilite">Queue&lt;Point&gt;</code> into an array of <code class="codehilite">Queue&lt;Circle&gt;</code> without raising a run-time error.  </p>
+<p>Generics in Java is added as an afterthought and to maintain backward compatibility, the compiler has to erase the type parameter during compile type.  During runtime, the type information is no longer available, and this design causes the quirks above.</p>
+<h2 id="raw-types">Raw Types</h2>
+<p>One final note: for backward compatibility, Java allows us to use a generic class to be used without the type argument.  For instance, even though we declare <code class="codehilite">Queue&lt;T&gt;</code>, we can just use <code class="codehilite">Queue</code>.  </p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Queue</span><span class="o">&lt;</span><span class="n">Circle</span><span class="o">&gt;</span> <span class="n">cq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Queue</span><span class="o">();</span>
+</pre></div>
+</td></tr></table>
+
+<p>After all, during compile time, <code class="codehilite">Queue&lt;Circle&gt;</code> is translated into <code class="codehilite">Queue</code> anyway.  In Java 5 or later, if we just use <code class="codehilite">Queue</code>, we get a <code class="codehilite">Queue</code> of <code class="codehilite">Object</code>s.  This is called a <em>raw type</em>.  Recent Java compilers will warn you if you use a raw type in your code.  </p>
+<h2 id="wrapper-classes">Wrapper Classes</h2>
+<p>We can get around the problem of not being able to create generics of primitive types using wrapper classes.  Java provides a set of wrapper classes, one for each primitive type: <code class="codehilite">Boolean</code>, <code class="codehilite">Byte</code>, <code class="codehilite">Character</code>, <code class="codehilite">Integer</code>, <code class="codehilite">Double</code>, <code class="codehilite">Long</code>, <code class="codehilite">Float</code>, and <code class="codehilite">Short</code>.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Queue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">iq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(</span><span class="mi">10</span><span class="o">);</span>
+<span class="n">cq</span><span class="o">.</span><span class="na">enqueue</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">4</span><span class="o">));</span>
+<span class="n">cq</span><span class="o">.</span><span class="na">enqueue</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">8</span><span class="o">));</span>
+<span class="n">cq</span><span class="o">.</span><span class="na">enqueue</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">15</span><span class="o">));</span>
+</pre></div>
+</td></tr></table>
+
+<p>Java 5 introduces something called <em>autoboxing</em> and <em>unboxing</em>, which creates the wrapper objects automatically (autoboxing) and retrieves its value (unboxing) automatically.  With autoboxing and unboxing, we can just write:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Queue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">iq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(</span><span class="mi">10</span><span class="o">);</span>
+<span class="n">cq</span><span class="o">.</span><span class="na">enqueue</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
+<span class="n">cq</span><span class="o">.</span><span class="na">enqueue</span><span class="o">(</span><span class="mi">8</span><span class="o">);</span>
+<span class="n">cq</span><span class="o">.</span><span class="na">enqueue</span><span class="o">(</span><span class="mi">15</span><span class="o">);</span>
+</pre></div>
+</td></tr></table>
+
+<p>Note that <code class="codehilite">enqueue</code> expects an <code class="codehilite">Integer</code> object, but we pass in an <code class="codehilite">int</code>.  This would cause the <code class="codehilite">int</code> variable to automatically be boxed (i.e., be wrapped in Integer object) and put onto the call stack of <code class="codehilite">enqueue</code>.</p>
+<h3 id="performance-penalty">Performance Penalty</h3>
+<p>If the wrapper class is so great, why not use it all the time and forget about primitive types?</p>
+<p>The answer: performance.  Because using an object comes with the cost of allocating memory for the object and collecting of garbage afterward, it is less efficient than primitive types.  Consider the following two programs:</p>
+<p><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Double</span> <span class="n">sum</span><span class="o">;</span>
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+<span class="o">{</span>
+    <span class="n">sum</span> <span class="o">+=</span> <span class="n">i</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+vs.
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">double</span> <span class="n">sum</span><span class="o">;</span>
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+<span class="o">{</span>
+    <span class="n">sum</span> <span class="o">+=</span> <span class="n">i</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></p>
+<p>The second one is 2 times faster!  Due to autoboxing and unboxing, the cost of creating objects become hidden and often forgotten.</p>
+<p>All primitive wrapper class objects are immutable -- once you create an object, it cannot be changed.  Thus, every time <code class="codehilite">sum</code> in the example above is updated, a new object gets created.</p>
+<h2 id="generic-methods">Generic Methods</h2>
+<p>We can get around the problem of not being able to define static methods using generic methods.  Generic methods are just like generic type, but the scope of the type parameter is limited to only the method itself.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">Queue</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="kr">static</span> <span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="nx">T</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">T</span> <span class="nx">t</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">t</span><span class="p">;</span> <span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>The above would compile.  Note that the <code class="codehilite">&lt;T&gt;</code> in <code class="codehilite">static &lt;T&gt; T foo(T t)</code> effectively declares a new type parameter <code class="codehilite">T</code>, scoped to the method <code class="codehilite">foo</code>, and has nothing to do with the type parameter <code class="codehilite">&lt;T&gt;</code> for <code class="codehilite">Queue&lt;T&gt;</code>. <br />
+(Recall that, since <code class="codehilite">foo</code> is static and is associated with the class <code class="codehilite">Queue</code>).</p>
+<p>As a convention, it is common to use the single letter <code class="codehilite">T</code> here, which may be confusing.  We can actually use any other single letter to represent the type parameter.
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">Queue</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="kr">static</span> <span class="o">&lt;</span><span class="nx">X</span><span class="o">&gt;</span> <span class="nx">X</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">X</span> <span class="nx">t</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">t</span><span class="p">;</span> <span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></p>
+<p>To invoke a generic method, we can call it like this:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Queue</span><span class="o">.&lt;</span><span class="n">Point</span><span class="o">&gt;</span><span class="n">foo</span><span class="o">(</span><span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">));</span>
+</pre></div>
+</td></tr></table></p>
+<p>or simply:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Queue</span><span class="o">.</span><span class="na">foo</span><span class="o">(</span><span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">));</span>
+</pre></div>
+</td></tr></table></p>
+<h2 id="type-inference">Type Inference</h2>
+<p>In the last example, Java compiler uses <em>type inference</em> to determine what <code class="codehilite">T</code> should be: in this case, we are passing in a <code class="codehilite">Point</code> object, so <code class="codehilite">T</code> should be replaced with <code class="codehilite">Point</code>.</p>
+<p>Type inference can also be used with constructors.
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Queue</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Queue</span><span class="o">&lt;&gt;();</span>
+</pre></div>
+</td></tr></table></p>
+<p>In the line above, we use the <em>diamond operator</em> <code class="codehilite">&lt;&gt;</code> to ask Java to fill in the type for us.  Again, type inference allows Java to infer that we are creating a <code class="codehilite">Point</code> object.</p>
+<p>In cases where the type inference finds multiple matching types, the most specific type is chosen.</p>
+<div class="admonition note">
+<p class="admonition-title">Local variable type inference in Java 10</p>
+<p>Java 10, which is scheduled to be released next month, supports type inference for a local variable.  We can write
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">var</span> <span class="n">q</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;();</span>
+</pre></div>
+</td></tr></table>
+and Java 10 compiler can infer that q should have the type <code class="codehilite">Queue&lt;Point&gt;</code>.</p>
+</div>
+<h2 id="java-collections">Java Collections</h2>
+<p>Now, we turn our attention to the Java Collection Framework.  Java provides a rich set of classes for managing and manipulating data.  They efficiently implement many useful data structures (hash tables, red-black trees, etc.) and algorithms (sorting, searching, etc.) so that we no longer have to.  As computer scientists, it is still very important for us to know how these data structures and algorithms can be implemented, how to prove some behaviors (such as running time) and their correctness, how certain trade-offs are made, etc. They are so important that we have two modules dedicated to them, CS2040 and CS3230, in the core CS curriculum.</p>
+<p>In CS2030, however, we will only use them but not study how to implement them.  Most importantly, Java Collection Framework is mostly well-designed and serves as real-world examples of how all the OO principles and programming language concepts are used.  We can see how all the things that we have learned so far is applied.</p>
+<h3 id="collection">Collection</h3>
+<p>One of the basic interfaces in Java Collection Framework is <code class="codehilite">Collection&lt;E&gt;</code>, it looks like:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Collection</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">Iterable</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">);</span>
+  <span class="kt">boolean</span> <span class="nf">contains</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">);</span>
+  <span class="kt">boolean</span> <span class="nf">remove</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">);</span>
+  <span class="kt">void</span> <span class="nf">clear</span><span class="o">();</span>
+  <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">();</span>
+  <span class="kt">int</span> <span class="nf">size</span><span class="o">();</span>
+
+  <span class="n">Object</span><span class="o">[]</span> <span class="nf">toArray</span><span class="o">();</span>
+  <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span><span class="o">[]</span> <span class="nf">toArray</span><span class="o">(</span><span class="n">T</span><span class="o">[]</span> <span class="n">a</span><span class="o">);</span>
+
+  <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">);</span>
+  <span class="kt">boolean</span> <span class="nf">containsAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">);</span>
+  <span class="kt">boolean</span> <span class="nf">removeAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">);</span>
+  <span class="kt">boolean</span> <span class="nf">retainAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">);</span>
+    <span class="o">:</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>There are some newly added methods in Java 8 that we will visit in the second half of this module, but first,
+let's try to understand what the definition above means.  First, like a generic class that you have seen, <code class="codehilite">Collection</code> is a <em>generic interface</em> parameterized with a type parameter <code class="codehilite">E</code>.  It extends a generic <code class="codehilite">Iterable&lt;E&gt;</code> interface (we will get to this later).</p>
+<p>The first six methods of <code class="codehilite">Collection&lt;E&gt;</code> should be self-explanatory.  <code class="codehilite">add</code> adds an element into the collection; <code class="codehilite">contains</code> checks if a given object is in the collection;  <code class="codehilite">remove</code> removes a single instance of the given object from the collection;  <code class="codehilite">clear</code> removes all objects from the collection;  <code class="codehilite">isEmpty()</code> checks if the collection has no elements or not; and finally, <code class="codehilite">size</code> returns the number of elements.</p>
+<p>Note that <code class="codehilite">contains()</code> relies on the implementation of <code class="codehilite">equals()</code> to check if the object exists in the collection or not.  Similarly, <code class="codehilite">remove()</code> relies on <code class="codehilite">equals()</code> to find the matching objects.  We said earlier that it is useful to override the <code class="codehilite">equals</code> methods of <code class="codehilite">Object</code> instead of implementing our own <code class="codehilite">equals</code>, because the overridden <code class="codehilite">equals()</code> will be called elsewhere.  This is one of the "elsewhere" I mentioned.  The documentation of <code class="codehilite">contains(o)</code> mentions that it is guaranteed to return <code class="codehilite">true</code> if there exists an element <code class="codehilite">e</code> such that <code class="codehilite">e.equals(o)</code> or <code class="codehilite">e == null</code> (if <code class="codehilite">o == null</code>).  Ditto for <code class="codehilite">remove(o)</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Non-generic Methods</p>
+<p>You might notice that, instead of <code class="codehilite">contains(E e)</code>and <code class="codehilite">remove(E e)</code>, the <code class="codehilite">Collection</code> interface uses <code class="codehilite">contains(Object o)</code> and <code class="codehilite">remove(Object o)</code>.  This little inconsistency, however, is harmless.  For instance, if you have a collection intended for circles only, adding a non-circle could be disastrous.  Trying to remove a non-circle or checking for a non-circle, would just return false.
+More information can be found on this <a href="https://stackoverflow.com/questions/104799/why-arent-java-collections-remove-methods-generic">StackOverflow</a> thread.</p>
+</div>
+<p>Java Collection Framework allows classes that implement an interface to throw an <code class="codehilite">UnsupportedOperationException</code> if the implementation decides not to implement one of the operations (but still need to have the method in the class).</p>
+<p>The method <code class="codehilite">toArray()</code> on Line 9 returns an array containing all the elements inside this collection.  The second overloaded <code class="codehilite">toArray</code> method takes in an array of generic type <code class="codehilite">T</code>.  If the collections fit in <code class="codehilite">a</code>, <code class="codehilite">a</code> is filled and returned.  Else, it allocates a new array of type <code class="codehilite">T</code> and returned.</p>
+<p>The second <code class="codehilite">toArray</code> method is an example of a generic method.  It is the caller responsibility to pass in the right type, otherwise, an <code class="codehilite">ArrayStoreException</code> will be thrown.</p>
+<p>The next group of methods operates on another collection.  <code class="codehilite">addAll</code> add all the elements of collection <code class="codehilite">c</code> into the current collection; <code class="codehilite">containsAll</code> checks if all the elements of collection <code class="codehilite">c</code> are contained in the current collection; <code class="codehilite">removeAll</code> removes all elements from collection <code class="codehilite">c</code>, and finally, <code class="codehilite">retainsAll</code> remove all elements not in <code class="codehilite">c</code>.</p>
+<p>What is more interesting about the methods is the type of <code class="codehilite">c</code>.  In <code class="codehilite">containsAll</code>, <code class="codehilite">removeAll</code>, and <code class="codehilite">retainAll</code>, the collection <code class="codehilite">c</code> has the type <code class="codehilite"><span class="nx">Collection</span><span class="cp">&lt;?</span><span class="o">&gt;</span></code>.  Recall that <code class="codehilite"><span class="nx">Collection</span><span class="cp">&lt;?</span><span class="o">&gt;</span></code> is a supertype of <code class="codehilite">Collection&lt;T&gt;</code>, whatever <code class="codehilite">T</code> is.  So, we can pass in a <code class="codehilite">Collection</code> of any reference type to check for equality.  In this case, we are not adding anything to the collection, so the type of <code class="codehilite">c</code> is set to be as general as possible.</p>
+<p>In <code class="codehilite">addAll</code>, however, <code class="codehilite">c</code> is declared as <code class="codehilite"><span class="nx">Collection</span><span class="cp">&lt;?</span> <span class="k">extends</span> <span class="nx">E</span><span class="o">&gt;</span></code>.  Since we are adding to the collection, we can only add elements that either has the type <code class="codehilite">E</code> or a type that is a subtype of <code class="codehilite">E</code>.  This constraint is enforced during compile time through the covariance relationship between <code class="codehilite"><span class="nx">Collection</span><span class="cp">&lt;?</span> <span class="k">extends</span> <span class="nx">E</span><span class="o">&gt;</span></code> and <code class="codehilite">Collection&lt;E&gt;</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Iterable</p>
+<p>The <code class="codehilite">Iterable&lt;E&gt;</code> interface provides only a single method, <code class="codehilite">Iterator&lt;E&gt; iterator()</code>, which returns a generic interface called <code class="codehilite">Iterator&lt;E&gt;</code> over the collection.  An <code class="codehilite">Iterator</code> is another interface that allows us to go through all the elements in a <code class="codehilite">Collection&lt;E&gt;</code>.  Useful methods include <code class="codehilite">hasNext()</code>, which returns if there is a next element in the <code class="codehilite">Collection&lt;E&gt;</code>; <code class="codehilite">next()</code>, which returns the next element (with parameterized type <code class="codehilite">E</code>); and <code class="codehilite">remove()</code>, which removes the last returned element from the <code class="codehilite">Collection&lt;E&gt;</code>.</p>
+</div>
+<p>So far we have not seen any example code using <code class="codehilite">Collection</code>.  This is because Java Collection Framework does not provide a class that implements the <code class="codehilite">Collection&lt;E&gt;</code> directly.  The documentation recommends that we implement the <code class="codehilite">Collection&lt;E&gt;</code> interface<sup id="fnref:3"><a class="footnote-ref" href="#fn:3" rel="footnote">3</a></sup> if we want a collection of objects that allows duplicates and does not care about the orders.</p>
+<h2 id="set-and-list">Set and List</h2>
+<p>The <code class="codehilite">Set&lt;E&gt;</code> and <code class="codehilite">List&lt;E&gt;</code> interfaces extend the <code class="codehilite">Collection&lt;E&gt;</code> interface.  <code class="codehilite">Set&lt;E&gt;</code> is meant for implementing a collection of objects that does not allow duplicates (but still does not care about order of elements), while <code class="codehilite">List&lt;E&gt;</code> is for implementing a collection of objects that allow duplicates, but the order of elements matters.</p>
+<p>Mathematically, a <code class="codehilite">Collection&lt;E&gt;</code> is used to represent a bag, <code class="codehilite">Set&lt;E&gt;</code>, a set, and <code class="codehilite">List&lt;E&gt;</code>, a sequence.</p>
+<p>The <code class="codehilite">List&lt;E&gt;</code> interface has additional methods for adding and removing elements.  <code class="codehilite">add(e)</code> by default would just add to the end of the list.  <code class="codehilite">add(i, e)</code> inserts <code class="codehilite">e</code> to position <code class="codehilite">i</code>.  <code class="codehilite">get(i)</code> returns the element at position <code class="codehilite">i</code>, <code class="codehilite">remove(i)</code> removes the elements at position <code class="codehilite">i</code>; <code class="codehilite">set(i,e)</code> replace the <code class="codehilite">i</code>-th element with <code class="codehilite">e</code>.</p>
+<p>Useful classes in Java collection that implement <code class="codehilite">List&lt;E&gt;</code> include <code class="codehilite">ArrayList</code> and <code class="codehilite">LinkedList</code>, and useful classes that implement <code class="codehilite">Set&lt;E&gt;</code> include <code class="codehilite">HashSet</code>.</p>
+<p>Let's see some examples:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">();</span>
+<span class="n">names</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;Cersei&quot;</span><span class="o">);</span>
+<span class="n">names</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;Joffrey&quot;</span><span class="o">);</span>
+<span class="n">names</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="s">&quot;Gregor&quot;</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">names</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
+</pre></div>
+</td></tr></table>
+
+<p>Line 1 above creates an empty array list.  The second line adds two strings into the list, each appending them to the list.  After executing Line 3, it would contain the sequence <code class="codehilite">&lt;&quot;Cersei&quot;,&quot;Joffrey&quot;&gt;</code>.  Line 4 inserts the string <code class="codehilite">&quot;Gregor&quot;</code> to position 0, moving the rest of the list down by 1 position.  The sequence is now <code class="codehilite">&lt;&quot;Gregor&quot;,&quot;Cersei&quot;,&quot;Joffrey&quot;&gt;</code>.  Finally, calling <code class="codehilite">get(1)</code> would return the string <code class="codehilite">&quot;Cersei&quot;</code>.</p>
+<p>Note that we declare <code class="codehilite">names</code> with the interface type <code class="codehilite">List&lt;String&gt;</code>.  We should always do this to keep our code flexible.  If we want to change our implementation to <code class="codehilite">LinkedList</code>, we only need to change Line 1 to:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">();</span>
+</pre></div>
+</td></tr></table></p>
+<h3 id="comparator">Comparator</h3>
+<p>The <code class="codehilite">List&lt;E&gt;</code> interface also specifies a <code class="codehilite">sort</code> method, with the following specification:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">default</span> <span class="kt">void</span> <span class="nf">sort</span><span class="o">(</span><span class="n">Comparator</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span>
+</pre></div>
+</td></tr></table></p>
+<p><code class="codehilite">List&lt;E&gt;</code> is an example of an interface with default method.  The keyword <code class="codehilite">default</code> indicates that the interface <code class="codehilite">List&lt;E&gt;</code> comes with a default <code class="codehilite">sort</code> implementation, so a class that implements the interface needs not implement it again unless the class wants to override the method.</p>
+<p>This method specification is also interesting and worth looking closer.  It takes in an object <code class="codehilite">c</code> with generic interface <code class="codehilite"><span class="nx">Comparator</span><span class="cp">&lt;?</span> <span class="nx">super</span> <span class="nx">E</span><span class="o">&gt;</span></code>.  The <code class="codehilite">Comparator</code> interface allows us to specify how to compare two elements, by implementing a <code class="codehilite">compare()</code> method.  <code class="codehilite">compare(o1,o2)</code> should return 0 if the two elements are equals, a negative integer if o1 is "less than" o2, and a positive integer otherwise.</p>
+<p>Let's write <code class="codehilite">Comparator</code> class<sup id="fnref:4"><a class="footnote-ref" href="#fn:4" rel="footnote">4</a></sup>:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">NameComparator</span> <span class="kd">implements</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">String</span> <span class="n">s1</span><span class="o">,</span> <span class="n">String</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">s1</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">s2</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>In the above, we use the <code class="codehilite">compareTo</code> method provided by the <code class="codehilite">String</code> class to do the comparison.  With the above, we can now sort the <code class="codehilite">names</code>:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">names</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="k">new</span> <span class="n">NameComparator</span><span class="o">());</span>
+</pre></div>
+</td></tr></table>
+
+<p>This would result in the sequence being changed to <code class="codehilite">&lt;&quot;Cersei&quot;,&quot;Gregor&quot;,&quot;Joffrey&quot;&gt;</code>.  We can easily change how we want to sort the names, for instance, to
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">NameComparator</span> <span class="kd">implements</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">String</span> <span class="n">s1</span><span class="o">,</span> <span class="n">String</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">s1</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">-</span> <span class="n">s2</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+if we want to sort by the length of the names.</p>
+<p>One last thing to note about the method <code class="codehilite">sort</code> is that it takes in <code class="codehilite"><span class="nx">Comparator</span><span class="cp">&lt;?</span> <span class="nx">super</span> <span class="nx">E</span><span class="o">&gt;</span></code> that is contravariant.  Recall that <code class="codehilite">Comparator&lt;Object&gt;</code> is a subtype of <code class="codehilite"><span class="nx">Comparator</span><span class="cp">&lt;?</span> <span class="nx">super</span> <span class="nx">E</span><span class="o">&gt;</span></code>, so we can pass in more general <code class="codehilite">Comparator</code> object to <code class="codehilite">sort</code> (e.g., a class that implements <code class="codehilite">Comprator&lt;Object&gt;</code> </p>
+<h2 id="map">Map</h2>
+<p>One of the more powerful data structures provided by Java Collection is maps (also known as a dictionary in other languages).  A map allows us to store a (unique key, value) pair into the collection, and retrieve the value later by looking up the key.</p>
+<p>The <code class="codehilite">Map&lt;K,V&gt;</code> interface is again generic, but this time, has two type parameters, <code class="codehilite">K</code> for the type of the key, and <code class="codehilite">V</code> for the type of the value.  These parameters make the <code class="codehilite">Map</code> interface flexible -- we can use any type as the key and value.</p>
+<p>The two most important methods for <code class="codehilite">Map</code> is <code class="codehilite">put</code> and <code class="codehilite">get</code>:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="n">V</span> <span class="nf">put</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">);</span>
+    <span class="n">V</span> <span class="nf">get</span><span class="o">(</span><span class="n">Object</span> <span class="n">k</span><span class="o">);</span>
+</pre></div>
+</td></tr></table>
+
+<p>A useful class that implements <code class="codehilite">Map</code> interface is <code class="codehilite">HashMap</code>:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">population</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Integer</span><span class="o">&gt;();</span>
+<span class="n">population</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;Oldtown&quot;</span><span class="o">,</span><span class="mi">500000</span><span class="o">);</span>
+<span class="n">population</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;Kings Landing&quot;</span><span class="o">,</span><span class="mi">500000</span><span class="o">);</span>
+<span class="n">population</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;Lannisport&quot;</span><span class="o">,</span><span class="mi">300000</span><span class="o">);</span>
+</pre></div>
+</td></tr></table>
+
+<p>Later, if we want to lookup the value, we can:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">population</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;Kings Landing&quot;</span><span class="o">);</span>
+</pre></div>
+</td></tr></table></p>
+<h2 id="which-collection-class">Which Collection Class?</h2>
+<p>Java provides many collection classes, more than what we have time to go through.  It is important to know which one to use to get the best performance out of them.  For the few classes we have seen:</p>
+<ul>
+<li>Use <code class="codehilite">HashMap</code> if you want to keep a (key, value) pair for lookup later.</li>
+<li>Use <code class="codehilite">HashSet</code> if you have a collection of elements with no duplicates and order is not important.</li>
+<li>Use <code class="codehilite">ArrayList</code> if you have a collection of elements with possible duplicates and order is important, and retrieving a specific location is more important than removing elements from the list.</li>
+<li>Use <code class="codehilite">LinkedList</code> if you have a collection of elements with possibly duplicates and order is important, retriving a specific location is less important than removing elements from the list.</li>
+</ul>
+<p>You should understand the reasons above after CS2040.</p>
+<p>Further, if you want to check if a given object is contained in the list, then <code class="codehilite">ArrayList</code> and <code class="codehilite">LinkedList</code> are not good candidates.  <code class="codehilite">HashSet</code>, on the other hand, can quickly check if an item is already contained in the set.  There is, unfortunately, no standard collection class that supports fast <code class="codehilite">contain</code> and allow duplicates.  </p>
+<h2 id="exercise">Exercise</h2>
+<ol>
+<li>
+<p>Consider the following code snippet:
+    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">interface</span> <span class="nc">I</span> <span class="o">{</span>
+  <span class="kt">void</span> <span class="nf">f</span><span class="o">();</span>
+  <span class="k">default</span> <span class="n">g</span><span class="o">()</span> <span class="o">{</span> 
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">A</span> <span class="kd">implements</span> <span class="n">I</span> <span class="o">{</span>
+  <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">h</span><span class="o">();</span>
+  <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">h</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">);</span>
+  <span class="kt">void</span> <span class="nf">j</span><span class="o">()</span> <span class="o">{</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">B</span> <span class="kd">extends</span> <span class="n">A</span> <span class="o">{</span>
+  <span class="o">:</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></p>
+<p>Class <code class="codehilite">B</code> is a concrete class.  What are the methods that <code class="codehilite">B</code> needs to implement?</p>
+</li>
+<li>
+<p>For each of the statement below, indicate if it is a valid statement (no compilation error). Explain why in one sentence.</p>
+<ul>
+<li><code class="codehilite"><span class="nx">List</span><span class="cp">&lt;?</span><span class="o">&gt;</span> <span class="k">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayList</span><span class="o">&lt;</span><span class="nx">String</span><span class="o">&gt;</span><span class="p">();</span></code></li>
+<li><code class="codehilite"><span class="nx">List</span><span class="cp">&lt;?</span> <span class="nx">super</span> <span class="nx">Integer</span><span class="o">&gt;</span> <span class="k">list</span> <span class="o">=</span> <span class="k">new</span> <span class="k">List</span><span class="o">&lt;</span><span class="nx">Object</span><span class="o">&gt;</span><span class="p">();</span></code></li>
+<li><code class="codehilite"><span class="nx">List</span><span class="cp">&lt;?</span> <span class="k">extends</span> <span class="nx">Object</span><span class="o">&gt;</span> <span class="k">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">LinkedList</span><span class="o">&lt;</span><span class="nx">Object</span><span class="o">&gt;</span><span class="p">();</span></code></li>
+<li><code class="codehilite"><span class="nx">List</span><span class="cp">&lt;?</span> <span class="nx">super</span> <span class="nx">Integer</span><span class="o">&gt;</span> <span class="k">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">LinkedList</span><span class="o">&lt;&gt;</span><span class="p">();</span></code></li>
+</ul>
+</li>
+<li>
+<p>Consider a generic class <code class="codehilite">A&lt;T&gt;</code> with a type parameter <code class="codehilite">T</code> and a constructor with no argument.  Which of the following statements are valid (i.e., no compilation error) ways of creating a new object of type A? We still consider the statement as valid if the Java compiler produces a warning.</p>
+<ul>
+<li><code class="codehilite">new A&lt;int&gt;();</code></li>
+<li><code class="codehilite">new A&lt;&gt;();</code></li>
+<li><code class="codehilite">new A();</code></li>
+</ul>
+</li>
+<li>
+<p>In this question, we will explore the more strange behavior of <code class="codehilite">Integer</code> class.</p>
+<p>Remember that <code class="codehilite">==</code> compares only references: whether the two references are pointing to the same object or not.   The <code class="codehilite">equals</code> method has been overridden to compare if the values are the same or not.  Try the following in <code class="codehilite">jshell</code>:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Integer</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="n">Integer</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="o">;</span>
+</pre></div>
+</td></tr></table>
+
+<p>What do you expect the comparison <code class="codehilite">==</code> to return?  What did it return?</p>
+<p>Now try:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Integer</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1000</span><span class="o">;</span>
+<span class="n">Integer</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">1000</span><span class="o">;</span>
+<span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="o">;</span>
+</pre></div>
+</td></tr></table>
+
+<p>What do you expect it to return?  What did it return?</p>
+<p>Look up on the Internet (e.g., StackOverflow) on why this happens.  </p>
+<p>The moral of the story here is to always use <code class="codehilite">equals</code> to compare two reference variables.</p>
+</li>
+<li>
+<p>Consider a method declared as <code class="codehilite">int foo(double x)</code> Which of the following statements will NOT result in a compilation error:</p>
+<ul>
+<li>int cs = foo(2030);</li>
+<li>double cs = foo(2.030);</li>
+<li>int cs = foo(new Double(2.030));</li>
+<li>Integer cs = foo(new Double(2.030));</li>
+</ul>
+</li>
+<li>
+<p>In this question, we will explore the behavior of <code class="codehilite">ArrayList</code> class and autoboxing/unboxing.  Will the following code compile?  If so, what will be printed?</p>
+<p>(a) 
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="kt">int</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="n">Integer</span> <span class="n">two</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">one</span><span class="o">);</span>
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">two</span><span class="o">);</span>
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+
+<span class="k">for</span> <span class="o">(</span><span class="n">Integer</span> <span class="n">num</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></p>
+<p>(b)
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="kt">int</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="n">Integer</span> <span class="n">two</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">one</span><span class="o">);</span>
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">two</span><span class="o">);</span>
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// Integer -&gt; int</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></p>
+<p>&copy;
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
+
+<span class="k">for</span> <span class="o">(</span><span class="n">Double</span> <span class="n">num</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></p>
+<p>(d)
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
+
+<span class="k">for</span> <span class="o">(</span><span class="kt">double</span> <span class="n">num</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></p>
+<p>(e)
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;&gt;();</span>
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+
+<span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">it</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="na">next</span><span class="o">());</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></p>
+</li>
+<li>
+<p>Here is another set of questions to explore about the behavior of autoboxing/unboxing and primitive type conversion.</p>
+<p>(a)
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">double</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mf">2.5</span><span class="o">;</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">d</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</pre></div>
+</td></tr></table></p>
+<p>(b)
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">double</span> <span class="n">d</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="mi">5</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="o">(</span><span class="kt">double</span><span class="o">)</span> <span class="mf">2.5</span><span class="o">;</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">d</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</pre></div>
+</td></tr></table></p>
+<p>&copy;
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">double</span> <span class="n">d</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="mf">5.5</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="mf">2.5</span><span class="o">;</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">d</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</pre></div>
+</td></tr></table></p>
+<p>(d)
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Double</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+<span class="n">Integer</span> <span class="n">i</span> <span class="o">=</span> <span class="mf">2.5</span><span class="o">;</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">d</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</pre></div>
+</td></tr></table></p>
+<p>(e)
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Double</span> <span class="n">d</span> <span class="o">=</span> <span class="o">(</span><span class="kt">double</span><span class="o">)</span> <span class="mi">5</span><span class="o">;</span>
+<span class="n">Integer</span> <span class="n">i</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="mf">2.5</span><span class="o">;</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">d</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</pre></div>
+</td></tr></table></p>
+<p>(f)
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">double</span> <span class="n">d</span> <span class="o">=</span> <span class="o">(</span><span class="n">Integer</span><span class="o">)</span> <span class="mi">5</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="o">(</span><span class="n">Integer</span><span class="o">)</span> <span class="mi">2</span><span class="o">;</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">d</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</pre></div>
+</td></tr></table></p>
+<p>(g)
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">double</span> <span class="n">d</span> <span class="o">=</span> <span class="o">(</span><span class="n">Double</span><span class="o">)</span> <span class="mi">5</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="o">(</span><span class="n">Integer</span><span class="o">)</span> <span class="mi">2</span><span class="o">;</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">d</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</pre></div>
+</td></tr></table></p>
+</li>
+</ol>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>This is widely considered as a bad practice (or <em>anti-pattern</em>), called the <em>constant interface anti-pattern</em>.&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Look up bridge methods if you want to know the gory details.&#160;<a class="footnote-backref" href="#fnref:2" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>If you want to do so, however, it is likely more useful to inherit from the abstract class <code class="codehilite">AbstractCollection&lt;E&gt;</code> (which implements most of the basic methods of the interface) rather than implementing the interface <code class="codehilite">Collection&lt;E&gt;</code> directly.&#160;<a class="footnote-backref" href="#fnref:3" rev="footnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>Later in CS2030, you will see how we significantly reduce the verbosity of this code!  But let's do it the hard way first.&#160;<a class="footnote-backref" href="#fnref:4" rev="footnote" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../lec04/index.html" title="4. Types, Memory, Exception" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                4. Types, Memory, Exception
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../style/index.html" title="Coding Style" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Coding Style
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright by Wei Tsang Ooi, Department of Computer Science, National University of Singapore 2018
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application-c35428f87f.js"></script>
+      
+      
+      <script>app.initialize({url:{base:".."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>
