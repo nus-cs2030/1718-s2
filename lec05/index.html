@@ -1475,7 +1475,7 @@ if we want to sort by the length of the names.</p>
 </ul>
 </li>
 <li>
-<p>Consider a generic class <code class="codehilite">A&lt;T&gt;</code> with a type parameter <code class="codehilite">T</code> and a constructor with no argument.  Which of the following statements are valid (i.e., no compilation error) ways of creating a new object of type A? We still consider the statement as valid if the Java compiler produces a warning.</p>
+<p>Consider a generic class <code class="codehilite">A&lt;T&gt;</code> with a type parameter <code class="codehilite">T</code> and a constructor with no argument.  Which of the following statements are valid (i.e., no compilation error) ways of creating a new object of type <code class="codehilite">A</code>? We still consider the statement as valid if the Java compiler produces a warning.</p>
 <ul>
 <li><code class="codehilite">new A&lt;int&gt;();</code></li>
 <li><code class="codehilite">new A&lt;&gt;();</code></li>
@@ -1504,16 +1504,16 @@ if we want to sort by the length of the names.</p>
 </td></tr></table>
 
 <p>What do you expect it to return?  What did it return?</p>
-<p>Look up on the Internet (e.g., StackOverflow) on why this happens.  </p>
+<p>Look up on the Internet (e.g., StackOverflow) on why this happens.  (Hint: <code class="codehilite">Integer</code> caching)</p>
 <p>The moral of the story here is to always use <code class="codehilite">equals</code> to compare two reference variables.</p>
 </li>
 <li>
 <p>Consider a method declared as <code class="codehilite">int foo(double x)</code> Which of the following statements will NOT result in a compilation error:</p>
 <ul>
-<li>int cs = foo(2030);</li>
-<li>double cs = foo(2.030);</li>
-<li>int cs = foo(new Double(2.030));</li>
-<li>Integer cs = foo(new Double(2.030));</li>
+<li><code class="codehilite">int cs = foo(2030);</code></li>
+<li><code class="codehilite">double cs = foo(2.030);</code></li>
+<li><code class="codehilite">int cs = foo(new Double(2.030));</code></li>
+<li><code class="codehilite">Integer cs = foo(new Double(2.030));</code></li>
 </ul>
 </li>
 <li>
