@@ -327,6 +327,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab1b/index.html" title="2. Simulator v1.1" class="md-nav__link">
+      2. Simulator v1.1
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1095,7 +1107,7 @@ will generate a compile-time error.</p>
 </pre></div>
 </td></tr></table></p>
 <p>We only use <code class="codehilite">?</code> when specifying the type of a variable, field, or parameter.</p>
-<p>Wildcards can be bounded.  Java uses the keyword <code class="codehilite">extends</code> and <code class="codehilite">super</code> to specify the bound.  For instance, <code class="codehilite">Queue&lt;Circle&gt;</code> and <code class="codehilite">Queue&lt;Shape&gt;</code> are both subtypes of <code class="codehilite"><span class="nx">Queue</span><span class="cp">&lt;?</span> <span class="k">extends</span> <span class="nx">Shape</span><span class="o">&gt;</span></code>, but <code class="codehilite">Queue&lt;Object&gt;</code> is not a subtype of <code class="codehilite"><span class="nx">Queue</span><span class="cp">&lt;?</span><span class="o">&gt;</span></code>.</p>
+<p>Wildcards can be bounded.  Java uses the keyword <code class="codehilite">extends</code> and <code class="codehilite">super</code> to specify the bound.  For instance, <code class="codehilite">Queue&lt;Circle&gt;</code> and <code class="codehilite">Queue&lt;Shape&gt;</code> are both subtypes of <code class="codehilite"><span class="nx">Queue</span><span class="cp">&lt;?</span> <span class="k">extends</span> <span class="nx">Shape</span><span class="o">&gt;</span></code>, but <code class="codehilite">Queue&lt;Object&gt;</code> is not a subtype of <s><code class="codehilite"><span class="nx">Queue</span><span class="cp">&lt;?</span><span class="o">&gt;</span></code></s> <code class="codehilite"><span class="nx">Queue</span><span class="cp">&lt;?</span> <span class="k">extends</span> <span class="nx">Shape</span><span class="o">&gt;</span></code>.</p>
 <p>To be more general, if <code class="codehilite">T</code> is a subtype of <code class="codehilite">S</code>, then <code class="codehilite">Queue&lt;T&gt;</code> is a subtype of <code class="codehilite"><span class="nx">Queue</span><span class="cp">&lt;?</span> <span class="k">extends</span> <span class="nx">S</span><span class="o">&gt;</span></code>.  In other words, the use of <code class="codehilite">? extends</code> is covariant.  Further, <code class="codehilite"><span class="nx">Queue</span><span class="cp">&lt;?</span> <span class="k">extends</span> <span class="nx">T</span><span class="o">&gt;</span></code> is a subtype of <code class="codehilite"><span class="nx">Queue</span><span class="cp">&lt;?</span> <span class="k">extends</span> <span class="nx">S</span><span class="o">&gt;</span></code>.</p>
 <p>The <code class="codehilite">super</code> keyword is used to specify the contravariant relationship.
 If <code class="codehilite">T</code> is a subtype of <code class="codehilite">S</code>, then <code class="codehilite">Queue&lt;S&gt;</code> is a subtype of <code class="codehilite"><span class="nx">Queue</span><span class="cp">&lt;?</span> <span class="nx">super</span> <span class="nx">T</span><span class="o">&gt;</span></code>.  </p>
