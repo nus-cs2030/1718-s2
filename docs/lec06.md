@@ -96,21 +96,7 @@ Nested classes are used to group logically relevant classes together.  Typically
 A nested class is a field of the containing class, and can access fields and methods of the containing class, including those declared as `private`.  We can keep the nested class within the abstraction barrier, and declare a nested class as `private`, if there is no need for it to be exposed to the client outside the barrier.
 On the other hand, because of this, you should really have a nested class only if the nested class belongs to the same encapsulation.  Otherwise, the containing class would leak its implementation details to the nested class. 
 
-Take the `HashMap<K,V>` class for instance.  The implementation of `HashMap<K,V>` contains several nested classes, including `KeyIterator<K>` and `ValueIterator<V>` which implement an `Iterator<E>` interface for iterating through the keys and the values in the map respectively, and an `Node<K,V>` class, which encapsulates a key-value pair in the map.  These classes are declared `private`, since they are only used within the `HashMap<K,V>` class.
-
-```Java
-class HashMap<K,V> .. {
-  private class KeyIterator<K> implements Iterator<K> {
-	:
-  }
-  private class ValueIterator<K> implements Iterator<V> {
-	:
-  }
-  private class Node<K,V> {
-	:
-  }
-}
-```
+Take the `HashMap<K,V>` class for instance.  [The implementation of `HashMap<K,V>`](https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/util/HashMap.java) contains several nested classes, including `HashIterator`, which implement an `Iterator<E>` interface for iterating through the key and value pairs in the map, and an `Entry<K,V>` class, which encapsulates a key-value pair in the map.  Some of these classes are declared `private`, if they are only used within the `HashMap<K,V>` class.
 
 A nested class can be either static or non-static.  Just like static fields and static methods, a _static nested class_ is associated with the containing _class_, NOT an _instance_.  So, it can only access static fields and static methods of the containing class.  A _non-static nested class_, on the other hand, can access all fields and methods of the containing class.  A _non-static nested class_ is also known as an _inner class_.
 
@@ -213,6 +199,7 @@ For this reason, even though a local class can access the local variables in the
 Variable captures could be confusing.  Consider the following code:
 
 ```Java
+void sortNames(List<String> names) {
   boolean ascendingOrder = true;
   class NameComparator implements Comparator<String> {
 	public int compare(String s1, String s2) {
@@ -230,7 +217,10 @@ Variable captures could be confusing.  Consider the following code:
 
 Will `sort` sorts in ascending order or descending order?
 
-To avoid confusing code right this, Java only allows a local class to access variables that are explicitly declared `final` or implicitly final (or _effectively_ final).  An implicitly final variable is one that does not change after initialization.  Therefore, Java saves us from such hair-pulling situation and disallow such code -- `ascendingOrder` is not effectively final so the code above does not compile.
+To avoid confusing code like this, Java only allows a local class to access variables that are explicitly declared `final` or implicitly final (or _effectively_ final).  An implicitly final variable is one that does not change after initialization.  Therefore, Java saves us from such hair-pulling situation and disallow such code -- `ascendingOrder` is not effectively final so the code above does not compile.
+
+!!! note "Variable Capture in Javascript"
+    Those of you who did CS1101S or otherwise familiar with Javascript might want to note that this is different from Javascript, which does not enforce the final/effectively final restriction in variable captures.
 
 I do not see a good use case for local class -- if you have information and behavior inside a block of code that is so complex that you need to encapsulate it within a local class, it is time to rethink your design.
 
@@ -300,6 +290,8 @@ class Event {
 
 Trying to assign anything other than the two predefined event type to `eventType` would result in compilation error.  Remember, an error caught at compile time is much better than an error caught during run time, so this is good!
 
+!!! note "In other languages"
+    Enumerated types like `enum` are common in other langauges, including procedural languages like C.  But, `enum` in Java is more powerful, as seen below.
 
 ### Enum's Fields and Methods 
 Each constant of an enum type is actually an instance of the enum class and is a field in the enum class declared with `public static final`.  
@@ -367,6 +359,7 @@ In the code above, `EventType` is an abstract class -- `log` is defined as `abst
 ```Java
 EventType.CUSTOMER_DONE.log(time, customer)
 ```
+
 to log that particular event.
 
 I admit that this example is rather contrived -- we can do the same with a polymorphism in a much cleaner way.
