@@ -911,31 +911,7 @@
 <p>Nested classes are used to group logically relevant classes together.  Typically, a nested class is tightly coupled with the container class, and would have no use outside of the container class.  Nested classes can be used to encapsulate information within a container class, for instance, when implementation of a class becomes too complex.  As such, it is useful for "helper" classes that serve specific purposes.</p>
 <p>A nested class is a field of the containing class, and can access fields and methods of the containing class, including those declared as <code class="codehilite">private</code>.  We can keep the nested class within the abstraction barrier, and declare a nested class as <code class="codehilite">private</code>, if there is no need for it to be exposed to the client outside the barrier.
 On the other hand, because of this, you should really have a nested class only if the nested class belongs to the same encapsulation.  Otherwise, the containing class would leak its implementation details to the nested class. </p>
-<p>Take the <code class="codehilite">HashMap&lt;K,V&gt;</code> class for instance.  The implementation of <code class="codehilite">HashMap&lt;K,V&gt;</code> contains several nested classes, including <code class="codehilite">KeyIterator&lt;K&gt;</code> and <code class="codehilite">ValueIterator&lt;V&gt;</code> which implement an <code class="codehilite">Iterator&lt;E&gt;</code> interface for iterating through the keys and the values in the map respectively, and an <code class="codehilite">Node&lt;K,V&gt;</code> class, which encapsulates a key-value pair in the map.  These classes are declared <code class="codehilite">private</code>, since they are only used within the <code class="codehilite">HashMap&lt;K,V&gt;</code> class.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">HashMap</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="o">..</span> <span class="o">{</span>
-  <span class="kd">private</span> <span class="kd">class</span> <span class="nc">KeyIterator</span><span class="o">&lt;</span><span class="n">K</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">K</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="o">:</span>
-  <span class="o">}</span>
-  <span class="kd">private</span> <span class="kd">class</span> <span class="nc">ValueIterator</span><span class="o">&lt;</span><span class="n">K</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="o">:</span>
-  <span class="o">}</span>
-  <span class="kd">private</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="o">:</span>
-  <span class="o">}</span>
-<span class="o">}</span>
-</pre></div>
-</td></tr></table>
-
+<p>Take the <code class="codehilite">HashMap&lt;K,V&gt;</code> class for instance.  <a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/util/HashMap.java">The implementation of <code class="codehilite">HashMap&lt;K,V&gt;</code></a> contains several nested classes, including <code class="codehilite">HashIterator</code>, which implement an <code class="codehilite">Iterator&lt;E&gt;</code> interface for iterating through the key and value pairs in the map, and an <code class="codehilite">Entry&lt;K,V&gt;</code> class, which encapsulates a key-value pair in the map.  Some of these classes are declared <code class="codehilite">private</code>, if they are only used within the <code class="codehilite">HashMap&lt;K,V&gt;</code> class.</p>
 <p>A nested class can be either static or non-static.  Just like static fields and static methods, a <em>static nested class</em> is associated with the containing <em>class</em>, NOT an <em>instance</em>.  So, it can only access static fields and static methods of the containing class.  A <em>non-static nested class</em>, on the other hand, can access all fields and methods of the containing class.  A <em>non-static nested class</em> is also known as an <em>inner class</em>.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -1090,7 +1066,9 @@ Object b = a.f();
 10
 11
 12
-13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="kt">boolean</span> <span class="n">ascendingOrder</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+13
+14</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">void</span> <span class="nf">sortNames</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">names</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kt">boolean</span> <span class="n">ascendingOrder</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
   <span class="kd">class</span> <span class="nc">NameComparator</span> <span class="kd">implements</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">String</span> <span class="n">s1</span><span class="o">,</span> <span class="n">String</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">if</span> <span class="o">(</span><span class="n">ascendingOrder</span><span class="o">)</span> 
@@ -1107,7 +1085,11 @@ Object b = a.f();
 </td></tr></table>
 
 <p>Will <code class="codehilite">sort</code> sorts in ascending order or descending order?</p>
-<p>To avoid confusing code right this, Java only allows a local class to access variables that are explicitly declared <code class="codehilite">final</code> or implicitly final (or <em>effectively</em> final).  An implicitly final variable is one that does not change after initialization.  Therefore, Java saves us from such hair-pulling situation and disallow such code -- <code class="codehilite">ascendingOrder</code> is not effectively final so the code above does not compile.</p>
+<p>To avoid confusing code like this, Java only allows a local class to access variables that are explicitly declared <code class="codehilite">final</code> or implicitly final (or <em>effectively</em> final).  An implicitly final variable is one that does not change after initialization.  Therefore, Java saves us from such hair-pulling situation and disallow such code -- <code class="codehilite">ascendingOrder</code> is not effectively final so the code above does not compile.</p>
+<div class="admonition note">
+<p class="admonition-title">Variable Capture in Javascript</p>
+<p>Those of you who did CS1101S or otherwise familiar with Javascript might want to note that this is different from Javascript, which does not enforce the final/effectively final restriction in variable captures.</p>
+</div>
 <p>I do not see a good use case for local class -- if you have information and behavior inside a block of code that is so complex that you need to encapsulate it within a local class, it is time to rethink your design.</p>
 <p>What about the use case of <code class="codehilite">NameComparator</code> above?  There are actually better ways to write the class.  We will look at <em>anonymous class</em> today.</p>
 <h3 id="anonymous-class">Anonymous Class</h3>
@@ -1178,6 +1160,10 @@ Object b = a.f();
 </pre></div>
 </td></tr></table></p>
 <p>Trying to assign anything other than the two predefined event type to <code class="codehilite">eventType</code> would result in compilation error.  Remember, an error caught at compile time is much better than an error caught during run time, so this is good!</p>
+<div class="admonition note">
+<p class="admonition-title">In other languages</p>
+<p>Enumerated types like <code class="codehilite"><span class="k">enum</span></code> are common in other langauges, including procedural languages like C.  But, <code class="codehilite"><span class="k">enum</span></code> in Java is more powerful, as seen below.</p>
+</div>
 <h3 id="enums-fields-and-methods">Enum's Fields and Methods</h3>
 <p>Each constant of an enum type is actually an instance of the enum class and is a field in the enum class declared with <code class="codehilite">public static final</code>.<br />
 Since enum in Java is a class, we can define constructors, methods, and fields in enums.  </p>
@@ -1273,10 +1259,11 @@ Since enum in Java is a class, we can define constructors, methods, and fields i
 </td></tr></table>
 
 <p>In the code above, <code class="codehilite">EventType</code> is an abstract class -- <code class="codehilite">log</code> is defined as <code class="codehilite">abstract</code> with no implementation.  Each enum constant has its own implementation to log that particular event.</p>
-<p><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">EventType</span><span class="o">.</span><span class="na">CUSTOMER_DONE</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="n">time</span><span class="o">,</span> <span class="n">customer</span><span class="o">)</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">EventType</span><span class="o">.</span><span class="na">CUSTOMER_DONE</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="n">time</span><span class="o">,</span> <span class="n">customer</span><span class="o">)</span>
 </pre></div>
 </td></tr></table>
-to log that particular event.</p>
+
+<p>to log that particular event.</p>
 <p>I admit that this example is rather contrived -- we can do the same with a polymorphism in a much cleaner way.</p>
 <h3 id="the-class-enum">The Class <code class="codehilite">Enum</code></h3>
 <p><code class="codehilite"><span class="k">enum</span></code> is a special type of class in Java.  All <code class="codehilite"><span class="k">enum</span></code> inherits from the class <code class="codehilite">Enum</code> implicitly.  Since <code class="codehilite"><span class="k">enum</span></code> is a class, we can extend <code class="codehilite"><span class="k">enum</span></code> from interfaces as per normal class.  Unfortunately, <code class="codehilite"><span class="k">enum</span></code> cannot extend another class, since it already extends from <code class="codehilite">Enum</code>.</p>
