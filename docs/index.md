@@ -2,14 +2,17 @@
 
 # Labs
 
+#### 2a. [**Simulator ver 1.2**](lab2a.md)
 #### 1b. [Simulator ver 1.1](lab1b.md)
 #### 1a. [Simulator ver 1.0](lab1a.md)
 #### 0. [Warm Up](lab0.md)
 
 # Lectures
 
+####  6. [Hash Code, Nested Class, Enum](lec06.md) 
+
 ####  5. [Generics and Collections](lec05.md) 
-[Slides](https://www.comp.nus.edu.sg/~cs2030/1718-s2/cs2030-lec05.pdf) | [**Video**](https://vimeo.com/255840375)
+[Slides](https://www.comp.nus.edu.sg/~cs2030/1718-s2/cs2030-lec05.pdf) | [Video](https://vimeo.com/255840375)
 
 
 ####  4. [Types, Memory, Exception](lec04.md) 
