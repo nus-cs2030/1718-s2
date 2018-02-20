@@ -928,6 +928,9 @@
 </pre></div>
 </td></tr></table>
 
+<p>!!! "Common Error"
+    The whitespace after <code class="codehilite">:</code> is required.  Also, make sure that the line above
+    ends with a new line.  </p>
 <p>Now, to compile, create a jar file, and run, here is the typical workflow.  </p>
 <p>In <code class="codehilite">~/lab2a</code>, run:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>javac cs2030/simulator/*.java
@@ -992,6 +995,10 @@
 <li>Every time a customer is being served, we generate a "done" event and schedule it (just like we did it in Lab 1).</li>
 <li>The "done" event generated will have a timestamp of <span>\(T\)</span> + now, where <span>\(T\)</span> is <em>no longer constant <code class="codehilite">SERVICE_TIME</code></em>, but instead is generated with the method <code class="codehilite">genServiceTime</code> from the class <code class="codehilite">RandomGenerator</code>.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">ADDITIONAL REQUIREMENT</p>
+<p>How long it takes to service a customer depends on the customer (what service is required or how many items is in the shopping cart).  Hence, in this lab, we would like the service time to be a property associated with the customer.  In other words, the service time should be a member of the <code class="codehilite">Customer</code> class and is initialized when the customer arrives.</p>
+</div>
 <p>Note that <em>we should only have a single random number generator</em> in the simulation. (hint: what access modifier should we use?)</p>
 <h2 id="grading">Grading</h2>
 <p>This lab is ungraded.  But, you should complete it and submit it anyway for our records.  Completing this lab will get your ready for Lab 2b.</p>
