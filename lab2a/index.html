@@ -1,0 +1,1149 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://nus-cs2030.github.io/1718-s2/lab2a/index.html">
+      
+      
+      
+        <link rel="shortcut icon" href="../assets/images/favicon.png">
+      
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.4">
+    
+    
+      
+        <title>2a Simulator v1.2 - CS2030 Programming Methodology II</title>
+      
+    
+    
+      <script src="../assets/javascripts/modernizr-1df76c4e58.js"></script>
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application-769c285a91.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    
+    
+  </head>
+  
+  
+  
+  
+    <body>
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <a href="https://nus-cs2030.github.io/1718-s2" title="CS2030 Programming Methodology II" class="md-icon md-icon--home md-header-nav__button">
+          </a>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+                <span class="md-header-nav__parent">
+                  Labs
+                </span>
+              
+            
+            2a Simulator v1.2
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result" data-md-lang-search="">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/nus-cs2030/1718-s2" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    
+      <i class="md-icon md-icon--home md-nav__button"></i>
+    
+    CS2030 Programming Methodology II
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/nus-cs2030/1718-s2" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      General
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        General
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../about/index.html" title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../prereqs/index.html" title="Prerequisites" class="md-nav__link">
+      Prerequisites
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../policies/index.html" title="Policies" class="md-nav__link">
+      Policies
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../schedule/index.html" title="Schedule" class="md-nav__link">
+      Schedule
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../readings/index.html" title="Readings" class="md-nav__link">
+      Readings
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Labs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Labs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab0/index.html" title="0 Warm Up" class="md-nav__link">
+      0 Warm Up
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab1a/index.html" title="1a v1.0" class="md-nav__link">
+      1a v1.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab1b/index.html" title="1b Simulator v1.1" class="md-nav__link">
+      1b Simulator v1.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        2a Simulator v1.2
+      </label>
+    
+    <a href="index.html" title="2a Simulator v1.2" class="md-nav__link md-nav__link--active">
+      2a Simulator v1.2
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" title="Prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" title="Learning Objectives" class="md-nav__link">
+    Learning Objectives
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" title="Setup" class="md-nav__link">
+    Setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goals" title="Goals" class="md-nav__link">
+    Goals
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-and-generating-javadoc" title="Writing and Generating Javadoc" class="md-nav__link">
+    Writing and Generating Javadoc
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#packaging-and-creating-jar" title="Packaging and Creating JAR" class="md-nav__link">
+    Packaging and Creating JAR
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-package" title="Creating a package" class="md-nav__link">
+    Creating a package
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-and-executing-a-jar" title="Creating and Executing a JAR" class="md-nav__link">
+    Creating and Executing a JAR
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priority-queuing" title="Priority Queuing" class="md-nav__link">
+    Priority Queuing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#randomized-arrival-and-service-time" title="Randomized Arrival and Service Time" class="md-nav__link">
+    Randomized Arrival and Service Time
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#random" title="Random" class="md-nav__link">
+    Random
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-randomgenerator-class" title="The RandomGenerator class" class="md-nav__link">
+    The RandomGenerator class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arrival-time" title="Arrival Time" class="md-nav__link">
+    Arrival Time
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service-time" title="Service Time" class="md-nav__link">
+    Service Time
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grading" title="Grading" class="md-nav__link">
+    Grading
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-and-output" title="Input and Output" class="md-nav__link">
+    Input and Output
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#submission" title="Submission" class="md-nav__link">
+    Submission
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Lectures
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Lectures
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec01/index.html" title="1. Abstraction & Encapsulation" class="md-nav__link">
+      1. Abstraction & Encapsulation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec02/index.html" title="2. Interface, Inheritance & Polymorphism" class="md-nav__link">
+      2. Interface, Inheritance & Polymorphism
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec03/index.html" title="3. More on Inheritance" class="md-nav__link">
+      3. More on Inheritance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec04/index.html" title="4. Types, Memory, Exception" class="md-nav__link">
+      4. Types, Memory, Exception
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec05/index.html" title="5. Generics and Collections" class="md-nav__link">
+      5. Generics and Collections
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lec06/index.html" title="6. hashCode, Nested Class, enum" class="md-nav__link">
+      6. hashCode, Nested Class, enum
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../style/index.html" title="Coding Style" class="md-nav__link">
+      Coding Style
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Software/Tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Software/Tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../jdk/index.html" title="Java" class="md-nav__link">
+      Java
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../javadoc/index.html" title="Javadoc" class="md-nav__link">
+      Javadoc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../unix/index.html" title="UNIX" class="md-nav__link">
+      UNIX
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vim/index.html" title="Vim" class="md-nav__link">
+      Vim
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" title="Prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" title="Learning Objectives" class="md-nav__link">
+    Learning Objectives
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" title="Setup" class="md-nav__link">
+    Setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goals" title="Goals" class="md-nav__link">
+    Goals
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-and-generating-javadoc" title="Writing and Generating Javadoc" class="md-nav__link">
+    Writing and Generating Javadoc
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#packaging-and-creating-jar" title="Packaging and Creating JAR" class="md-nav__link">
+    Packaging and Creating JAR
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-package" title="Creating a package" class="md-nav__link">
+    Creating a package
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-and-executing-a-jar" title="Creating and Executing a JAR" class="md-nav__link">
+    Creating and Executing a JAR
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priority-queuing" title="Priority Queuing" class="md-nav__link">
+    Priority Queuing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#randomized-arrival-and-service-time" title="Randomized Arrival and Service Time" class="md-nav__link">
+    Randomized Arrival and Service Time
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#random" title="Random" class="md-nav__link">
+    Random
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-randomgenerator-class" title="The RandomGenerator class" class="md-nav__link">
+    The RandomGenerator class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arrival-time" title="Arrival Time" class="md-nav__link">
+    Arrival Time
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service-time" title="Service Time" class="md-nav__link">
+    Service Time
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grading" title="Grading" class="md-nav__link">
+    Grading
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-and-output" title="Input and Output" class="md-nav__link">
+    Input and Output
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#submission" title="Submission" class="md-nav__link">
+    Submission
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/nus-cs2030/1718-s2/edit/master/docs/lab2a.md" title="Edit this page" class="md-icon md-content__icon">edit</a>
+                
+                
+                <h1 id="lab-2a-simulator-v12">Lab 2a: Simulator v1.2</h1>
+<p>Submission deadline: 2359, Friday, March 2, 2018.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>This lab assumes that students:</p>
+<ul>
+<li>are already familiar with <a href="../unix/index.html">simple UNIX commands</a> to copy files.</li>
+<li>have already attempted Lab 1b</li>
+<li>have an understanding of the customer/server system being simulated</li>
+<li>have already encapsulated the given code into their appropriate classes</li>
+</ul>
+<h2 id="learning-objectives">Learning Objectives</h2>
+<p>After completing this lab, students should:</p>
+<ul>
+<li>be familiar with how to package a program the into a <code class="codehilite">jar</code> application</li>
+<li>be familiar with <a href="../javadoc/index.html"><code class="codehilite">javadoc</code> syntax</a> and comfortable with documenting the code with <code class="codehilite">javadoc</code></li>
+<li>be comfortable reading a Java Collection Framework documentation and use one of the classes provided</li>
+<li>appreciate the usefulness of Java Collection Framework by seeing how much shorter and cleaner the resulting code is</li>
+<li>be familiar with the <code class="codehilite">RandomGenerator</code> class provided</li>
+<li>be ready for the next graded lab, Lab 2b.</li>
+</ul>
+<h2 id="setup">Setup</h2>
+<p>Sample code that solves <a href="../lab1b/index.html">Lab 1b</a> is provided (under <code class="codehilite">~cs2030/lab1b/sample</code> on the VM <code class="codehilite">cs2030-i</code>).   You are free to build on top of the given code, or build on top of your own Lab 1b solution.</p>
+<ul>
+<li>Login to <code class="codehilite">cs2030-i</code></li>
+<li>Copy <code class="codehilite">~cs2030/lab2a</code> to <code class="codehilite">~/lab2a</code></li>
+</ul>
+<p>You should see a file <code class="codehilite">RandomGenerator.java</code>, four test files (<code class="codehilite">TESTDATA1.txt</code> to <code class="codehilite">TESTDATA4.txt</code>) and four trace files (<code class="codehilite">OUTPUT1.txt</code> to <code class="codehilite">OUTPUT2.txt</code>).  You should copy either your solution or our sample solution for Lab 1b to <code class="codehilite">~/lab2a</code>.</p>
+<h2 id="goals">Goals</h2>
+<p>For Lab 2a, there are two sets of tasks.  The first involves learning more about the tools that Java Development Kit (JDK) provides to help us write and generate documentation, and to package our application into a single executable binary.  The second involves changing the code to use Java Collection Framework as well as to generate random events.</p>
+<h2 id="writing-and-generating-javadoc">Writing and Generating Javadoc</h2>
+<p>From Lab 2a onwards, you are required to document your classes and methods with Javadoc comments.  You can see examples from the skeleton code given earlier.  For more details, see the <a href="../javadoc/index.html">javadoc</a> guide.</p>
+<p>You should document all your methods and classes (including private ones).</p>
+<h2 id="packaging-and-creating-jar">Packaging and Creating JAR</h2>
+<p>So far, our application consists of a set of class files.  For others to run the application, they need a copy of all the class files.  One could zip up all the class files and share the zip file, but still, the others have to figure out which is that main class contains the <code class="codehilite">main</code> method.</p>
+<p>Java has a tool that combines all the class files in one Java ARchive (JAR) file.  We can include a manifest (default name is <code class="codehilite">manifest.txt</code>) in the JAR which specifies which is the main class with the <code class="codehilite">main</code> method.  </p>
+<p>Once the jar is created, we can disseminate the jar file to others to run.  You have seen an example -- the <code class="codehilite">checkstyle</code> tool under <code class="codehilite">~cs2030/bin</code> is a <code class="codehilite">jar</code> file!</p>
+<h3 id="creating-a-package">Creating a package</h3>
+<p>Recall that Java has a higher-level of abstraction barrier called <code class="codehilite">package</code>.  So far, our classes have been included in the default package.  In this lab, you will put your classes into a package called <code class="codehilite">cs2030.simulator</code>.  You can achieve this by adding the line </p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nn">cs2030.simulator</span><span class="o">;</span>
+</pre></div>
+</td></tr></table>
+
+<p>on top of every <code class="codehilite"><span class="na">.java</span></code> file.</p>
+<p>The package name is typically written in a hierarchical manner using the "." notations.  The name also implies the location of the <code class="codehilite"><span class="na">.java</span></code> files and the <code class="codehilite"><span class="na">.class</span></code> files.  For this reason, you can no longer store the <code class="codehilite"><span class="na">.java</span></code> files under <code class="codehilite">~/lab2a</code> directly.  Instead, you should put them in the directory <code class="codehilite">~/lab2a/cs2030/simulator</code>. </p>
+<h3 id="creating-and-executing-a-jar">Creating and Executing a JAR</h3>
+<p>To create a jar, we first need to create a <code class="codehilite">manifest.txt</code> file to tell JAR what is the main class.   To do this, create a new text file named <code class="codehilite">manifest.txt</code> under <code class="codehilite">~/lab2a</code> and add the following lines:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Main-Class: cs2030.simulator.LabTwoA
+</pre></div>
+</td></tr></table>
+
+<p>Now, to compile, create a jar file, and run, here is the typical workflow.  </p>
+<p>In <code class="codehilite">~/lab2a</code>, run:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>javac cs2030/simulator/*.java
+</pre></div>
+</td></tr></table>
+
+<p>to compile the classes, followed by</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>jar cvfm lab2a.jar manifest.txt cs2030/simulator/*class
+</pre></div>
+</td></tr></table>
+
+<p>to create a JAR file called <code class="codehilite">lab2a.jar</code> containing <code class="codehilite">manifest.txt</code> and the class files.  The flags <code class="codehilite">cvfm</code> stands for create (<code class="codehilite">c</code>), be verbose (<code class="codehilite">v</code>), use the file name (<code class="codehilite">f</code>) <code class="codehilite">lab2a.jar</code>, and use the manifest (<code class="codehilite">m</code>) <code class="codehilite">manifest.txt</code>.</p>
+<p>Now that you have a <code class="codehilite">lab2a.jar</code> file, you can run it with:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>java -cp . -jar lab2a.jar TESTDATA1.txt 
+</pre></div>
+</td></tr></table>
+
+<h2 id="priority-queuing">Priority Queuing</h2>
+<p>The next change you need to do in this assignment is to use one of the Java Collection classes to manage the events.  In <code class="codehilite">LabOneB.java</code>, we kept all the events in an array, and scanned through it to find the event with the smallest (i.e., earliest) timestamp.  This is not efficient, since scanning through all the events incurs a running time that increases linearly with the number of events<sup id="fnref:2"><a class="footnote-ref" href="#fn:2" rel="footnote">1</a></sup>.</p>
+<p>Java Collection provides a class that is perfect for our use: <a href="https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html"><code class="codehilite">PriorityQueue&lt;E&gt;</code></a>.  A <code class="codehilite">PriorityQueue</code> keeps a collection of elements, the elements are given certain priority.  Elements can be added with <a href="https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html#add-E-"><code class="codehilite">add(E e)</code></a> method.  To retrieve and remove the element with the highest priority, we use the <a href="https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html#poll--"><code class="codehilite">poll()</code></a> method, which returns an object of type <code class="codehilite">E</code>, or <code class="codehilite">null</code> is the queue is empty.</p>
+<p>In our case, the event with the smallest timestamp has the highest priority.  To tell the <code class="codehilite">PriorityQueue&lt;E&gt;</code> class how to order the events so that smaller timestamp has higher priority, we use the <a href="https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html#PriorityQueue-java.util.Comparator-"><code class="codehilite">PriorityQueue&lt;E&gt;</code> constructor</a> that takes in a <code class="codehilite">Comparator</code> object, just like we see in <a href="../lec06/index.html">Lecture 6</a>.</p>
+<p>If you design is right, you should only change the code in four places: (i) initialize list of events, (ii) schedule an event, (iii) get the next event, (iv) checking if there is still an event.</p>
+<p>(Hint: You should be able to implement a <code class="codehilite">Comparator</code> without getter <code class="codehilite">getTime()</code>)</p>
+<p><strong>You should implement this change first</strong>, since you can do a sanity check of your correctness against the result of Lab 1b using the test data <em>from</em> Lab 1b.</p>
+<h2 id="randomized-arrival-and-service-time">Randomized Arrival and Service Time</h2>
+<p>Next, we are going to change how the arrival time and service time is specified, so that we can easily simulate different settings (e.g., a more efficient server with faster service time, more arrivals during weekends, etc).</p>
+<h3 id="random">Random</h3>
+<p>First, an introduction to random number generation.  A random number generator is an entity that spews up one random number after another.  We, however, cannot generate a truly random number algorithmically.  We can only generate a <em>pseudo</em> random number.  A pseudo-random number generator can be initialized with a <em>seed</em>.  A pseudo-random number generator, when initialized with the same <em>seed</em>, always produces the same sequence of (seemingly random) numbers.</p>
+<p>Java provides a class <code class="codehilite">java.util.Random</code> that encapsulates a pseudo-random number generator.  We can create a random number generator with a seed:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Random</span> <span class="n">rng</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</pre></div>
+</td></tr></table>
+
+<p>We can then call <code class="codehilite">rng.nextDouble()</code> repeatedly to generate random numbers between 0 and 1.</p>
+<p>In the demo below, we see that creating a <code class="codehilite">Random</code> object with the same seed of 2 towards the end leads to the same sequence of random doubles being generated.</p>
+<script type="text/javascript" src="https://asciinema.org/a/137475.js" id="asciicast-137475" async></script>
+
+<p>Using a fixed seed is important for testing, since the execution of the program will be deterministic, even when random numbers are involved.</p>
+<h3 id="the-randomgenerator-class">The <code class="codehilite">RandomGenerator</code> class</h3>
+<p>We have written a <code class="codehilite">RandomGenerator</code> class that encapsulates different random number generators for use in our simulator.  Each random number generator generates a different stream of random numbers.  The constructor for <code class="codehilite">RandomGenerator</code> takes in three parameters:</p>
+<ul>
+<li><code class="codehilite">int seed</code> is the base seed for the random number generators.  Each random number generator uses a different seed derived from this argument.</li>
+<li><code class="codehilite">double lambda</code> is the arrival rate (see below).</li>
+<li><code class="codehilite">double mu</code> is the service rate (see below).</li>
+</ul>
+<h3 id="arrival-time">Arrival Time</h3>
+<p>In Lab 1, the arrival time is given in the input text file.  This approach is less flexible and requires another program to generate the input file.  Further, the original code creates <em>all</em> the arrival events before the simulation starts, and therefore limits the total number of arrivals to the size of the initial array <code class="codehilite">events</code>.</p>
+<p>We are going to improve this part of the program, by generating the arrival one after another.  To do this, we need to generate a <em>random inter-arrival time</em>.  The inter-arrival time is usually modeled as an exponential random variable, characterized by a single parameter <span>\(\lambda\)</span> (<code class="codehilite">lambda</code>), known as <em>arrival rate</em>.</p>
+<p>Mathematically, the inter-arrival time can be generated with <span>\(-\ln(U)/\lambda\)</span>, where <span>\(U\)</span> is a random variable between 0 and 1<sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">2</a></sup>.</p>
+<ul>
+<li>Every time an arrival event is processed, it generates another arrival event and schedules it.</li>
+<li>
+<p>If there are still more customer to simulator, we generate the next arrival event with a timestamp of <span>\(T\)</span> + now, where <span>\(T\)</span> is generated with the method <code class="codehilite">genInterArrivalTime(lambda)</code> of the class <code class="codehilite">RandomGenerator</code>.</p>
+</li>
+<li>
+<p>When we first start the simulator, we need to generate the first arrival event with timestamp 0.</p>
+</li>
+</ul>
+<h3 id="service-time">Service Time</h3>
+<p>In Lab 1, the service time is constant, which is not always realistic. We are going to model the service time as an exponential random variable, characterized by a single parameter, <em>service rate</em> <span>\(\mu\)</span> (<code class="codehilite">mu</code>).  We can generate the service time with the method <code class="codehilite">genServiceTime(mu)</code> from the class <code class="codehilite">RandomGenerator</code>.</p>
+<ul>
+<li>Every time a customer is being served, we generate a "done" event and schedule it (just like we did it in Lab 1).</li>
+<li>The "done" event generated will have a timestamp of <span>\(T\)</span> + now, where <span>\(T\)</span> is <em>no longer constant <code class="codehilite">SERVICE_TIME</code></em>, but instead is generated with the method <code class="codehilite">genServiceTime</code> from the class <code class="codehilite">RandomGenerator</code>.</li>
+</ul>
+<p>Note that <em>we should only have a single random number generator</em> in the simulation. (hint: what access modifier should we use?)</p>
+<h2 id="grading">Grading</h2>
+<p>This lab is ungraded.  But, you should complete it and submit it anyway for our records.  Completing this lab will get your ready for Lab 2b.</p>
+<h3 id="input-and-output">Input and Output</h3>
+<p>The input file format has changed.  The input file for Lab 2a contains the following:</p>
+<ul>
+<li>The first line is an integer, which is the base seed to the <code class="codehilite">RandomGenerator</code> object</li>
+<li>The second line is an integer, which is the number of servers</li>
+<li>The third line is an integer, which is the number of customers (i.e, the number of arrival events) to simulate</li>
+<li>The fourth line is a double, which is the parameter <span>\(lambda\)</span></li>
+<li>The last line is a double, which is the parameter <span>\(mu\)</span></li>
+</ul>
+<p>Remember: you must not change the formatting of the <em>last line</em> of output:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">&quot;%.3f %d %d&quot;</span><span class="o">,</span> <span class="o">..</span><span class="err">&quot;</span><span class="o">)</span>
+</pre></div>
+</td></tr></table></p>
+<p>Given an input, the output might not be deterministic, since if two events occur at exactly the same time, we break the ties arbitrarily.  For this reason, we will only test your code with test inputs where no two events occur at exactly the same time.</p>
+<p>The test cases and outputs<sup id="fnref2:1"><a class="footnote-ref" href="#fn:1" rel="footnote">2</a></sup> should be:</p>
+<table>
+<thead>
+<tr>
+<th>Test Case</th>
+<th>Output</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code class="codehilite">0.000 5 0</code></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code class="codehilite">0.217 8 2</code></td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code class="codehilite">1.188 14 6</code></td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code class="codehilite">5.263 667 333</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>As usual, producing the correct output for test cases above does not guarantee that your code is correct.</p>
+<p>We have also included traces of the simulation for each of the test cases, which you can find in the files <code class="codehilite">OUTPUT1.txt</code> to <code class="codehilite">OUTPUT4.txt</code>.  This should help you debug should your output is different from ours.</p>
+<h2 id="submission">Submission</h2>
+<p>When you are ready to submit your lab, on <code class="codehilite">cs2030-i</code>, run the script
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>~cs2030/submit2a
+</pre></div>
+</td></tr></table></p>
+<p>which will copy all files matching <code class="codehilite">*.java</code> (and nothing else) from your <code class="codehilite">~/lab2a/cs2030/simulator</code> directory on <code class="codehilite">cs2030-i</code> to an internal grading directory.  We will test compile and test run with a tiny sample input to make sure that your submission is OK.  We will also check if your code generates javadoc with any warning (should have no warning) and follows the CS2030 Java style guide.</p>
+<p>You can submit multiple times, but only the most recent submission will be stored.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:2">
+<p>For those who are taking CS2040, we say this is <span>\(O(n)\)</span> time.  A heap-based priority queue, on the other hand, takes <span>\(O(log n)\)</span> time.&#160;<a class="footnote-backref" href="#fnref:2" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:1">
+<p>After piping through <code class="codehilite">tail</code> (e.g., <code class="codehilite">jar -cp . lab2a.jar &lt; TESTDATA1.txt | tail -1</code>)&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:1" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../lab1b/index.html" title="1b Simulator v1.1" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                1b Simulator v1.1
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../lec01/index.html" title="1. Abstraction & Encapsulation" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                1. Abstraction & Encapsulation
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright by Wei Tsang Ooi, Department of Computer Science, National University of Singapore 2018
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application-c35428f87f.js"></script>
+      
+      
+      <script>app.initialize({url:{base:".."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>
