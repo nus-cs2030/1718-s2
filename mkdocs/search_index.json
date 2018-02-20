@@ -2,8 +2,13 @@
     "docs": [
         {
             "location": "/index.html",
-            "text": "Piazza Q&A\n\n\nLabs\n\n\n2a. \nSimulator ver 1.2\n\n\n1b. \nSimulator ver 1.1\n\n\n1a. \nSimulator ver 1.0\n\n\n0. \nWarm Up\n\n\nLectures\n\n\n6. \nHash Code, Nested Class, Enum\n\n\n5. \nGenerics and Collections\n\n\nSlides\n | \nVideo\n\n\n4. \nTypes, Memory, Exception\n\n\nSlides\n | \nVideo\n\n\n3. \nMore on Inheritance\n\n\nSlides\n | \nVideo\n\n\n2. \nInheritance and Polymorphism\n\n\nSlides\n | \nVideo\n\n\n1. \nAbstraction and Encapsulation\n\n\nSlides\n | \nVideo\n\n\nFor list of topics coming up, see \nthe class schedule\n.",
+            "text": "Midterm\n\n\nPiazza Q&A\n\n\nLabs\n\n\n2a. \nSimulator ver 1.2\n\n\n1b. \nSimulator ver 1.1\n\n\n1a. \nSimulator ver 1.0\n\n\n0. \nWarm Up\n\n\nLectures\n\n\n6. \nHash Code, Nested Class, Enum\n\n\n5. \nGenerics and Collections\n\n\nSlides\n | \nVideo\n\n\n4. \nTypes, Memory, Exception\n\n\nSlides\n | \nVideo\n\n\n3. \nMore on Inheritance\n\n\nSlides\n | \nVideo\n\n\n2. \nInheritance and Polymorphism\n\n\nSlides\n | \nVideo\n\n\n1. \nAbstraction and Encapsulation\n\n\nSlides\n | \nVideo\n\n\nFor list of topics coming up, see \nthe class schedule\n.",
             "title": "Home"
+        },
+        {
+            "location": "/index.html#midterm",
+            "text": "",
+            "title": "Midterm"
         },
         {
             "location": "/index.html#piazza-qa",
@@ -239,6 +244,36 @@
             "location": "/readings/index.html#for-1st-year-students",
             "text": "Notes to Computer Science Freshmen, From the Future :  Early into the AY12/13 academic year, Prof Tay Yong Chiang organized a supper for Computer Science freshmen at Tembusu College. The bunch of seniors who were gathered there put together a document for NUS computing freshmen. This is that document.    How Not to Go About a Programming Assignment, by Agustin Cernuda del Rio :  Computer programming students invariably fall into more than one bad habit. It can be extremely difficult to eradicate them (and many lecturers and professional programmers keep succumbing to them time and again)..    Best Teacher I Ever Had, by David Owen :  Mr. Whitson taught sixth-grade science. On the first day of class, he gave us a lecture about a creature called the cattywampus, ..    Academic Honesty :  All students share the responsibility for upholding the academic standards and reputation of the University. Academic honesty is a prerequisite condition in the pursuit and acquisition of knowledge..",
             "title": "For 1st Year Students"
+        },
+        {
+            "location": "/midterm/index.html",
+            "text": "Midterm\n\n\nImportant Information\n\n\n\n\nDate: March 2, 2018\n\n\nTime: 1000 - 1130\n\n\nVenue: MPSH 2 Section C\n\n\n\n\nPlease arrive at least 5 minutes earlier and wait outside the hall.\n\n\nScope\n\n\n\n\nEverything taught during Week 1 - Week 6\n\n\nLab 0 - Lab 1b\n\n\n\n\nOpen Book\n\n\nThis is an open book midterm.  You can bring in books and notes.  They can be printed or hand written.  No digital materials (laptop, tablet, etc.).  Any Java API needed will be provided to you.\n\n\nQuestions and Solutions\n\n\nHere is \na copy of the question paper with annotated solutions\n from AY2017/18 Semester 1.",
+            "title": "Midterm"
+        },
+        {
+            "location": "/midterm/index.html#midterm",
+            "text": "",
+            "title": "Midterm"
+        },
+        {
+            "location": "/midterm/index.html#important-information",
+            "text": "Date: March 2, 2018  Time: 1000 - 1130  Venue: MPSH 2 Section C   Please arrive at least 5 minutes earlier and wait outside the hall.",
+            "title": "Important Information"
+        },
+        {
+            "location": "/midterm/index.html#scope",
+            "text": "Everything taught during Week 1 - Week 6  Lab 0 - Lab 1b",
+            "title": "Scope"
+        },
+        {
+            "location": "/midterm/index.html#open-book",
+            "text": "This is an open book midterm.  You can bring in books and notes.  They can be printed or hand written.  No digital materials (laptop, tablet, etc.).  Any Java API needed will be provided to you.",
+            "title": "Open Book"
+        },
+        {
+            "location": "/midterm/index.html#questions-and-solutions",
+            "text": "Here is  a copy of the question paper with annotated solutions  from AY2017/18 Semester 1.",
+            "title": "Questions and Solutions"
         },
         {
             "location": "/lab0/index.html",
