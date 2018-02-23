@@ -6,6 +6,7 @@ pages:
       - Policies: 'policies.md'
   - Schedule: 'schedule.md'
   - Readings: 'readings.md'
+  - Midterm: 'midterm.md'
   - Labs:
       - 0 Warm Up: 'lab0.md'
       - 1a v1.0: 'lab1a.md'
@@ -35,6 +36,7 @@ remote_branch: gh-pages
 use_directory_urls: false
 markdown_extensions:
   - admonition
+  - fontawesome_markdown
   - codehilite(linenums=true)
   - footnotes
   - pymdownx.arithmatex
@@ -57,3 +59,5 @@ extra_css:
   - 'stylesheets/extra.css'
   - 'https://fonts.googleapis.com/css?family=Gentium+Book+Basic'
   - 'https://fonts.googleapis.com/css?family=Roboto'
+  - 'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css'
+
