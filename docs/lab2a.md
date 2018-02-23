@@ -69,6 +69,10 @@ To create a jar, we first need to create a `manifest.txt` file to tell JAR what 
 Main-Class: cs2030.simulator.LabTwoA
 ```
 
+!!! tip "Common Error"
+    The whitespace after `:` is required.  Also, make sure that the line above
+	ends with a new line.  
+
 Now, to compile, create a jar file, and run, here is the typical workflow.  
 
 In `~/lab2a`, run:
@@ -158,6 +162,9 @@ In Lab 1, the service time is constant, which is not always realistic. We are go
 
 - Every time a customer is being served, we generate a "done" event and schedule it (just like we did it in Lab 1).
 - The "done" event generated will have a timestamp of $T$ + now, where $T$ is _no longer constant `SERVICE_TIME`_, but instead is generated with the method `genServiceTime` from the class `RandomGenerator`.
+
+!!! note "ADDITIONAL REQUIREMENT"
+	How long it takes to service a customer depends on the customer (what service is required or how many items is in the shopping cart).  Hence, in this lab, we would like the service time to be a property associated with the customer.  In other words, the service time should be a member of the `Customer` class and is initialized when the customer arrives.
 
 Note that _we should only have a single random number generator_ in the simulation. (hint: what access modifier should we use?)
 
