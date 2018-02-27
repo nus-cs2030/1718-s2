@@ -166,13 +166,16 @@ class A {
 Recall that when a method returns, all local variables of the methods are removed from the stack.  But, an instance of that local class might still exist.  Consider the following example:
 
 ```Java
+interface C {
+  void g();
+}
 class A {
   int x = 1;
 
-  Object f() {
+  C f() {
 	int y = 1;
 
-	class B {
+	class B implements C {
 	  void g() {
 		x = y; // accessing x and y is OK.
 	  }
@@ -185,9 +188,10 @@ class A {
 ```
 
 Calling 
-```
+```Java
 A a = new A();
-Object b = a.f();
+C b = a.f();
+b.g();
 ```
 
 will give us a reference to an object of type `B` now.  But, if we call `b.g()`, what is the value of `y`? 
