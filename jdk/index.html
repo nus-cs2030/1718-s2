@@ -543,6 +543,19 @@
     Installing JDK or Java SE 9
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-apt" title="Using apt" class="md-nav__link">
+    Using apt
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -654,6 +667,19 @@
     Installing JDK or Java SE 9
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-apt" title="Using apt" class="md-nav__link">
+    Using apt
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -711,6 +737,17 @@ Java 8 is the earliest version of Java that will work with this module, as many 
 To use <code class="codehilite">jshell</code>, however, you need Java 9.</p>
 <h2 id="installing-jdk-or-java-se-9">Installing JDK or Java SE 9</h2>
 <p>You can <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">download the latest version of Java SE 9</a> from Oracle and follow its <a href="https://docs.oracle.com/javase/9/install/overview-jdk-9-and-jre-9-installation.htm#JSJIG-GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A">installation instructions</a>.</p>
+<h3 id="using-apt">Using <code class="codehilite">apt</code></h3>
+<p>An alternative to the Oracle's instructions above, if you are using a Ubuntu-based system, is to use <code class="codehilite">apt</code>.  You can do the following:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java9-installer
+</pre></div>
+</td></tr></table>
+
+<p>The first line asks <code class="codehilite">apt</code> to add Java's PPA (personal package archive) repository to its database.  The second line updates the local <code class="codehilite">apt</code> database with the available <code class="codehilite">apt</code> packages.  Finally, the last line installs Java 9.</p>
 <h2 id="compiling">Compiling</h2>
 <p>Now that you've installed Java on your machine, here's an example of how you can compile and run some Java code.</p>
 <h3 id="java-source-files">Java source files</h3>

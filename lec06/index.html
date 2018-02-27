@@ -1051,13 +1051,19 @@ On the other hand, because of this, you should really have a nested class only i
 13
 14
 15
-16</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">A</span> <span class="o">{</span>
+16
+17
+18
+19</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">interface</span> <span class="nc">C</span> <span class="o">{</span>
+  <span class="kt">void</span> <span class="nf">g</span><span class="o">();</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">A</span> <span class="o">{</span>
   <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
 
-  <span class="n">Object</span> <span class="nf">f</span><span class="o">()</span> <span class="o">{</span>
+  <span class="n">C</span> <span class="nf">f</span><span class="o">()</span> <span class="o">{</span>
     <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
 
-    <span class="kd">class</span> <span class="nc">B</span> <span class="o">{</span>
+    <span class="kd">class</span> <span class="nc">B</span> <span class="kd">implements</span> <span class="n">C</span> <span class="o">{</span>
       <span class="kt">void</span> <span class="nf">g</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span> <span class="c1">// accessing x and y is OK.</span>
       <span class="o">}</span>
@@ -1072,8 +1078,10 @@ On the other hand, because of this, you should really have a nested class only i
 
 <p>Calling 
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>A a = new A();
-Object b = a.f();
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">A</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">A</span><span class="o">();</span>
+<span class="n">C</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">f</span><span class="o">();</span>
+<span class="n">b</span><span class="o">.</span><span class="na">g</span><span class="o">();</span>
 </pre></div>
 </td></tr></table></p>
 <p>will give us a reference to an object of type <code class="codehilite">B</code> now.  But, if we call <code class="codehilite">b.g()</code>, what is the value of <code class="codehilite">y</code>? </p>
