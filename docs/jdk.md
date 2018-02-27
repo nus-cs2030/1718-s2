@@ -19,6 +19,15 @@ To use `jshell`, however, you need Java 9.
 
 You can [download the latest version of Java SE 9](http://www.oracle.com/technetwork/java/javase/downloads/index.html) from Oracle and follow its [installation instructions](https://docs.oracle.com/javase/9/install/overview-jdk-9-and-jre-9-installation.htm#JSJIG-GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A).
 
+## Alternative method (on Linux/ Linux Subsystem)
+
+Use the following commands:
+```
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java9-installer
+```
+
 ## Compiling
 
 Now that you've installed Java on your machine, here's an example of how you can compile and run some Java code.
