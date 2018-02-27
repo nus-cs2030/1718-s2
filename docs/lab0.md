@@ -179,6 +179,6 @@ When you are ready to submit your lab, on `cs2030-i`, run the script
 ~cs2030/submit0
 ```
 
-which will copy your the three java files `MaxDiscCover.java`, `Point.java`, and `Circle.java` (and nothing else) from your `~/lab0` directory on `cs2030-i` to an internal grading directory.
+which will copy your java files (and nothing else) from your `~/lab0` directory on `cs2030-i` to an internal grading directory.
 
 You can submit multiple times, but only the most recent submission will be graded for the next lab onwards. This lab is a warm-up lab, which will not be graded. 
