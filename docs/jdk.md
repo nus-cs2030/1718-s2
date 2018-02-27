@@ -19,14 +19,17 @@ To use `jshell`, however, you need Java 9.
 
 You can [download the latest version of Java SE 9](http://www.oracle.com/technetwork/java/javase/downloads/index.html) from Oracle and follow its [installation instructions](https://docs.oracle.com/javase/9/install/overview-jdk-9-and-jre-9-installation.htm#JSJIG-GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A).
 
-## Alternative method (on Linux/ Linux Subsystem)
+### Using `apt` 
 
-Use the following commands:
+An alternative to the Oracle's instructions above, if you are using a Ubuntu-based system, is to use `apt`.  You can do the following:
+
 ```
 sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
 sudo apt-get install oracle-java9-installer
 ```
+
+The first line asks `apt` to add Java's PPA (personal package archive) repository to its database.  The second line updates the local `apt` database with the available `apt` packages.  Finally, the last line installs Java 9.
 
 ## Compiling
 
