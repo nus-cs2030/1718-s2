@@ -357,8 +357,9 @@ s.setSize(4, 8);
 The `Square` developer can try to override `setSize`, to ignore the second parameter:
 
 ```Java
-class Square {
+class Square extends Rectangle {
     :
+  @Override
   void setSize(int width, int height) {
     this.width = width;
     this.height = width;
