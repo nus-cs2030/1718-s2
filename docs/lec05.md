@@ -182,7 +182,7 @@ Generics, however, are _invariant_, with respect to the type parameter.  That is
 ```Java
 Queue<Circle> qc = new Queue<Shape>();  // error
 Queue<Shape> qs = new Queue<Circle>(); // error
-Queue<Shape> qs = (Queue<Circle>) new Queue<Circle>(); // error
+Queue<Shape> qs = (Queue<Shape>) new Queue<Circle>(); // error
 ```
 
 will lead to compile-time error.  Attempting to type cast just like when we do a narrowing reference conversion will fail as well.
