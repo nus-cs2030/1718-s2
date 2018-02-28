@@ -564,7 +564,7 @@ Further, if you want to check if a given object is contained in the list, then `
     ```Java
     interface I {
       void f();
-      default g() { 
+      default void g() { 
       }
     }
 
