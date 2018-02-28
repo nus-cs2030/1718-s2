@@ -1230,8 +1230,10 @@ What should the developer who develops <code class="codehilite">Square</code> do
 4
 5
 6
-7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">Square</span> <span class="o">{</span>
+7
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">Square</span> <span class="kd">extends</span> <span class="n">Rectangle</span> <span class="o">{</span>
     <span class="o">:</span>
+  <span class="nd">@Override</span>
   <span class="kt">void</span> <span class="nf">setSize</span><span class="o">(</span><span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">this</span><span class="o">.</span><span class="na">width</span> <span class="o">=</span> <span class="n">width</span><span class="o">;</span>
     <span class="k">this</span><span class="o">.</span><span class="na">height</span> <span class="o">=</span> <span class="n">width</span><span class="o">;</span>
