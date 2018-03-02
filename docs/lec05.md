@@ -182,7 +182,7 @@ Generics, however, are _invariant_, with respect to the type parameter.  That is
 ```Java
 Queue<Circle> qc = new Queue<Shape>();  // error
 Queue<Shape> qs = new Queue<Circle>(); // error
-Queue<Shape> qs = (Queue<Circle>) new Queue<Circle>(); // error
+Queue<Shape> qs = (Queue<Shape>) new Queue<Circle>(); // error
 ```
 
 will lead to compile-time error.  Attempting to type cast just like when we do a narrowing reference conversion will fail as well.
@@ -201,11 +201,12 @@ class Bar<?> {
     private ? x;
 }
 ```
+
 We only use `?` when specifying the type of a variable, field, or parameter.
 
-Wildcards can be bounded.  Java uses the keyword `extends` and `super` to specify the bound.  For instance, `Queue<Circle>` and `Queue<Shape>` are both subtypes of `Queue<? extends Shape>`, but `Queue<Object>` is not a subtype of `Queue<?>`.
+Wildcards can be bounded.  Java uses the keyword `extends` and `super` to specify the bound.  For instance, `Queue<Circle>` and `Queue<Shape>` are both subtypes of `Queue<? extends Shape>`, but `Queue<Object>` is not a subtype of <s>` Queue<?> `</s> `Queue<? extends Shape>`.
 
-To be more general, if `T` is a subtype of `S`, then `Queue<T>` is a subtype of `Queue<? extends S>`.  In other words, the use of `? extends` is covariant.  
+To be more general, if `T` is a subtype of `S`, then `Queue<T>` is a subtype of `Queue<? extends S>`.  In other words, the use of `? extends` is covariant.  Further, `Queue<? extends T>` is a subtype of `Queue<? extends S>`.
 
 The `super` keyword is used to specify the contravariant relationship.
 If `T` is a subtype of `S`, then `Queue<S>` is a subtype of `Queue<? super T>`.  
@@ -563,7 +564,7 @@ Further, if you want to check if a given object is contained in the list, then `
     ```Java
     interface I {
       void f();
-      default g() { 
+      default void g() { 
       }
     }
 
@@ -588,7 +589,7 @@ Further, if you want to check if a given object is contained in the list, then `
     - `List<? extends Object> list = new LinkedList<Object>();`
     - `List<? super Integer> list = new LinkedList<>();`
 
-3. Consider a generic class `A<T>` with a type parameter `T` and a constructor with no argument.  Which of the following statements are valid (i.e., no compilation error) ways of creating a new object of type A? We still consider the statement as valid if the Java compiler produces a warning.
+3. Consider a generic class `A<T>` with a type parameter `T` and a constructor with no argument.  Which of the following statements are valid (i.e., no compilation error) ways of creating a new object of type `A`? We still consider the statement as valid if the Java compiler produces a warning.
 
     - `new A<int>();`
     - `new A<>();`
@@ -616,16 +617,16 @@ Further, if you want to check if a given object is contained in the list, then `
 
     What do you expect it to return?  What did it return?
 
-    Look up on the Internet (e.g., StackOverflow) on why this happens.  
+    Look up on the Internet (e.g., StackOverflow) on why this happens.  (Hint: `Integer` caching)
 
     The moral of the story here is to always use `equals` to compare two reference variables.
 
 5.  Consider a method declared as `int foo(double x)` Which of the following statements will NOT result in a compilation error:
 
-    - int cs = foo(2030);
-    - double cs = foo(2.030);
-    - int cs = foo(new Double(2.030));
-    - Integer cs = foo(new Double(2.030));
+    - `int cs = foo(2030);`
+    - `double cs = foo(2.030);`
+    - `int cs = foo(new Double(2.030));`
+    - `Integer cs = foo(new Double(2.030));`
 
 
 6.  In this question, we will explore the behavior of `ArrayList` class and autoboxing/unboxing.  Will the following code compile?  If so, what will be printed?
