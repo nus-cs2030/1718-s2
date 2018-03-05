@@ -30,7 +30,8 @@ No new skeleton is given.  You are to build on top of your Lab 2a solution.
 - Copy the test data and trace output from `~cs2030/lab2b` to `~/lab2b`
 - Copy the new `RandomGenerator.java` from `~cs2030/lab2b` to `~/lab2b`
 - Copy your solution from `~/lab2a` to `~/lab2b`
-- Rename the class `LabTwoA` to `LabTwoB` and the file `LabTwoA.java` to `LabTwoB.java`. 
+- Rename the class `LabTwoA` to `LabTwoB` and the file `LabTwoA.java` to `LabTwoB.java`
+- Update your manifest file to point to the new main class
 
 There should be 12 test files (`TESTDATA1.txt` to `TESTDATA12.txt`) and trace files (`OUTPUT1.txt` to `OUTPUT12.txt`).  
 
