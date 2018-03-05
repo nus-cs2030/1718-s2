@@ -4,7 +4,9 @@
 
 # :fa-keyboard-o: Labs
 
-&nbsp;&nbsp; 2a. [**Simulator ver 1.2**](lab2a.md)
+&nbsp;&nbsp; 2b. [**Simulator ver 1.3**](lab2b.md)
+
+&nbsp;&nbsp; 2a. [Simulator ver 1.2](lab2a.md)
 
 &nbsp;&nbsp; 1b. [Simulator ver 1.1](lab1b.md)
 
