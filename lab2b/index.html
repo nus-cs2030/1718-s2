@@ -923,6 +923,10 @@
 </div>
 <p>If the customer requires a service time less then <span>\(T_{self}\)</span>, it will look for an idle self-checkout counter first.  Failing which it will look for an idle human server.  If the customer fails to find any idle server (self-checkout and human server), it will try to join a queue at the self-checkout counters.  The behavior of a customer joining a queue at the self-checkout counters is <em>exactly the same as if the self-checkout counters are human servers</em>.</p>
 <p>If all the queues at the self-checkout counters are full, or the customer requires a longer service (service time is no less than <span>\(T_{self}\)</span>, then the customer joins one of the queues of the (human) servers.  The same greedy / no-greedy behavior applies.</p>
+<div class="admonition note">
+<p class="admonition-title">Greedy Customer and Self-Checkouts</p>
+<p>A greedy customer who is eligible for self-checkout counters will prefer the shortest queue among the self-checkout counters over an even shorter queue for human servers.</p>
+</div>
 <div class="admonition tips">
 <p class="admonition-title">Abstraction Principle</p>
 <p>You should avoid duplicating your code for customer choosing self-checkout counters and human servers as much as possible.  One way is to treat the self-checkout counters and the human servers as in two different (virtual) shops.</p>
