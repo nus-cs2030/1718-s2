@@ -104,6 +104,9 @@ If the customer requires a service time less then $T_{self}$, it will look for a
 
 If all the queues at the self-checkout counters are full, or the customer requires a longer service (service time is no less than $T_{self}$, then the customer joins one of the queues of the (human) servers.  The same greedy / no-greedy behavior applies.
 
+!!! note "Greedy Customer and Self-Checkouts"
+    A greedy customer who is eligible for self-checkout counters will prefer the shortest queue among the self-checkout counters over an even shorter queue for human servers.
+
 !!! tips "Abstraction Principle"
     You should avoid duplicating your code for customer choosing self-checkout counters and human servers as much as possible.  One way is to treat the self-checkout counters and the human servers as in two different (virtual) shops.
 
