@@ -174,7 +174,7 @@ Test | Output | Customer Types | $Q_{max}$ | Server Types | Can Human Server Res
 1    | `0.706 4 1` | Typical | 1 | Human | No | |
 2    | `1.042 3 1` | Typical | > 1 | Human | No | |
 3	 | `0.679 4 0` | Greedy | > 1 | Human | No | |
-4    | `8.725 76666665 235` | Mixed | > 1 | Human | No | |
+4    | `8.725 765 235` | Mixed | > 1 | Human | No | |
 5    | `0.706 4 1` | Typical | 1 | Self-checkouts | No | Everyone uses self-checkouts | 
 6    | `0 2 3`     | Typical | 1 | Self-checkouts | No | |
 7    | `1.049 20 0` | Mixed | > 1 | Mixed | No | |
