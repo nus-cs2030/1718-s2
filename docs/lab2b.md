@@ -182,7 +182,7 @@ Test | Output | Customer Types | $Q_{max}$ | Server Types | Can Human Server Res
 9    | `1.391 4 1` | Typical | 1 | Human | Always | Based on Test 1 |
 10   | `1.930 20 0` | Mixed | > 1 | Mixed | Always | Based on Test 7 |
 11   | `6.275 792 208` | Mixed | > 1 | Mixed | Always | Based on Test 8 |
-12   | `5.608 842 157` | Mixed | > 1 | Mixed | Maybe | Based on Test 11 |
+12   | `5.608 843 157` | Mixed | > 1 | Mixed | Maybe | Based on Test 11 |
 
 [^1]: After piping through `tail` (e.g., `jar -cp . lab2b.jar < TESTDATA1.txt | tail -1`)
 
