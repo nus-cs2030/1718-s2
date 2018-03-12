@@ -1167,7 +1167,7 @@ Creating a new list out of an existing list is actually a common pattern.  We mi
 3
 4
 5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">applyList</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="k">new</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span> 
-  <span class="n">Integer</span> <span class="nf">apply</span><span class="o">(</span><span class="n">Integer</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">Integer</span> <span class="nf">apply</span><span class="o">(</span><span class="n">Integer</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">});</span>
