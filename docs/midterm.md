@@ -1,34 +1,30 @@
 # Midterm
 
-## Questions and Solutions
+### Statistics
 
-Here is [a copy of the question paper with annotated solutions](https://www.comp.nus.edu.sg/~cs2030/1718-s1/midterm-w-solution.pdf)
+- Average: 33.5
+- Std Dev: 8.14
+- Max: 48
 
-## Mark Distribution
+![Histogram](figures/midterm-histogram.png)
 
-![mark distribution](figures/midterm-histogram.png)
 
-## Midterm Info Sheet
+### [Midterm Question Paper](https://www.comp.nus.edu.sg/~cs2030/1718-s2/midterm-w-solution.pdf) (with solution, marking scheme, and comments)
 
 ### Important Information
-- Date: October 2, 2017
-- Time: 1000 - 1120
-- Venue: LT19
+- Date: <s>March 2</s> March 5, 2018 (Monday)
+- Time: 1000 - 1130
+- Venue: MPSH 2 Section C
 
-Please arrive at least 5 minutes earlier and wait outside LT19 besides the canteen.
+Please arrive at least 5 minutes earlier and wait outside the hall.
 
 ### Scope
 - Everything taught during Week 1 - Week 6
-- Lab 1 - Lab 3
+- Lab 0 - Lab 1b
 
 ### Open Book
 This is an open book midterm.  You can bring in books and notes.  They can be printed or hand written.  No digital materials (laptop, tablet, etc.).  Any Java API needed will be provided to you.
 
-### Office Hours
+## PYP
 
-Kenneth and I will be holding special office hours before the midterm:
-
-Who | Date | Time | Venue |
-----|------|------|-------|
-Wei Tsang | Sep 28 (Thu) | 2-5pm | AS6 #05-14 |
-Kenneth | Sep 29 (Fri) | 2-5pm | DR6 (COM2 #02-12) |
+Here is [a copy of the question paper with annotated solutions](https://www.comp.nus.edu.sg/~cs2030/1718-s1/midterm-w-solution.pdf) from AY2017/18 Semester 1.
