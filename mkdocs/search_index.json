@@ -197,7 +197,7 @@
         },
         {
             "location": "/midterm/index.html",
-            "text": "Midterm\n\n\nStatistics\n\n\n\n\nAverage: 33.5\n\n\nStd Dev: 8.14\n\n\nMax: 48\n\n\n\n\n\n\nMidterm Question Paper\n (with solution, marking scheme, and comments)\n\n\nImportant Information\n\n\n\n\nDate: \nMarch 2\n March 5, 2018 (Monday)\n\n\nTime: 1000 - 1130\n\n\nVenue: MPSH 2 Section C\n\n\n\n\nPlease arrive at least 5 minutes earlier and wait outside the hall.\n\n\nScope\n\n\n\n\nEverything taught during Week 1 - Week 6\n\n\nLab 0 - Lab 1b\n\n\n\n\nOpen Book\n\n\nThis is an open book midterm.  You can bring in books and notes.  They can be printed or hand written.  No digital materials (laptop, tablet, etc.).  Any Java API needed will be provided to you.\n\n\nPYP\n\n\nHere is \na copy of the question paper with annotated solutions\n from AY2017/18 Semester 1.",
+            "text": "Midterm\n\n\nStatistics\n\n\n\n\nAverage: 33.5\n\n\nStd Dev: 8.14\n\n\nMax: 48\n\n\n\n\n\n\nMidterm Question Paper\n (with solution, marking scheme, and comments)\n\n\nSlides from the Labs\n\n\nVideo from Lecture 7 on Q11\n\n\nImportant Information\n\n\n\n\nDate: March 5, 2018 (Monday)\n\n\nTime: 1000 - 1130\n\n\nVenue: MPSH 2 Section C\n\n\n\n\nPlease arrive at least 5 minutes earlier and wait outside the hall.\n\n\nScope\n\n\n\n\nEverything taught during Week 1 - Week 6\n\n\nLab 0 - Lab 1b\n\n\n\n\nOpen Book\n\n\nThis is an open book midterm.  You can bring in books and notes.  They can be printed or hand written.  No digital materials (laptop, tablet, etc.).  Any Java API needed will be provided to you.\n\n\nPast Year Paper\n\n\n\n\nAY2017/18 Semester 1",
             "title": "Midterm"
         },
         {
@@ -216,8 +216,18 @@
             "title": "Midterm Question Paper (with solution, marking scheme, and comments)"
         },
         {
+            "location": "/midterm/index.html#slides-from-the-labs",
+            "text": "",
+            "title": "Slides from the Labs"
+        },
+        {
+            "location": "/midterm/index.html#video-from-lecture-7-on-q11",
+            "text": "",
+            "title": "Video from Lecture 7 on Q11"
+        },
+        {
             "location": "/midterm/index.html#important-information",
-            "text": "Date:  March 2  March 5, 2018 (Monday)  Time: 1000 - 1130  Venue: MPSH 2 Section C   Please arrive at least 5 minutes earlier and wait outside the hall.",
+            "text": "Date: March 5, 2018 (Monday)  Time: 1000 - 1130  Venue: MPSH 2 Section C   Please arrive at least 5 minutes earlier and wait outside the hall.",
             "title": "Important Information"
         },
         {
@@ -231,9 +241,9 @@
             "title": "Open Book"
         },
         {
-            "location": "/midterm/index.html#pyp",
-            "text": "Here is  a copy of the question paper with annotated solutions  from AY2017/18 Semester 1.",
-            "title": "PYP"
+            "location": "/midterm/index.html#past-year-paper",
+            "text": "AY2017/18 Semester 1",
+            "title": "Past Year Paper"
         },
         {
             "location": "/lab0/index.html",
