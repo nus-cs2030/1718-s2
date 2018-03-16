@@ -211,6 +211,6 @@ When you are ready to submit your lab, on `cs2030-i`, run the script
 ~cs2030/submit2b
 ```
 
-which will copy all files matching `*.java` (and nothing else) from your `~/lab2a/cs2030/simulator` directory on `cs2030-i` to an internal grading directory.  We will test compile and test run with a tiny sample input to make sure that your submission is OK.  We will also check if your code generates javadoc with any warning (should have no warning) and follows the CS2030 Java style guide.
+which will copy all files matching `*.java` (and nothing else) from your `~/lab2b/cs2030/simulator` directory on `cs2030-i` to an internal grading directory.  We will test compile and test run with a tiny sample input to make sure that your submission is OK.  We will also check if your code generates javadoc with any warning (should have no warning) and follows the CS2030 Java style guide.
 
 You can submit multiple times, but only the most recent submission will be graded.
