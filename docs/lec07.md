@@ -566,7 +566,7 @@ We can then call `RandomGenerator.serviceTimeGenerator.get()` to get the next se
         return newList;
       }
 
-      public <U> U reduce(U identity, BiFunction<U, ? super T, U> accumulator) {
+      public <U> U reduce(U identity, BiFunction<? super U, ? super T, ? extends U> accumulator) {
         // TODO
       }
 
