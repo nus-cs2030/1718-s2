@@ -21,6 +21,7 @@ pages:
       - 5. Generics and Collections: 'lec05.md'
       - 6. hashCode, Nested Class, enum: 'lec06.md'
       - 7. Functions: 'lec07.md'
+      - 8. Streams: 'lec08.md'
   - Coding Style: 'style.md'
   - Software/Tools:
       - Java: 'jdk.md'

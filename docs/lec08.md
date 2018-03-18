@@ -4,264 +4,168 @@
 
 After this lecture, students should be familiar with:
 
-- how to write functions with multiple arguments using curried functions 
-- how to compose functions
 - general functional interface with single abstract method (SAM)
-- the concept of closure and its relation to lambda expression
+- the concept of closure and its relation to lambda expressions
 - the concept of eager evaluation vs. lazy evaluation
+- Java `Optional` class and its operations
 - the concept of function as delayed data and its application in defining an infinite list
 - Java `Stream` class and its operations
 - using the stream operations to write declarative-style code, avoiding loops and branches
 
 We continue where we left off in Lecture 7.
 
-## Lambdas (continued)
-
-### Composing Functions
-
-The `Function` interface has two default methods:
-```Java
-default <V> Function<T,V> andThen(Function<? super R,? extends V> after);
-default <V> Function<V,R> compose(Function<? super V,? extends T> before);
-```
-
-for composing two functions.  The term _compose_ here is used in the mathematical sense (i.e., the $\cdot$ operator in $f \cdot g$).
-
-These two methods, `andThen` and `compose`, return another function, and they are generic methods, as they have a type parameter `<V>`.  Suppose we want to write a function that returns the square root of the absolute value of an int, we can write:
-```Java
-double SquareRootAbs(int x) {
-  return Math.sqrt(Math.abs(x));
-}
-```
-
-or, we can write either
-```Java
-Function<Integer,Integer> abs = Math::abs;
-Function<Integer,Double> sqrt = Math::sqrt;
-abs.andThen(sqrt)
-```
-
-or 
-```Java
-sqrt.compose(abs)
-```
-
-But isn't writing the plain old method `SquareRootAbs()` clearer?  Why bother with `Function`?  The difference is that, `SquareRootAbs()` has to be written before we compile our code, and is fixed once we compile.  Using the `Function` interface, we can compose functions at _run time_, dynamically as needed!  Here is an example that you might be familiar with, from Lab 5:
-
-```Java
-Function<Customer, Queue> findQueueToSwitchTo;
-if (numOfQueue > 1) {
-  findQueueToSwitchTo = findShortestQueue.andThen(checkIfFewerInFront); 
-} else { // only one queue
-  findQueueToSwitchTo = Customer::getQueue;  // no need to do anything
-}
-```
-
-So instead of relying on the logic that the shortest queue is the same as the only queue and there is always the same number of customer in front if the customer is already is in the shortest queue, we just redefine the function that finds the queue to switch to to return the only queue.
-
-### Other Functions
-
-Java 8 package `java.util.function` provides other useful interfaces, including:
-
-- [`Predicate<T>`](https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html) with a `boolean test(T t)` method 
-- [`Supplier<T>`](https://docs.oracle.com/javase/8/docs/api/java/util/function/Supplier.html) with a `T get()` method
-- [`Consumer<T>`](https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html) with a `void accept(T t)` method
-- [`BiFunction<T,U,R>`](https://docs.oracle.com/javase/8/docs/api/java/util/function/BiFunction.html) with a `R apply(T t, U u)` method
-
-Other variations that involves primitive types are also provided.
-
-### Curried Functions
-
-Functions have an _arity_.  The `Function` interface is for unary functions that take in a single argument; the `BiFunction` inteface for binary functions, with two arguments.  But we can have functions that take more than two arguments.  We can, however, build functions that take in multiple arguments with only unary functions.   Let's look at this mathematically first.  Consider a binary function $f: (X, Y) \rightarrow Z$.  We can introduce $F$ as a set of all functions $f': Y \rightarrow Z$, and rewrite $f$ as $f: X \rightarrow F$, of $f: X \rightarrow Y \rightarrow Z$.
-
-A trivial example for this is the `add` method that adds two `int` values. 
-```Java
-int add(int x, int y) {
-  return x + y;
-}
-```
-
-This can be written as
-```Java
-Function<Integer, Function<Integer, Integer>> add = x -> y -> (x + y);
-```
-
-To calcualte 1 + 1, we call
-```Java
-add.apply(1).apply(1);
-```
-
-Let's break it down a litte, `add` is a function that takes in an `Integer` object and returns a unary `Function` over `Integer`.  So `add.apply(1)` returns the function `y -> 1 + y`.  We could assign this to a variable:
-```
-Function<Integer,Integer> incr = add.apply(1);
-```
-
-Here is the place where you need to change how you think: `add` is not a function that takes two arguments and return a value.  It is a _higher-order function_ that takes in a single argument, and return another function.
-
-The technique that translates a general $n$-ary function to a sequence of $n$ unary functions is called _currying_.  After currying, we have a sequence of _curried_ functions.  
-
-!!! note "Curry"
-    Currying is not related to food, but rather is named after computer scientist Haskell Curry, who popularized the technique.
-    
-Again, you might question why do we need this?  We can simply call `add(1, 1)`, instead of `add.apply(1).apply(1)`?  Well, the verbosity is the fault of Java instead of functional programming techniques.  Other languages like Haskell or Scala have much simpler syntax (e.g., `add 1 1` or `add(1)(1)`).  
-
-If you get past the verbosity, there is another reason why currying is cool.  Consider `add(1, 1)` -- we have to have both arguments available at the same time to compute the function.  With currying, we no longer have to.  We can evaluate the different arguments at different time (as `incr` example above).  This feature is useful in cases where some arguments are not available until later.  We can _partially apply_ a function first.  This is also useful if one of the arguments does not change often, or is expensive to compute.  We can save the partial results as a function and continue applying later.
-
-Again, using Lab 5 as example, you can have several functions defined:
-```Java
-Function<Double, Function<Double,Double>> generateExponetialVariable = 
-    rate -> randDouble -> -Math.log(randDouble)/rate;
-Function<Double,Double> generateServiceTime = 
-    generateExponentialVariable.apply(param.lambda);
-Function<Double,Double> generateInterArrivalTime = 
-    generateExponentialVariable.apply(param.mu);
-  :
-```
-
-Instead of keeping around the parameters, you could keep the functions to generate the random time as fields, and invoked them:
-```Java
-this.generateServiceTime.apply(rng.nextDouble());
-```
-
-### Functional Interface
-
-We are not limited to using lambda expression for the interfaces defined in `java.util.function`.  We can use lambda expression as a short hand to a class that implements a interface with a single abstract method -- there has to be only one abstract method so that the compiler knows which method the lambda implements.  This is more commonly known as SAM interface.  
-Note that a SAM interface can be mulitple methods, but only one can be abstract (others can have default implementation).
-
-For instance, Java has the following interface:
-```
-interface Runnable {
-  void run();
-}
-```
-
-There is only one method, and it is abstract (no default implementation).  So it is a valid SAM interface.
-
-We can annotate a class with `@FunctionalInterface` to hint our intention to the compiler and to let the compiler helps us to catch unintended error (such as when we add a second abstract method to the interface).
-
-We can define our own interface as well.  For instance, in Lab 5, we can define:
-```
-@FunctionalInterface
-interface FindQueueStrategy {
-  CustomerQueue findQueue(Shop shop);
-}
-
-@FunctionalInterface
-interface JoinQueueStrategy {
-  void joinQueue(CustomerQueue queue, Customer c);
-}
-```
-
-Now, we can avoid three `Customer` subclasses.  We just need to instantiate a new `Customer` with different strategies:
-
-We can set `FindQueueStrategy` to either `shop -> shop.getShortestQueue()` or `shop -> shop.getRandomQueue()` and set the JoinQueueStrategy to either `(q, customer) -> q.addToBack(customer)` or `(q, customer) -> q.addToFront(customer)`.
-
 ### Lambda as Closure
 
-Just like a local class an anonymous classes, a lambda can capture the variables of the enclosing scope.  For instance, if you do not wish to generate the service time of a customer at the time of arrival, you can pass in a `Supplier` to `Customer` instead:
+Just like a local class and an anonymous class, a lambda expression can capture the variables of the enclosing scope.  Recall that, a lambda expression is just a shorthand to an anonymous class after all.  
+
+For instance, if you do not wish to generate the service time of a customer at the time of arrival, you can pass in a `Supplier` to `Customer` instead:
 ```
-Customer c = new Customer(() -> -Math.log(rng.nextDouble())/rate);
-```
-
-Here, `rng` and `rate` are variables captured from the enclosing scope.
-
-And just like in local and anonymous classes, a captured variable must be either explicitly declared as `final` or is effectively final.
-
-A lambda expression therefore store more than just the function to invoke -- it also stores the data from the environment where it is defined.  We call such construct which store a function together with the enclosing environments a _closure_. 
-
-### Function as Delayed Data
-
-Consider a function that produces new value or values.  We can consider the function as a promise to give us the given data sometime later, when needed.  For instance:
-```
-() -> -Math.log(rng.nextDouble())/rate)
+Customer c = new Customer(() -> rng.GenServiceTime());
 ```
 
-is not the value of a service time, but rather, a supplier of the service time.  When we need a service time, we just invoke the supplier.
+Here, `rng` is a variable captured from the enclosing scope.
 
-What's the big deal?  Not so much in the simple example above.  But consider the case where the function is an expensive one.
-We can then delay the execution of the expensive function until it is absolutely needed.  This allows us to do things that we couldn't before, for instance, create and manipulate an infinite list!
+Just like in local and anonymous classes, a captured variable must be either explicitly declared as `final` or is effectively final.
+
+A lambda expression, therefore, stores more than just the function to invoke -- it also stores the data from the environment where it is defined.  We call such construct that stores a function together with the enclosing environment a _closure_. 
+
+## Function as Cross-Barrier State Manipulator
+
+We have seen that functional-style programming allow us to do a few things that we couldn't before with functions: (i) we can assign function to a variable, pass functions around, return it from another function; (ii) we can compose and create functions dynamically during runtime; (iii) we can partially evaluate a function.
+
+Let's take a look at two ways functional-style programming helps us write better programs.
+
+We have seen the `applyList` method last week, where we pass a `Function<T,R>` object to manipulate the items in the list.  This method, commonly known as `map`, saves us from writing loops and leads to shorter and less buggy code.  If we view the internal representation of the list of items as behind the abstraction barrier, then we are manipulating data behind the abstraction barrier without knowing the internals of the object -- something we could only do through the interfaces provided by the implementer earlier, before the introduction of functions.
+
+## `Optional`
+
+Another way passing in functions to manipulate internal data is helpful is the [`Optional<T>`](https://docs.oracle.com/javase/8/ docs/api/java/util/Optional.html) class.  `Optional<T>` is a wrapper around a reference to either a `T` object or a `null`.  Recall that we said bugs can occur if we write functions that return a value not in its codomain, and we gave `null` as an example.  Often, we write functions that return `null` to indicate a special situation (e.g., `server = shop.findIdleServer()` cannot find an idle server) but use the returned reference without checking for `null` (e.g., `server.serve(customer)`) leading to `NullPointerException` being raised, because `null` is not a Server object.
+
+Wrapping the returned reference with an `Optional` changes the codomain of the function written, as `null` is now explicitly in the codomain.
+
+```Java
+Optional<Server> server = shop.findIdleServer();
+```
+
+We now have a reference to an `Optional` object, which wraps around either a server or `null`.  We cannot call `server.serve(customer)` since the actual reference to the server is behind the abstraction barrier.  The `Optional` class provides a method `map` that takes in a `Function<T,R>` and returns an `Optional<R>` object.  So you can call:
+
+```
+server.map(Server::serve(customer))
+```
+
+If server wraps around `null`, then `map` returns another `Optional` wrapped around `null`.  Using `Optional` means that we no longer have to write branching statements:
+
+```
+   if (server == null) { 
+     :
+   } 
+```
+
+It gets better.  Suppose we want to do something else if a value is `null`, `Optional` provides the `orElse` method which takes in a consumer as an argument.  We can write something like this:
+
+```Java
+shop.findIdleServer()
+    .map(Server::serve(customer))
+    .orElseGet(shop.findShortestQueue())
+    .map(Server::serve(customer))
+    .orElse(customer.leave())
+```
+
+The branching logic still exists, but we do not explicitly compares with `null` anymore and this code will never raise a `NullPointerException`.
+
+### Initializing an `Optional`
+To wrap up the discussion, let's see how we can create an `Optional` object.  If you want to wrap a non-`null` value in an `Optional`, call `Optional.of(value)`.  Otherwise, if you want to wrap it in a `null`, call `Optional.empty()`.  
+
+Alternatively, if you do not want to check if the value is `null` or not, call `Optional.ofNullable(value)` which will return one of the above appropriately for you.
+
+!!! note "`Optional` In other languages"
+    Scala has `Option`; Haskell has `Maybe`. If you use Python, check out the `PyMonad` library that supplies a `Maybe` class.
+
+## Function as Delayed Data
+
+Consider a function that produces a new value or values.  We can consider the function as a promise to provide us the given data sometime later, when needed.  For instance:
+```
+() -> rng.genServiceTime()
+```
+
+is not the value of a service time, but rather, a supplier of the service time.  We invoke this supplier only when we need the service time.
+
+Consider the case where the function to generate data is an expensive one.  We can delay the execution of the expensive function until it is absolutely needed.  This is called _lazy evaluation_.  
 
 ### An Infinite List
 
-How can we represent an infinite list?  If we store the values of each element in the list, then we will run out of memory pretty soon.  If we try to manipulate every element in the list, then we will enter an infinite loop.  
+Lazy evaluation allows us to build data structures that we could not before.  For instance, we can create and manipulate a list that is infinitely long.
 
-The trick to building an infinite list, is to treat the elements in the list as _delayed data_, and store a function that generates the elements, instead of the elements itself.
+How can we represent and manipulate an infinitely long list?  If we store the values of each element in the list, then we will run out of memory pretty soon.  If we try to manipulate every element in the list, then we will enter an infinite loop.  
 
-We can think of an infinite list as two functions, the first is a function that generates the first element, and the second is a function that generates the rest of the list.
+The trick to building an infinite list, is to treat the elements in the list as _delayed data_, and store _a function that generates the elements_, instead of the elements themselves.
+
+We can think of an infinite list as consisting of two functions, the first is a function that generates the first element, and the second is a function that generates the rest of the list.
 
 ```Java
 class InfiniteList<T> {
-  private Supplier<T> head;
-  private Supplier<InfiniteList<T>> tail;
+  private Supplier<T> headSupplier;
+  private Supplier<InfiniteList<T>> tailSupplier;
 
-  public static InfiniteList<T> generate(Supplier<T> supply) {
-    return new InfiniteList(supply,
-	  () -> InfiniteList.generate(supply));
-  }
+    :
 }
 ```
 
-There you go!  We now have an infinite list defined by the supply function.  
+We can then construct an infinite list in different ways by passing in different suppliers.
 
-A list defined this way is lazily evaluated.  We won't get the elements until we need it -- this is in constrast to the eager `LambdaList` you write in Lab 6.
+Suppose we want every element in the list to be generated using the same supplier.  We can write a method that does as follows:
 
-Let's see how to use this list.  Consider the `findFirst` method:
+```Java
+  public static <T> InfiniteList<T> generate(Supplier<T> supply) {
+    this.headSupplier = supply;
+    this.tailSupplier = () -> InfiniteList.generate(supply);
+  }
+```
+
+Or we can construct an infinite list consisting of a sequence of elements, each computed from the previous element using a `next` function:
+
+```Java
+  public static <T> InfiniteList<T> iterate(T init, Function<T, T> next) {
+    this.headSupplier = () -> init;
+    this.tailSupplier = () -> InfiniteList.iterate(next.apply(init), next);
+  }
+```
+
+Here are some examples of how to use the two methods above:
+
+```Java
+InfiniteList<Integer> ones = InfiniteList.generate(() -> 1); // 1, 1, 1, 1, ....
+InfiniteList<Integer> even = InfiniteList.iterate(0, x -> x + 2); // 0, 2, 4, 6, ...
+```
+
+A list that is defined this way is lazily evaluated.  We will not call the supplier to generate the elements until we need it -- this is in contrast to the eagerly evaluate `LambdaList` from the exercise in Lecture 7.
+
+Let's see how we can manipulate this list.  Consider the `findFirst` method, which returns the first element in the list that satisfies the given predicate.
 
 ```Java
 public T findFirst(Predicate<T> predicate) {
-  T first = this.head.get();
-  if (predicate.test(first)) {
-    return first;
-  } 
-  InfiniteList<T> list = this.tail.get();
+  InfiniteList<T> list = this;
   while (true) {
-	T next = list.head.get();
-	if (predicate.test(next)) {
-	  return next;
-	}
-	list = list.tail.get();
+    T next = list.head.get();
+    if (predicate.test(next)) {
+      return next;
+    }
+    list = list.tail.get();
   }
 }
 ```
 
-!!! Note "Simpler code"
-    The code shown in the lecture above could be simplified to:
-	```Java
-	public T findFirst(Predicate<T> predicate) {
-	  InfiniteList<T> list = this;
-	  while (true) {
-		T next = list.head.get();
-		if (predicate.test(next)) {
-		  return next;
-		}
-		list = list.tail.get();
-	  }
-	}
-	```
-
-
 In the method above, we repeatedly invoke the supplier, until we find an element that matches the predicate.  This way, we never had to generate every element in the list just to find the first element that matches.
-
-!!! Note "iterate"
-    In class, I also showed the `iterate` method to generate a list:
-	```Java
-	  public static <T> InfiniteList<T> iterate(T init, Function<T, T> next) {
-		return new InfiniteList<T>(
-			() -> init, 
-			() -> InfiniteList.iterate(next.apply(init), next)
-		  );
-	  }
-	```
 
 ## Stream
 
-Such a list, possibly infinite, that is lazily evaluated on demand is also known as a _stream_.  Java 8 provides a set of useful and powerful methods on streams, allowing programmers to manipulate data very easily.  Java 9 adds a couple of useful methods, `takeWhile` and `dropWhile`, which is also invaluable.  To take full advantage of streams, we will be using Java 9, not Java 8 for the rest of this class.  
+Such a list, possibly infinite, that is lazily evaluated on demand is also known as a _stream_.  Java 8 provides a class `Stream` and a set of useful and powerful methods on streams, allowing programmers to manipulate data very easily.  Java 9 adds a couple of useful methods, `takeWhile` and `dropWhile`, which is also invaluable.  To take full advantage of streams, we will be using Java 9, not Java 8 for the rest of this class.  
 
-### Stream operations
+### Stream Operations
 
-A few things to note before I show you how to use streams.  First, the operations on streams can be classified as either _intermediate_ or _terminal_.  An _intermediate_ operation returns another stream.  For instance, `map`, `filter`, `peek` are examples of intermediate operations.  An intermediate operation does not cause the stream to be evaluated.  A terminal operation, on the other hand, force the streams to be evaluated.  It does not return a stream.  `reduce`, `findFirst`, `forEach` are examples of terminal operation.  A typical way of writing code that operate on streams is to chain a series of intermediate operation together, ending with a terminal operation.  
+A few things to note before I show you how to use streams.  First, the operations on streams can be classified as either _intermediate_ or _terminal_.  An _intermediate_ operation returns another stream.  For instance, `map`, `filter`, `peek` are examples of intermediate operations.  An intermediate operation does not cause the stream to be evaluated.  A terminal operation, on the other hand, forces the streams to be evaluated.  It does not return a stream.  `reduce`, `findFirst`, `forEach` are examples of terminal operation.  A typical way of writing code that operates on streams is to chain a series of intermediate operation together, ending with a terminal operation.  
 
-Second, a stream can only be consumed once.  We cannot iterate through a stream mulitple times.  We have to create the stream again if we want to do that:
+Second, a stream can only be consumed once.  We cannot iterate through a stream multiple times.  We have to create the stream again if we want to do that:
 
 ```Java
 Stream<Integer> s = Stream.of(1,2,3);
@@ -269,14 +173,14 @@ s.count();
 s.count(); // <- error
 ```
 
-In the example above, we use the `of` static method with variable number of arguments to create a stream.  We can also create a stream by:
+In the example above, we use the `of` static method with a variable number of arguments to create a stream.  We can also create a stream by:
 
 - converting an array to stream using `Arrays.stream` method
 - converting a collection to stream using `stream` method
 - reading from a file using `Files.lines` method
-- using the `generate` method (provide a `Supplier`) or `interate` method (providing the initial value and incremental operation). 
+- using the `generate` method (provide a `Supplier`) or `iterate` method (providing the initial value and incremental operation). 
 
-You have seen many of the stream operations before, in Lab 6, including `map`, `reduce`, `filter`, `findFirst`, `peek`, and `forEach`.  Even though they are in the context of an eagerly evaluated list, the semantics are the same.  Here are a few more useful ones.
+You have seen many of the stream operations before, in Question 5 of Exercise 7, including `map`, `reduce`, `filter`, and `forEach`.  Even though they are in the context of an eagerly evaluated list, the semantics are the same.  Here are a few more useful ones.
 
 - `flatMap` is just like `map`, but it takes in a function that produces another stream (instead of another element), and it `flattens` the stream by inserting the elements from the stream produced into the stream.
 
@@ -306,43 +210,45 @@ Stream.of("live", "long", "and", "prosper")
     .flatMap(x -> x.chars().boxed())
 ```
 
-- `sorted` is an intermediate operation that returns a stream with the elements in the stream sorted.  Without argument, it sorts according to the natural order.  You can also passed in a `Comparator` to tell `sorted` how to sort.
+- `sorted` is an intermediate operation that returns a stream with the elements in the stream sorted.  Without argument, it sorts according to the natural order.  You can also pass in a `Comparator` to tell `sorted` how to sort.
 
 - `distinct` is another intermediate operation that returns a stream with only distinct elements in the stream. 
 
-`distinct` and `sorted` are stateful operations -- it needs to keep track of states in order to perform the operation.  `sorted` in particular, need to know every elements in the stream before it can output the result.  They are also known as `bounded` operations, since call them on an infinite stream is a very bad idea!
+`distinct` and `sorted` are stateful operations -- it needs to keep track of states in order to perform the operation.  `sorted`, in particular, needs to know every element in the stream before it can output the result.  They are also known as `bounded` operations, since they should only be called on a finite stream -- calling them on an infinite stream is a very bad idea.
 
-Here is how we print out the unique characters of a given sequence of streams in sorted order
+Let's look at an example.  The code below shows how we can print out the unique characters of a given sequence of streams in sorted order
 ```Java
 Stream.of("live", "long", "and", "prosper")
     .flatMap(x -> x.chars().boxed())
-	.distinct()
-	.sorted()
-	.map(x -> new Character((char)x.intValue()))
-	.forEach(System.out::print);
+    .distinct()
+    .sorted()
+    .map(x -> new Character((char)x.intValue()))
+    .forEach(System.out::print);
 ```
 
 There are several intermediate operations that convert from infinite stream to finite stream.  
 
-- *`limit`* takes in an `int` $n$ and return a stream containing the first $n$ elements of the stream;
-- *`takeWhile`* takes in a predicate and return a stream containing the elements of the stream, until the predicate becomes false.  The resulting stream might still be infinite if the predicate never becomes false.
+- `limit` takes in an `int` $n$ and returns a stream containing the first $n$ elements of the stream;
+- `takeWhile` takes in a predicate and returns a stream containing the elements of the stream, until the predicate becomes false.  The resulting stream might still be infinite if the predicate never becomes false.
 
 Here are more useful terminal operations:
 
-- *`noneMatch`* return true if none of the elements pass the given predicate.
-- *`allMatch`* return true if every element passes the given predicate.
-- *`anyMatch`* return true if no elements passes the given predicate.
+- `noneMatch` returns true if none of the elements pass the given predicate.
+- `allMatch` returns true if every element passes the given predicate.
+- `anyMatch` returns true if no elements pass the given predicate.
 
-### Example 1: Is this a prime?
+To illustrate the use of the `Stream` class and its methods, let's look at an example.
+
+### Example: Is this a prime?
 
 Consider the method below, which checks if a given `int` is a prime:
 
 ```Java
 boolean isPrime(int x) {
   for (i = 2; i <= x-1; i++) {
-	if (x % i == 0) {
-	  return false;
-	}
+    if (x % i == 0) {
+      return false;
+    }
   }
   return true;
 }
@@ -356,9 +262,6 @@ boolean isPrime(int x) {
 }
 ```
 
-!!! Warning "Bug"
-    There is a bug in the earlier code where the code showed `IntStream.range(2,x-1)`.  `range(m,n)` returns a stream from `m` to `n-1`.
-
 `IntStream` is a special `Stream` for primitive type `int`, the `range` method generates a stream of `int` in a given range (inclusive)
 
 What if we want to print out the first 500 prime numbers, starting from 2?  Normally, we would do the following:
@@ -367,16 +270,16 @@ void fiveHundredPrime() {
   int count = 0;
   int i = 2;
   while (count < 500) {
-	if (isPrime(i)) {
-	  System.out.println(i);
-	  count++;
-	}
-	i++;
+    if (isPrime(i)) {
+      System.out.println(i);
+      count++;
+    }
+    i++;
   }
 }
 ```
 
-The code is still considered simple, and understandable for many, but I am sure some of us will encounter a bug the first time we write this (either forgot to increment counter, or put the increment in the wrong place).  If you look at the code, there are a couple of compnents:
+The code is still considered simple, and understandable for many, but I am sure some of us will encounter a bug the first time we write this (either forgot to increment the counter, or put the increment in the wrong place).  If you look at the code, there are a couple of components:
 
 - Lines 3 and 9 deal with iterating through different numbers for primality testing
 - Line 4 is the test
@@ -387,72 +290,116 @@ With streams, we can write it like the following:
 ```Java
 IntStream.iterate(2, x -> x+1)
     .filter(x -> isPrime(x))
-	  .limit(500)
-	  .forEach(System.out::println);
+    .limit(500)
+    .forEach(System.out::println);
 ```
 
 Notice how each of the four components matches neatly with one operation on stream!  
 
-With stream, we no longer have to write loops -- as you have done in Lab 6, we have move the iterations to within each operation in stream.  We no longer need to maintain states and counters, they are done within each operation as needed as well.  This has another powerful implication: our code become more _declarative_, we only need to concern about what we want at each step, much less about how to do it.
+With stream, we no longer have to write loops, we have moved the iterations to within each operation in stream.  We no longer need to maintain states and counters, they are done within each operation as needed as well.  This has another powerful implication: our code become more _declarative_, we only need to concern about what we want at each step, much less about how to do it.
 
+You should take a look at the methods provided by the `Stream` class, and read through the APIs, a few times, they formed the fundamental building blocks for writing functional-style data processing code in Java.
 
-You should take a look at the methods provided by the `Stream` class, and read through the APIs, a few times, they formed fundamental building blocks for writing data processing code in functional style in Java.
+## Exercise
+1.  Write your own `Optional` class with the following skeleton:
 
-### Example 2: Simulator's run
+    ```Java
+    class Optional<T> {
+      T value;
 
-Let's convert our code from our lab into stream.  Consider this:
-
-```Java
-  public void run(Simulation sim) {
-      schedule(sim.firstEvents());
-      while (!events.isEmpty()) {
-        Event e = this.events.poll();
-        if (e.happensBefore(sim.expireTime())) {
-          e.log();
-          Event[] newEvents = sim.handle(e);
-          if (newEvents != null) {
-            schedule(newEvents);
-          }
-        } else {
-          break;
-        }
+      public static <T> Optional<T> of(T v) {
+        :
       }
-      System.out.println(sim.stats);
-```
 
-Again, you can see that the main loop is doing several things at one time: (i) it checks if there is still events in the queue, in Line 3, (ii) it checks if we have reached the end of the simulation in Line 5 and Line 12, (iii) it logs the event for debugging in Line 6, (iv) it runs and generates new events in Line 7, then (v) adds to the events in Lines 8-9.
+      public static <T> Optional<T> ofNullable(T v) {
+        :
+      }
 
-Let's try to rewrite this using stream.  First, we need to change our event generation to return a stream of events.  Instead of:
+      public static <T> Optional<T> empty(T v) {
+        :
+      }
 
-```
-return new Event[] { event1, event2 };
-```
+      public void ifPresent(Consumer<? super T> consumer) {
+        :
+      }
 
-We can now say:
+      public Optional<T> filter(Predicate<? super T> predicate) {
+        :
+      }
 
-```
-return Stream.of(event1, event2);
-```
+      public <U> Optional<U> map(Function<? super T, ? extends U> mapper) {
+        :
+      }
 
-which is IMHO cleaner and more readable.  We also get to avoid `null` (which is never a bad thing) by returning `Stream.empty()` instead of `null` if we are not going to generate a new event.
+      public<U> Optional<U> flatMap(Function<? super T, Optional<U>> mapper) {
+        :
+      }
 
-The `schedule` method becomes:
-```Java
-  public void schedule(Stream<Event> stream) {
-    this.events.addAll(stream.collect(Collectors.toList()));
-  }
-```
+      public T orElseGet(Supplier<? extends T> other) {
+        :
+      }
+    }
+    ```
 
-We will still use `PriorityQueue` for events, and so `addAll` expects a collection.  The `collect` method simply converts a stream to a collection.
+2.  Solve each of the following with Java 9 `Stream`.
 
-With the above changes, we can now rewrite the while loop in `run` using stream:
-```Java
-    Stream.generate(this.events::poll)
-        .takeWhile(event -> event != null)
-        .filter(event -> event.happensBefore(sim.expireTime())) 
-        .peek(event -> event.log())
-        .map(event -> sim.handle(event))
-        .forEach(eventStream -> this.schedule(eventStream));
-```
+    - Write a method `factors` with signature `LongStream factors(long x)` that takes in `long x` and return a `LongStream` consisting of the factors of `x`.  For instance, factors(6) should return the stream 1, 2, 3, 6.
+    
+    - Write a method `primeFactors` with signature `LongStream primeFactors(long x)` that takes in `long x` and return a `LongStream` consisting of the prime factors of `x` (a prime factor is a factor that is a prime number, excluding 1).  For instance, prime factors of 6 are 2 and 3.
 
-Once you get used to writing code with streams, it might be hard to go back to writing loops and branches again!
+    - Write a method `omega` with signature `LongStream omega(int n)` that takes in an `int n` and return a `LongStream` containing the first $n$ [omega numbers](https://oeis.org/A001221).  The $i$-th omega number is the number of distinct prime factors for the number $i$.  The first 10 omega numbers are 0, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1.
+
+3.  Write a method `product` that takes in two `List` objects `list1` and `list2`, and produce a `Stream` containing elements combining each element from `list1` with every element from `list2` using a given `BiFunction`.  This operation is similar to a Cartesian product.
+
+    For instance,
+
+    ```Java
+    ArrayList<Integer> list1 = new ArrayList<>();
+    ArrayList<Integer> list2 = new ArrayList<>();
+    Collections.addAll(list1, 1, 2, 3, 4);
+    Collections.addAll(list2, 10, 20);
+    product(list1, list2, (str1, str2) -> str1 + str2)
+        .forEach(System.out::println);
+    ```
+
+    gives the output:
+    ```
+    11
+    21
+    12
+    22
+    13
+    23
+    14
+    24
+    ```
+
+    The signature for `product` is
+    ```Java
+      public static <T,U,R> Stream<R> product(List<T> list1, List<U> list2, 
+          BiFunction<? super T, ? super U, R> f)
+    ```
+
+4.  Write a method that returns the first $n$ Fibonacci numbers as a `Stream<BigInteger>`.  For instance, the first 10 Fibonacci numbers are 1, 1, 2, 3, 5, 8, 13, 21, 34, 55.  It would be useful to write a new `Pair<T, U>` class that keeps two items around in the stream.  We use the `BigInteger` class to avoid overflow.
+
+5.  The interface `SummaryStrategy` has a single abstract method `summarize`, allowing any implementing class to define its own strategy of summarizing a long `String` to within the length of a given `lengthLimit`.  The declaration of the interface is as follows: 
+
+    ```Java
+    @FunctionalInterface
+    interface SummaryStrategy {
+      String summarize(String text, int lengthLimit);
+    }
+    ```
+
+    There is another method `createSnippet` that takes in a `SummaryStrategy` object as an argument.  
+
+    ```Java
+    void createSnippet(SummaryStrategy strategy) { 
+        :
+    }
+    ```
+
+    Suppose that there is a class `TextShortener` with a static method `String shorten(String s, int n)` that shortens the String `s` to within the length of `n`.  This method can serve as a summary strategy, and you want to use `shorten` as a `SummaryStrategy` in the method `createSnippet`.  
+
+    Show how you would call `createSnippet` with the static method `shorten` from the class `TextShortener` as the strategy.
+
