@@ -965,14 +965,24 @@
 <p>How can we represent and manipulate an infinitely long list?  If we store the values of each element in the list, then we will run out of memory pretty soon.  If we try to manipulate every element in the list, then we will enter an infinite loop.  </p>
 <p>The trick to building an infinite list, is to treat the elements in the list as <em>delayed data</em>, and store <em>a function that generates the elements</em>, instead of the elements themselves.</p>
 <p>We can think of an infinite list as consisting of two functions, the first is a function that generates the first element, and the second is a function that generates the rest of the list.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">InfiniteList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">class</span> <span class="nc">InfiniteList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
   <span class="kd">private</span> <span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">headSupplier</span><span class="o">;</span>
   <span class="kd">private</span> <span class="n">Supplier</span><span class="o">&lt;</span><span class="n">InfiniteList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">tailSupplier</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">InfiniteList</span><span class="o">(</span><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">headSupplier</span><span class="o">,</span> <span class="n">Supplier</span><span class="o">&lt;</span><span class="n">InfiniteList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">tailSupplier</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">headSupplier</span> <span class="o">=</span> <span class="n">headSupplier</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">tailSupplier</span> <span class="o">=</span> <span class="n">tailSupplier</span><span class="o">;</span>
+  <span class="o">}</span>
 
     <span class="o">:</span>
 <span class="o">}</span>
@@ -985,8 +995,8 @@
 2
 3
 4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">InfiniteList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">generate</span><span class="o">(</span><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">supply</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">headSupplier</span> <span class="o">=</span> <span class="n">supply</span><span class="o">;</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">tailSupplier</span> <span class="o">=</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">InfiniteList</span><span class="o">.</span><span class="na">generate</span><span class="o">(</span><span class="n">supply</span><span class="o">);</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">InfiniteList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;(</span><span class="n">supply</span><span class="o">,</span>
+        <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">InfiniteList</span><span class="o">.</span><span class="na">generate</span><span class="o">(</span><span class="n">supply</span><span class="o">));</span>
   <span class="o">}</span>
 </pre></div>
 </td></tr></table>
@@ -996,8 +1006,8 @@
 2
 3
 4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">InfiniteList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">iterate</span><span class="o">(</span><span class="n">T</span> <span class="n">init</span><span class="o">,</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">headSupplier</span> <span class="o">=</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">init</span><span class="o">;</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">tailSupplier</span> <span class="o">=</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">InfiniteList</span><span class="o">.</span><span class="na">iterate</span><span class="o">(</span><span class="n">next</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">init</span><span class="o">),</span> <span class="n">next</span><span class="o">);</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">InfiniteList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;(()</span> <span class="o">-&gt;</span> <span class="n">init</span><span class="o">,</span>
+      <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">InfiniteList</span><span class="o">.</span><span class="na">iterate</span><span class="o">(</span><span class="n">next</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">init</span><span class="o">),</span> <span class="n">next</span><span class="o">));</span>
   <span class="o">}</span>
 </pre></div>
 </td></tr></table>
@@ -1023,11 +1033,11 @@
 10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="n">T</span> <span class="nf">findFirst</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">predicate</span><span class="o">)</span> <span class="o">{</span>
   <span class="n">InfiniteList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">this</span><span class="o">;</span>
   <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">T</span> <span class="n">next</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">head</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+    <span class="n">T</span> <span class="n">next</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">headSupplier</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">predicate</span><span class="o">.</span><span class="na">test</span><span class="o">(</span><span class="n">next</span><span class="o">))</span> <span class="o">{</span>
       <span class="k">return</span> <span class="n">next</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="n">list</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">tail</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+    <span class="n">list</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">tailSupplier</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
@@ -1101,7 +1111,7 @@
     <span class="o">.</span><span class="na">flatMap</span><span class="o">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">.</span><span class="na">chars</span><span class="o">().</span><span class="na">boxed</span><span class="o">())</span>
     <span class="o">.</span><span class="na">distinct</span><span class="o">()</span>
     <span class="o">.</span><span class="na">sorted</span><span class="o">()</span>
-    <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">Character</span><span class="o">((</span><span class="kt">char</span><span class="o">)</span><span class="n">x</span><span class="o">.</span><span class="na">intValue</span><span class="o">()))</span>
+    <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">Character</span><span class="o">::</span><span class="n">toChars</span><span class="o">)</span>
     <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">print</span><span class="o">);</span>
 </pre></div>
 </td></tr></table></p>
@@ -1143,7 +1153,7 @@
 3
 4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">boolean</span> <span class="nf">isPrime</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
   <span class="k">return</span> <span class="n">IntStream</span><span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="o">)</span>
-      <span class="o">.</span><span class="na">matchNone</span><span class="o">(</span><span class="n">x</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="o">);</span>
+      <span class="o">.</span><span class="na">noneMatch</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="o">);</span>
 <span class="o">}</span>
 </pre></div>
 </td></tr></table></p>
