@@ -554,7 +554,7 @@ We can then call `RandomGenerator.serviceTimeGenerator.get()` to get the next se
         }
       }  
 
-      public static <T> LambdaList<T> generate(int count, Supplier<T> s) {
+      public static <T> LambdaList<T> generate(int count, Supplier<? extends T> s) {
         // TODO
       }
       
