@@ -184,7 +184,7 @@ What is updated in the server?  How about the customer?  Is the variable `numOfS
 
 If we design and write our program with pure functions as much as possible, we could significantly reduce the number of bugs.
 
-Michael Feathers tweeted that "(OO makes code understandable by encapsulating moving parts.  FP makes code understandable by minimizing moving parts.)"[https://twitter.com/mfeathers/status/29581296216?lang=en]  The moving parts here refers to changing states.  He succintly highlights one of the major differences between OOP and FP.
+Michael Feathers tweeted that "(OO makes code understandable by encapsulating moving parts.  FP makes code understandable by minimizing moving parts.)[https://twitter.com/mfeathers/status/29581296216?lang=en]"  The moving parts here refers to changing states.  He succintly highlights one of the major differences between OOP and FP.
 
 In mathematics, we say that a mapping is a _partial function_ if not all elements in the domain are mapped.   A common programming error is to treat a partial function like a function -- for instance, the `div` method above is written as if it is defined for all int values, but it is not defined when `j` is 0.  Another common error is that a function may produce a value that is not in the codomain, e.g., `null`.  
 
@@ -257,7 +257,7 @@ to return a list of squares.
 If we do not want to create a new class just for this, we can, as before, use an anonymous class:
 ```Java
 applyList(list, new Function<Integer,Integer>() { 
-  Integer apply(Integer x) {
+  public Integer apply(Integer x) {
     return x * x;
   }
 });
@@ -351,7 +351,7 @@ which is a method in the interface `Function<T,R>`.  The method declaration woul
 default <V> Function<T,V> andThen(Function<R, V> after);
 ```
 
-Here, composing a function $T :\rightarrow R$ followed by $R :\righarrow V$ gives us a function $T \rightarrow V$.  The issue with this `andThen` declaration, is that it is not very general.  The argument `after` must be exactly a function with argument type $R$ and return type $V$.  
+Here, composing a function $T :\rightarrow R$ followed by $R :\rightarrow V$ gives us a function $T \rightarrow V$.  The issue with this `andThen` declaration, is that it is not very general.  The argument `after` must be exactly a function with argument type $R$ and return type $V$.  
 
 We can make the method more general, but allowing it to take a function with `R` or any superclass of `R` as input -- surely if the function can take in a superclass of `R`, it can take in `R`.   Thus, we can relax input type, or what the function _consumes_, from `R` to `? super R`.
 
@@ -544,42 +544,58 @@ We can then call `RandomGenerator.serviceTimeGenerator.get()` to get the next se
     The skeleton code is given:
 
     ```Java
-    class LambdaList<T> {
-      List<T> list;
+	import java.util.ArrayList;
+	import java.util.List;
+	import java.util.function.BiFunction;
+	import java.util.function.Consumer;
+	import java.util.function.Function;
+	import java.util.function.Predicate;
+	import java.util.function.Supplier;
 
-      public static <T> LambdaList<T> of(T... varargs) {
-        list = new ArrayList<>();
-        for (T e : varargs) {
-          list.add(e);
-        }
-      }  
+	class LambdaList<T> {
+	  List<T> list;
 
-      public static <T> LambdaList<T> generate(int count, Supplier<T> s) {
-        // TODO
-      }
-      
-      public <V> LambdaList<V> map(Function<? super T, ? extends V> f) {
-        List<V> newList = new ArrayList<V>();
-        for (T i: list) {
-          newList.add(f.apply(i));
-        }
-        return newList;
-      }
+	  public static <T> LambdaList<T> of(T... varargs) {
+		List<T> list = new ArrayList<>();
+		for (T e : varargs) {
+		  list.add(e);
+		}
+		return new LambdaList<T>(list);
+	  }  
 
-      public <U> U reduce(U identity, BiFunction<U, ? super T, U> accumulator) {
-        // TODO
-      }
+	  private LambdaList(List<T> list) {
+		this.list = list;
+	  }
 
-      public LambdaList<T> filter(Predicate<? super T> predicate) {
-        // TODO
-      }
+	  public static <T> LambdaList<T> generate(int count, Supplier<T> s) {
+		// TODO
+		return null;
+	  }
 
-      public void forEach(Consumer<? super T> action) {
-        // TODO
-      }
+	  public <V> LambdaList<V> map(Function<? super T, ? extends V> f) {
+		List<V> newList = new ArrayList<V>();
+		for (T i: list) {
+		  newList.add(f.apply(i));
+		}
+		return new LambdaList<V>(newList);
+	  }
 
-      public String toString() {
-        return list.toString();
-      }
-    }
+	  public <U> U reduce(U identity, BiFunction<U, ? super T, U> accumulator) {
+		// TODO
+		return null;
+	  }
+
+	  public LambdaList<T> filter(Predicate<? super T> predicate) {
+		// TODO
+		return null;
+	  }
+
+	  public void forEach(Consumer<? super T> action) {
+		// TODO
+	  }
+
+	  public String toString() {
+		return list.toString();
+	  }
+	}
     ```
