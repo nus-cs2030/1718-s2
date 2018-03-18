@@ -4,7 +4,9 @@
 
 # :fa-keyboard-o: Labs
 
-&nbsp;&nbsp; 2a. [**Simulator ver 1.2**](lab2a.md)
+&nbsp;&nbsp; 2b. [**Simulator ver 1.3**](lab2b.md)
+
+&nbsp;&nbsp; 2a. [Simulator ver 1.2](lab2a.md)
 
 &nbsp;&nbsp; 1b. [Simulator ver 1.1](lab1b.md)
 
@@ -14,6 +16,8 @@
 
 <br>
 # :fa-commenting: Lectures
+&nbsp;&nbsp;7. [Functions](lec07.md) 
+
 &nbsp;&nbsp;6. [Hash Code, Nested Class, Enum](lec06.md) &nbsp;&nbsp;[:fa-file-powerpoint-o:](https://www.comp.nus.edu.sg/~cs2030/1718-s2/cs2030-lec06.pdf) [:fa-file-video-o:](https://vimeo.com/257099007)
 
 &nbsp;&nbsp;5. [Generics and Collections](lec05.md) &nbsp;&nbsp;[:fa-file-powerpoint-o:](https://www.comp.nus.edu.sg/~cs2030/1718-s2/cs2030-lec05.pdf) [:fa-file-video-o:](https://vimeo.com/255840375)
