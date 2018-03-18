@@ -4,7 +4,6 @@
 
 After this lecture, students should be familiar with:
 
-- general functional interface with single abstract method (SAM)
 - the concept of closure and its relation to lambda expressions
 - the concept of eager evaluation vs. lazy evaluation
 - Java `Optional` class and its operations
@@ -47,31 +46,51 @@ Wrapping the returned reference with an `Optional` changes the codomain of the f
 Optional<Server> server = shop.findIdleServer();
 ```
 
-We now have a reference to an `Optional` object, which wraps around either a server or `null`.  We cannot call `server.serve(customer)` since the actual reference to the server is behind the abstraction barrier.  The `Optional` class provides a method `map` that takes in a `Function<T,R>` and returns an `Optional<R>` object.  So you can call:
+We now have a reference to an `Optional` object, which wraps around either a server or `null`.  We cannot call `server.serve(customer)` since the actual reference to the server is behind the abstraction barrier.  The `Optional` class provides a method `ifPresent` that takes in a `Consumer`.  So you can call:
 
-```
-server.map(Server::serve(customer))
+```Java
+server.ifPresent(s -> s.serve(customer))
 ```
 
-If server wraps around `null`, then `map` returns another `Optional` wrapped around `null`.  Using `Optional` means that we no longer have to write branching statements:
-
+If server wraps around `null`, then `ifPresent` do nothing.  Using `Optional` means that we no longer have to write branching statements:
+```Java
+   server = shop.findIdleServer();
+   if (server != null) { 
+	 server.serve(customer);
+   }
 ```
+
+It can makes code with multiple-level of branching clearer.  Without `Optional`,
+
+```Java
+   server = shop.findIdleServer();
    if (server == null) { 
-     :
-   } 
+	 server = shop.findShortestQueue();
+	 if (server == null) {
+		customer.leave();
+	 } else {
+		server.serve(customer);
+	 }
+   }
 ```
 
-It gets better.  Suppose we want to do something else if a value is `null`, `Optional` provides the `orElse` method which takes in a consumer as an argument.  We can write something like this:
+Using `Optional`, we write
 
 ```Java
 shop.findIdleServer()
-    .map(Server::serve(customer))
-    .orElseGet(shop.findShortestQueue())
-    .map(Server::serve(customer))
-    .orElse(customer.leave())
+    .or(shop::findShortestQueue)
+    .ifPresentOrElse(
+        s -> s.serve(customer),
+        customer::leave);
 ```
 
-The branching logic still exists, but we do not explicitly compares with `null` anymore and this code will never raise a `NullPointerException`.
+!!! notes "Java 8 vs. 9"
+    `or` and `ifPresentOrElse` are available in Java 9 only.
+
+The branching logic still exists, but is internalized, just like we have internalized loops with `applyList` method.  Furthermore, we do not explicitly compares with `null` anymore and this code will never raise a `NullPointerException`.
+
+!!! warning "Updated Notes"
+    This whole section is more or less rewritten since published.  If you print your notes, please make sure that you have the latest version.
 
 ### Initializing an `Optional`
 To wrap up the discussion, let's see how we can create an `Optional` object.  If you want to wrap a non-`null` value in an `Optional`, call `Optional.of(value)`.  Otherwise, if you want to wrap it in a `null`, call `Optional.empty()`.  
@@ -107,6 +126,11 @@ class InfiniteList<T> {
   private Supplier<T> headSupplier;
   private Supplier<InfiniteList<T>> tailSupplier;
 
+  public InfiniteList(Supplier<T> headSupplier, Supplier<InfiniteList<T>> tailSupplier) {
+    this.headSupplier = headSupplier;
+    this.tailSupplier = tailSupplier;
+  }
+
     :
 }
 ```
@@ -117,8 +141,8 @@ Suppose we want every element in the list to be generated using the same supplie
 
 ```Java
   public static <T> InfiniteList<T> generate(Supplier<T> supply) {
-    this.headSupplier = supply;
-    this.tailSupplier = () -> InfiniteList.generate(supply);
+    return new InfiniteList<T>(supply,
+        () -> InfiniteList.generate(supply));
   }
 ```
 
@@ -126,8 +150,8 @@ Or we can construct an infinite list consisting of a sequence of elements, each 
 
 ```Java
   public static <T> InfiniteList<T> iterate(T init, Function<T, T> next) {
-    this.headSupplier = () -> init;
-    this.tailSupplier = () -> InfiniteList.iterate(next.apply(init), next);
+    return new InfiniteList<T>(() -> init,
+      () -> InfiniteList.iterate(next.apply(init), next));
   }
 ```
 
@@ -146,11 +170,11 @@ Let's see how we can manipulate this list.  Consider the `findFirst` method, whi
 public T findFirst(Predicate<T> predicate) {
   InfiniteList<T> list = this;
   while (true) {
-    T next = list.head.get();
+    T next = list.headSupplier.get();
     if (predicate.test(next)) {
       return next;
     }
-    list = list.tail.get();
+    list = list.tailSupplier.get();
   }
 }
 ```
@@ -222,7 +246,7 @@ Stream.of("live", "long", "and", "prosper")
     .flatMap(x -> x.chars().boxed())
     .distinct()
     .sorted()
-    .map(x -> new Character((char)x.intValue()))
+	.map(Character::toChars)
     .forEach(System.out::print);
 ```
 
@@ -258,7 +282,7 @@ The code coudln't be simpler -- or can it?  With streams, we can write it as:
 ```Java
 boolean isPrime(int x) {
   return IntStream.range(2, x-1)
-      .matchNone(x % i == 0);
+      .noneMatch(i -> x % i == 0);
 }
 ```
 
@@ -381,25 +405,3 @@ You should take a look at the methods provided by the `Stream` class, and read t
     ```
 
 4.  Write a method that returns the first $n$ Fibonacci numbers as a `Stream<BigInteger>`.  For instance, the first 10 Fibonacci numbers are 1, 1, 2, 3, 5, 8, 13, 21, 34, 55.  It would be useful to write a new `Pair<T, U>` class that keeps two items around in the stream.  We use the `BigInteger` class to avoid overflow.
-
-5.  The interface `SummaryStrategy` has a single abstract method `summarize`, allowing any implementing class to define its own strategy of summarizing a long `String` to within the length of a given `lengthLimit`.  The declaration of the interface is as follows: 
-
-    ```Java
-    @FunctionalInterface
-    interface SummaryStrategy {
-      String summarize(String text, int lengthLimit);
-    }
-    ```
-
-    There is another method `createSnippet` that takes in a `SummaryStrategy` object as an argument.  
-
-    ```Java
-    void createSnippet(SummaryStrategy strategy) { 
-        :
-    }
-    ```
-
-    Suppose that there is a class `TextShortener` with a static method `String shorten(String s, int n)` that shortens the String `s` to within the length of `n`.  This method can serve as a summary strategy, and you want to use `shorten` as a `SummaryStrategy` in the method `createSnippet`.  
-
-    Show how you would call `createSnippet` with the static method `shorten` from the class `TextShortener` as the strategy.
-
