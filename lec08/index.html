@@ -888,32 +888,64 @@
 </pre></div>
 </td></tr></table>
 
-<p>We now have a reference to an <code class="codehilite">Optional</code> object, which wraps around either a server or <code class="codehilite">null</code>.  We cannot call <code class="codehilite">server.serve(customer)</code> since the actual reference to the server is behind the abstraction barrier.  The <code class="codehilite">Optional</code> class provides a method <code class="codehilite">map</code> that takes in a <code class="codehilite">Function&lt;T,R&gt;</code> and returns an <code class="codehilite">Optional&lt;R&gt;</code> object.  So you can call:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>server.map(Server::serve(customer))
+<p>We now have a reference to an <code class="codehilite">Optional</code> object, which wraps around either a server or <code class="codehilite">null</code>.  We cannot call <code class="codehilite">server.serve(customer)</code> since the actual reference to the server is behind the abstraction barrier.  The <code class="codehilite">Optional</code> class provides a method <code class="codehilite">ifPresent</code> that takes in a <code class="codehilite">Consumer</code>.  So you can call:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">server</span><span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">serve</span><span class="o">(</span><span class="n">customer</span><span class="o">))</span>
 </pre></div>
 </td></tr></table>
 
-<p>If server wraps around <code class="codehilite">null</code>, then <code class="codehilite">map</code> returns another <code class="codehilite">Optional</code> wrapped around <code class="codehilite">null</code>.  Using <code class="codehilite">Optional</code> means that we no longer have to write branching statements:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>   if (server == null) { 
-     :
-   } 
-</pre></div>
-</td></tr></table>
-
-<p>It gets better.  Suppose we want to do something else if a value is <code class="codehilite">null</code>, <code class="codehilite">Optional</code> provides the <code class="codehilite">orElse</code> method which takes in a consumer as an argument.  We can write something like this:</p>
+<p>If server wraps around <code class="codehilite">null</code>, then <code class="codehilite">ifPresent</code> do nothing.  Using <code class="codehilite">Optional</code> means that we no longer have to write branching statements:
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">shop</span><span class="o">.</span><span class="na">findIdleServer</span><span class="o">()</span>
-    <span class="o">.</span><span class="na">orElseGet</span><span class="o">(</span><span class="n">shop</span><span class="o">.</span><span class="na">findShortestQueue</span><span class="o">())</span>
-    <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">Server</span><span class="o">::</span><span class="n">serve</span><span class="o">(</span><span class="n">customer</span><span class="o">))</span>
-    <span class="o">.</span><span class="na">orElse</span><span class="o">(</span><span class="n">customer</span><span class="o">.</span><span class="na">leave</span><span class="o">())</span>
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>   <span class="n">server</span> <span class="o">=</span> <span class="n">shop</span><span class="o">.</span><span class="na">findIdleServer</span><span class="o">();</span>
+   <span class="k">if</span> <span class="o">(</span><span class="n">server</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span> 
+     <span class="n">server</span><span class="o">.</span><span class="na">serve</span><span class="o">(</span><span class="n">customer</span><span class="o">);</span>
+   <span class="o">}</span>
+</pre></div>
+</td></tr></table></p>
+<p>It can makes code with multiple-level of branching clearer.  Without <code class="codehilite">Optional</code>,</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>   <span class="n">server</span> <span class="o">=</span> <span class="n">shop</span><span class="o">.</span><span class="na">findIdleServer</span><span class="o">();</span>
+   <span class="k">if</span> <span class="o">(</span><span class="n">server</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span> 
+     <span class="n">server</span> <span class="o">=</span> <span class="n">shop</span><span class="o">.</span><span class="na">findShortestQueue</span><span class="o">();</span>
+     <span class="k">if</span> <span class="o">(</span><span class="n">server</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">customer</span><span class="o">.</span><span class="na">leave</span><span class="o">();</span>
+     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="n">server</span><span class="o">.</span><span class="na">serve</span><span class="o">(</span><span class="n">customer</span><span class="o">);</span>
+     <span class="o">}</span>
+   <span class="o">}</span>
 </pre></div>
 </td></tr></table>
 
-<p>The branching logic still exists, but we do not explicitly compares with <code class="codehilite">null</code> anymore and this code will never raise a <code class="codehilite">NullPointerException</code>.</p>
+<p>Using <code class="codehilite">Optional</code>, we write</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">shop</span><span class="o">.</span><span class="na">findIdleServer</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">or</span><span class="o">(</span><span class="n">shop</span><span class="o">::</span><span class="n">findShortestQueue</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">ifPresentOrElse</span><span class="o">(</span>
+        <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">serve</span><span class="o">(</span><span class="n">customer</span><span class="o">),</span>
+        <span class="n">customer</span><span class="o">::</span><span class="n">leave</span><span class="o">);</span>
+</pre></div>
+</td></tr></table>
+
+<div class="admonition notes">
+<p class="admonition-title">Java 8 vs. 9</p>
+<p><code class="codehilite">or</code> and <code class="codehilite">ifPresentOrElse</code> are available in Java 9 only.</p>
+</div>
+<p>The branching logic still exists, but is internalized, just like we have internalized loops with <code class="codehilite">applyList</code> method.  Furthermore, we do not explicitly compares with <code class="codehilite">null</code> anymore and this code will never raise a <code class="codehilite">NullPointerException</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Updated Notes</p>
+<p>This whole section is more or less rewritten since published.  If you print your notes, please make sure that you have the latest version.</p>
+</div>
 <h3 id="initializing-an-optional">Initializing an <code class="codehilite">Optional</code></h3>
 <p>To wrap up the discussion, let's see how we can create an <code class="codehilite">Optional</code> object.  If you want to wrap a non-<code class="codehilite">null</code> value in an <code class="codehilite">Optional</code>, call <code class="codehilite">Optional.of(value)</code>.  Otherwise, if you want to wrap it in a <code class="codehilite">null</code>, call <code class="codehilite">Optional.empty()</code>.  </p>
 <p>Alternatively, if you do not want to check if the value is <code class="codehilite">null</code> or not, call <code class="codehilite">Optional.ofNullable(value)</code> which will return one of the above appropriately for you.</p>
