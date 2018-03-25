@@ -8,11 +8,12 @@ pages:
   - Readings: 'readings.md'
   - Midterm: 'midterm.md'
   - Labs:
-      - 0 Warm Up: 'lab0.md'
-      - 1a Simulator v1.0: 'lab1a.md'
-      - 1b Simulator v1.1: 'lab1b.md'
-      - 2a Simulator v1.2: 'lab2a.md'
-      - 2b Simulator v1.3: 'lab2b.md'
+      - 0. Warm Up: 'lab0.md'
+      - 1a. Simulator v1.0: 'lab1a.md'
+      - 1b. Simulator v1.1: 'lab1b.md'
+      - 2a. Simulator v1.2: 'lab2a.md'
+      - 2b. Simulator v1.3: 'lab2b.md'
+      - 3.  Infinite List:  'lab3.md'
   - Lectures:
       - 1. Abstraction & Encapsulation: 'lec01.md'
       - 2. Interface, Inheritance & Polymorphism: 'lec02.md'
@@ -21,6 +22,7 @@ pages:
       - 5. Generics and Collections: 'lec05.md'
       - 6. hashCode, Nested Class, enum: 'lec06.md'
       - 7. Functions: 'lec07.md'
+      - 9. FP Patterns: 'lec09.md'
       - 8. Streams: 'lec08.md'
   - Coding Style: 'style.md'
   - Software/Tools:
