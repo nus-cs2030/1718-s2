@@ -20,7 +20,6 @@
 # :fa-commenting: Lectures
 &nbsp;&nbsp;9. [**Functionl-Style Patterns**](lec09.md) 
 
-# :fa-commenting: Lectures
 &nbsp;&nbsp;8. [Streams](lec08.md) &nbsp;&nbsp;[:fa-file-powerpoint-o:](https://www.comp.nus.edu.sg/~cs2030/1718-s2/cs2030-lec08.pdf) [:fa-file-video-o:](https://vimeo.com/261451705)
 
 &nbsp;&nbsp;7. [Functions](lec07.md) &nbsp;&nbsp;[:fa-file-powerpoint-o:](https://www.comp.nus.edu.sg/~cs2030/1718-s2/cs2030-lec07.pdf) [:fa-file-video-o:](https://vimeo.com/260526994)
