@@ -4,7 +4,9 @@
 
 # :fa-keyboard-o: Labs
 
-&nbsp;&nbsp; 3. [**Infinite List**](lab3.md)
+&nbsp;&nbsp; 4a. [**Simulator ver 2.0**](lab4a.md)
+
+&nbsp;&nbsp; 3. [Infinite List](lab3.md)
 
 &nbsp;&nbsp; 2b. [Simulator ver 1.3](lab2b.md)
 
