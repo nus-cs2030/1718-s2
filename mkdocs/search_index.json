@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/index.html",
-            "text": "Midterm\n\n\n \nPiazza Q&A\n\n\n Labs\n\n\n\u00a0\u00a0 4a. \nSimulator ver 2.0\n\n\n\u00a0\u00a0 3. \nInfinite List\n\n\n\u00a0\u00a0 2b. \nSimulator ver 1.3\n\n\n\u00a0\u00a0 2a. \nSimulator ver 1.2\n\n\n\u00a0\u00a0 1b. \nSimulator ver 1.1\n\n\n\u00a0\u00a0 1a. \nSimulator ver 1.0\n\n\n\u00a0\u00a0 0. \nWarm Up\n\n\n\n\n Lectures\n\n\n\u00a0\u00a09. \nFunctionl-Style Patterns\n \n\n\n\u00a0\u00a08. \nStreams\n \u00a0\u00a0\n \n\n\n\u00a0\u00a07. \nFunctions\n \u00a0\u00a0\n \n\n\n\u00a0\u00a06. \nHash Code, Nested Class, Enum\n \u00a0\u00a0\n \n\n\n\u00a0\u00a05. \nGenerics and Collections\n \u00a0\u00a0\n \n\n\n\u00a0\u00a04. \nTypes, Memory, Exception\n \u00a0\u00a0\n \n\n\n\u00a0\u00a03. \nMore on Inheritance\n \u00a0\u00a0\n \n\n\n\u00a0\u00a02. \nInheritance and Polymorphism\n \u00a0\u00a0\n \n\n\n\u00a0\u00a01. \nAbstraction and Encapsulation\n \u00a0\u00a0\n \n\n\nFor list of topics coming up, see \nthe class schedule\n.",
+            "text": "Midterm\n\n\n \nPiazza Q&A\n\n\n Labs\n\n\n\u00a0\u00a0 4a. \nSimulator ver 2.0\n\n\n\u00a0\u00a0 3. \nInfinite List\n\n\n\u00a0\u00a0 2b. \nSimulator ver 1.3\n\n\n\u00a0\u00a0 2a. \nSimulator ver 1.2\n\n\n\u00a0\u00a0 1b. \nSimulator ver 1.1\n\n\n\u00a0\u00a0 1a. \nSimulator ver 1.0\n\n\n\u00a0\u00a0 0. \nWarm Up\n\n\n\n\n Lectures\n\n\n\u00a0\u00a09. \nFunctionl-Style Patterns\n \u00a0\u00a0\n \n\n\n\u00a0\u00a08. \nStreams\n \u00a0\u00a0\n \n\n\n\u00a0\u00a07. \nFunctions\n \u00a0\u00a0\n \n\n\n\u00a0\u00a06. \nHash Code, Nested Class, Enum\n \u00a0\u00a0\n \n\n\n\u00a0\u00a05. \nGenerics and Collections\n \u00a0\u00a0\n \n\n\n\u00a0\u00a04. \nTypes, Memory, Exception\n \u00a0\u00a0\n \n\n\n\u00a0\u00a03. \nMore on Inheritance\n \u00a0\u00a0\n \n\n\n\u00a0\u00a02. \nInheritance and Polymorphism\n \u00a0\u00a0\n \n\n\n\u00a0\u00a01. \nAbstraction and Encapsulation\n \u00a0\u00a0\n \n\n\nFor list of topics coming up, see \nthe class schedule\n.",
             "title": "Home"
         },
         {
@@ -22,7 +22,7 @@
         },
         {
             "location": "/index.html#lectures",
-            "text": "9.  Functionl-Style Patterns    \u00a0\u00a08.  Streams  \u00a0\u00a0    \u00a0\u00a07.  Functions  \u00a0\u00a0    \u00a0\u00a06.  Hash Code, Nested Class, Enum  \u00a0\u00a0    \u00a0\u00a05.  Generics and Collections  \u00a0\u00a0    \u00a0\u00a04.  Types, Memory, Exception  \u00a0\u00a0    \u00a0\u00a03.  More on Inheritance  \u00a0\u00a0    \u00a0\u00a02.  Inheritance and Polymorphism  \u00a0\u00a0    \u00a0\u00a01.  Abstraction and Encapsulation  \u00a0\u00a0    For list of topics coming up, see  the class schedule .",
+            "text": "9.  Functionl-Style Patterns  \u00a0\u00a0    \u00a0\u00a08.  Streams  \u00a0\u00a0    \u00a0\u00a07.  Functions  \u00a0\u00a0    \u00a0\u00a06.  Hash Code, Nested Class, Enum  \u00a0\u00a0    \u00a0\u00a05.  Generics and Collections  \u00a0\u00a0    \u00a0\u00a04.  Types, Memory, Exception  \u00a0\u00a0    \u00a0\u00a03.  More on Inheritance  \u00a0\u00a0    \u00a0\u00a02.  Inheritance and Polymorphism  \u00a0\u00a0    \u00a0\u00a01.  Abstraction and Encapsulation  \u00a0\u00a0    For list of topics coming up, see  the class schedule .",
             "title": "Lectures"
         },
         {
