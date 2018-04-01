@@ -26,8 +26,7 @@ While concurrency gives the illusion of subtasks running at the same time, paral
 
 All parallel programs are concurrent, but not all concurrent programs are parallel.
 
-Modern computers have more than one cores / processors[^1].
-As such, the line between parallelism and concurrency is blurred.  
+Modern computers have more than one core/processor[^1].  As such, the line between parallelism and concurrency is blurred.
 
 [^1]: iPhone X comes with A11 Bionic chip with six cores.  The fastest supercomputer in the world as of this writing, the Sunway TaihuLight (神威 太湖之光), has 40,960 processors, each with 256 cores, giving a total of 10,485,760 cores.  
 
@@ -37,12 +36,12 @@ Parallel computing is one of the major topics in computer science.  One can teac
 
 ## Parallel Stream 
 
-We have seen that Java `Stream` class is a powerful and useful class for processing data in declarative style.  But, we have not fully unleash the power of `Stream`.  The neatest thing about `Stream` is that it allows parallel operations on the elements of the stream in one single line of code.  
+We have seen that Java `Stream` class is a powerful and useful class for processing data in declarative style.  But, we have not fully unleashed the power of `Stream`.  The neatest thing about `Stream` is that it allows parallel operations on the elements of the stream in one single line of code.  
 
-Let's consider the following program that prints out all the prime numbers between 1 and 999,999.
+Let's consider the following program that prints out all the prime numbers between 2,030,000 and 2,040,000.
 
 ```Java
-    IntStream.range(1, 1_000_000)
+    IntStream.range(2_030_000, 2_040_000)
         .filter(x -> isPrime(x))
         .forEach(System.out::println);
 ```
@@ -50,32 +49,32 @@ Let's consider the following program that prints out all the prime numbers betwe
 We can parallelize the code by adding the call `parallel()` into the stream.
 
 ```Java
-    IntStream.range(1, 1_000_000)
+    IntStream.range(2_030_000, 2_040_000)
         .filter(x -> isPrime(x))
         .parallel()
         .forEach(System.out::println);
 ```
 
-You may observe that the output has been reordered, although the same set of numbers are still being produced.  This is because `Stream` has broken down the numbers into subsequences, and run `filter` and `forEach` for each subsequences in parallel.  Since there is no coordination among the parallel tasks on the order of the printing, whichever parallel tasks that complete first will output the result to screen first, causing the sequence of numbers to be reordered.
+You may observe that the output has been reordered, although the same set of numbers are still being produced.  This is because `Stream` has broken down the numbers into subsequences, and run `filter` and `forEach` for each subsequence in parallel.  Since there is no coordination among the parallel tasks on the order of the printing, whichever parallel tasks that complete first will output the result to screen first, causing the sequence of numbers to be reordered.
 
-If you want to produce the output in the order of input, use `forEachOrdered` instead of `forEach`, we will loose some benefits of parallelization because of this.
+If you want to produce the output in the order of input, use `forEachOrdered` instead of `forEach`, we will lose some benefits of parallelization because of this.
 
-Suppose now that we want to compute the number of primes below 1,000,000.  We can run:
+Suppose now that we want to compute the number of primes between 2,030,000 and 2,040,000.  We can run:
 
 ```Java
-    IntStream.range(1, 1_000_000)
+    IntStream.range(2_030_000, 2_040_000)
         .filter(x -> isPrime(x))
         .parallel()
         .count()
 ```
 
-The code above produce the same output regardless of it is being parallelized or not.  
+The code above produces the same output regardless of it is being parallelized or not.  
 
-Note that the task above is stateless and does not produce any side effect.  Furthermore, each element is processed individually without depending on other elements.  Such computation is sometimes known as _embarrassingly parallel_.  The only communication needed for each of the parallel subtask is to combine the result of `count()` from the subtasks into the final count (which has been implemented in `Stream` for us.
+Note that the task above is stateless and does not produce any side effect.  Furthermore, each element is processed individually without depending on other elements.  Such computation is sometimes known as _embarrassingly parallel_.  The only communication needed for each of the parallel subtasks is to combine the result of `count()` from the subtasks into the final count (which has been implemented in `Stream` for us.
 
 ### How to parallelize a stream
 
-You have seen that adding `parallel()` to the chain of calls in a stream enables parallel processing of the stream.  Note that `parallel()` is a lazy operation -- it merely marks the stream to be process in parallel.  As such, you can insert the call to `parallel()` anywhere in the chain.
+You have seen that adding `parallel()` to the chain of calls in a stream enables parallel processing of the stream.  Note that `parallel()` is a lazy operation -- it merely marks the stream to be processed in parallel.  As such, you can insert the call to `parallel()` anywhere in the chain.
 
 !!! note "sequential()"
     There is a method `sequential()` which marks the stream to be process sequentially.  If you call both `parallel()` and `sequential()` in a stream,
@@ -89,13 +88,13 @@ Another way to create a parallel stream is to call the method `parallelStream()`
 
 ### What can be parallelized?
 
-To ensure that the output of the parallel execution is correct, the stream operations must not _interfere_ with the stream data, and most of time must be _stateless_.  Side-effects should be kept to minimum.
+To ensure that the output of the parallel execution is correct, the stream operations must not _interfere_ with the stream data, and most of time must be _stateless_.  Side-effects should be kept to a minimum.
 
 ### Interference
 Interference means that one of the stream operation modifies the source of the stream during the execution of the terminal operation.  For instance:
 
 ```Java
-List<String> list = new ArrayList<>(Arrays.asList("Luke", "Leia", "Han"));
+List<String> list = new ArrayList<>(List.of("Luke", "Leia", "Han"));
 list.stream()
     .peek(name -> {
          if (name.equals("Han")) {
@@ -133,18 +132,31 @@ list.parallelStream()
     .forEach(x -> result.add(x));
 ```
 
-The `forEach` lambda generates a side effect -- it modifies `result`.  `ArrayList` is what we call a non-thread-safe data structure.  If two threads manipulate it at the same time, incorrect result may result.
+The `forEach` lambda generates a side effect -- it modifies `result`.  `ArrayList` is what we call a non-thread-safe data structure.  If two threads manipulate it at the same time, an incorrect result may result.
 
-If we use `Collectors.toList()` instead, we can achieve the intended result without visible side effects.
+There are two ways to resolve this.  One, we can use the `.collect` method 
+```Java
+list.parallelStream()
+    .filter(x -> isPrime(x))
+	.collect(Collectors.toList())
+```
+Second, we can use a thread-safe data structure.  Java provides several in `java.util.concurrent` package, including `CopyOnWriteArrayList`.
+
+```Java
+List<Integer> result = new CopyOnWriteArrayList<>();
+list.parallelStream()
+    .filter(x -> isPrime(x))
+    .forEach(x -> result.add(x));
+```
 
 ### Associativity
-The `reduce` operation is inherently parallelizable, as we can easily reduce each sub-streams and then use the `combiner` to combine the results together.  Recall this example from Lecture 9:
+The `reduce` operation is inherently parallelizable, as we can easily reduce each sub-streams and then use the `combiner` to combine the results together.  Consider this example:
 
 ```Java
 Stream.of(1,2,3,4).reduce(1, (x,y)->x*y, (x,y)->x*y);
 ```
 
-There are several rules that the `identity`, the `accumulator` and the `combiner` must follow:
+In order to allow us to run `reduce` in parallel, however, there are several rules that the `identity`, the `accumulator` and the `combiner` must follow:
 
 - `combiner.apply(identity, i)` must be equal to `i`.
 - The `combiner` and the `accumulator` must be associative -- the order of applying must not matter.
@@ -161,7 +173,7 @@ The multiplication example above meetings the three rules:
 Let's go back to:
 
 ```Java
-IntStream.range(1, 1_000_000)
+IntStream.range(2_030_000, 2_040_000)
     .filter(x -> isPrime(x))
     .parallel()
     .count()
@@ -173,7 +185,7 @@ Let's use the [`Instant`](https://docs.oracle.com/javase/9/docs/api/java/time/In
 
 ```Java
     Instant start = Instant.now();
-    long howMany = IntStream.range(1,1000000)
+    long howMany = IntStream.range(2_000_000, 3_000_000)
         .filter(x -> isPrime(x))
         .parallel()
         .count();
@@ -181,7 +193,7 @@ Let's use the [`Instant`](https://docs.oracle.com/javase/9/docs/api/java/time/In
     System.out.println(howMany + " " + Duration.between(start,stop).toMillis() + " ms");
 ```
 
-The code above measures roughly the time it takes to count the number of primes below 1,000,000.  On my iMac, it takes about 300-320 ms.  If I remove `parallel()`, it takes about 500 ms.  So we gain about 36 - 40% performance.
+The code above measures roughly the time it takes to count the number of primes between 2 million and 3 million.  On my iMac, it takes slightly more than 1 seconds.  If I remove `parallel()`, it takes about 450-550 ms.  So we gain about 50% performance.
 
 Can we parallelize some more?  Remember how we implement `isPrime`[^2]
 
@@ -204,82 +216,128 @@ Let's parallelize this to make this even faster!
 
 [^2]: This is a more efficient version of the code you have seen, since it stops testing after the square root of the $n$.
 
-If you run the code above, however, you will find that the code is not as fast as we expect. On my iMac, it takes about 12.7s, about 25 times slower!
+If you run the code above, however, you will find that the code is not as fast as we expect. On my iMac, it takes about 18s, about 18 times slower!
 
 _Parallelizing a stream does not always improve the performance_.
 
-What is going on?  To understand this, we have to delve a bit deeper into how Java implements the parallel streams.  
+To understand why, we have to delve a bit deeper into how Java implements the parallel streams.  We are going to take a detour to see some parallel programming concepts and important Java classes related to parallel programming first.
 
-### Thread Pools and Fork/Join
+## Fork and Join
 
-Internally, Java maintains pool of _worker threads_.  A worker thread is an abstraction for running a task.  We can submit a task to the pool for execution, the task will join queue.  The worker thread can pick a task from the queue to execute.  When it is done, it pick another task, if one exists in the queue, and so on -- not unlike our `Server` (worker thread) and `Customer` (task).
-
-A `ForkJoinPool` is a class the implements a thread pool with a particular semantic --- the task that the worker runs must specify `fork` -- how to create subtasks, and `join` -- how to merge the results from the subtasks.
-
-In the case of a parallel stream, `fork` will create subtasks running the same chain of operations on sub-streams, and when done, run `join` to combine the results (e.g., `combiner` for `reduce` is run in `join`).  `fork` and `join` can be recursive -- for instance, a `fork` operation can split the stream into two subtasks.  The subtasks can further split the sub-streams into four smaller sub-streams, and so on, until the size of the sub-stream is small enough that the task is actually invoked.
-
-To define a task, we subclass from `RecursiveTask<T>` (if the task returns a value of type `T`) or `RecursiveAction` (if the task does not return a value).
-
-Here is an example task that we can submit to ForkJoinPool:
+Suppose we have the following code:
 
 ```Java
-  static class BinSearch extends RecursiveTask<Boolean> {
+b = f(a);
+c = g(b);
+d = h(b);
+e = i(c,d);
+```
+
+which we could visualize as a _computation graph_, which looks like the following:
+
+![computation graph](figures/cs2030-lec10/cs2030-lec10.015.png)
+
+It should be clear that `f(a)` has to be invoked before `g(b)` and `h(b)`, and `i(c,d)` has to be invoked after both `g(b)` and `h(b)` complete.  What about the order of `g(b)` and `h(b)`? 
+
+Suppose that `g()` and `h()` are pure functions, i.e., the outputs `c` and `d` only depend on `b` and nothing else, and `g()` and `h()` does not produce any side effects, then we can safely conclude that `g(b)` and `h(b)` can be invoked in any order.  Not only that, they can be invoked in parallel, independently from each other.
+
+To express that we wish to run `g()` in parallel to `h()` , we can _fork_ the task `g()` -- this means that we tell JVM that it _could_[^3] execute `g()` at the same time as `h()`.  
+
+[^3]: The operating systems and JVM can decide this depends on how many cores or processors are available and how many tasks are pending.  But these details are hidden from us so we do not need to worry about them unless we want to squeeze some performance out of this -- in which case you should to take CS2106 and CS3210.
+
+We can then _join_ back the task `g()`.  The join operation causes our code to wait for `g()` to complete, ensuring that the updated value of `c` is available when `i(c,d)` is called.
+
+This pattern of invoking tasks in parallel is called the fork/join framework.  It typically involves some recursive forking and joining to break down a huge task to many smaller ones (but don't have to).  We will see a more concrete example below.
+
+### The `ForkJoinTask<V>` Abstract Class
+
+Java provides an abstraction for a task that can be forked and joined, aptly called [`ForkJoinTask`](https://docs.oracle.com/javase/10/docs/api/java/util/concurrent/ForkJoinTask.html).  This is an abstract class, which we will not use directly.  The class has many methods, but the two most important ones, which we will use, are `fork()` and `join()`.  The method `fork()` submits this task to JVM for execution, possibly parallely.  The method `join()` waits for the computation to complete and returns the value of type `V`.
+
+### The `RecursiveTask<V>` Abstract Class
+
+A `ForkJoinTask<V>` has a subclass called `RecursiveTask<V>`, which is also abstract.  It has a method `V compute()`, which we can customize with the task we want for compute.
+
+Here is an example task of how we can use `RecursiveTask<V>`
+
+```Java
+  static class Summer extends RecursiveTask<Integer> {
     final int FORK_THRESHOLD = 2;
     int low;
     int high;
-    int toFind;
     int[] array;
 
-    BinSearch(int low, int high, int toFind, int[] array) {
+    Summer(int low, int high, int[] array) {
       this.low = low;
       this.high = high;
-      this.toFind = toFind;
       this.array = array;
     }
 
     @Override
-    protected Boolean compute() {
+    protected Integer compute() {
       // stop splitting into subtask if array is already small.
       if (high - low < FORK_THRESHOLD) {
+        int sum = 0;
         for (int i = low; i < high; i++) {
-          if (array[i] == toFind) {
-            return true;
-          }
+          sum += array[i];
         }
-        return false;
+        return sum;
       } 
 
-      int middle = (low + high)/2;
-      BinSearch left = new BinSearch(low, middle, toFind, array);
-      BinSearch right = new BinSearch(middle, high, toFind, array);
+      int middle = (low + high) / 2;
+      Summer left = new Summer(low, middle, array);
+      Summer right = new Summer(middle, high, array);
       left.fork();
-      return right.compute() || left.join();
+      return right.compute() + left.join();
     }
   }
 ```
 
-To run the task, we call the `invoke` method of `ForkJoinPool`, which executes the given task immediately and return the result.
+To run the task, we call `compute()` 
 
 ```Java
-    BinSearch searchTask = new BinSearch(0, array.length, 12, array);
-    boolean found = ForkJoinPool.commonPool().invoke(searchTask)
+    Summer task = new Summer(0, array.length, array);
+    int sum = task.compute();
 ```
 
-The task above recursively search for an element in the left half and right half of the array.  Note that this is similar to, but is NOT binary search.  Binary search of course just search in either the left or the right side, depending on the middle value, and is not parallel.
+!!! note "RecursiveAction"
+    Another subclass of `ForkJoinTask` is called `RecursiveAction`, which is very similar to `RecursiveTask`, except that `RecursiveAction` does not return a value.
 
-### ForkJoinPool overhead
+### Thread Pools and Fork/Join
 
-In the example above, you can see that creating subtasks incur some overhead (new task objects, copying of parameters into objects, etc).  In the `isPrime` example above, the task is trivial (checking `n % x == 0`), and so, by parallelizing it, we are actually creating more work for Java to do!  It is much more efficient if we simply check for `n % x == 0` sequentially.
+Internally, Java maintains a pool of _worker threads_.  A worker thread is an abstraction for running a task.  We can submit a task to the pool for execution, the task will join a queue.  There is a global queue for a newly submitted task.  There is also a queue for each worker.   A task spawn from another task executed by a worker will join the queue belonging to that worker.  
+
+The worker thread can pick a task from the queue to execute.  When it is done, it picks another task, if one exists in the queue, and so on -- not unlike our `Server` (worker thread) and `Customer` (task).  A `ForkJoinPool` is a class the implements a thread pool for `ForkJoinTask`.  An alternative way of executing the `sumTask` above is to submit the task to the `ForkJoinPool` instead of calling it directly.
+
+```Java
+int sum = ForkJoinPool.commonPool().invoke(task);
+```
+
+The difference between calling `invoke(task)` versus `task.compute()` is huge, even though both returns us the correct result above.  Calling `task.compute()` means that we are invoking the task immediately and directly (just like any method call); Calling `invoke(task)`, however, means that we are asking the task to join a queue, waiting to be carried out by a worker, and return us the result.  You can see this effect if we have too many recursive tasks, in which case if we call `task.compute` we will end out with a stack overflow.
+
+
+### Overhead of Fork/Join
+
+You can see from the description above that forking and joining actually creates additional overhead -- we first need to wrap the computation in an object, submit the object to a queue of tasks.  There are workers that go through the queue to execute the tasks.  You can try different values of `FORK_TRESHOLD` to look at the effect.  Here is what the result looks like on my iMac: 
+
+![time vs threshold](figures/cs2030-lec10/cs2030-lec10.020.png)
+
+The smaller the fork threshold, the more tasks we create, and the smaller each task becomes.  As the figure shows, if the task to parallelize is too simple, it is not worth to parallelize it due to the overhead cost. 
+
+## Parallel Stream using Fork/Join
+
+Parallel streams are implemented using fork/join in Java.  Here, `fork` creates subtasks running the same chain of operations on sub-streams, and when done, run `join` to combine the results (e.g., `combiner` for `reduce` is run in `join`).  `fork` and `join` can be recursive -- for instance, a `fork` operation can split the stream into two subtasks.  The subtasks can further split the sub-streams into four smaller sub-streams, and so on, until the size of the sub-stream is small enough that the task is actually invoked.
+
+In the `isPrime` example earlier, the task is trivial (checking `n % x == 0`), and so, by parallelizing it, we are actually creating more work for Java to do.  It is much more efficient if we simply check for `n % x == 0` sequentially.
 
 The moral of the story is, parallelization is worthwhile if the task is complex enough that the benefit of parallelization outweighs the overhead.  While we discuss this in the context of parallel streams, this principle holds for all parallel and concurrent programs.
 
-### Ordered vs. Unordered Source
+## Ordered vs. Unordered Source
 
 Whether or not the stream elements are _ordered_ or _unordered_ also plays a role in the performance of parallel stream operations.  A stream may define an _encounter order_.  Streams created from `iterate`, ordered collections (e.g., `List` or arrays), from `of`, are ordered.  Stream created from `generate` or unordered collections (e.g., `Set`) are unordered.
 
 Some stream operations respect the encounter order.  For instance, both `distinct` and `sorted` preserve the original order of elements (if ordering is preserved, we say that an operation is _stable_).
 
-The parallel version of `findFirst`, `limit`, and `skip` can be expensive on ordered stream.  
+The parallel version of `findFirst`, `limit`, and `skip` can be expensive on ordered stream, since it needs to coordinate between the streams to maintain the order.  
 
 If we have an ordered stream and respecting the original order is not important, we can call `unordered()` as part of the chain command to make the parallel operations much more efficient.
 
@@ -303,23 +361,3 @@ But, with `unordered()` inserted, it takes about 350ms, a 2x speed up!
         .filter(i -> i % 64 == 0)
         .forEachOrdered(i -> { });
 ```
-
-### Collectors
-
-To wrap up, we will revisit the `Collector` class.  Recall that `collect` is a mutable version of `reduce` on `Stream`.  Being mutable, parallelizing it is tricky.  Luckily, we only need to provide hints to the Collector class, which will optimize the implementation for us.  The hint is given as part of the `characteristics()` method (the last method that we did not cover last week).
-
-The `characteristics()` method returns a `Set` that contains a combination of three enums:
-
-- `CONCURRENT` to indicate that the container that the supplier created can support accumulator function being called concurrently from multiple threads,
-- `IDENTITY_FINISH` to indicate the the finisher function is the identity function, and can be skipped.
-- `UNORDERED` to indicate that the collection operation does not necessary preserve the encounter order of the elements.
-
-The operation `collect` will only be parallelized if the following three conditions hold:
-
-- The stream is parallel
-- The collector has characteristic `CONCURRENT` 
-- The stream is unordered or has characteristic `UNORDERED`
-
-Of course, if we tell the collector has the characteristic `CONCURRENT`, the container that we use must actually supports that!  Luckily for us, Java `java.util.concurrent` package provides many collections that support concurrency, including `CopyOnWriteArrayList`, `ConcurrentHashMap`, etc.  Obviously these are more expensive.  For instance, `CopyOnWriteArrayList` creates a fresh copy of the underlying array whenever there is a mutative operation (e.g., `add`, `set`, etc), not unlike your `LambdaList`.  
-
-Again, this is the overhead cost of parallelization -- the cost that might not outweigh the benefit of parallelization, and should be considered carefully.
