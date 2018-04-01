@@ -361,3 +361,44 @@ But, with `unordered()` inserted, it takes about 350ms, a 2x speed up!
         .filter(i -> i % 64 == 0)
         .forEachOrdered(i -> { });
 ```
+
+## Exercise
+
+1. The last two lines of `compute` of `Summer` class, which says:
+
+    ```Java
+        left.fork();
+        return right.compute() + left.join();
+    ```
+
+    What would happen if we change these two lines to the following:
+
+    (a). 
+    ```Java
+        return right.compute() + left.compute();
+    ```
+
+    (b). 
+    ```Java
+        right.fork();
+        left.fork();
+        return right.join() + left.join();
+    ```
+
+    (c ) 
+    ```Java
+        right.fork();
+        return right.join() + left.compute();
+    ```
+
+2. What is the value of the variable `x` after executing the following statement? 
+    ```Java
+    Stream.of(1,2,3,4).reduce(0, (result, x) -> result * 2 + x);
+    ```
+
+    After we parallelized the above code into the following, we found the output is different.  Why?  
+    ```Java
+    Stream.of(1,2,3,4).parallel().reduce(0, (result, x) -> result * 2 + x);
+    ```
+
+3. Take the standard implementation of merge sort (e.g., from CS2040) and parallelize it with fork and join.
