@@ -4,6 +4,8 @@
 
 # :fa-keyboard-o: Labs
 
+&nbsp;&nbsp; 4b. [**Simulator ver 2.1**](lab4b.md)
+
 &nbsp;&nbsp; 4a. [**Simulator ver 2.0**](lab4a.md)
 
 &nbsp;&nbsp; 3. [Infinite List](lab3.md)
@@ -20,7 +22,10 @@
 
 <br>
 # :fa-commenting: Lectures
-&nbsp;&nbsp;9. [**Functionl-Style Patterns**](lec09.md) &nbsp;&nbsp;[:fa-file-powerpoint-o:](https://www.comp.nus.edu.sg/~cs2030/1718-s2/cs2030-lec09.pdf) [:fa-file-video-o:](https://vimeo.com/262597186)
+
+&nbsp;&nbsp;10. [**Parallel Streams**](lec10.md)
+
+&nbsp;&nbsp;9. [Functionl-Style Patterns](lec09.md) &nbsp;&nbsp;[:fa-file-powerpoint-o:](https://www.comp.nus.edu.sg/~cs2030/1718-s2/cs2030-lec09.pdf) [:fa-file-video-o:](https://vimeo.com/262597186)
 
 &nbsp;&nbsp;8. [Streams](lec08.md) &nbsp;&nbsp;[:fa-file-powerpoint-o:](https://www.comp.nus.edu.sg/~cs2030/1718-s2/cs2030-lec08.pdf) [:fa-file-video-o:](https://vimeo.com/261451705)
 

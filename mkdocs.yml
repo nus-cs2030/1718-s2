@@ -15,6 +15,7 @@ pages:
       - 2b. Simulator v1.3: 'lab2b.md'
       - 3.  Infinite List:  'lab3.md'
       - 4a. Simulator v2.0: 'lab4a.md'
+      - 4b. Simulator v2.1: 'lab4b.md'
   - Lectures:
       - 1. Abstraction & Encapsulation: 'lec01.md'
       - 2. Interface, Inheritance & Polymorphism: 'lec02.md'
@@ -25,6 +26,7 @@ pages:
       - 7. Functions: 'lec07.md'
       - 8. Streams: 'lec08.md'
       - 9. FP Patterns: 'lec09.md'
+      - 10. Parallel streams: 'lec10.md'
   - Coding Style: 'style.md'
   - Software/Tools:
       - Java: 'jdk.md'
