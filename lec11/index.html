@@ -1086,7 +1086,7 @@ Let's say that we want to print out the result with a <code class="codehilite">C
 <p>BTW, <code class="codehilite">CompletableFuture</code> is a monad too!  The <code class="codehilite">thenCompose</code> method is analougous to the <code class="codehilite">flatMap</code> method of <code class="codehilite">Stream</code> and <code class="codehilite">Optional</code>. </p>
 <p>This also means that <code class="codehilite">CompletableFuture</code> satisfies the monad laws, one of which is that there is a method to wrap a value around with a <code class="codehilite">CompletableFuture</code>.  We call this the <code class="codehilite">of</code> method in the context of <code class="codehilite">Stream</code> and <code class="codehilite">Optional</code>, but in <code class="codehilite">CompletableFuture</code>, it is called <code class="codehilite">completedFuture</code>.  This method creates a <code class="codehilite">CompletableFuture</code> that is completed.
 The <code class="codehilite">completedFuture</code> method is useful, for instance, if we want to convert a method below to asynchronous.
-    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -1099,24 +1099,18 @@ The <code class="codehilite">completedFuture</code> method is useful, for instan
 <span class="o">}</span>
 </pre></div>
 </td></tr></table></p>
+<p>With <code class="codehilite">CompletableFuture</code>, it becomes:
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>With `CompletableFuture`, it becomes:
-```Java
-CompletableFuture&lt;Integer&gt; foo(int x) {
-  if (x &lt; 0) 
-    return CompletableFuture.completedFuture(0);
-  else 
-    return CompletableFuture.supplyAsync(() -&gt; doSomething(x));
-```
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">foo</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> 
+    <span class="k">return</span> <span class="n">CompletableFuture</span><span class="o">.</span><span class="na">completedFuture</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+  <span class="k">else</span> 
+    <span class="k">return</span> <span class="n">CompletableFuture</span><span class="o">.</span><span class="na">supplyAsync</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">doSomething</span><span class="o">(</span><span class="n">x</span><span class="o">));</span>
 </pre></div>
-</td></tr></table>
-
+</td></tr></table></p>
 <p>When we discussed about monad, we say that one way to think of a monad as a wrapper of a value in some context.  In the case of <code class="codehilite">Optional</code>, the context is that the value may or may not be there.  In the context of <code class="codehilite">CompletableFuture</code>, the context is that the value not be available yet.</p>
 <p>Being a functor and a monad, <code class="codehilite">CompletableFuture</code> objects can be chained together, just like <code class="codehilite">Stream</code> and <code class="codehilite">Optional</code>.  We can write code like this:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -1237,7 +1231,7 @@ CompletableFuture&lt;Integer&gt; foo(int x) {
 </td></tr></table></p>
 </li>
 </ol>
-<p>&copy;
+<p>(C)
     <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
