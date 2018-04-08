@@ -291,7 +291,7 @@ Finally, `exceptionally` handles exception by replacing a thrown exception with 
 CompletableFuture
     .completedFuture(Matrix.generate(nRows, nCols, rng::nextDouble))
     .thenApply(m -> m.multiply(m))
-    .exceptionally(Matrix.generate(nRows, nCols, ()->0);
+    .exceptionally(ex -> Matrix.generate(nRows, nCols, () -> 0));
 ```
 
 !!! note "Promise"
