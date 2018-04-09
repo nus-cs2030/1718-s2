@@ -1,0 +1,2 @@
+codebulb.ch is suspended
+The [table](http://www.codebulb.ch/2015/07/completablefuture-clean-callbacks-with-java-8s-promises-part-4.html#api) by Nicolas Hofstetter neatly summarizes all the methods available.  As you can see, the API is quite extensive (bloated?).
