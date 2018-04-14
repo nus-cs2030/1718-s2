@@ -201,6 +201,36 @@
             "title": "For 1st Year Students"
         },
         {
+            "location": "/final/index.html",
+            "text": "Information about Final Assessment\n\n\nPlease check back regularly for updates.\n\n\nDate and Time\n\n\n\n\n3 May, 2018 (Thurs) \n\n\n1:00pm\n\n\n\n\nFormat\n\n\n\n\nOpen book\n\n\nMCQs and short questions\n\n\n\n\nScope\n\n\n\n\nAll lectures, all labs\n\n\n\n\nPYQ\n\n\n\n\nAY2017/18 Semester 1 \nQuestions\n | \nQuestions with Solutions\n\n\nAY2017/18 Semester 2 \nQuestions",
+            "title": "Final"
+        },
+        {
+            "location": "/final/index.html#information-about-final-assessment",
+            "text": "Please check back regularly for updates.",
+            "title": "Information about Final Assessment"
+        },
+        {
+            "location": "/final/index.html#date-and-time",
+            "text": "3 May, 2018 (Thurs)   1:00pm",
+            "title": "Date and Time"
+        },
+        {
+            "location": "/final/index.html#format",
+            "text": "Open book  MCQs and short questions",
+            "title": "Format"
+        },
+        {
+            "location": "/final/index.html#scope",
+            "text": "All lectures, all labs",
+            "title": "Scope"
+        },
+        {
+            "location": "/final/index.html#pyq",
+            "text": "AY2017/18 Semester 1  Questions  |  Questions with Solutions  AY2017/18 Semester 2  Questions",
+            "title": "PYQ"
+        },
+        {
             "location": "/midterm/index.html",
             "text": "Midterm\n\n\nStatistics\n\n\n\n\nAverage: 33.5\n\n\nStd Dev: 8.14\n\n\nMax: 48\n\n\n\n\n\n\nMidterm Question Paper\n (with solution, marking scheme, and comments)\n\n\nSlides from the Labs\n\n\nVideo from Lecture 7 on Q11\n\n\nImportant Information\n\n\n\n\nDate: March 5, 2018 (Monday)\n\n\nTime: 1000 - 1130\n\n\nVenue: MPSH 2 Section C\n\n\n\n\nPlease arrive at least 5 minutes earlier and wait outside the hall.\n\n\nScope\n\n\n\n\nEverything taught during Week 1 - Week 6\n\n\nLab 0 - Lab 1b\n\n\n\n\nOpen Book\n\n\nThis is an open book midterm.  You can bring in books and notes.  They can be printed or hand written.  No digital materials (laptop, tablet, etc.).  Any Java API needed will be provided to you.\n\n\nPast Year Paper\n\n\n\n\nAY2017/18 Semester 1",
             "title": "Midterm"
