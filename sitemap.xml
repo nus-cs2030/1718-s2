@@ -195,6 +195,12 @@
      <changefreq>daily</changefreq>
     </url>
         
+    <url>
+     <loc>https://nus-cs2030.github.io/1718-s2/monad/index.html</loc>
+     <lastmod>2018-04-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
     
 
     
