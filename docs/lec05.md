@@ -133,7 +133,7 @@ Java 5 introduces generics, which is a significant improvement to the type syste
 class Queue<T> {
   private T[] objects;
    :
-  public Queue<T>(int size) {...}
+  public Queue(int size) {...}
   public boolean isFull() {...}
   public boolean isEmpty() {...}
   public void enqueue(T o) {...}
