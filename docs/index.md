@@ -1,12 +1,18 @@
-# :fa-pencil: [Midterm](midterm.md)
+# :fa-pencil: [Final](final.md)
 
 # :fa-question-circle: [Piazza Q&A](https://piazza.com/class/jcaaskvbs754wh)
 
+# :fa-pencil: [Midterm](midterm.md)
+
 # :fa-keyboard-o: Labs
 
-&nbsp;&nbsp; 4b. [**Simulator ver 2.1**](lab4b.md)
+&nbsp;&nbsp; 6. [Async Web API](lab6.md)
 
-&nbsp;&nbsp; 4a. [**Simulator ver 2.0**](lab4a.md)
+&nbsp;&nbsp; 5. [Matrix Multiplication](lab5.md)
+
+&nbsp;&nbsp; 4b. [Simulator ver 2.1](lab4b.md)
+
+&nbsp;&nbsp; 4a. [Simulator ver 2.0](lab4a.md)
 
 &nbsp;&nbsp; 3. [Infinite List](lab3.md)
 
@@ -23,7 +29,12 @@
 <br>
 # :fa-commenting: Lectures
 
-&nbsp;&nbsp;10. [**Parallel Streams**](lec10.md)
+&nbsp;&nbsp;12. Review (no notes)&nbsp;&nbsp;[:fa-file-powerpoint-o:](https://www.comp.nus.edu.sg/~cs2030/1718-s2/cs2030-lec12.pdf) [[:fa-file-video-o:](https://vimeo.com/266290733)
+ (Extra: [Build a Monad](monad.md))
+
+&nbsp;&nbsp;11. [Getting Asynchronous with CompletableFuture](lec11.md)&nbsp;&nbsp;[:fa-file-powerpoint-o:](https://www.comp.nus.edu.sg/~cs2030/1718-s2/cs2030-lec11.pdf) [:fa-file-video-o:](https://vimeo.com/264712340)
+
+&nbsp;&nbsp;10. [Parallel Streams](lec10.md)&nbsp;&nbsp;[:fa-file-powerpoint-o:](https://www.comp.nus.edu.sg/~cs2030/1718-s2/cs2030-lec10.pdf) [:fa-file-video-o:](https://vimeo.com/263627336)
 
 &nbsp;&nbsp;9. [Functionl-Style Patterns](lec09.md) &nbsp;&nbsp;[:fa-file-powerpoint-o:](https://www.comp.nus.edu.sg/~cs2030/1718-s2/cs2030-lec09.pdf) [:fa-file-video-o:](https://vimeo.com/262597186)
 
