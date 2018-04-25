@@ -71,6 +71,8 @@ It can makes code with multiple-level of branching clearer.  Without `Optional`,
 	 } else {
 		server.serve(customer);
 	 }
+   } else {
+     server.serve(customer);
    }
 ```
 

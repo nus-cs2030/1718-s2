@@ -203,20 +203,37 @@ The `completedFuture` method is useful, for instance, if we want to convert a me
 ```Java
 Integer foo(int x) {
   if (x < 0) 
-	return 0;
+    return 0;
   else
-	return doSomething(x);
+    return doSomething(x);
 }
 ```
 
 With `CompletableFuture`, it becomes:
 ```Java
-CompletableFuture<Integer> foo(int x) {
+CompletableFuture<Integer> fooAsync(int x) {
   if (x < 0) 
     return CompletableFuture.completedFuture(0);
   else 
     return CompletableFuture.supplyAsync(() -> doSomething(x));
 ```
+
+!!! note "Extra Example"
+    In the class, I got carried away with the question about `completedFuture` and added the following example for <s>`flatMap`</s> `thenCompose` as well:
+
+    Original non-async version:
+    ```Java
+    int x = bar(z)
+    int y = foo(x)
+    ```
+
+    Async version:
+    ```Java
+    y = barAsync(z)
+           .thenCompose(i -> fooAsync(i))
+           .get();
+    ```
+
 
 When we discussed about monad, we say that one way to think of a monad as a wrapper of a value in some context.  In the case of `Optional`, the context is that the value may or may not be there.  In the context of `CompletableFuture`, the context is that the value not be available yet.
 
@@ -244,7 +261,6 @@ CompletableFuture right = CompletableFuture
 
 Similar to `Stream`, some of the methods are terminal (e.g., `thenRun`, `thenAccept`), and some are intermediate (`thenApply`).
 
-### More Examples
 
 ### Variations
 
@@ -260,7 +276,6 @@ Other features of `CompletableFuture` include:
 
 - Some methods takes in additional `Throwable` parameter, for cases where earlier calls might throw an exception.
 
-The [table](http://www.codebulb.ch/2015/07/completablefuture-clean-callbacks-with-java-8s-promises-part-4.html#api) by Nicolas Hofstetter neatly summarizes all the methods available.  As you can see, the API is quite extensive (bloated?).
 
 ### Handling Exceptions
 
@@ -303,24 +318,25 @@ CompletableFuture
 ## Exercise
 
 1. Change the following sequence of code so that `f()`, `g()` and `h()` are invoked asynchronously, using `CompletableFuture`.
-	(a)
-    ```Java
-	B b = f(a);
-	C c = g(b);
-	D d = h(c);
-	```
 
-	(b)
+    (i)
     ```Java
-	B b = f();
-	C c = g(b);
-	h(c); // no return value
-	```
+    B b = f(a);
+    C c = g(b);
+    D d = h(c);
+    ```
 
-   (C)
+    (ii)
     ```Java
-	B b = f(a);
-	C c = g(b);
-	D d = h(b);
-	E e = i(c, d);
-	```
+    B b = f();
+    C c = g(b);
+    h(c); // no return value
+    ```
+
+    (iii)
+    ```Java
+    B b = f(a);
+    C c = g(b);
+    D d = h(b);
+    E e = i(c, d);
+    ```

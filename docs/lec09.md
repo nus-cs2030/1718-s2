@@ -109,7 +109,7 @@ Let's check:
 ```
 A a = new A(-1);
 a.isSameAs(a.f(x -> x));
-a.f(x -> x + 1).g(x -> x * 2).isSameAs(a.f(x -> (x + 1) * 2));
+a.f(x -> x + 1).f(x -> x * 2).isSameAs(a.f(x -> (x + 1) * 2));
 ```
 
 The second line above failed to return true.  As such, class `A` violates the first functor law and therefore is not a functor.  Class `B` below, however, is a functor:
@@ -322,6 +322,10 @@ In OO design, this is known as the Observer pattern.  With lambda, we can implem
 ```
 class Event {
   List<Runnable> actions;
+
+	Event() {
+		actions = new ArrayList<>();
+	}
 
   void register(Runnable r) {
     actions.add(r);
