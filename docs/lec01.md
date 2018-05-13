@@ -405,16 +405,16 @@ Java is very strict when it comes to type checking, and is one of the _type-safe
 
     ```Java
     class A {
-	    public static int x = 1;
-	    public int y = 5;
+      public static int x = 1;
+      public int y = 5;
 
-	    void incrX() {
-		    x = x + 1;
-	    }
+      void incrX() {
+        x = x + 1;
+      }
 
-	    void incrY() {
-		    y = y + 1;
-	    }
+      void incrY() {
+        y = y + 1;
+      }
     }
 
     A a1 = new A();
@@ -433,7 +433,7 @@ Java is very strict when it comes to type checking, and is one of the _type-safe
 
     ```Java
     class A {
-    	private int x;
+      private int x;
       public void changeSelf() {
         x = 1;
       }
@@ -444,9 +444,9 @@ Java is very strict when it comes to type checking, and is one of the _type-safe
     }
 
     class B {
-    	public void changeAnother(A a) {
-    		a.x = 1;
-    	}
+      public void changeAnother(A a) {
+        a.x = 1;
+      }
     }
     ```
 
