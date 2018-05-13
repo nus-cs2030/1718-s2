@@ -36,7 +36,7 @@ See Lab 1 and Lab 2 skeleton code for samples.
 
 ## Style
 
-1. If you want to break you comments into paragraphs, insert one blank line between paragraphs.  Start a new paragraph with HTML tag `<p>` with no space after, and ends your paragraph with HTML tag `</p>`.
+1. If you want to break your comments into paragraphs, insert one blank line between paragraphs.  Start a new paragraph with HTML tag `<p>` with no space after, and end your paragraph with HTML tag `</p>`.
 
 2. You should use the tags `@param` `@return` and `@throws` in that order, and they should never appear without a description.
 
