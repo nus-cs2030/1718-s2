@@ -18,7 +18,7 @@ int multiple(int x, int y) {
 int z = multiple(3, 4);
 ```
 
-In the simple example above, our code continues executing after, and only after `add()` completes.
+In the simple example above, our code continues executing after, and only after `multiple()` completes.
 
 If a method takes a long time to run, however, the execution will delay the execution of subsequent methods, and maybe undesirable.
 
