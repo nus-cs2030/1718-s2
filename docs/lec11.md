@@ -11,14 +11,14 @@ After this lecture, students should:
 In synchronous programming, when we call a method, we expect the method to be executed, and when the method returns, the result of the method is available.
 
 ```Java
-int multiple(int x, int y) {
+int multiply(int x, int y) {
     return x * y;
 }
 
-int z = multiple(3, 4);
+int z = multiply(3, 4);
 ```
 
-In the simple example above, our code continues executing after, and only after `multiple()` completes.
+In the simple example above, our code continues executing after, and only after `multiply()` completes.
 
 If a method takes a long time to run, however, the execution will delay the execution of subsequent methods, and maybe undesirable.
 
