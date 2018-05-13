@@ -119,11 +119,11 @@ Sometimes we need to comment out a whole block of code in Java for testing purpo
 
 - Place the cursor on the first line of the block of code you want to comment.
 - `0` to jump to the beginning of the line
-- `V` enter visual mode
+- `<CTRL-v>` enter visual block mode
 - Use arrow key to select the block of code you want to comment. 
 - `I` to insert at the beginning of the line (here, since we already selected the block, we will insert at the beginning of every selected)
 - `//` to insert the Java comment character (you will see it inserted in the current line, but don't worry)
-- <ESC> to escape from the visual code.
+- `<ESC> <ESC>` to escape from the visual code and to insert the comment character for the rest of the lines.
 
 To uncomment, 
 
