@@ -72,8 +72,8 @@ If the compiler tells you there is an error on Line $x$, you can issue `:<x>` to
 - `e`   jump to the end of the word (or next word when pressed again)
 - `f` + char: search forward in the line and sit on the next matching char
 - `t` + char:  search forward in the line and sit on one space before the matching char
-- <CTRL-d> jump forward half page
-- <CTRL-u> jump backward half page
+- `<CTRL-d>` jump forward half page
+- `<CTRL-u>` jump backward half page
 - `$` jump to end of line
 - `0` jump to the beginning of the line
 - `%` jump between matching parentheses
