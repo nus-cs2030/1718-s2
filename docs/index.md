@@ -1,10 +1,10 @@
-If you stumble upon this site via search engines, please note that this is an old site for CS2030 circa AY2017/18.  For AY2019/20 Semester 1, please access the module resource via [Luminus](https://luminus.nus.edu.sg/modules/b3005ff8-d517-4615-a877-dadef6956c58).
+If you stumble upon this site via search engines, please note that this is an old site for CS2030 circa AY2017/18.  For AY2019/20 Semester 1, please access the module resources via [Luminus](https://luminus.nus.edu.sg/modules/b3005ff8-d517-4615-a877-dadef6956c58) and [its Q&A forum via Piazza here](https://piazza.com/class/jzm7f4ppc1k276)
 
---
+# AY 2017/18 Semester 2
 
-# :fa-question-circle: [Piazza Q&A](https://piazza.com/class/jcaaskvbs754wh)
+## :fa-question-circle: [Piazza Q&A](https://piazza.com/class/jcaaskvbs754wh)
 
-# :fa-keyboard-o: Labs and Assessments
+## :fa-keyboard-o: Labs and Assessments
 
 &nbsp;&nbsp; :fa-pencil: [Final](final.md)
 
@@ -31,7 +31,7 @@ If you stumble upon this site via search engines, please note that this is an ol
 &nbsp;&nbsp; 0. [Warm Up](lab0.md)
 
 <br>
-# :fa-commenting: Lectures
+## :fa-commenting: Lectures
 
 &nbsp;&nbsp;12. Review (no notes)&nbsp;&nbsp;[:fa-file-powerpoint-o:](https://www.comp.nus.edu.sg/~cs2030/1718-s2/cs2030-lec12.pdf) [[:fa-file-video-o:](https://vimeo.com/266290733)
  (Extra: [Build a Monad](monad.md))
