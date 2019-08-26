@@ -1,10 +1,14 @@
-# :fa-pencil: [Final](final.md)
+If you stumble upon this site via search engines, please note that this is an old site for CS2030 circa AY2017/18.  For AY2019/20 Semester 1, please access the module resource via [Luminus](https://luminus.nus.edu.sg/modules/b3005ff8-d517-4615-a877-dadef6956c58).
+
+--
 
 # :fa-question-circle: [Piazza Q&A](https://piazza.com/class/jcaaskvbs754wh)
 
-# :fa-pencil: [Midterm](midterm.md)
+# :fa-keyboard-o: Labs and Assessments
 
-# :fa-keyboard-o: Labs
+&nbsp;&nbsp; :fa-pencil: [Final](final.md)
+
+&nbsp;&nbsp; :fa-pencil: [Midterm](midterm.md)
 
 &nbsp;&nbsp; 6. [Async Web API](lab6.md)
 
