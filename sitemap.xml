@@ -1,248 +1,183 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-    
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/about/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/prereqs/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/policies/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
-    
-
-    
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/schedule/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/readings/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/final/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/midterm/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lab0/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lab1a/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lab1b/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lab2a/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lab2b/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lab3/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lab4a/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lab4b/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lab5/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lab6/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
-    
-
-    
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lec01/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lec02/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lec03/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lec04/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lec05/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lec06/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lec07/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lec08/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lec09/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lec10/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/lec11/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/monad/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/review-questions/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
-    
-
-    
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/style/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/jdk/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/javadoc/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/unix/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
      <loc>https://nus-cs2030.github.io/1718-s2/vim/index.html</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2019-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
-    
-
 </urlset>
