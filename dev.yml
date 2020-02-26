@@ -1,0 +1,52 @@
+pages:
+  - Home: 'index.md'
+  - General:
+      - About: 'about.md'
+      - Prerequisites: 'prereqs.md'
+      - Policies: 'policies.md'
+  - Schedule: 'schedule.md'
+  - Readings: 'readings.md'
+  - Lectures:
+      - 1. Abstraction & Encapsulation: 'lec01.md'
+      - 2. Interface, Inheritance & Polymorphism: 'lec02.md'
+      - 3. More on Inheritance: 'lec03.md'
+      - 4. Misc Java: 'lec04.md'
+  - Coding Style: 'style.md'
+  - Software/Tools:
+      - Java: 'jdk.md'
+      - Javadoc: 'javadoc.md'
+      - UNIX: 'unix.md'
+      - Vim: 'vim.md'
+
+# pip install pymdown-extensions
+# pip install pygments
+site_name: CS2030 Programming Methodology II
+repo_url: https://github.com/nus-cs2030/1718-s2
+site_url: https://nus-cs2030.github.io/1718-s2
+copyright: Copyright by Wei Tsang Ooi, Department of Computer Science, National University of Singapore 2018
+remote_branch: gh-pages
+use_directory_urls: false
+markdown_extensions:
+  - admonition
+  - codehilite(linenums=true)
+  - footnotes
+  - pymdownx.arithmatex
+  - pymdownx.betterem(smart_enable=all)
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist(custom_checkbox=true)
+  - pymdownx.tilde
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+theme: 'material'
+extra_javascript:
+  - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
+extra_css:
+  - 'stylesheets/extra.css'
+  - 'https://fonts.googleapis.com/css?family=Gentium+Book+Basic'
+  - 'https://fonts.googleapis.com/css?family=Roboto'
