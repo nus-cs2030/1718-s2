@@ -11,14 +11,14 @@ After this lecture, students should:
 In synchronous programming, when we call a method, we expect the method to be executed, and when the method returns, the result of the method is available.
 
 ```Java
-int multiple(int x, int y) {
+int multiply(int x, int y) {
     return x * y;
 }
 
-int z = multiple(3, 4);
+int z = multiply(3, 4);
 ```
 
-In the simple example above, our code continues executing after, and only after `add()` completes.
+In the simple example above, our code continues executing after, and only after `multiply()` completes.
 
 If a method takes a long time to run, however, the execution will delay the execution of subsequent methods, and maybe undesirable.
 
@@ -121,7 +121,9 @@ You can see that the code gets out of hand quickly, and this is only if we have 
 
 What we need is have a way to specify a _callback_.  A callback is basically a method that will be executed when a certain event happens.  In this case, we need to specify a callback when an asynchronous task is complete.  This way, we can just call an asynchronous task, specify what to do when the task is completed, and forget about it.  We do not need to check again and again if the task is done.
 
-Java 8 introduces the class `CompletableFuture`, which implements the `Future` interface, and allows us to specify an asynchronous task, and an action to perform when the task completes.
+To do exactly this, Java 8 introduces the class `CompletableFuture<V>`, which implements the `Future<V>` interface.  Thus, just like `Future<V>`, a `CompletableFuture<V>` object returns a value of type `V` when it completes.  But `CompletableFuture<V>` is more powerful, it allows us to specify an asynchronous task, and an action to perform when the task completes.
+
+The notion of "complete" is important for `CompletableFuture`.  If the `CompletableFuture` is complete, then the value to return is available.  We can create an already-completed `CompletableFuture`, passing in a value, or a yet-to-be-completed `CompletableFuture`, by passing in a function to be executed asynchronously.  When this function returns, the `CompletableFuture` completes.
 
 To create a `CompletableFuture` object, we can call one of its static method.  For instance, `supplyAsync` takes in a `Supplier`:
 
@@ -129,7 +131,8 @@ To create a `CompletableFuture` object, we can call one of its static method.  F
 CompletableFuture<Matrix> future = CompletableFuture.supplyAsync(() -> m1.multiply(m2));
 ```
 
-To specify the callback, we can use the `thenAccept` method, which takes in a consumer:
+As explained above, `future` completes when `m1.multiply(m2)` returns.  
+Let's say that we want to print out the result with a `Consumer` when `future` completes, we can use the `thenAccept` method:
 
 ```Java
 future.thenAccept(System.out::println);
@@ -142,6 +145,29 @@ CompletableFuture
     .supplyAsync(() -> m1.multiply(m2))
     .thenAccept(System.out::println);
 ```
+
+### Waiting for Completion
+
+If you want your code to block until a `CompletableFuture` completes, you can call `join()`.  
+
+```Java
+m = future.join();
+```
+
+Suppose you have several `CompletableFuture` objects, say `cf1`, `cf2`, and `cf3`, and you want to block until all of these `CompletableFuture` completes.  You can create a composite `CompletableFuture` objects, using `allOf()`:
+
+
+```Java
+CompletableFuture.allOf(cf1, cf2, cf3).join();
+```
+
+The object created by `CompletableFuture.allOf(cf1, cf2, cf3)` completes, only after all of `cf1`, `cf2`, `cf3` completes.
+
+There is also a `anyOf`, for cases where it is sufficient for any one of the `CompletableFuture` to complete:
+```Java
+CompletableFuture.anyOf(cf1, cf2, cf3).join();
+```
+
 
 ### CompletableFuture is a Functor / Monad
 
@@ -172,7 +198,44 @@ All the methods above return a `CompletableFuture`.
 
 BTW, `CompletableFuture` is a monad too!  The `thenCompose` method is analougous to the `flatMap` method of `Stream` and `Optional`. 
 
-This also means that `CompletableFuture` satisfies the monad laws, one of which is that there is a method to wrap a value around with a `CompletableFuture`.  We call this the `of` method in the context of `Stream` and `Optional`, but in `CompletableFuture`, it is called `completedFuture`.
+This also means that `CompletableFuture` satisfies the monad laws, one of which is that there is a method to wrap a value around with a `CompletableFuture`.  We call this the `of` method in the context of `Stream` and `Optional`, but in `CompletableFuture`, it is called `completedFuture`.  This method creates a `CompletableFuture` that is completed.
+The `completedFuture` method is useful, for instance, if we want to convert a method below to asynchronous.
+```Java
+Integer foo(int x) {
+  if (x < 0) 
+    return 0;
+  else
+    return doSomething(x);
+}
+```
+
+With `CompletableFuture`, it becomes:
+```Java
+CompletableFuture<Integer> fooAsync(int x) {
+  if (x < 0) 
+    return CompletableFuture.completedFuture(0);
+  else 
+    return CompletableFuture.supplyAsync(() -> doSomething(x));
+```
+
+!!! note "Extra Example"
+    In the class, I got carried away with the question about `completedFuture` and added the following example for <s>`flatMap`</s> `thenCompose` as well:
+
+    Original non-async version:
+    ```Java
+    int x = bar(z)
+    int y = foo(x)
+    ```
+
+    Async version:
+    ```Java
+    y = barAsync(z)
+           .thenCompose(i -> fooAsync(i))
+           .get();
+    ```
+
+
+When we discussed about monad, we say that one way to think of a monad as a wrapper of a value in some context.  In the case of `Optional`, the context is that the value may or may not be there.  In the context of `CompletableFuture`, the context is that the value not be available yet.
 
 Being a functor and a monad, `CompletableFuture` objects can be chained together, just like `Stream` and `Optional`.  We can write code like this:
 
@@ -198,6 +261,7 @@ CompletableFuture right = CompletableFuture
 
 Similar to `Stream`, some of the methods are terminal (e.g., `thenRun`, `thenAccept`), and some are intermediate (`thenApply`).
 
+
 ### Variations
 
 - There are variations of methods with name containing the word `Either` or `Both`, taking in another `CompletableFuture`.  These methods invoke the given `Function`/`Runnable`/`Consumer` when either one (for `Either`) or both (for `Both`) of the `CompletableFuture` completes.
@@ -212,7 +276,6 @@ Other features of `CompletableFuture` include:
 
 - Some methods takes in additional `Throwable` parameter, for cases where earlier calls might throw an exception.
 
-The [table](http://www.codebulb.ch/2015/07/completablefuture-clean-callbacks-with-java-8s-promises-part-4.html#api) by Nicolas Hofstetter neatly summarizes all the methods available.  As you can see, the API is quite extensive (bloated?).
 
 ### Handling Exceptions
 
@@ -243,7 +306,7 @@ Finally, `exceptionally` handles exception by replacing a thrown exception with 
 CompletableFuture
     .completedFuture(Matrix.generate(nRows, nCols, rng::nextDouble))
     .thenApply(m -> m.multiply(m))
-    .exceptionally(Matrix.generate(nRows, nCols, ()->0);
+    .exceptionally(ex -> Matrix.generate(nRows, nCols, () -> 0));
 ```
 
 !!! note "Promise"
@@ -251,3 +314,29 @@ CompletableFuture
 
 !!! note "CompletionStage"
     In Java, `CompletableFuture` also implements a `CompletionStage` interface.  Thus, you will find references to this interface in many places in the Java documentation.  I find this name unintuitive and makes an already-confusing java documentation even harder to read.
+
+## Exercise
+
+1. Change the following sequence of code so that `f()`, `g()` and `h()` are invoked asynchronously, using `CompletableFuture`.
+
+    (i)
+    ```Java
+    B b = f(a);
+    C c = g(b);
+    D d = h(c);
+    ```
+
+    (ii)
+    ```Java
+    B b = f();
+    C c = g(b);
+    h(c); // no return value
+    ```
+
+    (iii)
+    ```Java
+    B b = f(a);
+    C c = g(b);
+    D d = h(b);
+    E e = i(c, d);
+    ```

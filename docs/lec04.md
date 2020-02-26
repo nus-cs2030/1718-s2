@@ -17,11 +17,12 @@ After this class, students should:
 - how to generate an exception and create a new exception
 - not commit bad practices when using exceptions
 
+
 ## `java` and `javac`
 
 Now that we have gone through the basic concepts of OO programming, let's take a step away from OO for the moment and look at some other important features of Java.
 
-In your [Lab 0](lab00.md), we showed you how to use `javac` to compile your Java program and `java` to execute your program.  
+In your [Lab 0](lab0.md), we showed you how to use `javac` to compile your Java program and `java` to execute your program.  
 
 `javac` is a _compiler_. It reads in Java source files as a string, parses the string for syntax errors, and converts the Java code into an intermediate binary format called the _bytecode_.  Bytecode is an instruction set akin to hardware instructions but is typically executed by a software interpreter.
 
@@ -224,7 +225,7 @@ You can see that the _references_ to the objects `p1` and `p2` are copied onto t
 Within the method, any modification done to `this` would change the object referenced to by `p1`, and any change made to `q` would change the object referenced to by `p2` as well.
 After the method returns, the stack frame for that method is destroyed.
 
-Let's call the `move` function from your [Lab 0](lab00.md), with arguments `(double theta, double d)`.
+Let's call the `move` function from your [Lab 0](lab0.md), with arguments `(double theta, double d)`.
 
 ```Java
 double theta = Math.PI/4.0;
@@ -419,7 +420,9 @@ Sometimes, you just want to focus on the main logic of the program and get it wo
 try {
   // your code
 }
-catch (Exception e) {}
+catch (Exception e) {
+  :
+}
 ```
 
 to shut the compiler up.  DO NOT DO THIS.  All exceptions thrown are now silently ignored!  This is such as bad practice that there is a name for this -- this is call the _Pokemon Exception Handling_.
@@ -429,7 +432,9 @@ Can we do _worse_?  How about the following:
 try {
   // your code
 }
-catch (Error e) {}
+catch (Error e) {
+  :
+}
 ```
 😱
 
@@ -480,12 +485,12 @@ We should, as much as possible, handle the implementation specific exceptions wi
     ```
 
     Will the following two lines compile?  Will any of the lines cause a run time exception?  Explain.
-    ```
+    ```Java
     shapes = circles;
     shapes[0] = new Square(3.0);
     ```
 
-		(Assume `Square` has a constructor that takes in a single `double` argument.)
+    (Assume `Square` has a constructor that takes in a single `double` argument.)
 
 2. Write a static method with the following signature:
 

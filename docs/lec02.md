@@ -111,7 +111,7 @@ Note that we can have other methods (such as `moveTo`) in the class beyond what 
 
 _A class can implement more than one interface._  For instance, let's say that we have another interface called `Printable`[^1] with a single method defined:
 
-```
+```Java
 interface Printable {
   public void print();
 }

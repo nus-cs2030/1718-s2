@@ -24,7 +24,7 @@
 
 * We encourage discussions among students for lab assignments, but each student should be responsible for writing his/her own code and should give credits to others when appropriate.  
 
-* NUS and School of Computing have a high standard on academic honesty and take any violation seriously.  In the context of computing modules, source code plagiarism -- copying code from another source and attributing it as one's own code -- is a series violation.   Please read the page [Preventing Plagiarism](http://www.comp.nus.edu.sg/cug/plagiarism) from the school's website to familiarize yourself with the policy.
+* NUS and School of Computing have a high standard on academic honesty and take any violation seriously.  In the context of computing modules, source code plagiarism -- copying code from another source and attributing it as one's own code -- is a serious violation.   Please read the page [Preventing Plagiarism](http://www.comp.nus.edu.sg/cug/plagiarism) from the school's website to familiarize yourself with the policy.
 
 * I adopt a "no mercy" policy when it comes to disciplinary action on plagiarism.  Both parties, the student who copied, and the student who allowed others to copy, will be penalized equally.
 
